@@ -1,0 +1,5 @@
+#!/Users/alyssa/Documents/GitHub/Construction-Document-Parser-for-LLM-based-AI-assistants/.conda/bin/python3.11
+
+from idlelib.pyshell import main
+if __name__ == '__main__':
+    main()

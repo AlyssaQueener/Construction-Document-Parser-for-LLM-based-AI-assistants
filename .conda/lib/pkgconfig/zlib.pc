@@ -1,0 +1,13 @@
+prefix=/Users/alyssa/Documents/GitHub/Construction-Document-Parser-for-LLM-based-AI-assistants/.conda
+exec_prefix=/Users/alyssa/Documents/GitHub/Construction-Document-Parser-for-LLM-based-AI-assistants/.conda
+libdir=/Users/alyssa/Documents/GitHub/Construction-Document-Parser-for-LLM-based-AI-assistants/.conda/lib
+sharedlibdir=/Users/alyssa/Documents/GitHub/Construction-Document-Parser-for-LLM-based-AI-assistants/.conda/lib
+includedir=/Users/alyssa/Documents/GitHub/Construction-Document-Parser-for-LLM-based-AI-assistants/.conda/include
+
+Name: zlib
+Description: zlib compression library
+Version: 1.2.13
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}

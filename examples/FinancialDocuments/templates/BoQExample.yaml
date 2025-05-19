@@ -1,0 +1,21 @@
+issuer: BoQ Construction Parser
+keywords:
+  - Bills of quantities
+  - construction
+  - residential building
+
+fields:
+  partner_name:
+    parser: regex
+    regex: Owner:\s*(.+)
+
+  amount:
+    parser: regex
+    regex: GRAND TOTAL FOR CONSTRUCTION OF MAIN HOUSE\s+([\d,]+)
+    type: int
+
+options:
+  currency: RWF
+  date_formats:
+    - "%Y-%m-%d"
+  decimal_separator: "."
