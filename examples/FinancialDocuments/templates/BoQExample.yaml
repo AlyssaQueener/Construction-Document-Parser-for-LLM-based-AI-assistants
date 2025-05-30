@@ -8,3 +8,8 @@ fields:
   amount:
     parser: regex
     regex: GRAND TOTAL FOR CONSTRUCTION OF MAIN HOUSE\s+([\d,]+)
+
+tables:
+  - start: N°\s+ITEMS DESCRIPTION\s+Unit\s+QTY\s+RATE\s+Amount
+    end: GRAND TOTAL FOR CONSTRUCTION OF MAIN HOUSE
+    body: (?P<item_no>\d+)\s+(?P<description>.+?)\s{2,}(?P<unit>[a-zA-Z]+)\s+(?P<rate>[\d.,]+)\s+(?P<quantity>[\d,]+)\s+(?P<amount>[\d,]+)$

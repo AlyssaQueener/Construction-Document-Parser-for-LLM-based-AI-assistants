@@ -146,6 +146,7 @@ def extract_data(
         input_module = text if invoicefile.lower().endswith(".txt") else pdftotext
 
     extracted_str = input_module.to_text(invoicefile)
+    print(extracted_str)
     if not isinstance(extracted_str, str) or not extracted_str.strip():
         logger.error(
             "Failed to extract text from %s using %s",
@@ -164,6 +165,7 @@ def extract_data(
     for template in templates:
         if template.matches_input(extracted_str):
             logger.info("Using %s template", template["template_name"])
+            print("Using %s template", template["template_name"])
             optimized_str = template.prepare_input(extracted_str)
             return template.extract(
                 optimized_str, invoicefile, input_module
