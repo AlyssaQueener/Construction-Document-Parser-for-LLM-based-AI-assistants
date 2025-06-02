@@ -20,6 +20,7 @@ from ..input import pdftotext
 from ..input import tesseract
 from . import parsers
 from .plugins import tables
+from .utils import clean_broken_lines
 
 
 logger = getLogger(__name__)
@@ -28,6 +29,7 @@ OPTIONS_DEFAULT = {
     "remove_whitespace": False,
     "remove_accents": False,
     "lowercase": False,
+    "fix_broken_lines": False,
     "currency": "EUR",
     "date_formats": [],
     "languages": [],
@@ -105,6 +107,9 @@ class InvoiceTemplate(OrderedDictType[str, Any]):
         # Convert to lower case
         if self.options["lowercase"]:
             optimized_str = optimized_str.lower()
+
+        if self.options["fix_broken_lines"]:
+            optimized_str = clean_broken_lines(optimized_str)
 
         if not isinstance(self.options.get("replace", []), list):
             self.options["replace"] = [self.options["replace"]]

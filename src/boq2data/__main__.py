@@ -14,8 +14,8 @@ from typing import List
 from typing import Optional
 from typing import Tuple
 
-from invoice2data.extract.invoice_template import InvoiceTemplate
-from invoice2data.extract.loader import read_templates
+from .extract.invoice_template import InvoiceTemplate
+from .extract.loader import read_templates
 
 from .input import gvision
 from .input import ocrmypdf

@@ -1,0 +1,13 @@
+     Bills of quantities for construction of a residential house
+     location: GISENYI SECTOR -RUBAVU WESTERN
+     Owner: SUCCESSION NGIZWENAYO
+
+N°                     ITEMS DESCRIPTION                          Unit    QTY       RATE        Amount
+ I PRELIMINARY WORKS
+1 Terracing for site levelling                                    L.S.      1       200,000        200,000
+                                                                      3
+2 Excavation in foundation and footing trenches                   m         38.64     3,000        115,920
+   S/TOTAL                                                                                         315,920
+
+
+      GRAND TOTAL FOR CONSTRUCTION OF MAIN HOUSE                                                29,539,076
