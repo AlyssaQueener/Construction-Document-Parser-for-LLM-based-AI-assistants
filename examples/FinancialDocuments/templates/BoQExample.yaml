@@ -10,6 +10,19 @@ fields:
     regex: GRAND TOTAL FOR CONSTRUCTION OF MAIN HOUSE\s+([\d,]+)
 
 tables:
-  - start: N°\s+ITEMS DESCRIPTION\s+Unit\s+QTY\s+RATE\s+Amount
+  - start: (?i)N°\s+ITEMS\s+DESCRIPTION.*Amount
     end: GRAND TOTAL FOR CONSTRUCTION OF MAIN HOUSE
-    body: (?P<item_no>\d+)\s+(?P<description>.+?)\s{2,}(?P<unit>[a-zA-Z]+)\s+(?P<rate>[\d.,]+)\s+(?P<quantity>[\d,]+)\s+(?P<amount>[\d,]+)$
+    body: |
+      (?P<section>(([IVXLCDM]+|[0-9]+)[\.\-]?\s+[A-Z].+))
+      |
+      (?P<item_no>\d+)\s+(?P<description>.+?)\s+(?P<unit>m³|m²|m3|m|L\.S\.|ml|Pce|[a-zA-Z³².]+)\s+(?P<quantity>[\d.,]+)\s+(?P<rate>[\d.,]+)\s+(?P<amount>[\d.,]+)
+
+# section line
+#(?P<section>...) → Named capture for the section title.
+#([IVXLCDM]+|[0-9]+) → Matches either Roman or Arabic numerals.
+#[\.\-]? → Optionally allow a period (.) or dash (-) after the numeral.
+#\s+[A-Z].+ → Ensures the section label starts with capital letters (like "PRELIMINARY WORKS").
+
+# Item row 
+# 
+
