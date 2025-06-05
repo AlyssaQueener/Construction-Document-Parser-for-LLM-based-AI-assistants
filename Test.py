@@ -6,6 +6,6 @@ import json
 filename = "examples/FinancialDocuments/BoQExample.pdf"
 templates = read_templates('examples/FinancialDocuments/templates')
 result = extract_data(filename, templates=templates)
-format_boq(result)
+structured_result = format_boq(result)
 with open('test.json', 'w', encoding='utf-8') as f:
-    json.dump(result, f, indent=4, ensure_ascii=False)
+    json.dump(structured_result, f, indent=4, ensure_ascii=False)
