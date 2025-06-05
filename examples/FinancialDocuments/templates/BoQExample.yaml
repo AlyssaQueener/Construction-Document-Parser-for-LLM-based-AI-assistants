@@ -10,12 +10,17 @@ fields:
     regex: GRAND TOTAL FOR CONSTRUCTION OF MAIN HOUSE\s+([\d,]+)
 
 tables:
-  - start: (?i)N°\s+ITEMS\s+DESCRIPTION.*Amount
+  - start: (?i)N°.*DESCRIPTION.*Amount
     end: GRAND TOTAL FOR CONSTRUCTION OF MAIN HOUSE
-    body: |
-      (?P<section>(([IVXLCDM]+|[0-9]+)[\.\-]?\s+[A-Z].+))
-      |
-      (?P<item_no>\d+)\s+(?P<description>.+?)\s+(?P<unit>m³|m²|m3|m|L\.S\.|ml|Pce|[a-zA-Z³².]+)\s+(?P<quantity>[\d.,]+)\s+(?P<rate>[\d.,]+)\s+(?P<amount>[\d.,]+)
+    body: (?P<item_no>\d+)\s+(?P<description>.+?)\s+(?P<unit>[^\s]+)\s+(?P<quantity>[\d.,]+)\s+(?P<rate>[\d,]+)\s+(?P<amount>[\d,]+)
+
+#tables:
+ # - start: (?i)N°.*DESCRIPTION.*Amount
+  #  end: GRAND TOTAL FOR CONSTRUCTION OF MAIN HOUSE
+   # body: |
+    #  (?P<section>(([IVXLCDM]+|[0-9]+)[\.\-]?\s+[A-Z].+))
+     # |
+      #(?P<item_no>\d+)\s+(?P<description>.+?)\s+(?P<unit>m³|m²|m3|m|L\.S\.|ml|Pce|[a-zA-Z³².]+)\s+(?P<quantity>[\d.,]+)\s+(?P<rate>[\d.,]+)\s+(?P<amount>[\d.,]+)
 
 # section line
 #(?P<section>...) → Named capture for the section title.

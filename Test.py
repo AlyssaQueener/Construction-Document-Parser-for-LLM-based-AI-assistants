@@ -29,3 +29,4 @@ print(json.dumps(result, indent=4, ensure_ascii=False))  # Pretty print
 # Save to JSON file
 with open('test.json', 'w', encoding='utf-8') as f:
     json.dump(result, f, indent=4, ensure_ascii=False)
+    print(" JSON saved to test.json")
