@@ -369,7 +369,7 @@ def _check_required_fields(
 ) -> Dict[str, Any]:
     """Check if all required fields are present in the output."""
     if "required_fields" not in self.keys():
-        required_fields = ["amount", "issuer"]
+        required_fields = ["total", "issuer"]
     else:
         required_fields = []
         for v in self["required_fields"]:
