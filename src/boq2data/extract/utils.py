@@ -44,14 +44,7 @@ def clean_broken_lines(text):
             if not line:
                 continue  # skip empty lines
 
-        # If the line is short or contains only a digit, append it to the previous line
             if (not (len(line) <= 3 and line.isdigit()) or re.match(r"^\d{1,2}$", line)):
                 cleaned_lines.append(line)
-                #if cleaned_lines:
-                 #   cleaned_lines[-1] += " " + line
-                #else:
-                 #   cleaned_lines.append(line)
-            #else:
-                #cleaned_lines.append(line)
-
+                
         return "\n".join(cleaned_lines)
