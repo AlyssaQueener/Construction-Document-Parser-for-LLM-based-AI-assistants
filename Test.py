@@ -3,7 +3,7 @@ from src.boq2data.extract.loader import read_templates
 from src.boq2data.output.format_boq import format_boq
 import json
 
-filename = "examples/FinancialDocuments/BoQExample.pdf"
+filename = "examples/FinancialDocuments/BOQ3.pdf"
 templates = read_templates('examples/FinancialDocuments/templates')
 result = extract_data(filename, templates=templates)
 structured_result = format_boq(result)
