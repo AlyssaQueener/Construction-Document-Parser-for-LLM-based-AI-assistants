@@ -1,0 +1,15 @@
+issuer: BoQ Construction Parser
+keywords:
+  - BILLS OF QUANTITIES
+  - CONSTRUCTION
+  - BOUNDARY WALL
+
+fields:
+  amount:
+    parser: regex
+    regex: TOTAL\s+([\d,]+)
+
+tables:
+  - start: DSR NO\.\s+DESCRIPTION OF ITEM/DSR SUB\. NO\.\s+QTY\.\s+RATE\s+PER\s+AMOUNT
+    end: TOTAL
+    body: ^(?P<dsr_no>\d+(?:\.\d+)*)(?:\s+)(?P<description>.+?)\s+(?P<qty>\d*\.?\d+)?\s+(?P<rate>\d*\.?\d+)?\s+(?P<per>[A-Za-z]+\.?)\s+(?P<amount>\d*\.?\d+)?$
