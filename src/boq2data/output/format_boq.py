@@ -50,12 +50,12 @@ def structure_result(result: Dict[str, Any], phases: Dict[str, Any]):
                     "rate": rate[j],
                     "amount": amount[j]
                 }
-            if (item_no[j]=='1' and start == True):
+            if ((item_no[j]=='1' or item_no[j]=='1.') and start == True):
                 items[j] = first_item
             if (item_no[j] != '1'):
                 items[j] = item
                 start = False
-            if (item_no[j]== '1' and start == False):
+            if ((item_no[j]=='1' or item_no[j]=='1.') and start == False):
                 first_item = item
                 phases[i]["items"] = items
                 k=j
