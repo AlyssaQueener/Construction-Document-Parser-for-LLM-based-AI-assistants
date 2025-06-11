@@ -33,7 +33,7 @@
 # print(tables)
 # test_camelot.py
 import camelot
-tables = camelot.read_pdf('examples/FinancialDocuments/BoQExample.pdf', flavor='stream', pages='1')
+tables = camelot.read_pdf('examples/FinancialDocuments/BOQ4.pdf', flavor='stream', pages='1')
 print(f"Found {tables.n} tables")
 
 for i, table in enumerate(tables, start=1):
@@ -41,5 +41,5 @@ for i, table in enumerate(tables, start=1):
     print(table.df)
 
 tables.export('test.json', f='json')
-tables.export('all_tables.csv', f='csv', compress=True)
+tables.export('all_tables4.csv', f='csv')
 
