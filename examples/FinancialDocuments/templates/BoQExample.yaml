@@ -15,9 +15,31 @@ fields:
 
 
 tables:
-  - start: N°\s+ITEMS DESCRIPTION\s+Unit\s+QTY\s+RATE\s+Amount
+  - start: (?i)N°.*DESCRIPTION.*Amount
     end: GRAND TOTAL FOR CONSTRUCTION OF MAIN HOUSE
+<<<<<<< HEAD
     body: ^(?P<item_no>\d+\.?)\s+(?P<description>[A-Za-z0-9 \/\(\)\.,\-]+?)\s{2,}(?P<unit>[A-Za-z\.]+|m3)?\s+(?P<qty>\d*\.?\d+)?\s+(?P<rate>\d{1,3}(?:,\d{3})*|\d+)?\s+(?P<amount>\d{1,3}(?:,\d{3})*|\d+)?$
 
 options:
   fix_broken_lines: true
+=======
+    body: (?P<item_no>\d+)\s+(?P<description>.+?)\s+(?P<unit>[^\s]+)\s+(?P<quantity>[\d.,]+)\s+(?P<rate>[\d,]+)\s+(?P<amount>[\d,]+)
+
+#tables:
+ # - start: (?i)N°.*DESCRIPTION.*Amount
+  #  end: GRAND TOTAL FOR CONSTRUCTION OF MAIN HOUSE
+   # body: |
+    #  (?P<section>(([IVXLCDM]+|[0-9]+)[\.\-]?\s+[A-Z].+))
+     # |
+      #(?P<item_no>\d+)\s+(?P<description>.+?)\s+(?P<unit>m³|m²|m3|m|L\.S\.|ml|Pce|[a-zA-Z³².]+)\s+(?P<quantity>[\d.,]+)\s+(?P<rate>[\d.,]+)\s+(?P<amount>[\d.,]+)
+
+# section line
+#(?P<section>...) → Named capture for the section title.
+#([IVXLCDM]+|[0-9]+) → Matches either Roman or Arabic numerals.
+#[\.\-]? → Optionally allow a period (.) or dash (-) after the numeral.
+#\s+[A-Z].+ → Ensures the section label starts with capital letters (like "PRELIMINARY WORKS").
+
+# Item row 
+# 
+
+>>>>>>> origin/rebekka.test

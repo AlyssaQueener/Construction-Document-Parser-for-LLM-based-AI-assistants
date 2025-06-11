@@ -1,6 +1,7 @@
 """This module abstracts utilities for processing of the extracted values."""
 
 from logging import getLogger
+import re
 from typing import Any
 from typing import Dict
 from typing import Optional
@@ -32,6 +33,7 @@ def _apply_grouping(settings: Dict[str, Any], result: Any) -> Optional[Any]:
                 logger.warning("Unsupported grouping method: %s", settings["group"])
                 return None
     return result
+<<<<<<< HEAD
 
 def clean_broken_lines(text):
         lines = text.splitlines()
@@ -48,3 +50,36 @@ def clean_broken_lines(text):
                 cleaned_lines.append(line)
                 
         return "\n".join(cleaned_lines)
+=======
+import re
+
+def clean_broken_lines(text):
+    lines = text.splitlines()
+    cleaned_lines = []
+    buffer = ""
+
+    for line in lines:
+        stripped = line.strip()
+        if not stripped:
+            continue  # skip empty lines
+
+        # If this is the start of a new line item
+        if re.match(r"^\d+\s", stripped):  # starts with item number
+            if buffer:
+                cleaned_lines.append(buffer.strip())
+            buffer = stripped
+        # If this looks like a continuation line with unit + qty + rate + amount
+        elif re.match(r"^\s*(m³|m²|ml|m3|m|L\.S\.|Pce)[\s\d,.]+$", stripped):
+            buffer += " " + stripped
+        else:
+            buffer += " " + stripped
+
+    if buffer:
+        cleaned_lines.append(buffer.strip())
+
+    print("Cleaned lines:")
+    for line in cleaned_lines:
+        print(line)
+
+    return "\n".join(cleaned_lines)
+>>>>>>> origin/rebekka.test

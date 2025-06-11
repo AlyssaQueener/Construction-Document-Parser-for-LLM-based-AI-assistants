@@ -221,8 +221,8 @@ def parse_cashflow_csv(csv_file_path, output_json_path):
 # Example usage with better error handling
 if __name__ == "__main__":
     # Replace these paths with your actual file paths
-    csv_file = "cashflow.csv"
-    json_file = "cashflow_output1.json"
+    csv_file = "examples/FinancialDocuments/cashflow.csv"
+    json_file = "examples/FinancialDocuments/cashflow_output1.json"
     
     try:
         print("Starting CSV parsing...")

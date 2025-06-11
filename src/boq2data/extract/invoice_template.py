@@ -29,7 +29,11 @@ OPTIONS_DEFAULT = {
     "remove_whitespace": False,
     "remove_accents": False,
     "lowercase": False,
+<<<<<<< HEAD
     "fix_broken_lines": False,
+=======
+    "fix_broken_lines": True,
+>>>>>>> origin/rebekka.test
     "currency": "EUR",
     "date_formats": [],
     "languages": [],
@@ -110,6 +114,10 @@ class InvoiceTemplate(OrderedDictType[str, Any]):
 
         if self.options["fix_broken_lines"]:
             optimized_str = clean_broken_lines(optimized_str)
+<<<<<<< HEAD
+=======
+            print("✅ Running clean_broken_lines...")
+>>>>>>> origin/rebekka.test
 
         if not isinstance(self.options.get("replace", []), list):
             self.options["replace"] = [self.options["replace"]]
