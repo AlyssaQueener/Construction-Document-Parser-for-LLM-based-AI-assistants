@@ -39,3 +39,7 @@ print(f"Found {tables.n} tables")
 for i, table in enumerate(tables, start=1):
     print(f"\n=== Table {i} ===")
     print(table.df)
+
+tables.export('test.json', f='json')
+tables.export('all_tables.csv', f='csv', compress=True)
+
