@@ -1,0 +1,29 @@
+issuer: BoQ Sectioned Parser
+keywords:
+  - Bill of Quantities
+  - Bill No
+  - Work
+
+fields:
+  total:
+    parser: regex
+    regex: Total, exclusive of any credits.*?£\s*([\d,]+\.\d{2})
+
+tables:
+  - name: boq_section_items
+    start: ^Bill No\.\s+\d+\s+.*
+    end: ^£\s*[\d,]+\s*TOTAL carried to main summary
+    body: ^(?P<description>[\d\.]+[^\d\n]*?)\s+(?P<unit>[a-zA-Z³]+)?\s+(?P<qty>\d{1,4}(?:\.\d+)?)\s+(?P<rate>\d{1,4}(?:\.\d{2})?)$
+    columns:
+      - description
+      - unit
+      - qty
+      - rate
+
+options:
+  fix_broken_lines: true
+
+                                       
+                             
+      
+
