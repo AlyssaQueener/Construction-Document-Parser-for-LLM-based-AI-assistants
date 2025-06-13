@@ -12,4 +12,4 @@ fields:
 tables:
   - start: DSR NO\.\s+DESCRIPTION OF ITEM/DSR SUB\. NO\.\s+QTY\.\s+RATE\s+PER\s+AMOUNT
     end: TOTAL
-    body: ^(?P<dsr_no>\d+(?:\.\d+)*)(?:\s+)(?P<description>.+?)\s+(?P<qty>\d*\.?\d+)?\s+(?P<rate>\d*\.?\d+)?\s+(?P<per>[A-Za-z]+\.?)\s+(?P<amount>\d*\.?\d+)?$
+    body: ^(?P<dsr_no>\d{1,2}(?:\.\d+)*)(?:\s+)(?P<description>.+?)(?:\s{2,})(?P<qty>\d+(?:\.\d+)?|\s)?(?:\s{2,})(?P<rate>\d+(?:\.\d+)?|\s)?(?:\s{2,})(?P<per>[A-Za-z]+\.?)?(?:\s{2,})(?P<amount>\d+(?:\.\d+)?|\s)?$
