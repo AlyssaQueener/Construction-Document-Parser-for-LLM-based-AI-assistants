@@ -1,21 +1,48 @@
-import cv2
+import sys
+import math
+import cv2 as cv
+import numpy as np
 
+filename = 'examples/FloorplansAndSectionViews/bemasster-grundriss-plankopf_page1.png'
+# works with the png from alyssa but not with the one from soley using pymupdf (rebekka)
 
+# Load image
+src = cv.imread(filename, cv.IMREAD_GRAYSCALE)
+if src is None:
+    print("Failed to load image!")
+    sys.exit()
+h, w = src.shape
 
-input_path = "examples/FloorplansAndSectionViews/bemasster-grundriss-plankopf_page1.png"
-img = cv2.imread( input_path,  cv2.IMREAD_COLOR)
-# Creating GUI window to display an image on screen
-# first Parameter is windows title (should be in string format)
-# Second Parameter is image array
-cv2.imshow("image", img)
-img.shape
-# To hold the window on screen, we use cv2.waitKey method
-# Once it detected the close input, it will release the control
-# To the next line
-# First Parameter is for holding screen for specified milliseconds
-# It should be positive integer. If 0 pass an parameter, then it will
-# hold the screen until user close it.
-cv2.waitKey(0)
-# It is for removing/deleting created GUI window from screen
-# and memory
-cv2.destroyAllWindows()
+# Blur to reduce noise
+blurred = cv.GaussianBlur(src, (5, 5), 0)
+
+# Adaptive threshold
+binary = cv.adaptiveThreshold(blurred, 255, cv.ADAPTIVE_THRESH_MEAN_C,
+                              cv.THRESH_BINARY_INV, 15, 5)
+
+# Stronger closing to connect walls
+kernel = np.ones((5, 5), np.uint8)
+closed = cv.morphologyEx(binary, cv.MORPH_CLOSE, kernel, iterations=2)
+
+# HoughLinesP — tune parameters!
+linesP = cv.HoughLinesP(closed, 1, np.pi / 180, 80, minLineLength=100, maxLineGap=10)
+
+# Prepare blank canvas
+lines_only_white = np.ones((h, w, 3), dtype=np.uint8) * 255
+
+if linesP is not None:
+    print(f"Detected {len(linesP)} lines")
+    for l in linesP:
+        x1, y1, x2, y2 = l[0]
+        cv.line(lines_only_white, (x1, y1), (x2, y2), (0, 0, 255), 2, cv.LINE_AA)
+else:
+    print("no hough lines detected")
+
+print("finished")
+
+cv.imshow("Binary", binary)
+cv.imshow("Closed", closed)
+cv.imshow("Hough Lines Only (white bg)", lines_only_white)
+cv.waitKey()
+cv.destroyAllWindows()
+
