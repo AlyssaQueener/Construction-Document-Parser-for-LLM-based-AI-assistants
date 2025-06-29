@@ -155,10 +155,10 @@ cv.rectangle(mask, (x_min_roi, y_min_roi), (x_max_roi, y_max_roi), 255, -1)
 # Apply the mask to your 'walls' image
 walls_roi = cv.bitwise_and(walls, mask)
 
-# [4] Now detect contours for rooms ########################################################
-# Use RETR_CCOMP for a two-level hierarchy: outer boundaries (rooms) and holes (fixtures/internal clutter)
-contours_rooms, hierarchy_rooms = cv.findContours(walls_roi, cv.RETR_CCOMP, cv.CHAIN_APPROX_SIMPLE)
-
+#########################################################################################################
+# # [4] Now detect contours for rooms ########################################################
+# # Use RETR_CCOMP for a two-level hierarchy: outer boundaries (rooms) and holes (fixtures/internal clutter)
+# contours_rooms, hierarchy_rooms = cv.findContours(walls_roi, cv.RETR_CCOMP, cv.CHAIN_APPROX_SIMPLE)
 # room_contours = []
 # if hierarchy_rooms is not None:
 #     # Hierarchy structure: [Next, Previous, First_Child, Parent]
@@ -194,8 +194,7 @@ contours_rooms, hierarchy_rooms = cv.findContours(walls_roi, cv.RETR_CCOMP, cv.C
 
 # cv.imshow("Detected Rooms", rooms_output) # The exciting result!
 
-
-
+##############################################################################################
 
 
 # Now detect contours of walls
@@ -211,10 +210,11 @@ cv.imshow("Walls within ROI", walls_roi)
 cv.imshow("Original Source", src)
 cv.imshow("Image for Wall Processing (Text Removed)", img_for_wall_processing) # See text removed
 cv.imshow("Binary (Text Removed)", filtered_binary)
-cv.imshow("Edges (Text Removed)", edges)
+cv.imshow("Cleaned Edges", cleaned_for_edges)
 cv.imshow("Walls (thickened)", walls)
 cv.imshow("Detected Wall Contours (Filled)", walls_contours)
 
 cv.waitKey() 
 cv.destroyAllWindows()
+
 
