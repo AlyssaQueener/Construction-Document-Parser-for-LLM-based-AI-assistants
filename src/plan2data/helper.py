@@ -2,7 +2,7 @@ import os
 import io
 from typing import Tuple, List
 import pymupdf  
-from PIL import Image
+import json
 
 
 def extract_images_from_pdf(path_pdf, output_format, output_dir):
@@ -79,3 +79,53 @@ def convert_pdf2img(input_file: str, pages: Tuple = None):
     print("\n".join("{}:{}".format(i, j) for i, j in summary.items()))
     print("###################################################################")
     return output_files
+
+def check_for_further_ai_usage(ai_response):
+    ai_response_as_dict = json.loads(ai_response)
+    if ai_response_as_dict["Completness"] == "yes":
+        return True
+    else:
+        return False
+
+
+## Determines based on ai response in which quadrant of the image the titleblock is located by returning the horizontal and vertical boundry
+## and wether the location of the titleblock is below/above the vertical and right/left of horizontal boundry 
+def prepare_for_titleblock_extraction(ai_response):
+    ai_response_as_dict = json.loads(ai_response)
+    
+    vertical_from = float(ai_response_as_dict["Vertical location"]["From"])
+    vertical_to = float(ai_response_as_dict["Vertical location"]["To"])
+    horizontal_from = float(ai_response_as_dict["Horizontal location"]["From"])
+    horizontal_to = float(ai_response_as_dict["Horizontal location"]["To"])
+    
+    vertical_center = (vertical_from + vertical_to) / 2
+    horizontal_center = (horizontal_from + horizontal_to) / 2
+    
+    greater_then_vertical = vertical_center >= 0.5
+    greater_then_horizontal = horizontal_center >= 0.5
+    
+    if greater_then_vertical:
+        vertical_boundary_percentage = vertical_from  
+    else:
+        vertical_boundary_percentage = vertical_to    
+        
+    if greater_then_horizontal:
+        horizontal_boundary_percentage = horizontal_from  
+    else:
+        horizontal_boundary_percentage = horizontal_to   
+
+    ## in the case that the title block located over full image height/ width
+    ## greater_then_vertical/ the_horizontal is true but the vertical/horizontal_from value is 0
+    ## this is problematic in the title_block_region function because the boundry value is set to zero
+    ## therefore text block regions are not recognized
+    ## workaround: set boundry percentage values to 1 instead of 0
+
+    if horizontal_boundary_percentage == 0.0 and greater_then_horizontal == True:
+        horizontal_boundary_percentage = 1
+        greater_then_horizontal = False
+    if vertical_boundary_percentage == 0.0 and greater_then_vertical == True:
+        greater_then_vertical = False
+        vertical_boundary_percentage = 1
+    
+
+    return horizontal_boundary_percentage, vertical_boundary_percentage, greater_then_horizontal, greater_then_vertical
