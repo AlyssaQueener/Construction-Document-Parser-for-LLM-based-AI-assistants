@@ -1,0 +1,356 @@
+[
+  {
+    "Section Title": "I PRELIMINARY WORKS",
+    "Items": [
+      {
+        "Item Number": "1",
+        "Item Description": "Terracing for site levelling",
+        "Unit": "L.S.",
+        "Quantity": "1",
+        "Rate": "200000",
+        "Amount": "200000.00",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "2",
+        "Item Description": "Excavation in foundation and footing trenches",
+        "Unit": "m3",
+        "Quantity": "38.64",
+        "Rate": "3000",
+        "Amount": "115920.00",
+        "Currency": "€"
+      },
+      {
+        "Item Number": null,
+        "Item Description": "Subtotal PRELIMINARY WORKS",
+        "Unit": null,
+        "Quantity": null,
+        "Rate": null,
+        "Amount": "315920.00",
+        "Currency": "€"
+      }
+    ]
+  },
+  {
+    "Section Title": "II MASONRY &STRUCTURE IN R.C.C",
+    "Items": [
+      {
+        "Item Number": "1",
+        "Item Description": "Blinding concrete",
+        "Unit": "m3",
+        "Quantity": "1.449",
+        "Rate": "80000",
+        "Amount": "115920.00",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "2",
+        "Item Description": "Foundation in broken rocks bonded with cement mortar",
+        "Unit": "m3",
+        "Quantity": "30.912",
+        "Rate": "55000",
+        "Amount": "1700160.00",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "3",
+        "Item Description": "Ordinal concrete screed on foundation",
+        "Unit": "m3",
+        "Quantity": "1.449",
+        "Rate": "60000",
+        "Amount": "86940.00",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "6",
+        "Item Description": "Columns in R.C.C",
+        "Unit": "m3",
+        "Quantity": "0.384",
+        "Rate": "250000",
+        "Amount": "96000.00",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "9",
+        "Item Description": "Asphalt felt layer",
+        "Unit": "ml",
+        "Quantity": "77.28",
+        "Rate": "2200",
+        "Amount": "170016.00",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "10",
+        "Item Description": "Elevation in hallow cement blocks",
+        "Unit": "m3",
+        "Quantity": "0.24576",
+        "Rate": "55000",
+        "Amount": "13517.00",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "11",
+        "Item Description": "Lintel in R.C.C",
+        "Unit": "m3",
+        "Quantity": "2.898",
+        "Rate": "250000",
+        "Amount": "724500.00",
+        "Currency": "€"
+      },
+      {
+        "Item Number": null,
+        "Item Description": "Subtotal MASONRY &STRUCTURE IN R.C.C",
+        "Unit": null,
+        "Quantity": null,
+        "Rate": null,
+        "Amount": "2907053.00",
+        "Currency": "€"
+      }
+    ]
+  },
+  {
+    "Section Title": "III DOORS AND WINDOWS",
+    "Items": [
+      {
+        "Item Number": "1",
+        "Item Description": "Grilled metal doors",
+        "Unit": "m²",
+        "Quantity": "7.56",
+        "Rate": "65000",
+        "Amount": "491400.00",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "2",
+        "Item Description": "Timber panelled doors",
+        "Unit": "Pce",
+        "Quantity": "4",
+        "Rate": "90000",
+        "Amount": "360000.00",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "3",
+        "Item Description": "Grilled metal windows",
+        "Unit": "m²",
+        "Quantity": "29.52",
+        "Rate": "85000",
+        "Amount": "2509200.00",
+        "Currency": "€"
+      },
+      {
+        "Item Number": null,
+        "Item Description": "Subtotal DOORS AND WINDOWS",
+        "Unit": null,
+        "Quantity": null,
+        "Rate": null,
+        "Amount": "3360600.00",
+        "Currency": "€"
+      }
+    ]
+  },
+  {
+    "Section Title": "IV PLASTERING OF WALLS",
+    "Items": [
+      {
+        "Item Number": "1",
+        "Item Description": "Sub- flooring in quarry stones'chips (interior and walkways)",
+        "Unit": "m²",
+        "Quantity": "64.78",
+        "Rate": "3000",
+        "Amount": "194340.00",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "2",
+        "Item Description": "Cement mortar rendered on internal and external walls",
+        "Unit": "m²",
+        "Quantity": "463.68",
+        "Rate": "2500",
+        "Amount": "1159200.00",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "3",
+        "Item Description": "Flooring & walkways in ceramic tiles",
+        "Unit": "m²",
+        "Quantity": "64.78",
+        "Rate": "18000",
+        "Amount": "1166040.00",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "4",
+        "Item Description": "Coated walls with tiles of ware in bathrooms",
+        "Unit": "m²",
+        "Quantity": "62.5",
+        "Rate": "16000",
+        "Amount": "1000000.00",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "5",
+        "Item Description": "Painting on internal &external walls",
+        "Unit": "m²",
+        "Quantity": "463.68",
+        "Rate": "2500",
+        "Amount": "1159200.00",
+        "Currency": "€"
+      },
+      {
+        "Item Number": null,
+        "Item Description": "Subtotal PLASTERING OF WALLS",
+        "Unit": null,
+        "Quantity": null,
+        "Rate": null,
+        "Amount": "4678780.00",
+        "Currency": "€"
+      }
+    ]
+  },
+  {
+    "Section Title": "V ELECTRICAL INSTALLATION",
+    "Items": [
+      {
+        "Item Number": "1",
+        "Item Description": "Wiring and intubation",
+        "Unit": "L.S.",
+        "Quantity": "1",
+        "Rate": "1875000",
+        "Amount": "1875000.00",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "2",
+        "Item Description": "Point lights in ordinary bulb",
+        "Unit": "Pce",
+        "Quantity": "7",
+        "Rate": "35000",
+        "Amount": "245000.00",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "3",
+        "Item Description": "Point lights in shining bulb",
+        "Unit": "Pce",
+        "Quantity": "6",
+        "Rate": "22000",
+        "Amount": "132000.00",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "4",
+        "Item Description": "simple plugs",
+        "Unit": "Pce",
+        "Quantity": "5",
+        "Rate": "5000",
+        "Amount": "25000.00",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "5",
+        "Item Description": "Plug with triple curent",
+        "Unit": "Pce",
+        "Quantity": "4",
+        "Rate": "35000",
+        "Amount": "140000.00",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "6",
+        "Item Description": "Simple switches",
+        "Unit": "Pce",
+        "Quantity": "5",
+        "Rate": "15000",
+        "Amount": "75000.00",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "7",
+        "Item Description": "Switch for double lighting",
+        "Unit": "Pce",
+        "Quantity": "6",
+        "Rate": "15000",
+        "Amount": "90000.00",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "8",
+        "Item Description": "Switches with double ignitions",
+        "Unit": "Pce",
+        "Quantity": "7",
+        "Rate": "15000",
+        "Amount": "105000.00",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "9",
+        "Item Description": "Switches of curent with zipper",
+        "Unit": "Pce",
+        "Quantity": "6",
+        "Rate": "15000",
+        "Amount": "90000.00",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "10",
+        "Item Description": "globe at the top of mirrors",
+        "Unit": "Pce",
+        "Quantity": "2",
+        "Rate": "35000",
+        "Amount": "70000.00",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "11",
+        "Item Description": "Partition box having 8 ways",
+        "Unit": "Pce",
+        "Quantity": "2",
+        "Rate": "65000",
+        "Amount": "130000.00",
+        "Currency": "€"
+      },
+      {
+        "Item Number": null,
+        "Item Description": "Subtotal ELECTRICAL INSTALLATION",
+        "Unit": null,
+        "Quantity": null,
+        "Rate": null,
+        "Amount": "2837000.00",
+        "Currency": "€"
+      }
+    ]
+  },
+  {
+    "Section Title": "VI SANITARY INSTALLATION",
+    "Items": [
+      {
+        "Item Number": "1",
+        "Item Description": "Connection to EWSA water networks",
+        "Unit": "L.S.",
+        "Quantity": "1",
+        "Rate": "875000",
+        "Amount": "875000.00",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "2",
+        "Item Description": "Intubation for evacuation of waste water",
+        "Unit": "L.S.",
+        "Quantity": "1",
+        "Rate": "675000",
+        "Amount": "675000.00",
+        "Currency": "€"
+      },
+      {
+        "Item Number": null,
+        "Item Description": "Subtotal SANITARY INSTALLATION",
+        "Unit": null,
+        "Quantity": null,
+        "Rate": null,
+        "Amount": "1550000.00",
+        "Currency": "€"
+      }
+    ]
+  }
+]

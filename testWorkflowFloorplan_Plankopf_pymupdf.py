@@ -73,7 +73,7 @@ if __name__ == "__main__":
         0,                      # y0: start of page
         dense_area.x0,          # x1: left edge of the dense text region
         page_height             # y1: full page height
-    )
+    )  
 
     # Optional: add some small margin, if needed
     remaining_area.x1 -= 10
