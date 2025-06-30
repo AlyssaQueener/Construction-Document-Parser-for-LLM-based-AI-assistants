@@ -37,7 +37,7 @@ def extract_right_side_titleblock(image_rgb, data):
                 })
     
     if not titleblock_text_boxes:
-        return None, None
+        return None
     
     
     if titleblock_text_boxes:
@@ -154,6 +154,8 @@ def visualize_extracted_titleblock(image_path,titleblock_region):
 
 
 def extract_text_titleblock(image_path, titleblock_region):
+    if titleblock_region == None:
+        return " "
     image = cv2.imread(image_path)
     image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     
