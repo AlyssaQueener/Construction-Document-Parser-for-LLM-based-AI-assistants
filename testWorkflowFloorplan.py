@@ -6,8 +6,8 @@ import src.plan2data.helper as helper
 ### workflow to identify title block in floorplan and extract the keyfeatures (Keyfeatures are shown in terminal)
 
 #image_path = "examples/FloorplansAndSectionViews/bemasster-grundriss-plankopf_page1.png"
-#image_path = "examples/FloorplansAndSectionViews/floorplan1.png"
-image_path = "examples/FloorplansAndSectionViews/floorplan2.png"
+image_path = "examples/FloorplansAndSectionViews/floorplan1.png"
+#image_path = "examples/FloorplansAndSectionViews/floorplan2.png"
 
 #title_block_region = title_block.init_title_block_extraction(image_path)
 #text_title_block = title_block.extract_text_titleblock(image_path, title_block_region)

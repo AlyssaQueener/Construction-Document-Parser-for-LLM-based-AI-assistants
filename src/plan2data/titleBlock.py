@@ -99,8 +99,8 @@ def extract_titleblock_with_ai_localization(image_rgb, data, horizontal_boundary
     
     margin = 10
     titleblock_region = {
-        'x': max(0, min_x),
-        'y': max(0, min_y),
+        'x': max(0, min_x+margin),
+        'y': max(0, min_y+margin),
         'width': min(width - (min_x - margin), max_x - min_x + 2*margin),
         'height': min(height - (min_y - margin), max_y - min_y + 2*margin)
     }
