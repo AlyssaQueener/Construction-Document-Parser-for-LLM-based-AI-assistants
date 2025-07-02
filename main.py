@@ -2,7 +2,7 @@ from typing import Union
 
 from fastapi import FastAPI, UploadFile, HTTPException
 from PIL import Image 
-import testWorkflowFloorplanForApi as floorplan_parser
+import src.plan2data.titleBlockInfo as floorplan_parser
 import io
 import os
 import uuid

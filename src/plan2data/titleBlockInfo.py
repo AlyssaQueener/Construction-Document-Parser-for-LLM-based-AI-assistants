@@ -1,7 +1,7 @@
-import src.plan2data.titleBlock as title_block
-import src.plan2data.mistralConnection as mistral
-import src.plan2data.helper as helper
 import json
+import src.plan2data.extractionLogictitleBlock as title_block
+import src.plan2data.mistralConnection as mistral 
+import src.plan2data.helper as helper 
 
 
 ### workflow to identify title block in floorplan and extract the keyfeatures (Keyfeatures are shown in terminal)
@@ -12,23 +12,12 @@ def get_title_block_info(path):
     return final_output
 
 def compare_results(output_with_ai,output_without_ai):
-    ##final_response = {
-    #"client": "null",
-    #"creation_date": "null",
-    #"drawing_name": "null",
-    #"project_name": "null",
-    #"location": "null",
-    #"scale": "null",
-    #"architect": "null"
-    #}##
     ai_ouput = json.loads(output_with_ai)
     non_ai_output = json.loads(output_without_ai)
     for i in ai_ouput:
         if ai_ouput[i] == None and non_ai_output[i] !=None:
             ai_ouput[i] = non_ai_output[i]
     return ai_ouput
-
-
 
 def extract_title_block_info(image_path):
     title_block_region = title_block.init_title_block_extraction(image_path)
