@@ -128,7 +128,7 @@ def call_gemini_return_json(prompt):
      # Define the generation configuration
 
     response = model.generate_content(prompt)
-    raw_text_content = response.text
+    raw_text_content = response.text # so that the ouput is just the 
         
      # Now apply string methods to the raw_text_content
     cleaned_response = raw_text_content.strip().removeprefix('```json\n').removesuffix('\n```')
