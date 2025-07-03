@@ -40,7 +40,7 @@ def make_gemini_easy_call(prompt_text="Hello, Gemini! How are you today?"):
         print("- Ensure you have an active internet connection.")
         print("- Verify the 'gemini-pro' model is accessible with your key.")
         
-def create_extraction_prompt(extracted_text):
+def create_preproccesed_prompt(extracted_text):
     
     """
     Constructs a detailed prompt for Gemini to extract structured,
@@ -53,18 +53,19 @@ You are an expert system for extracting structured data from English or German B
 🔧 Your task:
 - Extract item rows and organize them into a JSON array.
 - Group each section under a key called `"Section Title"`.
+- sometimes there are subsection titles under the section titles they are called " Subsection Title" if present include them in the nested structure 
 - Each section should contain an `"Items"` list of the line items.
 - Include subtotals **as the last item** in the `Items` array of each section.
 
 📌 JSON Schema:
 ```json
-[
+[{{"Section Title": "2.5.1 Fillings ",
   {{
-    "Section Title": "1 PRELIMINARY WORKS",
+    "Subsection Title": "2.5.1 Fillings obtained from excavated material",
     "Items": [
       {{
-        "Item Number": "1.1",
-        "Item Description": "Excavation for foundations",
+        "Item Number": "2.5.1.1.1",
+        "Item Description": "Fill obtained from temporary spoil heaps to foundations, level compacted in max 150mm layers byhand >500mm thick",
         "Unit": "m³",
         "Quantity": "150",
         "Rate": "25.00",
@@ -83,11 +84,13 @@ You are an expert system for extracting structured data from English or German B
       }}
     ]
   }},
+}},
   ...
 ]
 📌 Rules to follow:
 
-Section headers (like "1 PRELIMINARY WORKS", "2 MASONRY") should be used as "Section Title"..
+Section headers (like "2.5.1 Fillings") should be used as "Section Title"..
+Subsection headers (like "2.5.1 Fillings obtained from excavated material" ) should be used as Subsection Title.. they can be idetified by their consecutive number or are underlined 
 Ensure item keys follow this exact naming and order:
 
     "Item Number"
@@ -104,7 +107,7 @@ If the subtotal row is present, it must:
 - Set "Item Number" to null.
 - Use "Subtotal" of "Section header" in "Item Description". e.g Subtotal Prelimanry works
 
-- Do NOT group items under custom keys like "Category" or "Item" — only use "Section Title" and "Items".
+- Do NOT group items under custom keys like "Category" or "Item" — only use "Section Title", if present "Subction title" and "Items".
 - DO NOT include any introductory or explanatory text. ONLY output the JSON.**
 - **DO NOT wrap the JSON in markdown code blocks (e.g., ```json...```).**
 **Unescape the newline characters (`\n`).** The `json` library in Python will handle this automatically if you provide it with a clean string.

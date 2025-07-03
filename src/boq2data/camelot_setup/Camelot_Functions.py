@@ -58,8 +58,8 @@ def cam_stream_merge(tables):
     print(json.dumps(output, indent=2, ensure_ascii=False))
 
     # Save the output list of dicts to a file
-    with open('output.json', 'w', encoding='utf-8') as f:
-        json.dump(output, f, ensure_ascii=False, indent=2)
+    # with open('output.json', 'w', encoding='utf-8') as f:
+    #     json.dump(output, f, ensure_ascii=False, indent=2)
     return output
 
 # def cam_dict(output):

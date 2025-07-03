@@ -55,3 +55,4 @@ async def create_upload_file_v2(file: UploadFile):
         print(f"Error processing file: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Error processing image: {str(e)}")
 
+#https://fastapi.tiangolo.com/async/#in-a-hurry maybe have a look at this to improve performance

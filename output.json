@@ -1,102 +1,6 @@
 [
   {
-    "0": "N°",
-    "1": "ITEMS DESCRIPTION",
-    "2": "Unit",
-    "3": "QTY",
-    "4": "RATE",
-    "5": "Amount"
-  },
-  {
-    "0": "I",
-    "1": "PRELIMINARY WORKS",
-    "2": "",
-    "3": "",
-    "4": "",
-    "5": ""
-  },
-  {
-    "0": "1",
-    "1": "Terracing for site levelling",
-    "2": "L.S.",
-    "3": "1",
-    "4": "200,000",
-    "5": "200,000"
-  },
-  {
-    "0": "2",
-    "1": "Excavation in foundation and footing trenches S/TOTAL",
-    "2": "m3",
-    "3": "38.64",
-    "4": "3,000",
-    "5": "115,920"
-  },
-  {
-    "0": "II",
-    "1": "MASONRY &STRUCTURE IN R.C.C",
-    "2": "",
-    "3": "",
-    "4": "",
-    "5": ""
-  },
-  {
-    "0": "1",
-    "1": "Blinding concrete",
-    "2": "m3",
-    "3": "1.449",
-    "4": "80,000",
-    "5": "115,920"
-  },
-  {
-    "0": "2",
-    "1": "Foundation in broken rocks bonded with cement mortar",
-    "2": "m3",
-    "3": "30.912",
-    "4": "55,000",
-    "5": "1,700,160"
-  },
-  {
-    "0": "3",
-    "1": "Ordinal concrete screed on foundation",
-    "2": "m3",
-    "3": "1.449",
-    "4": "60,000",
-    "5": "86,940"
-  },
-  {
-    "0": "6",
-    "1": "Columns in R.C.C",
-    "2": "m3",
-    "3": "0.384",
-    "4": "250,000",
-    "5": "96,000"
-  },
-  {
-    "0": "9",
-    "1": "Asphalt felt layer",
-    "2": "ml",
-    "3": "77.28",
-    "4": "2200",
-    "5": "170,016"
-  },
-  {
-    "0": "10",
-    "1": "Elevation in hallow cement blocks",
-    "2": "m3",
-    "3": "0.24576",
-    "4": "55,000",
-    "5": "13,517"
-  },
-  {
-    "0": "11",
-    "1": "Lintel in R.C.C S/TOTAL",
-    "2": "m3",
-    "3": "2.898",
-    "4": "250,000",
-    "5": "724,500"
-  },
-  {
-    "0": "III DOORS AND WINDOWS",
+    "0": "Bill No. 2 Excavating & filling",
     "1": "",
     "2": "",
     "3": "",
@@ -104,31 +8,7 @@
     "5": ""
   },
   {
-    "0": "1",
-    "1": "Grilled metal doors",
-    "2": "m²",
-    "3": "7.56",
-    "4": "65,000",
-    "5": "491,400"
-  },
-  {
-    "0": "2",
-    "1": "Timber panelled doors",
-    "2": "Pce",
-    "3": "4",
-    "4": "90,000",
-    "5": "360,000"
-  },
-  {
-    "0": "3",
-    "1": "Grilled metal windows S/TOTAL",
-    "2": "m²",
-    "3": "29.52",
-    "4": "85,000",
-    "5": "2,509,200"
-  },
-  {
-    "0": "IV PLASTERING OF WALLS",
+    "0": "2.5 Excavating & filling",
     "1": "",
     "2": "",
     "3": "",
@@ -136,163 +16,179 @@
     "5": ""
   },
   {
-    "0": "1",
-    "1": "Sub- flooring in quarry stones'chips (interior and walkways)",
-    "2": "m²",
-    "3": "64.78",
-    "4": "3,000",
-    "5": "194,340"
-  },
-  {
-    "0": "2",
-    "1": "Cement mortar rendered on internal and external walls",
-    "2": "m²",
-    "3": "463.68",
-    "4": "2,500",
-    "5": "1,159,200"
-  },
-  {
-    "0": "3",
-    "1": "Flooring & walkways in ceramic tiles",
-    "2": "m²",
-    "3": "64.78",
-    "4": "18,000",
-    "5": "1,166,040"
-  },
-  {
-    "0": "4",
-    "1": "Coated walls with tiles of ware in bathrooms",
-    "2": "m²",
-    "3": "62.5",
-    "4": "16,000",
-    "5": "1,000,000"
-  },
-  {
-    "0": "5",
-    "1": "Painting on internal &external walls S/TOTAL",
-    "2": "m²",
-    "3": "463.68",
-    "4": "2,500",
-    "5": "1,159,200"
-  },
-  {
-    "0": "V",
-    "1": "ELECTRICAL INSTALLATION",
+    "0": "2.5.1",
+    "1": "Fillings",
     "2": "",
     "3": "",
     "4": "",
     "5": ""
   },
   {
-    "0": "1",
-    "1": "Wiring and intubation",
-    "2": "L.S.",
-    "3": "1",
-    "4": "1,875,000",
-    "5": "1,875,000"
-  },
-  {
-    "0": "2",
-    "1": "Point lights in ordinary bulb",
-    "2": "Pce",
-    "3": "7",
-    "4": "35,000",
-    "5": "245,000"
-  },
-  {
-    "0": "3",
-    "1": "Point lights in shining bulb",
-    "2": "Pce",
-    "3": "6",
-    "4": "22,000",
-    "5": "132,000"
-  },
-  {
-    "0": "4",
-    "1": "simple plugs",
-    "2": "Pce",
-    "3": "5",
-    "4": "5,000",
-    "5": "25,000"
-  },
-  {
-    "0": "5",
-    "1": "Plug with triple curent",
-    "2": "Pce",
-    "3": "4",
-    "4": "35,000",
-    "5": "140,000"
-  },
-  {
-    "0": "6",
-    "1": "Simple switches",
-    "2": "Pce",
-    "3": "5",
-    "4": "15,000",
-    "5": "75,000"
-  },
-  {
-    "0": "7",
-    "1": "Switch for double lighting",
-    "2": "Pce",
-    "3": "6",
-    "4": "15,000",
-    "5": "90,000"
-  },
-  {
-    "0": "8",
-    "1": "Switches with double ignitions",
-    "2": "Pce",
-    "3": "7",
-    "4": "15,000",
-    "5": "105,000"
-  },
-  {
-    "0": "9",
-    "1": "Switches of  curent with zipper",
-    "2": "Pce",
-    "3": "6",
-    "4": "15,000",
-    "5": "90,000"
-  },
-  {
-    "0": "10",
-    "1": "globe at the top of mirrors",
-    "2": "Pce",
-    "3": "2",
-    "4": "35,000",
-    "5": "70,000"
-  },
-  {
-    "0": "11",
-    "1": "Partition box having 8 ways S/TOTAL",
-    "2": "Pce",
-    "3": "2",
-    "4": "65,000",
-    "5": "130,000"
-  },
-  {
-    "0": "VI",
-    "1": "SANITARY INSTALLATION",
+    "0": "2.5.1.1",
+    "1": "Filling obtained from excavated material",
     "2": "",
     "3": "",
     "4": "",
     "5": ""
   },
   {
-    "0": "1",
-    "1": "Connection to EWSA water networks",
-    "2": "L.S.",
-    "3": "1",
-    "4": "875,000",
-    "5": "875,000"
+    "0": "2.5.1.1.1",
+    "1": "Fill obtained from temporary spoil heaps to foundations, level compacted in max 150mm layers by hand >500mm thick",
+    "2": "2.80\nm³",
+    "3": "",
+    "4": "65",
+    "5": "65"
   },
   {
-    "0": "2",
-    "1": "Intubation for evacuation of waste water",
-    "2": "L.S.",
-    "3": "1",
-    "4": "675,000",
-    "5": "675,000"
+    "0": "2.5.1.1.2",
+    "1": "Fill obtained from excavated material to foundations 150mm thick compacted in max 150mm layers, laid level",
+    "2": "7.69\nm²",
+    "3": "",
+    "4": "26",
+    "5": "99"
+  },
+  {
+    "0": "2.5.1.2",
+    "1": "Sub base",
+    "2": "",
+    "3": "",
+    "4": "",
+    "5": ""
+  },
+  {
+    "0": "2.5.1.2.1",
+    "1": "Imported filling 100mm thick level sub base to paving compacted in max 150mm layers Sub base MOT type 1",
+    "2": "73.59\nm²",
+    "3": "",
+    "4": "1,292",
+    "5": "63"
+  },
+  {
+    "0": "2.5.2",
+    "1": "Excavations",
+    "2": "",
+    "3": "",
+    "4": "",
+    "5": ""
+  },
+  {
+    "0": "2.5.2.1",
+    "1": "Foundations",
+    "2": "",
+    "3": "",
+    "4": "",
+    "5": ""
+  },
+  {
+    "0": "2.5.2.1.1",
+    "1": "Excavation from foundations max depth <2m Backhoe loader and driver",
+    "2": "22.20\nm³",
+    "3": "",
+    "4": "523",
+    "5": "40"
+  },
+  {
+    "0": "2.5.2.1.2",
+    "1": "Preparing bottom of excavations",
+    "2": "24.66\nm²",
+    "3": "",
+    "4": "59",
+    "5": "75"
+  },
+  {
+    "0": "2.5.3",
+    "1": "Disposal",
+    "2": "",
+    "3": "",
+    "4": "",
+    "5": ""
+  },
+  {
+    "0": "2.5.3.1",
+    "1": "Excavated material disposal",
+    "2": "",
+    "3": "",
+    "4": "",
+    "5": ""
+  },
+  {
+    "0": "2.5.3.1.1",
+    "1": "Disposal of excavated material off site Tipper (20 tonne) and driver inc. land fill tax",
+    "2": "48.97\nm³",
+    "3": "",
+    "4": "1,245",
+    "5": "34"
+  },
+  {
+    "0": "2.5.4",
+    "1": "Membranes",
+    "2": "",
+    "3": "",
+    "4": "",
+    "5": ""
+  },
+  {
+    "0": "2.5.4.1",
+    "1": "Damp proof membrane",
+    "2": "",
+    "3": "",
+    "4": "",
+    "5": ""
+  },
+  {
+    "0": "2.5.4.1.1",
+    "1": "DPM to beam and block floor construction >500mm wide horizontal Visqueen EcoMembrane polythene DPM black 1200 gauge (300mu) BBA",
+    "2": "61.81\nm²",
+    "3": "",
+    "4": "96",
+    "5": "30"
+  },
+  {
+    "0": "2.5.5",
+    "1": "Excavation support",
+    "2": "",
+    "3": "",
+    "4": "",
+    "5": ""
+  },
+  {
+    "0": "2.5.5.1",
+    "1": "Excavation support",
+    "2": "",
+    "3": "",
+    "4": "",
+    "5": ""
+  },
+  {
+    "0": "2.5.5.1.1",
+    "1": "Support to faces of excavation",
+    "2": "101.52\nm²",
+    "3": "",
+    "4": "1,832",
+    "5": "46"
+  },
+  {
+    "0": "2.5.6",
+    "1": "Retaining excavated material",
+    "2": "",
+    "3": "",
+    "4": "",
+    "5": ""
+  },
+  {
+    "0": "2.5.6.1",
+    "1": "Excavated material retention",
+    "2": "",
+    "3": "",
+    "4": "",
+    "5": ""
+  },
+  {
+    "0": "2.5.6.1.1",
+    "1": "Retain excavated subsoil on site in spoil heaps 50m from excavation by machine Dumper (3 tonne)",
+    "2": "3.96\nm³",
+    "3": "",
+    "4": "16",
+    "5": "43"
   }
 ]

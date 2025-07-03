@@ -1,0 +1,125 @@
+[
+  {
+    "Section Title": "2.5.1 Fillings",
+    "Subsection Title": "2.5.1.1 Filling obtained from excavated material",
+    "Items": [
+      {
+        "Item Number": "2.5.1.1.1",
+        "Item Description": "Fill obtained from temporary spoil heaps to foundations, level compacted in max 150mm layers by hand >500mm thick",
+        "Unit": "m³",
+        "Quantity": 2.8,
+        "Rate": 65.0,
+        "Amount": 65.0,
+        "Currency": "€"
+      },
+      {
+        "Item Number": "2.5.1.1.2",
+        "Item Description": "Fill obtained from excavated material to foundations 150mm thick compacted in max 150mm layers, laid level",
+        "Unit": "m²",
+        "Quantity": 7.69,
+        "Rate": 26.0,
+        "Amount": 99.0,
+        "Currency": "€"
+      }
+    ]
+  },
+  {
+    "Section Title": "2.5.1 Fillings",
+    "Subsection Title": "2.5.1.2 Sub base",
+    "Items": [
+      {
+        "Item Number": "2.5.1.2.1",
+        "Item Description": "Imported filling 100mm thick level sub base to paving compacted in max 150mm layers Sub base MOT type 1",
+        "Unit": "m²",
+        "Quantity": 73.59,
+        "Rate": 1292.0,
+        "Amount": 63.0,
+        "Currency": "€"
+      }
+    ]
+  },
+  {
+    "Section Title": "2.5.2 Excavations",
+    "Subsection Title": "2.5.2.1 Foundations",
+    "Items": [
+      {
+        "Item Number": "2.5.2.1.1",
+        "Item Description": "Excavation from foundations max depth <2m Backhoe loader and driver",
+        "Unit": "m³",
+        "Quantity": 22.2,
+        "Rate": 523.0,
+        "Amount": 40.0,
+        "Currency": "€"
+      },
+      {
+        "Item Number": "2.5.2.1.2",
+        "Item Description": "Preparing bottom of excavations",
+        "Unit": "m²",
+        "Quantity": 24.66,
+        "Rate": 59.0,
+        "Amount": 75.0,
+        "Currency": "€"
+      }
+    ]
+  },
+  {
+    "Section Title": "2.5.3 Disposal",
+    "Subsection Title": "2.5.3.1 Excavated material disposal",
+    "Items": [
+      {
+        "Item Number": "2.5.3.1.1",
+        "Item Description": "Disposal of excavated material off site Tipper (20 tonne) and driver inc. land fill tax",
+        "Unit": "m³",
+        "Quantity": 48.97,
+        "Rate": 1245.0,
+        "Amount": 34.0,
+        "Currency": "€"
+      }
+    ]
+  },
+  {
+    "Section Title": "2.5.4 Membranes",
+    "Subsection Title": "2.5.4.1 Damp proof membrane",
+    "Items": [
+      {
+        "Item Number": "2.5.4.1.1",
+        "Item Description": "DPM to beam and block floor construction >500mm wide horizontal Visqueen EcoMembrane polythene DPM black 1200 gauge (300mu) BBA",
+        "Unit": "m²",
+        "Quantity": 61.81,
+        "Rate": 96.0,
+        "Amount": 30.0,
+        "Currency": "€"
+      }
+    ]
+  },
+  {
+    "Section Title": "2.5.5 Excavation support",
+    "Subsection Title": "2.5.5.1 Excavation support",
+    "Items": [
+      {
+        "Item Number": "2.5.5.1.1",
+        "Item Description": "Support to faces of excavation",
+        "Unit": "m²",
+        "Quantity": 101.52,
+        "Rate": 1832.0,
+        "Amount": 46.0,
+        "Currency": "€"
+      }
+    ]
+  },
+  {
+    "Section Title": "2.5.6 Retaining excavated material",
+    "Subsection Title": "2.5.6.1 Excavated material retention",
+    "Items": [
+      {
+        "Item Number": "2.5.6.1.1",
+        "Item Description": "Retain excavated subsoil on site in spoil heaps 50m from excavation by machine Dumper (3 tonne)",
+        "Unit": "m³",
+        "Quantity": 3.96,
+        "Rate": 16.0,
+        "Amount": 43.0,
+        "Currency": "€"
+      }
+    ]
+  }
+]
