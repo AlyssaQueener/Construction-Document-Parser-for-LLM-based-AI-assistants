@@ -36,7 +36,7 @@ async def create_upload_file_v2(file: UploadFile):
                     im = im.convert("RGB")
                 im.save(file_path, 'JPEG')
         
-        result = floorplan_parser.get_title_block_info(file_path)
+        ### insert process logic
         
         os.remove(file_path)  
         
