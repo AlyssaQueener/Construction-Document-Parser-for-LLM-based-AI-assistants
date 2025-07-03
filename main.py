@@ -40,7 +40,7 @@ async def create_upload_file_v2(file: UploadFile):
         
         os.remove(file_path)  
         
-        return result
+        return {"Under": "construction"}
         
     except HTTPException:
         raise
