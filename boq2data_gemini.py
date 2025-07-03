@@ -5,17 +5,33 @@ import src.boq2data.camelot_setup.gemini as gemini
 import csv
 import asyncio 
 
+
+def financial_boq(path,flav,page_num):
+        tables = camelot.read_pdf(path, flavor=flav, pages=page_num) # -> output camelot table object 
+        tables_boq_processed = cam.cam_stream_merge(tables) # json 
+        processed_str = json.dumps(tables_boq_processed, indent=2, ensure_ascii=False)
+        response_json = gemini.call_gemini_return_json(prompt)
+        output_filename = "extracted_boq_data.json"
+        print(response_json)
+        with open(output_filename, 'w', encoding='utf-8') as f:
+                json.dump(response_json, f, indent=2, ensure_ascii=False)
+        print(f"Successfully saved extracted JSON to '{output_filename}'")
+
+
+
 if __name__ == "__main__":
+    
+    
     path = 'examples/FinancialDocuments/Bill-of-Quantities-Sample2.pdf'
     flav = 'network'
     page_num = '1'
     #tables_boq4 = cam.cam_extract(path,flav,page_num)
    
    # unprocessed and processed values 
-    tables = camelot.read_pdf(path, flavor=flav, pages=page_num)
-    tables_boq_processed = cam.cam_stream_merge(tables)
+    tables = camelot.read_pdf(path, flavor=flav, pages=page_num) # -> output camelot table object 
+    tables_boq_processed = cam.cam_stream_merge(tables) # json 
     
-    # Display tables in json and csv 
+###### # Display tables in json and csv 
     print(tables)
 #     tables.export('foo.csv',f='csv')
 

@@ -1,0 +1,34 @@
+[
+  {
+    "Section Title": "05.20 EXCAVATIONS To reduce levels",
+    "Items": [
+      {
+        "Item Number": "1",
+        "Item Description": "from excavation Removing tree stumps girth 0.60 - 1.50: filling voids with selected material arising",
+        "Unit": null,
+        "Quantity": null,
+        "Rate": null,
+        "Amount": null,
+        "Currency": null
+      },
+      {
+        "Item Number": "3",
+        "Item Description": "maximum depth not exceeding 1.00m maximum depth not exceeding 1.00m for formation level\nincluding blinds and insulation Basements and the like: commencing level from reduce level: 59.320m",
+        "Unit": "m³",
+        "Quantity": "863",
+        "Rate": null,
+        "Amount": null,
+        "Currency": null
+      },
+      {
+        "Item Number": "5",
+        "Item Description": "maximum depth not exceeding 2.00m For pile caps and ground beams between piles not exceeding 2.00m : commencing from reduce level:\n 59.32m not exceeding 2.00m : commencing from reduce level:\n 61.1m not exceeding 2.00m : commencing from reduce\n level:57.82m",
+        "Unit": "m³",
+        "Quantity": "1,100",
+        "Rate": null,
+        "Amount": null,
+        "Currency": null
+      }
+    ]
+  }
+]
