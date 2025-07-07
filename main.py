@@ -6,14 +6,15 @@ import src.plan2data.titleBlockInfo as floorplan_parser
 import io
 import os
 import uuid
+import src.gantt2data.ganttParser as gantt_parser
 
 app = FastAPI()
 
 ## after installation of fastapi run -- fastapi dev main.py -- in terminal to start server locally 
 ## go to http://127.0.0.1:8000/docs to view the automatically created api docs
 
-@app.post("/financial/uploadfile/")
-async def create_upload_file_v2(file: UploadFile):
+@app.post("/gantt/uploadfile/")
+async def create_upload_file_gantt(file: UploadFile):
     upload_dir = "uploads"  # Make sure this directory exists
     os.makedirs(upload_dir, exist_ok=True)
     
@@ -36,11 +37,11 @@ async def create_upload_file_v2(file: UploadFile):
                     im = im.convert("RGB")
                 im.save(file_path, 'JPEG')
         
-        ### insert process logic
+        result = gantt_parser.parse_gantt_chart(file_path)
         
         os.remove(file_path)  
         
-        return {"Under": "construction"}
+        return result
         
     except HTTPException:
         raise
