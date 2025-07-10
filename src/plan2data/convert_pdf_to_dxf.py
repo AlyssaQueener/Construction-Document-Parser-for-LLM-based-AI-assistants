@@ -76,18 +76,16 @@ if __name__=='__main__':
                     
                 elif element[0] == "re" and len(element) == 3:
                     _, rect,fill = element
-                    x0, y0 = rect.x0, rect.y0
-                    x1, y1 = rect.x1, rect.y1
+                    x0, y0 = rect.x0, page_height-rect.y0
+                    x1, y1 = rect.x1, page_height-rect.y1
+                     
                     
-                    # Transform Y coordinates
-                    y0_dxf = page_height - y0
-                    y1_dxf = page_height - y1
                     
-                    x_min, x_max = min(x0, x1), max(x0, x1)
-                    y_min, y_max = min(y0_dxf, y1_dxf), max(y0_dxf, y1_dxf)
+                    # x_min, x_max = min(x0, x1), max(x0, x1)
+                    # y_min, y_max = min(y0_dxf, y1_dxf), max(y0_dxf, y1_dxf)
                         
                     msp.add_solid(
-                        [(x_min, y_min), (x_max, y_min), (x_max, y_max), (x_min, y_max)],
+                        [(x0, y0), (x1, y0),(x0, y1), (x1, y1)],
                             dxfattribs={"layer": "PDFRects"}
                         )
                     
