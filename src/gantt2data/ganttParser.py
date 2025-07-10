@@ -5,11 +5,11 @@ from pydantic import BaseModel
 import pandas as pd
 
 class Task(BaseModel):
-    id: int | None
-    task: str | None
-    start: str | None
-    finish: str | None
-    duration: str | None
+    id: int | None = None
+    task: str | None = None
+    start: str | None = None
+    finish: str | None = None
+    duration: str | None = None
 
 path = "examples/ganttDiagrams/commercial-building-construction-gantt-chart.pdf"
 path1 = "examples/ganttDiagrams/GANTT CHART EXAMPLE.pdf"
@@ -118,8 +118,8 @@ def create_tasks(column_order, df):
             continue
     return tasks
 
-def parse_gantt_chart(path): 
-    tables = camelot.read_pdf(path)
+def parse_gantt_chart(path, page_number): 
+    tables = camelot.read_pdf(path, pages=page_number)
     df = tables[0].df
     print("Original DataFrame:")
     print(df.head())
