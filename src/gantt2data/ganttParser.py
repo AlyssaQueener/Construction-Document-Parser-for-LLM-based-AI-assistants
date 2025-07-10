@@ -118,8 +118,8 @@ def create_tasks(column_order, df):
             continue
     return tasks
 
-def parse_gantt_chart(path, page_number): 
-    tables = camelot.read_pdf(path, pages=page_number)
+def parse_gantt_chart(path): 
+    tables = camelot.read_pdf(path)
     df = tables[0].df
     print("Original DataFrame:")
     print(df.head())
