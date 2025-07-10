@@ -6,7 +6,7 @@ import os
 #api_key = os.environ["MISTRAL_API_KEY"]
 
 model = "mistral-small-latest"
-api_key = os.environ["MISTRAL_API_KEY"]
+api_key = os.environ.get("MISTRAL_API_KEY")
 client = Mistral(api_key=api_key)
 
 
