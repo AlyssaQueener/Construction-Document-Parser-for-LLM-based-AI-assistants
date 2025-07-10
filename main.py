@@ -51,6 +51,8 @@ async def create_upload_file_gantt(file: UploadFile):
 @app.get("/documentparser")
 def read_root():
     return {"Under": "construction"}
+
+
 @app.post("/drawingparser/uploadfile/")
 async def create_upload_file_v2(file: UploadFile):
     upload_dir = "uploads"  # Make sure this directory exists
