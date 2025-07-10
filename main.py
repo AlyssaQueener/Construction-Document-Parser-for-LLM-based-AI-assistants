@@ -13,6 +13,10 @@ app = FastAPI()
 ## after installation of fastapi run -- fastapi dev main.py -- in terminal to start server locally 
 ## go to http://127.0.0.1:8000/docs to view the automatically created api docs
 
+@app.get("/")
+async def hello_world():
+    return {"This is": "Document Parser for LLM based AI assistants"}
+    
 @app.post("/gantt/uploadfile/")
 async def create_upload_file_gantt(file: UploadFile):
     upload_dir = "uploads"  # Make sure this directory exists
