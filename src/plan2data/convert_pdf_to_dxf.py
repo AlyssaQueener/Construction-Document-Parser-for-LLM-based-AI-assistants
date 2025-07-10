@@ -78,34 +78,28 @@ if __name__=='__main__':
                     _, rect,fill = element
                     x0, y0 = rect.x0, page_height-rect.y0
                     x1, y1 = rect.x1, page_height-rect.y1
-                     
-                    
-                    
-                    # x_min, x_max = min(x0, x1), max(x0, x1)
-                    # y_min, y_max = min(y0_dxf, y1_dxf), max(y0_dxf, y1_dxf)
                         
                     msp.add_solid(
                         [(x0, y0), (x1, y0),(x0, y1), (x1, y1)],
                             dxfattribs={"layer": "PDFRects"}
                         )
                     
-                # # elif element[0] == "c" and len(element) == 5:
-                # #     _, p0,p1,p2,p3 = element
-                # #     # Try to approximate as arc if possible
-                # #     try:
-                # #         arc = ezdxf.math.ConstructionArc([p1, p2, p3])
-                # #         msp.add_arc(
-                # #             center=(arc.center.x, page_height - arc.center.y),
-                # #             radius=arc.radius,
-                # #             start_angle=arc.start_angle,
-                # #             end_angle=arc.end_angle,
-                # #             dxfattribs={"layer": "PDFCurves"}
-                # #         )
-                #     except ValueError:
-                #         # fallback: treat as spline if not arc
-                #         points = [(p1.x, page_height - p1.y), (p2.x, page_height - p2.y), (p3.x, page_height - p3.y)]
-                #         msp.add_spline(points, dxfattribs={"layer": "PDFSplines"})
-                #         print("⚠️ Could not construct arc; falling back to spline.")
+                elif element[0] == "c"and len(element) == 5:
+                    _, start, cp1, cp2, end = element                   
+                    # Convert Y coordinates
+                    control_points = [
+                        (start[0], page_height - start[1]),
+                        (cp1[0], page_height - cp1[1]),
+                        (cp2[0], page_height - cp2[1]),
+                        (end[0], page_height - end[1])
+                    ]
+                    
+                    # Create a cubic spline (degree 3)
+                    spline = msp.add_spline(
+                        control_points,
+                        degree=3,
+                        dxfattribs={"layer": "PDFCurves"}
+                    )
                 elif element[0] == "el" and len(element) == 2:
                     _, ellipse = element
                     cx, cy = ellipse.center
