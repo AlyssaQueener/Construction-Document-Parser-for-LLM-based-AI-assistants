@@ -1,4 +1,3 @@
-*.conda
 /.BOQ3.pdf
 /.format_boq.cpython-313.pyc
 /.Test.py
@@ -261,3 +260,5 @@ rever/
 
 # setuptools-scm
 conda/_version.py
+
+.conda
