@@ -135,7 +135,7 @@ def parse_gantt_chart(path, chart_format):
         print("Processed columns:", processed_df.columns.tolist())
     
         column_order, found_matches = match_column_names_with_task_properties(processed_df)
-        rint("Found matches:", found_matches)
+        print("Found matches:", found_matches)
 
         if all(value is None for value in column_order):
             print("No column matches found")
