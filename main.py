@@ -8,7 +8,26 @@ import os
 import uuid
 import src.gantt2data.ganttParser as gantt_parser
 
-app = FastAPI()
+description = """
+This API helps you to convert your Construction Document into structured JSON files, ideal for further applications and LLM usage.
+
+## Financial Parser
+
+upload and parse **Bill of Quantities**.
+
+## Program Parser
+
+upload and parse **Gantt Charts**.
+
+## Program Parser
+
+upload and parse **Floor Plans and Section Views**.
+"""
+
+app = FastAPI(
+    title="Construction Document Parser for LLM based AI assistants",
+    description=description,
+)
 
 ## after installation of fastapi run -- fastapi dev main.py -- in terminal to start server locally 
 ## go to http://127.0.0.1:8000/docs to view the automatically created api docs
