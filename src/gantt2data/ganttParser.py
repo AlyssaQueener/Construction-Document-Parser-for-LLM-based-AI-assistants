@@ -118,31 +118,34 @@ def create_tasks(column_order, df):
             continue
     return tasks
 
-def parse_gantt_chart(path): 
-    tables = camelot.read_pdf(path)
-    df = tables[0].df
-    print("Original DataFrame:")
-    print(df.head())
-    print("Original columns:", df.columns.tolist())
+def parse_gantt_chart(path, chart_format): 
+    if chart_format == "tabular":
+        tables = camelot.read_pdf(path)
+        df = tables[0].df
+        print("Original DataFrame:")
+        print(df.head())
+        print("Original columns:", df.columns.tolist())
     
-    processed_df, is_empty = preprocess_df_and_check_column_names(df)
-    if is_empty:
-        return {"This didn't work": "We need a different approach!"}
+        processed_df, is_empty = preprocess_df_and_check_column_names(df)
+        if is_empty:
+            return {"This didn't work": "We need a different approach!"}
     
-    print("Processed DataFrame:")
-    print(processed_df.head())
-    print("Processed columns:", processed_df.columns.tolist())
+        print("Processed DataFrame:")
+        print(processed_df.head())
+        print("Processed columns:", processed_df.columns.tolist())
     
-    column_order, found_matches = match_column_names_with_task_properties(processed_df)
-    print("Found matches:", found_matches)
+        column_order, found_matches = match_column_names_with_task_properties(processed_df)
+        rint("Found matches:", found_matches)
 
-    if all(value is None for value in column_order):
-        print("No column matches found")
-        print(processed_df)
-        return {"This didn't work": "We need a different approach!"}
+        if all(value is None for value in column_order):
+            print("No column matches found")
+            print(processed_df)
+            return {"This didn't work": "We need a different approach!"}
     
-    tasks = create_tasks(column_order, processed_df)
-    json_string = json.dumps([ob.__dict__ for ob in tasks])
-    return json_string
+        tasks = create_tasks(column_order, processed_df)
+        json_string = json.dumps([ob.__dict__ for ob in tasks])
+        return json_string
+    else:
+        return {"Not implemented":"yet"}
 
 
