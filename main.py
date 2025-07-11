@@ -1,5 +1,5 @@
 from typing import Union
-
+import boq2data_gemini as boq
 from fastapi import FastAPI, UploadFile, HTTPException
 from PIL import Image 
 import src.plan2data.titleBlockInfo as floorplan_parser
@@ -79,10 +79,35 @@ async def create_upload_file_gantt(file: UploadFile, chart_format):
     except Exception as e:
         print(f"Error processing file: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Error processing file: {str(e)}")
-@app.get("/financial_parser")
-def read_root():
-    return {"Under": "construction"}
+@app.post("/financial/uploadfile/")
 
+async def create_upload_file_fin(file: UploadFile):
+    upload_dir = "uploads"
+    os.makedirs(upload_dir, exist_ok=True)
+    try:
+        if not (file.content_type == 'application/pdf' or file.content_type.startswith('image/')): # type: ignore
+            raise HTTPException(status_code=400, detail="File must be a PDF or image")
+        
+        file_extension = os.path.splitext(file.filename)[1] if file.filename else '.pdf'
+        unique_filename = f"{uuid.uuid4()}{file_extension}"
+        file_path = os.path.join(upload_dir, unique_filename)
+        
+        file_content = await file.read()
+        
+        if file.content_type == 'application/pdf':
+            with open(file_path, 'wb') as f:
+                f.write(file_content)
+
+        result = boq.financial_boq(file_path)
+        os.remove(file_path)  
+        
+        return result
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"Error processing file: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error processing file: {str(e)}")
 
 @app.post("/drawing_parser/")
 async def create_upload_file_v2(file: UploadFile):
