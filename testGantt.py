@@ -6,6 +6,7 @@ import pandas as pd
 import src.gantt2data.ganttParser as parser
 import pdfplumber
 import pymupdf as pymupdf
+from src.plan2data.helper import convert_pdf2img
 
 
 
@@ -15,9 +16,9 @@ path2 = "gantChart.pdf"
 
 with pdfplumber.open(path2) as pdf:
     first_page = pdf.pages[0]
-    table = first_page.extract_table()
-    df = pd.DataFrame(table[1:], columns=table[0])
-    print(df)
+    text = first_page.extract_text()
+    print(text)
+    
     
 
 
