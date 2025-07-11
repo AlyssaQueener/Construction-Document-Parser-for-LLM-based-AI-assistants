@@ -67,7 +67,7 @@ def match_column_names_with_task_properties(df):
     column_order = [None] * len(column_names)
     found_matches = 0
     for i, name in enumerate(column_names):
-        title = match(name)
+        title = match(str(name))
         if title != "no match found":
             column_order[i] = {
                 "generalized_title": title,
@@ -118,31 +118,36 @@ def create_tasks(column_order, df):
             continue
     return tasks
 
-def parse_gantt_chart(path, page_number): 
-    tables = camelot.read_pdf(path, pages=page_number)
-    df = tables[0].df
-    print("Original DataFrame:")
-    print(df.head())
-    print("Original columns:", df.columns.tolist())
+def parse_gantt_chart(path, chart_format): 
+    if chart_format== "tabular":
+        tables = camelot.read_pdf(path)
+        df = tables[0].df
+        print("Original DataFrame:")
+        print(df.head())
+        print("Original columns:", df.columns.tolist())
+        processed_df, is_empty = preprocess_df_and_check_column_names(df)
+        if is_empty:
+            return {"Table Recognition": "failed"}
     
-    processed_df, is_empty = preprocess_df_and_check_column_names(df)
-    if is_empty:
-        return {"This didn't work": "We need a different approach!"}
-    
-    print("Processed DataFrame:")
-    print(processed_df.head())
-    print("Processed columns:", processed_df.columns.tolist())
-    
-    column_order, found_matches = match_column_names_with_task_properties(processed_df)
-    print("Found matches:", found_matches)
+        print("Processed DataFrame:")
+        print(processed_df.head())
+        print("Processed columns:", processed_df.columns.tolist())
 
-    if all(value is None for value in column_order):
-        print("No column matches found")
-        print(processed_df)
-        return {"This didn't work": "We need a different approach!"}
-    
-    tasks = create_tasks(column_order, processed_df)
-    json_string = json.dumps([ob.__dict__ for ob in tasks])
-    return json_string
+        column_order, found_matches = match_column_names_with_task_properties(processed_df)
+        print("Found matches:", found_matches)
+
+        ## Remove this
+        ## add if found_matches < 3 -> ai_column_matching
+        if all(value is None for value in column_order):
+            print("No column matches found")
+            print(processed_df.to_string())
+            return {"This didn't work": "We need a diffrent approach"}
+        ## to do: rethink a little bit the validations-> only tabular structures are inputed here
+        ## implement ai column matching if regex fails
+        tasks = create_tasks(column_order, processed_df)
+        json_string = json.dumps([ob.__dict__ for ob in tasks])
+        return json_string
+    else:
+        return {"Not implemented": "Yet"}
 
 

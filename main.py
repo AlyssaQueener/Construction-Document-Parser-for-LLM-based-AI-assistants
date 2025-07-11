@@ -23,10 +23,18 @@ upload and parse **Gantt Charts**.
 
 upload and parse **Floor Plans and Section Views**.
 """
+tags_metadata = [
+    {
+        "name": "gantt_parser",
+        "description": "chartFormat (string) – Specifies the layout of the Gantt chart. Use visual for charts where activity timing must be inferred from bar positions (with activities on the left and a timeline above), or tabular for charts that include a structured table with explicit start, end, and duration fields",
+    }
+]
+
 
 app = FastAPI(
     title="Construction Document Parser for LLM based AI assistants",
     description=description,
+    openapi_tags= tags_metadata
 )
 
 ## after installation of fastapi run -- fastapi dev main.py -- in terminal to start server locally 
@@ -36,8 +44,8 @@ app = FastAPI(
 async def hello_world():
     return {"This is": "Document Parser for LLM based AI assistants"}
     
-@app.post("/gantt/uploadfile/")
-async def create_upload_file_gantt(file: UploadFile):
+@app.post("/gantt_parser/{chart_format}")
+async def create_upload_file_gantt(file: UploadFile, chart_format):
     upload_dir = "uploads"  # Make sure this directory exists
     os.makedirs(upload_dir, exist_ok=True)
     
@@ -60,7 +68,7 @@ async def create_upload_file_gantt(file: UploadFile):
                     im = im.convert("RGB")
                 im.save(file_path, 'JPEG')
         
-        result = gantt_parser.parse_gantt_chart(file_path)
+        result = gantt_parser.parse_gantt_chart(file_path,chart_format)
         
         os.remove(file_path)  
         
@@ -71,12 +79,12 @@ async def create_upload_file_gantt(file: UploadFile):
     except Exception as e:
         print(f"Error processing file: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Error processing file: {str(e)}")
-@app.get("/documentparser")
+@app.get("/financial_parser")
 def read_root():
     return {"Under": "construction"}
 
 
-@app.post("/drawingparser/uploadfile/")
+@app.post("/drawing_parser/")
 async def create_upload_file_v2(file: UploadFile):
     upload_dir = "uploads"  # Make sure this directory exists
     os.makedirs(upload_dir, exist_ok=True)
