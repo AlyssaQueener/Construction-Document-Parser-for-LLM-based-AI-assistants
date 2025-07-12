@@ -6,13 +6,13 @@ from collections import Counter
 
 #PDF Scale in cm 
 
-def convert_PDF_to_cm_point(PDF_scale=1,PDF_x, PDF_y):
+def convert_PDF_to_cm_point(point,PDF_scale=1):
     PDF_Unit_to_cm   =2.54/72 # 72 pdf UNits = 1 inch = 2,54 cm 
-    CM_x= PDF_x*PDF_Unit_to_cm*PDF_scale
-    CM_y =PDF_y*PDF_scale*PDF_scale
+    CM_x= point[0]*PDF_Unit_to_cm*PDF_scale
+    CM_y =point[1]*PDF_Unit_to_cm*PDF_scale
     Pt_cm = (CM_x,CM_y)
     return Pt_cm
-def convert_PDF_to_cm(PDF_scale=1,PDF_cord):
+def convert_PDF_to_cm(PDF_cord,PDF_scale=1):
     PDF_Unit_to_cm   =2.54/72 # 72 pdf UNits = 1 inch = 2,54 cm 
     CM_cord= PDF_cord*PDF_Unit_to_cm*PDF_scale
     return CM_cord
@@ -80,31 +80,40 @@ if __name__=='__main__':
                 
                 if element[0] == "l" and len(element) == 3:
                         _, p1, p2 = element
-                        pt1 = (round(p1.x, 2), round(page_height - p1.y, 2))
-                        pt2 = (round(p2.x, 2), round(page_height - p2.y, 2))
+                        raw_pt1 = ((round(p1.x, 2), round(page_height - p1.y, 2)))
+                        raw_pt2 = (round(p2.x, 2), round(page_height - p2.y, 2))
+
+                        pt1 = convert_PDF_to_cm_point(raw_pt1)
+                        pt2 = convert_PDF_to_cm_point(raw_pt2)
+
                         line_segments.append((pt1, pt2))
                         msp.add_line((pt1),(pt2),dxfattribs={"layer": "PDFLines"},)
                     
                 elif element[0] == "re" and len(element) == 3:
                     _, rect,fill = element
-                    x0, y0 = rect.x0, page_height-rect.y0
-                    x1, y1 = rect.x1, page_height-rect.y1
-                        
+                    r_x0, r_y0 = rect.x0, page_height-rect.y0
+                    r_x1, r_y1 = rect.x1, page_height-rect.y1
+
+                    x0 = convert_PDF_to_cm(r_x0)
+                    y0 = convert_PDF_to_cm(r_y0)
+                    x1 = convert_PDF_to_cm(r_x1)
+                    y1= convert_PDF_to_cm(r_y1)
+
                     msp.add_solid(
                         [(x0, y0), (x1, y0),(x0, y1), (x1, y1)],
                             dxfattribs={"layer": "PDFRects"}
                         )
                     
                 elif element[0] == "c"and len(element) == 5:
-                    _, start, cp1, cp2, end = element                   
+                    _, start, cp1, cp2, end = element      
+                    control_points = []             
                     # Convert Y coordinates
-                    control_points = [
-                        (start[0], page_height - start[1]),
-                        (cp1[0], page_height - cp1[1]),
-                        (cp2[0], page_height - cp2[1]),
-                        (end[0], page_height - end[1])
-                    ]
-                    
+                    for pt in [start, cp1, cp2, end]:
+                        inverted_pt = (pt[0], page_height - pt[1])
+                        cm_point = convert_PDF_to_cm_point(inverted_pt, PDF_scale=your_scale_value)
+                        control_points.append(cm_point)
+
+                  
                     # Create a cubic spline (degree 3)
                     spline = msp.add_spline(
                         control_points,
@@ -135,15 +144,22 @@ if __name__=='__main__':
                             # msp.add_spline(points, dxfattribs={"layer": "PDFCurves"})
                 elif element[0] == 'qu' and len(element) == 2:
                     _, quad = element 
-                    p0,p1,p2,p3 = quad
-                    points = [  (p0.x, page_height - p0.y),
-                                (p1.x, page_height - p1.y),
-                                (p3.x, page_height - p3.y),
-                                (p2.x, page_height - p2.y),
-                                (p0.x, page_height - p0.y),]  # quad strucutre TopLeft, BottomLeft, TopRight, BottomRight
+                    p0, p1, p2, p3 = quad
+
+                    # Convert to (x, y), apply Y-axis flip, then convert to cm
+                    raw_points = [
+                        (p0.x, page_height - p0.y),
+                        (p1.x, page_height - p1.y),
+                        (p3.x, page_height - p3.y),
+                        (p2.x, page_height - p2.y),
+                        (p0.x, page_height - p0.y),  # Close the loop
+                    ]
+
+                    points_cm = [convert_PDF_to_cm_point(pt) for pt in raw_points]
+                # quad strucutre TopLeft, BottomLeft, TopRight, BottomRight
 
     
-                    msp.add_lwpolyline(points, dxfattribs={"layer": "PDFQuads"})
+                    msp.add_lwpolyline(points_cm, dxfattribs={"layer": "PDFQuads"})
     # === Text Extraction ===
     textpage = page.get_textpage()
     text_dict = textpage.extractDICT()
@@ -166,7 +182,7 @@ if __name__=='__main__':
                     })
                     text_entity.dxf.insert = (x, dxf_y)
     
-
+  
   
 
     # === Save and Report ===
