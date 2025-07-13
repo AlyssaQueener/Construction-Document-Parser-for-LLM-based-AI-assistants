@@ -43,16 +43,28 @@ def cam_stream_merge(tables):
     for table in tables:
         df = table.df  #pandas DataFrame
         for _, row in df.iterrows():
-            # Convert each row to a dictionary with column indices as keys
-            data.append({str(i): str(row[i]).strip() for i in range(len(row))})
+            #iterate over the actual row values directly using enumerate(row)
+            data.append({str(i): str(value).strip() for i, value in enumerate(row)})
+
     output = []
     current_row = None
+    
+    # for row in data:
+    #     for key in row.keys:
+    #         if row.get(key, "") and key!="1":  # New main row
+    #             current_row = row.copy()
+    #             output.append(current_row)
+    #         elif row.get("1", "") and current_row:  # Continuation line
+    #             current_row["1"] += " " + row["1"]
     for row in data:
-        if row.get("0", ""):  # New main row
+        non_empty = {k: v.strip() for k, v in row.items() if v.strip()}
+
+        # Only column "1" (second column) is filled
+        if list(non_empty.keys()) == ["1"] and current_row:
+            current_row["1"] += " " + non_empty["1"]
+        else:
             current_row = row.copy()
             output.append(current_row)
-        elif row.get("1", "") and current_row:  # Continuation line
-            current_row["1"] += " " + row["1"]
 
     # Print cleaned result
     print(json.dumps(output, indent=2, ensure_ascii=False))
@@ -106,11 +118,10 @@ def cam_stream_merge(tables):
 
 #Execution of the code 
 if __name__ == "__main__":
-    path = 'examples/FinancialDocuments/BoQExample.pdf'
+    path = 'examples/FinancialDocuments/BOQ3.pdf'
     flav = 'hybrid'
     page_num = '1'
     tables_boq4 = cam_extract(path,flav,page_num)
-    #tables = cam_extract_accuracy(path,page_num)
-    
+    print(tables_boq4)
     tables_boq_processed = cam_stream_merge(tables_boq4)
 
