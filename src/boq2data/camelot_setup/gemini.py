@@ -81,7 +81,7 @@ You are an expert system for extracting structured data from English or German B
         "Quantity": null,
         "Rate": null,
         "Amount": "14230.00",
-        "Currency": "€"
+        "Currency": null
       }}
     ]
   }},
@@ -102,12 +102,34 @@ Ensure item keys follow this exact naming and order:
     "Amount"
     "Currency"
 
+if there is no information matching an item key set its value to null 
 If the subtotal row is present, it must:
 
 - Appear as the last object in the section’s "Items" array.
 - Set "Item Number" to null.
 - Use "Subtotal" of "Section header" in "Item Description". e.g Subtotal Prelimanry works
 
+
+If the total row is present include it as the last entry like this : 
+- set the "Section Title" to "Grand Total" 
+- include one item with the total amount
+e.g like this: 
+JSON Schema:
+```json
+[{{"Section Title": "Grand Total",
+    "Items": [
+      {{
+        "Item Number": null,
+        "Item Description": "Grand Total",
+        "Unit": null,
+        "Quantity":null ,
+        "Rate": null,
+        "Amount": "924000",
+        "Currency": "€"
+      }},
+      ]
+   }}
+]
 - Do NOT group items under custom keys like "Category" or "Item" — only use "Section Title", if present "Subction title" and "Items".
 - DO NOT include any introductory or explanatory text. ONLY output the JSON.**
 - **DO NOT wrap the JSON in markdown code blocks (e.g., ```json...```).**

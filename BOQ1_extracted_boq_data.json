@@ -1,6 +1,6 @@
 [
   {
-    "Section Title": "I PRELIMINARY WORKS",
+    "Section Title": "PRELIMINARY WORKS",
     "Items": [
       {
         "Item Number": "1",
@@ -8,7 +8,7 @@
         "Unit": "L.S.",
         "Quantity": "1",
         "Rate": "200000",
-        "Amount": "200000.00",
+        "Amount": "200000",
         "Currency": "€"
       },
       {
@@ -17,7 +17,7 @@
         "Unit": "m3",
         "Quantity": "38.64",
         "Rate": "3000",
-        "Amount": "115920.00",
+        "Amount": "115920",
         "Currency": "€"
       },
       {
@@ -26,13 +26,13 @@
         "Unit": null,
         "Quantity": null,
         "Rate": null,
-        "Amount": "315920.00",
+        "Amount": "315920",
         "Currency": "€"
       }
     ]
   },
   {
-    "Section Title": "II MASONRY &STRUCTURE IN R.C.C",
+    "Section Title": "MASONRY &STRUCTURE IN R.C.C",
     "Items": [
       {
         "Item Number": "1",
@@ -40,7 +40,7 @@
         "Unit": "m3",
         "Quantity": "1.449",
         "Rate": "80000",
-        "Amount": "115920.00",
+        "Amount": "115920",
         "Currency": "€"
       },
       {
@@ -49,7 +49,7 @@
         "Unit": "m3",
         "Quantity": "30.912",
         "Rate": "55000",
-        "Amount": "1700160.00",
+        "Amount": "1700160",
         "Currency": "€"
       },
       {
@@ -58,7 +58,7 @@
         "Unit": "m3",
         "Quantity": "1.449",
         "Rate": "60000",
-        "Amount": "86940.00",
+        "Amount": "86940",
         "Currency": "€"
       },
       {
@@ -67,7 +67,7 @@
         "Unit": "m3",
         "Quantity": "0.384",
         "Rate": "250000",
-        "Amount": "96000.00",
+        "Amount": "96000",
         "Currency": "€"
       },
       {
@@ -76,7 +76,7 @@
         "Unit": "ml",
         "Quantity": "77.28",
         "Rate": "2200",
-        "Amount": "170016.00",
+        "Amount": "170016",
         "Currency": "€"
       },
       {
@@ -85,7 +85,7 @@
         "Unit": "m3",
         "Quantity": "0.24576",
         "Rate": "55000",
-        "Amount": "13517.00",
+        "Amount": "13517",
         "Currency": "€"
       },
       {
@@ -94,7 +94,7 @@
         "Unit": "m3",
         "Quantity": "2.898",
         "Rate": "250000",
-        "Amount": "724500.00",
+        "Amount": "724500",
         "Currency": "€"
       },
       {
@@ -103,13 +103,13 @@
         "Unit": null,
         "Quantity": null,
         "Rate": null,
-        "Amount": "2907053.00",
+        "Amount": "2907053",
         "Currency": "€"
       }
     ]
   },
   {
-    "Section Title": "III DOORS AND WINDOWS",
+    "Section Title": "DOORS AND WINDOWS",
     "Items": [
       {
         "Item Number": "1",
@@ -117,7 +117,7 @@
         "Unit": "m²",
         "Quantity": "7.56",
         "Rate": "65000",
-        "Amount": "491400.00",
+        "Amount": "491400",
         "Currency": "€"
       },
       {
@@ -126,7 +126,7 @@
         "Unit": "Pce",
         "Quantity": "4",
         "Rate": "90000",
-        "Amount": "360000.00",
+        "Amount": "360000",
         "Currency": "€"
       },
       {
@@ -135,7 +135,7 @@
         "Unit": "m²",
         "Quantity": "29.52",
         "Rate": "85000",
-        "Amount": "2509200.00",
+        "Amount": "2509200",
         "Currency": "€"
       },
       {
@@ -144,13 +144,13 @@
         "Unit": null,
         "Quantity": null,
         "Rate": null,
-        "Amount": "3360600.00",
+        "Amount": "3360600",
         "Currency": "€"
       }
     ]
   },
   {
-    "Section Title": "IV PLASTERING OF WALLS",
+    "Section Title": "PLASTERING OF WALLS",
     "Items": [
       {
         "Item Number": "1",
@@ -158,7 +158,7 @@
         "Unit": "m²",
         "Quantity": "64.78",
         "Rate": "3000",
-        "Amount": "194340.00",
+        "Amount": "194340",
         "Currency": "€"
       },
       {
@@ -167,7 +167,7 @@
         "Unit": "m²",
         "Quantity": "463.68",
         "Rate": "2500",
-        "Amount": "1159200.00",
+        "Amount": "1159200",
         "Currency": "€"
       },
       {
@@ -176,7 +176,7 @@
         "Unit": "m²",
         "Quantity": "64.78",
         "Rate": "18000",
-        "Amount": "1166040.00",
+        "Amount": "1166040",
         "Currency": "€"
       },
       {
@@ -185,7 +185,7 @@
         "Unit": "m²",
         "Quantity": "62.5",
         "Rate": "16000",
-        "Amount": "1000000.00",
+        "Amount": "1000000",
         "Currency": "€"
       },
       {
@@ -194,7 +194,7 @@
         "Unit": "m²",
         "Quantity": "463.68",
         "Rate": "2500",
-        "Amount": "1159200.00",
+        "Amount": "1159200",
         "Currency": "€"
       },
       {
@@ -203,13 +203,13 @@
         "Unit": null,
         "Quantity": null,
         "Rate": null,
-        "Amount": "4678780.00",
+        "Amount": "4678780",
         "Currency": "€"
       }
     ]
   },
   {
-    "Section Title": "V ELECTRICAL INSTALLATION",
+    "Section Title": "ELECTRICAL INSTALLATION",
     "Items": [
       {
         "Item Number": "1",
@@ -217,7 +217,7 @@
         "Unit": "L.S.",
         "Quantity": "1",
         "Rate": "1875000",
-        "Amount": "1875000.00",
+        "Amount": "1875000",
         "Currency": "€"
       },
       {
@@ -226,7 +226,7 @@
         "Unit": "Pce",
         "Quantity": "7",
         "Rate": "35000",
-        "Amount": "245000.00",
+        "Amount": "245000",
         "Currency": "€"
       },
       {
@@ -235,7 +235,7 @@
         "Unit": "Pce",
         "Quantity": "6",
         "Rate": "22000",
-        "Amount": "132000.00",
+        "Amount": "132000",
         "Currency": "€"
       },
       {
@@ -244,7 +244,7 @@
         "Unit": "Pce",
         "Quantity": "5",
         "Rate": "5000",
-        "Amount": "25000.00",
+        "Amount": "25000",
         "Currency": "€"
       },
       {
@@ -253,7 +253,7 @@
         "Unit": "Pce",
         "Quantity": "4",
         "Rate": "35000",
-        "Amount": "140000.00",
+        "Amount": "140000",
         "Currency": "€"
       },
       {
@@ -262,7 +262,7 @@
         "Unit": "Pce",
         "Quantity": "5",
         "Rate": "15000",
-        "Amount": "75000.00",
+        "Amount": "75000",
         "Currency": "€"
       },
       {
@@ -271,7 +271,7 @@
         "Unit": "Pce",
         "Quantity": "6",
         "Rate": "15000",
-        "Amount": "90000.00",
+        "Amount": "90000",
         "Currency": "€"
       },
       {
@@ -280,7 +280,7 @@
         "Unit": "Pce",
         "Quantity": "7",
         "Rate": "15000",
-        "Amount": "105000.00",
+        "Amount": "105000",
         "Currency": "€"
       },
       {
@@ -289,7 +289,7 @@
         "Unit": "Pce",
         "Quantity": "6",
         "Rate": "15000",
-        "Amount": "90000.00",
+        "Amount": "90000",
         "Currency": "€"
       },
       {
@@ -298,7 +298,7 @@
         "Unit": "Pce",
         "Quantity": "2",
         "Rate": "35000",
-        "Amount": "70000.00",
+        "Amount": "70000",
         "Currency": "€"
       },
       {
@@ -307,7 +307,7 @@
         "Unit": "Pce",
         "Quantity": "2",
         "Rate": "65000",
-        "Amount": "130000.00",
+        "Amount": "130000",
         "Currency": "€"
       },
       {
@@ -316,13 +316,13 @@
         "Unit": null,
         "Quantity": null,
         "Rate": null,
-        "Amount": "2837000.00",
+        "Amount": "2977000",
         "Currency": "€"
       }
     ]
   },
   {
-    "Section Title": "VI SANITARY INSTALLATION",
+    "Section Title": "SANITARY INSTALLATION",
     "Items": [
       {
         "Item Number": "1",
@@ -330,7 +330,7 @@
         "Unit": "L.S.",
         "Quantity": "1",
         "Rate": "875000",
-        "Amount": "875000.00",
+        "Amount": "875000",
         "Currency": "€"
       },
       {
@@ -339,7 +339,106 @@
         "Unit": "L.S.",
         "Quantity": "1",
         "Rate": "675000",
-        "Amount": "675000.00",
+        "Amount": "675000",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "3",
+        "Item Description": "Water closet english type",
+        "Unit": "Pce",
+        "Quantity": "1",
+        "Rate": "250000",
+        "Amount": "250000",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "4",
+        "Item Description": "complet bath tub",
+        "Unit": "Pce",
+        "Quantity": "1",
+        "Rate": "250000",
+        "Amount": "250000",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "5",
+        "Item Description": "Complet Overhead Showers",
+        "Unit": "Pce",
+        "Quantity": "1",
+        "Rate": "75000",
+        "Amount": "75000",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "6",
+        "Item Description": "Kitchen sink in galvanized steel",
+        "Unit": "Pce",
+        "Quantity": "1",
+        "Rate": "150000",
+        "Amount": "150000",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "7",
+        "Item Description": "Water heater of 100 liters",
+        "Unit": "Pce",
+        "Quantity": "1",
+        "Rate": "350000",
+        "Amount": "350000",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "8",
+        "Item Description": "Toilet paper hanger",
+        "Unit": "Pce",
+        "Quantity": "1",
+        "Rate": "5000",
+        "Amount": "5000",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "9",
+        "Item Description": "Soap container",
+        "Unit": "Pce",
+        "Quantity": "1",
+        "Rate": "5000",
+        "Amount": "5000",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "10",
+        "Item Description": "Mirrors in bath rooms",
+        "Unit": "Pce",
+        "Quantity": "1",
+        "Rate": "30000",
+        "Amount": "30000",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "11",
+        "Item Description": "Septic tank for 50 users",
+        "Unit": "Pce",
+        "Quantity": "1",
+        "Rate": "2750000",
+        "Amount": "2750000",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "12",
+        "Item Description": "Soak pit of 12m height",
+        "Unit": "Pce",
+        "Quantity": "1",
+        "Rate": "300000",
+        "Amount": "300000",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "13",
+        "Item Description": "Manholes",
+        "Unit": "Pce",
+        "Quantity": "15",
+        "Rate": "25000",
+        "Amount": "375000",
         "Currency": "€"
       },
       {
@@ -348,7 +447,134 @@
         "Unit": null,
         "Quantity": null,
         "Rate": null,
-        "Amount": "1550000.00",
+        "Amount": "6090000",
+        "Currency": "€"
+      }
+    ]
+  },
+  {
+    "Section Title": "ROOF AND CEILING",
+    "Items": [
+      {
+        "Item Number": "1.",
+        "Item Description": "Frame work in timber Supply, shaping & assembing of laths in timber following the plans",
+        "Unit": "ml",
+        "Quantity": "1.152",
+        "Rate": "2500",
+        "Amount": "2880",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "2.",
+        "Item Description": "Panne rafter in timber Supply, shaping & installation in timber rafter",
+        "Unit": "ml",
+        "Quantity": "2.304",
+        "Rate": "1500",
+        "Amount": "3456",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "3",
+        "Item Description": "Roof covering sheets Supply and installation of covering sheets",
+        "Unit": "m²",
+        "Quantity": "74.497",
+        "Rate": "11000",
+        "Amount": "819467",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "4.",
+        "Item Description": "Steel gutter with downpipes",
+        "Unit": "ml",
+        "Quantity": "32.2",
+        "Rate": "8500",
+        "Amount": "273700",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "5",
+        "Item Description": "Installation of ceiling",
+        "Unit": "m²",
+        "Quantity": "64.78",
+        "Rate": "19000",
+        "Amount": "1230820",
+        "Currency": "€"
+      },
+      {
+        "Item Number": null,
+        "Item Description": "Subtotal ROOF AND CEILING",
+        "Unit": null,
+        "Quantity": null,
+        "Rate": null,
+        "Amount": "2330323",
+        "Currency": "€"
+      }
+    ]
+  },
+  {
+    "Section Title": "SITE WORKS",
+    "Items": [
+      {
+        "Item Number": "1",
+        "Item Description": "Stone Foundation (60 Cm Height)",
+        "Unit": "m3",
+        "Quantity": "16.8",
+        "Rate": "55000",
+        "Amount": "924000",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "3",
+        "Item Description": "Boundary Wall & Columns in burnt Bricks",
+        "Unit": "m3",
+        "Quantity": "30.8",
+        "Rate": "55000",
+        "Amount": "1694000",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "4",
+        "Item Description": "Steel Gate",
+        "Unit": "Pse",
+        "Quantity": "1",
+        "Rate": "750000",
+        "Amount": "750000",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "5",
+        "Item Description": "Parking/Drive way Paving",
+        "Unit": "m²",
+        "Quantity": "100",
+        "Rate": "10000",
+        "Amount": "1000000",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "6",
+        "Item Description": "Gardening and Landscaping",
+        "Unit": "L.S",
+        "Quantity": "1",
+        "Rate": "1000000",
+        "Amount": "1000000",
+        "Currency": "€"
+      },
+      {
+        "Item Number": "7",
+        "Item Description": "Retaining wall",
+        "Unit": "m3",
+        "Quantity": "81.2",
+        "Rate": "60000",
+        "Amount": "4872000",
+        "Currency": "€"
+      },
+      {
+        "Item Number": null,
+        "Item Description": "Subtotal SITE WORKS",
+        "Unit": null,
+        "Quantity": null,
+        "Rate": null,
+        "Amount": "10240000",
         "Currency": "€"
       }
     ]

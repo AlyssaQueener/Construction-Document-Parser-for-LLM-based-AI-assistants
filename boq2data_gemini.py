@@ -23,8 +23,8 @@ def financial_boq(path):
 if __name__ == "__main__":
     
     
-    path = 'examples/FinancialDocuments/Bill-of-Quantities-Sample2.pdf'
-    flav = 'stream'
+    path = 'examples/FinancialDocuments/BOQ3.pdf'
+    flav = 'hybrid'
     page_num = 'all'
     #tables_boq4 = cam.cam_extract(path,flav,page_num)
    
@@ -39,11 +39,11 @@ if __name__ == "__main__":
 #     tables.export('foo.csv',f='csv')
 
     print(tables_boq_processed)
-    fieldnames = sorted(tables_boq_processed[0].keys()) if tables_boq_processed else []
-    with open('output.csv', 'w', encoding='utf-8', newline='') as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(tables_boq_processed)
+    # fieldnames = sorted(tables_boq_processed[0].keys()) if tables_boq_processed else []
+    # with open('output.csv', 'w', encoding='utf-8', newline='') as f:
+    #     writer = csv.DictWriter(f, fieldnames=fieldnames)
+    #     writer.writeheader()
+    #     writer.writerows(tables_boq_processed)
 
 #Prepare processed input for gemini 
 #stringify the json again 
@@ -56,7 +56,7 @@ if __name__ == "__main__":
 
    # Step 2: Call Gemini and get the parsed JSON
     response_json = gemini.call_gemini_return_json(prompt)
-    output_filename = "extracted_boq_data.json"
+    output_filename = "BOQ3_extracted_boq_data.json"
     print(response_json)
     with open(output_filename, 'w', encoding='utf-8') as f:
             json.dump(response_json, f, indent=2, ensure_ascii=False)
