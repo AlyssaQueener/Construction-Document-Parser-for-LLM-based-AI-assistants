@@ -20,16 +20,14 @@ def encode_image(image_path):
         print(f"Error: {e}")
         return None
 
-def create_room_detection_prompt():
+def create_door_detection_prompt():
     """
-    Create a prompt that instructs the model to extract the bounding boxes for rooms.
+    Create a prompt that instructs the model to extract the bounding boxes for doors.
     
     The required JSON structure is:
-    
     {
-      "rooms": [
+      "doors": [
         {
-          "name": "Room Name or null",
           "bbox": {
             "x_min": <decimal between 0.0 and 1.0>,
             "y_min": <decimal between 0.0 and 1.0>,
@@ -40,46 +38,39 @@ def create_room_detection_prompt():
         ...
       ]
     }
-    
-    If room names are not visible, return "name": null.
     """
     prompt = """
-You are an expert in understanding architectural floor plans. Your task is to identify all the rooms in the provided image and return the bounding boxes for each room.
-For each room you find, return a JSON object with the following structure:
-\The image you're analyzing is exactly {2200} pixels wide and {1700} pixels high. Use these dimensions to compute and normalize all bounding boxes.
+You are an expert in reading architectural floor plans. Your task is to identify all the **doors** in the provided image and return the bounding boxes for each door.
+Use the following structure for your output.
+
+The image you're analyzing is exactly 2200 pixels wide and 1700 pixels high. Use these dimensions to compute and normalize all bounding boxes.
+
+Return only a valid JSON object in this format:
 
 {
-    "width": 2200,
-    "height": 1700
-}
-{
-  "rooms": [
-    {
-      "name": "Room Name or null",
-      "bbox": {
-        "x_min": value,  // left side (decimal percentage of image width, between 0.0 and 1.0)
+    "doors": [
+        {
+            "bbox": {
+             "x_min": value,  // left side (decimal percentage of image width, between 0.0 and 1.0)
         "y_min": value,  // bottom side (decimal percentage of image height, between 0.0 and 1.0)
         "x_max": value,  // right side (decimal percentage of image width, between 0.0 and 1.0)
         "y_max": value   // top side (decimal percentage of image height, between 0.0 and 1.0)
-      }
-    }
-    // ... more rooms if present
-  ]
+            }
+        }
+        // more doors if present
+    ]
 }
-
-Please return only a valid JSON object exactly following the above structure.
 """
     return prompt
 
-def call_mistral_for_room_detection(image_path):
-    """Call the Mistral API with an image to detect room bounding boxes."""
+def call_mistral_for_door_detection(image_path):
+    """Call the Mistral API with an image to detect door bounding boxes."""
     base64_image = encode_image(image_path)
     if not base64_image:
         return {"error": "Unable to encode image"}
     
-    prompt = create_room_detection_prompt()
+    prompt = create_door_detection_prompt()
     
-    # Create the message as a list with text and image parts.
     messages = [
         {
             "role": "user",
@@ -98,7 +89,6 @@ def call_mistral_for_room_detection(image_path):
             messages=messages,
             response_format={"type": "json_object"}
         )
-        # Parse the JSON response content and return as a Python dict
         response_content = chat_response.choices[0].message.content
         return json.loads(response_content)
     except json.JSONDecodeError as e:
@@ -106,22 +96,21 @@ def call_mistral_for_room_detection(image_path):
     except Exception as e:
         return {"error": f"API call failed: {str(e)}"}
 
-def save_results_to_file(results, output_file="room_detection_results_b1.json"):
-    """Save the results to a JSON file."""
+
+def save_door_results(results, output_file="door_detection_results_b1.json"):
+    """Save the door detection results to a JSON file."""
     try:
         with open(output_file, 'w') as f:
             json.dump(results, f, indent=2)
-        print(f"Results saved to {output_file}")
+        print(f"Door results saved to {output_file}")
     except Exception as e:
-        print(f"Error saving results: {str(e)}")
+        print(f"Error saving door results: {str(e)}")
 
-# --- Example Usage ---
 if __name__ == "__main__":
-    # Replace 'floorplan.jpg' with the path to your floor plan image.
-    result = call_mistral_for_room_detection("test4.png")
-    
-    # Print the JSON result
-    print(json.dumps(result, indent=2))
-    
-    # Optionally save to file
-    save_results_to_file(result)
+    image_path = "test4.png"  # Update with your actual image path
+
+    # Run Door Detection
+    door_result = call_mistral_for_door_detection(image_path)
+    print("Door Detection Result:")
+    print(json.dumps(door_result, indent=2))
+    save_door_results(door_result)

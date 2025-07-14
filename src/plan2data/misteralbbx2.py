@@ -20,56 +20,38 @@ def encode_image(image_path):
         print(f"Error: {e}")
         return None
 
-def create_room_detection_prompt():
+def create_room_detection_prompt(image_width=2200, image_height=1700):
     """
-    Create a prompt that instructs the model to extract the bounding boxes for rooms.
-    
-    The required JSON structure is:
-    
-    {
-      "rooms": [
-        {
-          "name": "Room Name or null",
-          "bbox": {
-            "x_min": <decimal between 0.0 and 1.0>,
-            "y_min": <decimal between 0.0 and 1.0>,
-            "x_max": <decimal between 0.0 and 1.0>,
-            "y_max": <decimal between 0.0 and 1.0>
-          }
-        },
-        ...
-      ]
-    }
-    
-    If room names are not visible, return "name": null.
+    Generate a prompt for Mistral to detect rooms and return normalized bounding boxes.
     """
-    prompt = """
-You are an expert in understanding architectural floor plans. Your task is to identify all the rooms in the provided image and return the bounding boxes for each room.
-For each room you find, return a JSON object with the following structure:
-\The image you're analyzing is exactly {2200} pixels wide and {1700} pixels high. Use these dimensions to compute and normalize all bounding boxes.
+    return f"""
+You are an expert in understanding architectural floor plans.
 
-{
-    "width": 2200,
-    "height": 1700
-}
-{
+The image you're analyzing is exactly {image_width} pixels wide and {image_height} pixels high. 
+Use these dimensions to compute and normalize all bounding boxes. 
+All values should be returned as decimal percentages between 0.0 and 1.0.
+
+Your task is to identify all the rooms in the image and return the bounding boxes for each room 
+as a JSON object in the following format (no explanations, only valid JSON):
+
+{{
   "rooms": [
-    {
+    {{
       "name": "Room Name or null",
-      "bbox": {
-        "x_min": value,  // left side (decimal percentage of image width, between 0.0 and 1.0)
-        "y_min": value,  // bottom side (decimal percentage of image height, between 0.0 and 1.0)
-        "x_max": value,  // right side (decimal percentage of image width, between 0.0 and 1.0)
-        "y_max": value   // top side (decimal percentage of image height, between 0.0 and 1.0)
-      }
-    }
+      "bbox": {{
+        "x_min": <decimal between 0.0 and 1.0>,  // left edge (x coordinate of bounding box start / image width)
+        "y_min": <decimal between 0.0 and 1.0>,  // bottom edge (y coordinate of bounding box start / image height)
+        "x_max": <decimal between 0.0 and 1.0>,  // right edge (x coordinate of bounding box end / image width)
+        "y_max": <decimal between 0.0 and 1.0>   // top edge (y coordinate of bounding box end / image height)
+      }}
+    }}
     // ... more rooms if present
   ]
-}
+}}
 
-Please return only a valid JSON object exactly following the above structure.
+If the room name is not visible, return "name": null. 
+Only return the JSON, without additional explanation or formatting.
 """
-    return prompt
 
 def call_mistral_for_room_detection(image_path):
     """Call the Mistral API with an image to detect room bounding boxes."""
@@ -106,7 +88,7 @@ def call_mistral_for_room_detection(image_path):
     except Exception as e:
         return {"error": f"API call failed: {str(e)}"}
 
-def save_results_to_file(results, output_file="room_detection_results_b1.json"):
+def save_results_to_file(results, output_file="room_detection_results_a1.json"):
     """Save the results to a JSON file."""
     try:
         with open(output_file, 'w') as f:

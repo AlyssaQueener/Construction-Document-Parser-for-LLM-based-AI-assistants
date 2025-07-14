@@ -82,7 +82,7 @@ def draw_bounding_boxes(file_path, figsize=(10, 8)):
 # Example usage:
 if __name__ == "__main__":
     # Draw bounding boxes from a local JSON file
-    draw_bounding_boxes('room_detection_results2.json')
+    draw_bounding_boxes('room_detection_results5.json')
     
     # Or with a different path
     # draw_bounding_boxes('/path/to/your/rooms.json')

@@ -1,0 +1,159 @@
+{
+    "doors": [
+        {
+            "template": "door.png",
+            "bbox": {
+                "x_min": 0.6518,
+                "y_min": 0.57,
+                "x_max": 0.6759,
+                "y_max": 0.5941
+            },
+            "pixel_coordinates": {
+                "x": 713,
+                "y": 969,
+                "width": 53,
+                "height": 41
+            },
+            "debug_info": {
+                "original_normalized": {
+                    "x_min": 0.3241,
+                    "x_max": 0.3482,
+                    "y_min": 0.4059,
+                    "y_max": 0.43
+                },
+                "after_scaling": {
+                    "x_min": 0.3241,
+                    "x_max": 0.3482,
+                    "y_min": 0.4059,
+                    "y_max": 0.43
+                }
+            }
+        },
+        {
+            "template": "door.png",
+            "bbox": {
+                "x_min": 0.6518,
+                "y_min": 0.6824,
+                "x_max": 0.6759,
+                "y_max": 0.7065
+            },
+            "pixel_coordinates": {
+                "x": 713,
+                "y": 1160,
+                "width": 53,
+                "height": 41
+            },
+            "debug_info": {
+                "original_normalized": {
+                    "x_min": 0.3241,
+                    "x_max": 0.3482,
+                    "y_min": 0.2935,
+                    "y_max": 0.3176
+                },
+                "after_scaling": {
+                    "x_min": 0.3241,
+                    "x_max": 0.3482,
+                    "y_min": 0.2935,
+                    "y_max": 0.3176
+                }
+            }
+        },
+        {
+            "template": "door2.png",
+            "bbox": {
+                "x_min": 0.5823,
+                "y_min": 0.2388,
+                "x_max": 0.6009,
+                "y_max": 0.27
+            },
+            "pixel_coordinates": {
+                "x": 878,
+                "y": 406,
+                "width": 41,
+                "height": 53
+            },
+            "debug_info": {
+                "original_normalized": {
+                    "x_min": 0.3991,
+                    "x_max": 0.4177,
+                    "y_min": 0.73,
+                    "y_max": 0.7612
+                },
+                "after_scaling": {
+                    "x_min": 0.3991,
+                    "x_max": 0.4177,
+                    "y_min": 0.73,
+                    "y_max": 0.7612
+                }
+            }
+        },
+        {
+            "template": "door5.png",
+            "bbox": {
+                "x_min": 0.4582,
+                "y_min": 0.4524,
+                "x_max": 0.4823,
+                "y_max": 0.4765
+            },
+            "pixel_coordinates": {
+                "x": 1139,
+                "y": 769,
+                "width": 53,
+                "height": 41
+            },
+            "debug_info": {
+                "original_normalized": {
+                    "x_min": 0.5177,
+                    "x_max": 0.5418,
+                    "y_min": 0.5235,
+                    "y_max": 0.5476
+                },
+                "after_scaling": {
+                    "x_min": 0.5177,
+                    "x_max": 0.5418,
+                    "y_min": 0.5235,
+                    "y_max": 0.5476
+                }
+            }
+        },
+        {
+            "template": "door5.png",
+            "bbox": {
+                "x_min": 0.4582,
+                "y_min": 0.5776,
+                "x_max": 0.4823,
+                "y_max": 0.6018
+            },
+            "pixel_coordinates": {
+                "x": 1139,
+                "y": 982,
+                "width": 53,
+                "height": 41
+            },
+            "debug_info": {
+                "original_normalized": {
+                    "x_min": 0.5177,
+                    "x_max": 0.5418,
+                    "y_min": 0.3982,
+                    "y_max": 0.4224
+                },
+                "after_scaling": {
+                    "x_min": 0.5177,
+                    "x_max": 0.5418,
+                    "y_min": 0.3982,
+                    "y_max": 0.4224
+                }
+            }
+        }
+    ],
+    "image_dimensions": {
+        "width": 2200,
+        "height": 1700
+    },
+    "scaling_parameters": {
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "offset_x": 0.0,
+        "offset_y": 0.0
+    }
+}

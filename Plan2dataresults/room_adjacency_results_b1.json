@@ -1,0 +1,18 @@
+{
+  "adjacencies": {
+    "Bedroom": [
+      "Living room"
+    ],
+    "Kitchen": [
+      "Living room"
+    ],
+    "Living room": [
+      "Bedroom",
+      "Kitchen",
+      "bedroom"
+    ],
+    "bedroom": [
+      "Living room"
+    ]
+  }
+}

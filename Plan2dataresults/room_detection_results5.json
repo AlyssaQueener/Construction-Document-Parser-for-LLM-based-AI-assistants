@@ -1,0 +1,51 @@
+{
+  "width": 2200,
+  "height": 1700,
+  "rooms": [
+    {
+      "name": "kitchen",
+      "bbox": {
+        "x_min": 0.0,
+        "y_min": 0.0,
+        "x_max": 0.4091,
+        "y_max": 0.9235
+      }
+    },
+    {
+      "name": "living room",
+      "bbox": {
+        "x_min": 0.4091,
+        "y_min": 0.2824,
+        "x_max": 0.7182,
+        "y_max": 0.8235
+      }
+    },
+    {
+      "name": "bedroom",
+      "bbox": {
+        "x_min": 0.7182,
+        "y_min": 0.0,
+        "x_max": 1.0,
+        "y_max": 0.4618
+      }
+    },
+    {
+      "name": "bedroom",
+      "bbox": {
+        "x_min": 0.7182,
+        "y_min": 0.4618,
+        "x_max": 1.0,
+        "y_max": 0.8824
+      }
+    },
+    {
+      "name": "Bedroom",
+      "bbox": {
+        "x_min": 0.0,
+        "y_min": 0.5882,
+        "x_max": 0.4091,
+        "y_max": 1.0
+      }
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "rooms": [
+    {
+      "name": "kitchen",
+      "bbox": {
+        "x_min": 0.0,
+        "y_min": 0.0,
+        "x_max": 0.4091,
+        "y_max": 1.0
+      }
+    },
+    {
+      "name": "living room",
+      "bbox": {
+        "x_min": 0.4091,
+        "y_min": 0.0,
+        "x_max": 0.7182,
+        "y_max": 1.0
+      }
+    },
+    {
+      "name": "bedroom",
+      "bbox": {
+        "x_min": 0.7182,
+        "y_min": 0.0,
+        "x_max": 1.0,
+        "y_max": 0.4941
+      }
+    },
+    {
+      "name": "bedroom",
+      "bbox": {
+        "x_min": 0.7182,
+        "y_min": 0.4941,
+        "x_max": 1.0,
+        "y_max": 1.0
+      }
+    },
+    {
+      "name": "Bedroom",
+      "bbox": {
+        "x_min": 0.0,
+        "y_min": 0.0,
+        "x_max": 0.4091,
+        "y_max": 0.5
+      }
+    }
+  ]
+}

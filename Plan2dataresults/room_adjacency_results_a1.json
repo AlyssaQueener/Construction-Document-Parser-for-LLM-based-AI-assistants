@@ -1,0 +1,38 @@
+{
+  "adjacencies": {
+    "G\u00e4stezimmer": [
+      "Abstellzimmer",
+      "Diele"
+    ],
+    "Abstellzimmer": [
+      "G\u00e4stezimmer",
+      "Diele"
+    ],
+    "K\u00fcche": [
+      "Diele",
+      "Wohn-/Esszimmer"
+    ],
+    "Wohn-/Esszimmer": [
+      "K\u00fcche",
+      "Terrasse",
+      "Diele"
+    ],
+    "Diele": [
+      "G\u00e4stezimmer",
+      "Abstellzimmer",
+      "K\u00fcche",
+      "Wohn-/Esszimmer",
+      "Bad",
+      "HWR"
+    ],
+    "Bad": [
+      "Diele"
+    ],
+    "HWR": [
+      "Diele"
+    ],
+    "Terrasse": [
+      "Wohn-/Esszimmer"
+    ]
+  }
+}
