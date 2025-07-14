@@ -1,0 +1,255 @@
+[
+  {
+    "Section Title": "1.1.1 Mechanical Plant",
+    "Subsections": [
+      {
+        "Subsection Title": "1.1.1.1 Cranes",
+        "Items": [
+          {
+            "Item Number": "1.1.1.1.1",
+            "Item Description": "Crane and slings Mobile tele-crane (25 tonne) and driver",
+            "Unit": "day",
+            "Quantity": "1.00",
+            "Rate": null,
+            "Amount": "352.00",
+            "Currency": null
+          },
+          {
+            "Item Number": null,
+            "Item Description": "Subtotal Preliminaries",
+            "Unit": null,
+            "Quantity": null,
+            "Rate": null,
+            "Amount": "352.00",
+            "Currency": "£"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Section Title": "2.5.1 Fillings",
+    "Subsections": [
+      {
+        "Subsection Title": "2.5.1.1 Filling obtained from excavated material",
+        "Items": [
+          {
+            "Item Number": "2.5.1.1.1",
+            "Item Description": "Fill obtained from temporary spoil heaps to foundations, level compacted in max 150mm layers by hand >500mm thick",
+            "Unit": "m³",
+            "Quantity": "2.80",
+            "Rate": null,
+            "Amount": "65.65",
+            "Currency": null
+          },
+          {
+            "Item Number": "2.5.1.1.2",
+            "Item Description": "Fill obtained from excavated material to foundations 150mm thick compacted in max 150mm layers, laid level",
+            "Unit": "m²",
+            "Quantity": "7.69",
+            "Rate": null,
+            "Amount": "26.99",
+            "Currency": null
+          }
+        ]
+      },
+      {
+        "Subsection Title": "2.5.1.2 Sub base",
+        "Items": [
+          {
+            "Item Number": "2.5.1.2.1",
+            "Item Description": "Imported filling 100mm thick level sub base to paving compacted in max 150mm layers Sub base MOT type 1",
+            "Unit": "m²",
+            "Quantity": "73.59",
+            "Rate": null,
+            "Amount": "1292.63",
+            "Currency": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Section Title": "2.5.2 Excavations",
+    "Subsections": [
+      {
+        "Subsection Title": "2.5.2.1 Foundations",
+        "Items": [
+          {
+            "Item Number": "2.5.2.1.1",
+            "Item Description": "Excavation from foundations max depth <2m Backhoe loader and driver",
+            "Unit": "m³",
+            "Quantity": "22.20",
+            "Rate": null,
+            "Amount": "523.40",
+            "Currency": null
+          },
+          {
+            "Item Number": "2.5.2.1.2",
+            "Item Description": "Preparing bottom of excavations",
+            "Unit": "m²",
+            "Quantity": "24.66",
+            "Rate": null,
+            "Amount": "59.75",
+            "Currency": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Section Title": "2.5.3 Disposal",
+    "Subsections": [
+      {
+        "Subsection Title": "2.5.3.1 Excavated material disposal",
+        "Items": [
+          {
+            "Item Number": "2.5.3.1.1",
+            "Item Description": "Disposal of excavated material off site Tipper (20 tonne) and driver inc. land fill tax",
+            "Unit": "m³",
+            "Quantity": "48.97",
+            "Rate": null,
+            "Amount": "1245.34",
+            "Currency": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Section Title": "2.5.4 Membranes",
+    "Subsections": [
+      {
+        "Subsection Title": "2.5.4.1 Damp proof membrane",
+        "Items": [
+          {
+            "Item Number": "2.5.4.1.1",
+            "Item Description": "DPM to beam and block floor construction >500mm wide horizontal Visqueen EcoMembrane polythene DPM black 1200 gauge (300mu) BBA",
+            "Unit": "m²",
+            "Quantity": "61.81",
+            "Rate": null,
+            "Amount": "96.30",
+            "Currency": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Section Title": "2.5.5 Excavation support",
+    "Subsections": [
+      {
+        "Subsection Title": "2.5.5.1 Excavation support",
+        "Items": [
+          {
+            "Item Number": "2.5.5.1.1",
+            "Item Description": "Support to faces of excavation",
+            "Unit": "m²",
+            "Quantity": "101.52",
+            "Rate": null,
+            "Amount": "1832.46",
+            "Currency": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Section Title": "2.5.6 Retaining excavated material",
+    "Subsections": [
+      {
+        "Subsection Title": "2.5.6.1 Excavated material retention",
+        "Items": [
+          {
+            "Item Number": "2.5.6.1.1",
+            "Item Description": "Retain excavated subsoil on site in spoil heaps 50m from excavation by machine Dumper (3 tonne)",
+            "Unit": "m³",
+            "Quantity": "3.96",
+            "Rate": null,
+            "Amount": "16.43",
+            "Currency": null
+          },
+          {
+            "Item Number": null,
+            "Item Description": "Subtotal Excavating & filling",
+            "Unit": null,
+            "Quantity": null,
+            "Rate": null,
+            "Amount": "5158.95",
+            "Currency": "£"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Section Title": "3.11.1 Reinforcement",
+    "Subsections": [
+      {
+        "Subsection Title": "3.11.1.1 Screeds",
+        "Items": [
+          {
+            "Item Number": "3.11.1.1.1",
+            "Item Description": "Mesh minimum laps 300mm A142 steel fabric reinforcement mesh",
+            "Unit": "m²",
+            "Quantity": "61.81",
+            "Rate": null,
+            "Amount": "463.36",
+            "Currency": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Section Title": "3.11.2 Plain in-situ concrete",
+    "Subsections": [
+      {
+        "Subsection Title": "3.11.2.1 Wall cavity",
+        "Items": [
+          {
+            "Item Number": "3.11.2.1.1",
+            "Item Description": "Concrete cavity fill Ready mix concrete GEN1, S3",
+            "Unit": "m³",
+            "Quantity": "0.74",
+            "Rate": null,
+            "Amount": "173.27",
+            "Currency": null
+          }
+        ]
+      },
+      {
+        "Subsection Title": "3.11.2.2 Strip foundations",
+        "Items": [
+          {
+            "Item Number": "3.11.2.2.1",
+            "Item Description": "Horizontal work >300mm thick to strip foundations poured direct Ready mix concrete GEN1, S3",
+            "Unit": "m³",
+            "Quantity": "14.27",
+            "Rate": null,
+            "Amount": "1655.19",
+            "Currency": null
+          },
+          {
+            "Item Number": "3.11.2.2.2",
+            "Item Description": "Horizontal work <300mm thick to strip foundations poured direct Ready mix concrete GEN1, S3",
+            "Unit": "m³",
+            "Quantity": "1.69",
+            "Rate": null,
+            "Amount": "195.97",
+            "Currency": null
+          },
+          {
+            "Item Number": null,
+            "Item Description": "Subtotal Insitu concrete works",
+            "Unit": null,
+            "Quantity": null,
+            "Rate": null,
+            "Amount": "2487.79",
+            "Currency": "£"
+          }
+        ]
+      }
+    ]
+  }
+]
