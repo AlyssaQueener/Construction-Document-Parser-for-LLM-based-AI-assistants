@@ -302,7 +302,9 @@ def determine_start_end_of_activity(activity_timestamps):
 
 
 def parse_gant_chart_visual(path):
+    is_succesful = False
     tolerance = 2
+    method = "deterministic"
     with pdfplumber.open(path) as pdf:
         page = pdf.pages[0]
         image_path = helper.convert_pdf2img(path)
@@ -315,21 +317,27 @@ def parse_gant_chart_visual(path):
         activities = extract_activities(df)
         if len(activities)<2:
             activities = json.loads(mistral.call_mistral_activities(image_path))
+            method = "hybrid"
         time_line_rows= extract_timeline_rows(df)
         timeline = create_single_timeline(time_line_rows)
         if len(timeline) < 2:
             timeline = json.loads(mistral.call_mistral_timeline(image_path))
+            method = "hybrid"
         time_line_with_localization, unfound_timestamps = localize_timestamps(timeline, page)
         if unfound_timestamps > len(timeline) - tolerance:
             timeline = json.loads(mistral.call_mistral_timeline(image_path))
             time_line_with_localization, unfound_timestamps = localize_timestamps(timeline, page)
+            method = "hybrid"
         activities_with_loc, unfound_activites = localize_activities(activities, page)
         if unfound_activites > len(activities)-tolerance:
             activities = json.loads(mistral.call_mistral_activities(image_path))
             activities_with_loc, unfound_activites = localize_activities(activities, page)
+            method = "hybrid"
         gantt_chart_bars = find_bars(boxes, activities_with_loc,2)
         activity_timestamps = match_bars_with_timeline(gantt_chart_bars,time_line_with_localization)
         activites_with_dates = determine_start_end_of_activity(activity_timestamps)
+        if activites_with_dates:
+            is_succesful = True
         json_string = json.dumps(activites_with_dates, indent=4)
-        return(json_string)
+        return json_string, method, is_succesful
 

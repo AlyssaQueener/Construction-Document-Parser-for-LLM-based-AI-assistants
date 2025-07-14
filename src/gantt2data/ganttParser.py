@@ -122,6 +122,8 @@ def create_tasks(column_order, df):
     return tasks
 
 def parse_gantt_chart(path, chart_format): 
+    method = "deterministic"
+    is_succesful = False
     if chart_format== "tabular":
         tables = camelot.read_pdf(path)
         df = tables[0].df
@@ -134,11 +136,14 @@ def parse_gantt_chart(path, chart_format):
                 first_page = pdf.pages[0]
                 text = first_page.extract_text()
                 column_order = json.loads(mistral.call_mistral_for_colums(text))
+                method = "hybrid"
         tasks = create_tasks(column_order, processed_df)
+        if tasks:
+            is_succesful=True
         json_string = json.dumps([ob.__dict__ for ob in tasks],indent=4)
-        return json_string
+        return json_string, method, is_succesful
     else:
-        json_string = visual.parse_gant_chart_visual(path)
-        return json_string
+        json_string, method_visual, is_succesful_visual = visual.parse_gant_chart_visual(path)
+        return json_string, method_visual, is_succesful_visual
 
 

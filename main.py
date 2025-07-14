@@ -8,6 +8,14 @@ import os
 import uuid
 import src.gantt2data.ganttParser as gantt_parser
 import boq2data_gemini as boq
+from pydantic import BaseModel
+
+class Response(BaseModel):
+    input_format: str
+    is_extraction_succesful: bool
+    extraction_method: str
+    result: str
+
 
 description = """
 This API helps you to convert your Construction Document into structured JSON files, ideal for further applications and LLM usage.
@@ -53,8 +61,8 @@ async def create_upload_file_gantt(file: UploadFile, chart_format):
     os.makedirs(upload_dir, exist_ok=True)
     
     try:
-        if not (file.content_type == 'application/pdf' or file.content_type.startswith('image/')):
-            raise HTTPException(status_code=400, detail="File must be a PDF or image")
+        if not (file.content_type == 'application/pdf'):
+            raise HTTPException(status_code=400, detail="File must be a PDF")
         
         file_extension = os.path.splitext(file.filename)[1] if file.filename else '.pdf'
         unique_filename = f"{uuid.uuid4()}{file_extension}"
@@ -71,11 +79,18 @@ async def create_upload_file_gantt(file: UploadFile, chart_format):
                     im = im.convert("RGB")
                 im.save(file_path, 'JPEG')
         
-        result = gantt_parser.parse_gantt_chart(file_path,chart_format)
+        result, method, is_succesful = gantt_parser.parse_gantt_chart(file_path,chart_format)
+
+        response = Response(
+            input_format=file.content_type,  
+            is_extraction_successful= is_succesful,
+            extraction_method=method,
+            result=result
+        )
         
         os.remove(file_path)  
         
-        return result
+        return response
         
     except HTTPException:
         raise
@@ -113,7 +128,7 @@ async def create_upload_file_fin(file: UploadFile):
 
 
 @app.post("/drawing_parser/")
-async def create_upload_file_v2(file: UploadFile):
+async def create_upload_file_floorplans(file: UploadFile):
     upload_dir = "uploads"  # Make sure this directory exists
     os.makedirs(upload_dir, exist_ok=True)
     
@@ -132,11 +147,19 @@ async def create_upload_file_v2(file: UploadFile):
                 im = im.convert("RGB")
             im.save(file_path, 'JPEG')
         
-        result = floorplan_parser.get_title_block_info(file_path)
+        result, method, is_succesful = floorplan_parser.get_title_block_info(file_path)
+
+
+        response = Response(
+            input_format=file.content_type,  
+            is_extraction_successful= is_succesful,
+            extraction_method=method,
+            result=result
+        )
         
         os.remove(file_path)  
         
-        return result
+        return response
         
     except HTTPException:
         raise
