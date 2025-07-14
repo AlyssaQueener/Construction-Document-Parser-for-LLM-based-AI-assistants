@@ -1,5 +1,5 @@
 import json
-import src.plan2data.extractionLogicTitleBlockEasyOcr as title_block
+import src.plan2data.extractionLogictitleBlock as title_block
 import src.plan2data.mistralConnection as mistral 
 import src.plan2data.helper as helper 
 
