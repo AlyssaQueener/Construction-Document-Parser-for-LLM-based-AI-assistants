@@ -52,7 +52,7 @@ app = FastAPI(
 @app.get("/")
 async def hello_world():
     return {"This is": "Document Parser for LLM based AI assistants",
-            "To use API from UI" : "Go to -> /docs"
+            "To try out API" : "Go to -> /docs"
             }
     
 @app.post("/gantt_parser/{chart_format}")
@@ -147,7 +147,13 @@ async def create_upload_file_floorplans(file: UploadFile):
                 im = im.convert("RGB")
             im.save(file_path, 'JPEG')
         
-        result, method, is_succesful = floorplan_parser.get_title_block_info(file_path)
+        method = "None"
+
+        is_succesful = False
+
+        result = {
+            "This feature": "is currently under construction"
+        }
 
 
         response = Response(
