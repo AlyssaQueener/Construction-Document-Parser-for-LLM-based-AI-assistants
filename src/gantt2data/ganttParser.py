@@ -3,6 +3,10 @@ import json
 import re
 from pydantic import BaseModel
 import pandas as pd
+import src.gantt2data.mistral as mistral
+import pymupdf as pymupdf
+import pdfplumber
+import src.gantt2data.ganttParserVisual as visual
 
 class Task(BaseModel):
     id: int | None = None
@@ -10,10 +14,6 @@ class Task(BaseModel):
     start: str | None = None
     finish: str | None = None
     duration: str | None = None
-
-path = "examples/ganttDiagrams/commercial-building-construction-gantt-chart.pdf"
-path1 = "examples/ganttDiagrams/GANTT CHART EXAMPLE.pdf"
-path2 = "examples/FinancialDocuments/BoQExample.pdf"
 
 def rename_columns(df, old_column_names):
     new_column_names = df.iloc[0].tolist()  
@@ -71,9 +71,9 @@ def match_column_names_with_task_properties(df):
         if title != "no match found":
             column_order[i] = {
                 "generalized_title": title,
-                "column_name": name  # This should be the actual column name in the DataFrame
+                "column_name": name  # This should be the actual column name in Gant Chart
             }
-            found_matches += 1  # Fixed: was =+ instead of +=
+            found_matches += 1  
     print("Column order:", column_order)
     print("DataFrame columns:", df.columns.tolist())
     return column_order, found_matches
@@ -122,33 +122,21 @@ def parse_gantt_chart(path, chart_format):
     if chart_format== "tabular":
         tables = camelot.read_pdf(path)
         df = tables[0].df
-        print("Original DataFrame:")
-        print(df.head())
-        print("Original columns:", df.columns.tolist())
         processed_df, is_empty = preprocess_df_and_check_column_names(df)
         if is_empty:
             return {"Table Recognition": "failed"}
-    
-        print("Processed DataFrame:")
-        print(processed_df.head())
-        print("Processed columns:", processed_df.columns.tolist())
-
         column_order, found_matches = match_column_names_with_task_properties(processed_df)
-        print("Found matches:", found_matches)
-
-        ## Remove this
-        ## add if found_matches < 3 -> ai_column_matching
-        if all(value is None for value in column_order):
-            print("No column matches found")
-            print(processed_df.to_string())
-            return {"This didn't work": "We need a diffrent approach"}
-        ## to do: rethink a little bit the validations-> only tabular structures are inputed here
-        ## implement ai column matching if regex fails
+        if found_matches < 3:
+            with pdfplumber.open(path) as pdf:
+                first_page = pdf.pages[0]
+                text = first_page.extract_text()
+                column_order = json.loads(mistral.call_mistral_for_colums(text))
         tasks = create_tasks(column_order, processed_df)
-        json_string = json.dumps([ob.__dict__ for ob in tasks])
+        json_string = json.dumps([ob.__dict__ for ob in tasks],indent=4)
         return json_string
     else:
-        return {"Not implemented": "Yet"}
+        json_string = visual.parse_gant_chart_visual(path)
+        return json_string
     
 
     

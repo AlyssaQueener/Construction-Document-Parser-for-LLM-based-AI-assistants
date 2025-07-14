@@ -23,7 +23,7 @@ def cam_extract_accuracy(path, pagenum):
 
     for flavor in flavours: 
         tables = camelot.read_pdf(path, flavor=flavor, pages=pagenum)
-        report = tables[0].parsing_report
+        report = tables[0].parsing_report #Camelot’s accuracy only measures text-assignment completeness, not table structure quality.
         acc = report.get('accuracy', 0)
         print(flavor, acc)
 
@@ -48,14 +48,6 @@ def cam_stream_merge(tables):
 
     output = []
     current_row = None
-    
-    # for row in data:
-    #     for key in row.keys:
-    #         if row.get(key, "") and key!="1":  # New main row
-    #             current_row = row.copy()
-    #             output.append(current_row)
-    #         elif row.get("1", "") and current_row:  # Continuation line
-    #             current_row["1"] += " " + row["1"]
     for row in data:
         non_empty = {k: v.strip() for k, v in row.items() if v.strip()}
 
@@ -118,10 +110,13 @@ def cam_stream_merge(tables):
 
 #Execution of the code 
 if __name__ == "__main__":
-    path = 'examples/FinancialDocuments/BOQ3.pdf'
-    flav = 'hybrid'
-    page_num = '1'
-    tables_boq4 = cam_extract(path,flav,page_num)
-    print(tables_boq4)
-    tables_boq_processed = cam_stream_merge(tables_boq4)
+    path = 'examples/FinancialDocuments/BOQ4.pdf'
+    flav = 'lattice'
+    page_num = 'all'
+   
+   # tables_boq4 = cam_extract(path,flav,page_num)
+    cam_extract_accuracy(path,page_num)
+
+    # print(tables_boq4)
+    # tables_boq_processed = cam_stream_merge(tables_boq4)
 

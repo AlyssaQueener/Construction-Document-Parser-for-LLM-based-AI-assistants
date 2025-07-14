@@ -3,13 +3,13 @@ import ezdxf
 from ezdxf.math import Vec2
 from collections import defaultdict
 
-def convert_PDF_to_cm_point(PDF_scale=1,PDF_x, PDF_y):
+def convert_PDF_to_cm_point(PDF_scale,PDF_x, PDF_y):
     PDF_Unit_to_cm   =2.54/72 # 72 pdf UNits = 1 inch = 2,54 cm 
     CM_x= PDF_x*PDF_Unit_to_cm*PDF_scale
     CM_y =PDF_y*PDF_scale*PDF_scale
     Pt_cm = (CM_x,CM_y)
     return Pt_cm
-def convert_PDF_to_cm(PDF_scale=1,PDF_cord):
+def convert_PDF_to_cm(PDF_scale,PDF_cord):
     PDF_Unit_to_cm   =2.54/72 # 72 pdf UNits = 1 inch = 2,54 cm 
     CM_cord= PDF_cord*PDF_Unit_to_cm*PDF_scale
     return CM_cord

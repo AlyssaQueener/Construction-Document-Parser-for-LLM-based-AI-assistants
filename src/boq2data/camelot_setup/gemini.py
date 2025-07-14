@@ -40,108 +40,134 @@ def make_gemini_easy_call(prompt_text="Hello, Gemini! How are you today?"):
         print("- Double-check your API key's validity on Google AI Studio.")
         print("- Ensure you have an active internet connection.")
         print("- Verify the 'gemini-pro' model is accessible with your key.")
-        
-def create_preproccesed_prompt(extracted_text):
-    
+
+def create_preprocessed_prompt(extracted_text):
     """
     Constructs a detailed prompt for Gemini to extract structured,
     section-grouped information from a Bill of Quantities (BoQ).
     Includes subtotals and organizes items under section headers.
     """
     prompt = f"""
-You are an expert system for extracting structured data from English or German Bill of Quantities (BoQs).
+You are an expert system for extracting structured data from English or German Bills of Quantities (BoQs).
 
 🔧 Your task:
 - Extract item rows and organize them into a JSON array.
-- Group each section under a key called `"Section Title"`.
-- sometimes there are subsection titles under the section titles they are called " Subsection Title" if present include them in the nested structure 
-- Each section should contain an `"Items"` list of the line items.
-- Include subtotals **as the last item** in the `Items` array of each section.
+- Group each section under a key called "Section Title".
+- Sometimes there are subsection titles under the section titles — if present, include them as "Subsection Title" or as nested "Subsections".
+- Each section should contain an "Items" list of the line items.
+- Include valid **subtotals only if present** as the **last item** in the Items array of each section.
 
-📌 JSON Schema:
-```json
-[{{"Section Title": "2.5.1 Fillings ",
+📌 JSON Structure Examples:
+
+If there are nested subsections:
+[
   {{
-    "Subsection Title": "2.5.1 Fillings obtained from excavated material",
-    "Items": [
+    "Section Title": "2.5 Excavating & filling",
+    "Subsections": [
       {{
-        "Item Number": "2.5.1.1.1",
-        "Item Description": "Fill obtained from temporary spoil heaps to foundations, level compacted in max 150mm layers byhand >500mm thick",
-        "Unit": "m³",
-        "Quantity": "150",
-        "Rate": "25.00",
-        "Amount": "3750.00",
-        "Currency": "€"
-      }},
-      ...
-      {{
-        "Item Number": null,
-        "Item Description": "Subtotal",
-        "Unit": null,
-        "Quantity": null,
-        "Rate": null,
-        "Amount": "14230.00",
-        "Currency": null
+        "Subsection Title": "2.5.1 Fillings",
+        "Subsections": [
+          {{
+            "Subsection Title": "2.5.1.1 Filling obtained from excavated material",
+            "Items": [
+              {{
+                "Internal Number": "0",
+                "Item Number": "2.5.1.1.1",
+                "Item Description": "Fill obtained from temporary spoil heaps ...",
+                "Unit": "m³",
+                "Quantity": "150",
+                "Rate": "25.00",
+                "Amount": "3750.00",
+                "Currency": "€"
+              }},
+              ...
+              {{
+                "Internal Number": "1",
+                "Item Number": null,
+                "Item Description": "Subtotal Excavating & filling",
+                "Unit": null,
+                "Quantity": null,
+                "Rate": null,
+                "Amount": "14230.00",
+                "Currency": null
+              }}
+            ]
+          }}
+        ]
       }}
     ]
-  }},
-}},
-  ...
+  }}
 ]
-📌 Rules to follow:
 
-Section headers (like "2.5.1 Fillings") should be used as "Section Title"..
-Subsection headers (like "2.5.1 Fillings obtained from excavated material" ) should be used as Subsection Title.. they can be idetified by their consecutive number or are underlined 
-Ensure item keys follow this exact naming and order:
-
-    "Item Number"
-    "Item Description"
-    "Unit"
-    "Quantity"
-    "Rate"
-    "Amount"
-    "Currency"
-
-if there is no information matching an item key set its value to null 
-If the subtotal row is present, it must:
-
-- Appear as the last object in the section’s "Items" array.
-- Set "Item Number" to null.
-- Use "Subtotal" of "Section header" in "Item Description". e.g Subtotal Prelimanry works
-
-
-If the total row is present include it as the last entry like this : 
-- set the "Section Title" to "Grand Total" 
-- include one item with the total amount
-e.g like this: 
-JSON Schema:
-```json
-[{{"Section Title": "Grand Total",
+If no nested subsections:
+[
+  {{
+    "Section Title": "1.1 Preliminaries",
     "Items": [
       {{
-        "Item Number": null,
-        "Item Description": "Grand Total",
-        "Unit": null,
-        "Quantity":null ,
-        "Rate": null,
-        "Amount": "924000",
-        "Currency": "€"
-      }},
-      ]
-   }}
+        "Internal Number": "0",
+        "Item Number": "1.1.1.1",
+        "Item Description": "Mobile tele-crane and driver",
+        "Unit": "day",
+        "Quantity": "1.00",
+        "Rate": "350.00",
+        "Amount": "350.00",
+        "Currency": "£"
+      }}
+    ]
+  }}
 ]
-- Do NOT group items under custom keys like "Category" or "Item" — only use "Section Title", if present "Subction title" and "Items".
-- DO NOT include any introductory or explanatory text. ONLY output the JSON.**
-- **DO NOT wrap the JSON in markdown code blocks (e.g., ```json...```).**
-**Unescape the newline characters (`\n`).** The `json` library in Python will handle this automatically if you provide it with a clean string.
 
-✅ Output must be valid JSON — no extra text, markdown, or explanation.
-        EXTRACTED TEXT:
-        {extracted_text}
-     ONLY return the structured JSON in the described format.
+📌 Extraction Rules:
+
+1. Section headers (e.g. "2.5 Excavating & filling") should be used as "Section Title".
+
+2. Subsection headers (e.g. "2.5.1 Fillings") should be added as "Subsection Title" inside "Subsections".
+
+3. Further nested headers (e.g. "2.5.1.1 Fillings obtained from excavated material") should be "Subsection Title" again inside further "Subsections" nesting.
+
+4. A line is considered a **header** (Section/Subsection) if:
+   - It contains a number pattern like 2.5.1.1 **and**
+   - All of these fields are empty or null: Quantity, Unit, Rate, and Amount.
+   ➤ Otherwise, treat it as a normal item.
+
+5. Ensure item keys follow this **exact naming and order**:
+"Internal Number"
+"Item Number"  
+"Item Description"  
+"Unit"  
+"Quantity"  
+"Rate"  
+"Amount"  
+"Currency"
+6. Add a unique "Internal Number" to each item (not headers or subsections), starting from 0, increasing by 1 regardless of its section/subsection position.
+If a field is not available, set its value to null.
+
+📌 Subtotal Rule:
+
+If a subtotal row is present, it must:
+- Be the **last item** in the section’s "Items" array.
+- Have "Item Number" = null.
+- "Item Description" must contain the word Subtotal and the name of the section.
+- "Amount" must be present and not null.
+
+Do **not** create a subtotal if:
+- There's no keyword like Subtotal, S/Total, or Total.
+- Or if the "Amount" is missing or empty.
+
+📌 Output Rules:
+- Only return a **valid JSON array**.
+- Do not include any markdown, comments, or extra explanation.
+- Do not wrap the JSON in code blocks (```json).
+- Unescape newline characters (`\\n`) — Python will handle formatting.
+
+EXTRACTED TEXT:
+{extracted_text}
+
+ONLY return the structured JSON in the described format.
 """
-        
-    return prompt 
+    return prompt
+
 
 def call_gemini_return_json(prompt):
     #api_key = os.environ["GOOGLE_API_KEY"]
