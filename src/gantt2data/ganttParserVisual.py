@@ -1,13 +1,11 @@
-import camelot
 import json
-import re
 from pydantic import BaseModel
 import pandas as pd
 import src.gantt2data.mistral as mistral
 import pymupdf as pymupdf
 import pdfplumber
 import pandas as pd
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 from matplotlib.patches import Rectangle
