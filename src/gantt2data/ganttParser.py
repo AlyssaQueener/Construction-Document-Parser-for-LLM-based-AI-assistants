@@ -3,6 +3,9 @@ import json
 import re
 from pydantic import BaseModel
 import pandas as pd
+import pdfplumber
+import src.gantt2data.mistral as mistral
+import src.gantt2data.ganttParserVisual as visual
 
 class Task(BaseModel):
     id: int | None = None
@@ -119,33 +122,23 @@ def create_tasks(column_order, df):
     return tasks
 
 def parse_gantt_chart(path, chart_format): 
-    if chart_format == "tabular":
+    if chart_format== "tabular":
         tables = camelot.read_pdf(path)
         df = tables[0].df
-        print("Original DataFrame:")
-        print(df.head())
-        print("Original columns:", df.columns.tolist())
-    
         processed_df, is_empty = preprocess_df_and_check_column_names(df)
         if is_empty:
-            return {"This didn't work": "We need a different approach!"}
-    
-        print("Processed DataFrame:")
-        print(processed_df.head())
-        print("Processed columns:", processed_df.columns.tolist())
-    
+            return {"Table Recognition": "failed"}
         column_order, found_matches = match_column_names_with_task_properties(processed_df)
-        print("Found matches:", found_matches)
-
-        if all(value is None for value in column_order):
-            print("No column matches found")
-            print(processed_df)
-            return {"This didn't work": "We need a different approach!"}
-    
+        if found_matches < 3:
+            with pdfplumber.open(path) as pdf:
+                first_page = pdf.pages[0]
+                text = first_page.extract_text()
+                column_order = json.loads(mistral.call_mistral_for_colums(text))
         tasks = create_tasks(column_order, processed_df)
-        json_string = json.dumps([ob.__dict__ for ob in tasks])
+        json_string = json.dumps([ob.__dict__ for ob in tasks],indent=4)
         return json_string
     else:
-        return {"Not implemented":"yet"}
+        json_string = visual.parse_gant_chart_visual(path)
+        return json_string
 
 
