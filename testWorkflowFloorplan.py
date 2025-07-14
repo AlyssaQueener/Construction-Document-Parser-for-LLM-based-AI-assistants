@@ -1,14 +1,11 @@
-import plan2data.extractionLogictitleBlock as title_block
-import src.plan2data.mistralConnection as mistral
-import src.plan2data.helper as helper
-import testWorkflowFloorplanForApi as test
+import src.plan2data.titleBlockInfo as parser
 
 
 ### workflow to identify title block in floorplan and extract the keyfeatures (Keyfeatures are shown in terminal)
 
 #image_path = "examples/FloorplansAndSectionViews/bemasster-grundriss-plankopf_page1.png"
-image_path = "examples/FloorplansAndSectionViews/floorplan1.png"
-#image_path = "examples/FloorplansAndSectionViews/floorplan2.png"
+#image_path = "examples/FloorplansAndSectionViews/floorplan1.png"
+image_path = "examples/FloorplansAndSectionViews/floorplan2.png"
 
 #mistral_response = mistral.call_mistral_for_titleblock_location(image_path)
 #print("Ai title block localization:")
@@ -22,6 +19,5 @@ image_path = "examples/FloorplansAndSectionViews/floorplan1.png"
 
 #print(mistral_response_content)
 
-print(test.get_title_block_info(image_path))
-
+print(parser.get_title_block_info(image_path))
 
