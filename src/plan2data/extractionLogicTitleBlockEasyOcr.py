@@ -4,7 +4,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 # Initialize EasyOCR reader (you can specify languages as needed)
-reader = easyocr.Reader(['en','de'])  # Add more languages like ['en', 'de', 'fr'] if needed
+reader = easyocr.Reader(['en'], gpu=False)  # Add more languages like ['en', 'de', 'fr'] if needed
 
 ## inits-> loading and preprocessing image (with ai-> localization is added)
 def init_title_block_extraction(image_path):
