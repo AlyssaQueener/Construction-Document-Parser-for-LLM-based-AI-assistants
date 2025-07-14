@@ -3,25 +3,22 @@ import json
 import re
 from pydantic import BaseModel
 import pandas as pd
-import src.gantt2data.ganttParser as parser
-import pdfplumber
+import src.gantt2data.mistral as mistral
 import pymupdf as pymupdf
-from src.plan2data.helper import convert_pdf2img
+import pdfplumber
+import pandas as pd
 from PIL import Image, ImageDraw, ImageFont
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 from matplotlib.patches import Rectangle
 import numpy as np
 import src.gantt2data.helper as helper
-import src.gantt2data.mistral as mistral
-import src.gantt2data.ganttParserVisual as visual_parser
 
 
-
-path = "examples/ganttDiagrams/commercial-building-construction-gantt-chart.pdf"
-path1 = "examples/ganttDiagrams/GANTT CHART EXAMPLE.pdf"
-path2 = "gantChart.pdf"
-path3 = "examples/ganttDiagrams/zn_Potenziale_entfalten_GanttChartExample-2-2.pdf"
+class Task_visual(BaseModel):
+    task: str | None = None
+    start: str | None = None
+    finish: str | None = None
 
 def extract_activities(df):
         activities = []
@@ -78,11 +75,11 @@ def is_vertically_aligned(activity, rectangle, tolerance):
 def is_rectangle_to_right(activity, rectangle, min_gap=10):
     return rectangle['x0'] >= activity['x1'] + min_gap
 
-def localize_activities(activities):
+def localize_activities(activities, page):
     unfound_activities = 0
     activities_with_loc = []
     for activity in activities:
-        activity_with_bbox = first_page.search(activity)
+        activity_with_bbox = page.search(activity)
         if not activity_with_bbox:
             unfound_activities += 1
             continue
@@ -96,10 +93,10 @@ def localize_activities(activities):
         activities_with_loc.append(activity_with_loc)
     return activities_with_loc, unfound_activities
 
-def localize_timestamps(timeline):
+def localize_timestamps(timeline, page):
     unfound_timestamps = 0
     for timestamp in timeline:
-        timestamp_with_bbox = first_page.search(str(timestamp['timestamp_value']))
+        timestamp_with_bbox = page.search(str(timestamp['timestamp_value']))
         if not timestamp_with_bbox:
             unfound_timestamps += 1
             continue
@@ -149,10 +146,9 @@ def is_horizontally_aligned(timestamp, rectangle, tolerance=5):
     return (rect_left - tolerance <= timestamp_center_x <= rect_right + tolerance)
 
 def match_bars_with_timeline(gantt_chart_bars, timeline_with_localization):
-    """
-    Match activity bars with timeline timestamps to find start and end dates.
-    For each activity, only saves the first and last matching timestamps.
-    """
+    '''
+    Calculates if the bar of a activity (matching_rectangles) match with timestemps, returns a dict in which all matching timestemps a mapped to the name of a activity
+    '''
     activity_timestamps = {}
     
     for activity, matching_rectangles in gantt_chart_bars.items():
@@ -167,7 +163,6 @@ def match_bars_with_timeline(gantt_chart_bars, timeline_with_localization):
                         'additional_info': timestamp['additional_info']
                     }
                     matching_timestamps.append(relevant_timestamp_info)
-                    break  # Found a match for this timestamp, no need to check other rectangles
         
         activity_timestamps[activity] = matching_timestamps
     
@@ -279,10 +274,64 @@ def visualize_with_matplotlib(pdf_path, gantt_chart_bars, activities_with_loc):
     
     doc.close()
 
-#print(visual_parser.parse_gant_chart_visual(path2))
-print(parser.parse_gantt_chart(path2,"visual"))
-    
-    
+def determine_start_end_of_activity(activity_timestamps):
+    '''
+    Goes thorugh activity timestamps to find start and end date of activity based on column index of timestamp
+    Input: Dictionary with activity names as keys and lists of timestamp dicts as values
+    timestamp_info = {
+                        'timestamp': timestamp['timestamp_value'],
+                        'column_index': timestamp['column_index'],
+                        'additional_info': timestamp['additional_info']
+                    }
+    '''
+    activities_with_dates = []
+    for activity, timestamps in activity_timestamps.items():
+        if timestamps:  
+            # Find timestamp with minimum column_index
+            min_timestamp = min(timestamps, key=lambda x: x['column_index'])
+            max_timestamp = max(timestamps, key=lambda x: x['column_index'])
+            start_date = str(min_timestamp['timestamp'])
+            end_date = str(max_timestamp['timestamp'])
+            activity_with_date = {
+                "task" : activity,
+                "start" : start_date,
+                "finish": end_date
+            }
+            activities_with_dates.append(activity_with_date)
+
+    return activities_with_dates
 
 
+
+def parse_gant_chart_visual(path):
+    tolerance = 2
+    with pdfplumber.open(path) as pdf:
+        page = pdf.pages[0]
+        image_path = helper.convert_pdf2img(path)
+        tables = page.extract_table()
+        boxes = page.rects
+        df = pd.DataFrame(tables[1:], columns=tables[0])
+        df = df.replace('', None)
+        df = df.dropna(how='all')
+        df = df.dropna(axis='columns', how='all')
+        activities = extract_activities(df)
+        if len(activities)<2:
+            activities = json.loads(mistral.call_mistral_activities(image_path))
+        time_line_rows= extract_timeline_rows(df)
+        timeline = create_single_timeline(time_line_rows)
+        if len(timeline) < 2:
+            timeline = json.loads(mistral.call_mistral_timeline(image_path))
+        time_line_with_localization, unfound_timestamps = localize_timestamps(timeline, page)
+        if unfound_timestamps > len(timeline) - tolerance:
+            timeline = json.loads(mistral.call_mistral_timeline(image_path))
+            time_line_with_localization, unfound_timestamps = localize_timestamps(timeline, page)
+        activities_with_loc, unfound_activites = localize_activities(activities, page)
+        if unfound_activites > len(activities)-tolerance:
+            activities = json.loads(mistral.call_mistral_activities(image_path))
+            activities_with_loc, unfound_activites = localize_activities(activities, page)
+        gantt_chart_bars = find_bars(boxes, activities_with_loc,2)
+        activity_timestamps = match_bars_with_timeline(gantt_chart_bars,time_line_with_localization)
+        activites_with_dates = determine_start_end_of_activity(activity_timestamps)
+        json_string = json.dumps(activites_with_dates, indent=4)
+        return(json_string)
 

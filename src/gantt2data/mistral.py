@@ -122,3 +122,100 @@ Return the answer in valid JSON.
 
 """
     return prompt
+
+def call_mistral_for_colums(text):
+    message = create_column_identification_promt(text)
+    messages = [
+        {
+        "role": "user",
+        "content": message,
+        }
+    ]
+    chat_response = client.chat.complete(
+        model = model,
+        messages = messages,
+        response_format = {
+            "type": "json_object",
+        }
+    )
+    response = chat_response.choices[0].message.content
+    return response
+
+def create_column_identification_promt(text):
+    promt = f"""
+        # Gantt Chart Column Identification Prompt
+
+You are a data analysis assistant specializing in identifying columns in Gantt charts. Your task is to analyze a list of column names from a parsed Gantt chart table and identify which columns correspond to standard Gantt chart properties.
+
+## Input Format
+You will receive the full text content extracted from a Gantt chart PDF. This text may include:
+- Column headers
+- Row data
+- Other text elements from the chart
+- Potentially messy or imperfectly parsed content
+
+Your task is to identify the column structure and extract the column names from this raw text.
+
+## Column Categories to Identify
+You need to identify columns that represent these 5 standard Gantt chart properties:
+- **id**: Task identifier, ID, or number
+- **task**: Task name, activity name, or description
+- **start**: Start date or beginning time
+- **finish**: End date, finish date, or completion time
+- **duration**: Duration, length, or time span
+
+## Instructions
+1. **First, identify the column headers** from the raw text (they are typically at the top or repeated throughout)
+2. **Extract the column names** - look for patterns that indicate column headers
+3. **Analyze each column name** to determine its purpose
+4. **Consider variations** in naming conventions (e.g., "Task Name" vs "Activity" vs "Description")
+5. **Look for common abbreviations** and synonyms
+6. **Be flexible** with formatting (spaces, underscores, capitalization)
+7. **Handle imperfect parsing** - text extraction may have introduced errors or spacing issues
+8. **Consider domain-specific terminology** that might be used
+
+## Output Format
+Return ONLY a JSON array with the column mapping. Do not include any other text, explanations, or formatting.
+
+**Critical formatting requirements:**
+- Return ONLY the JSON array, nothing else
+- Use `None` for positions where no match is found
+- Maintain the exact order of the identified columns
+- Use the exact column names as found in the text in "column_name"
+- Only use these 5 generalized titles: "id", "task", "start", "finish", "duration"
+
+Example output (return exactly this format):
+```json
+[
+    {{"generalized_title": "id", "column_name": "Project ID"}},
+    {{"generalized_title": "task", "column_name": "Task Description"}},
+    {{"generalized_title": "start", "column_name": "Start Date"}},
+    {{"generalized_title": "finish", "column_name": "End Date"}},
+    {{"generalized_title": "duration", "column_name": "Days"}}
+]
+```
+
+If no match is found for a column:
+```json
+[
+    {{"generalized_title": "id", "column_name": "Project ID"}},
+    None,
+    {{"generalized_title": "start", "column_name": "Start Date"}},
+    None,
+    {{"generalized_title": "duration", "column_name": "Days"}}
+]
+```
+
+## Example Variations to Consider
+- ID columns: "ID", "Task ID", "Item #", "No.", "Number", "Reference"
+- Task columns: "Task", "Activity", "Description", "Name", "Work Item", "Deliverable"
+- Start columns: "Start", "Begin", "From", "Commence", "Start Date", "Begin Date"
+- Finish columns: "End", "Finish", "Complete", "To", "End Date", "Completion Date"
+- Duration columns: "Duration", "Length", "Days", "Hours", "Time", "Span", "Period"
+
+## Raw Text from Gantt Chart:
+{text}
+
+Analyze this raw text, identify the column headers, and return ONLY the JSON array mapping as specified above.
+    """
+    return promt 
