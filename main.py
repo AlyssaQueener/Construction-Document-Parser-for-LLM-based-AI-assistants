@@ -115,7 +115,15 @@ async def create_upload_file_fin(file: UploadFile):
             with open(file_path, 'wb') as f:
                 f.write(file_content)
 
-        result = boq.financial_boq(file_path)
+        result, method, is_success = boq.financial_boq(file_path)
+
+        response = Response(
+            input_format=file.content_type,  
+            is_extraction_succesful= is_success,
+            extraction_method=method,
+            result=result
+        )
+        
         os.remove(file_path)  
         
         return result
