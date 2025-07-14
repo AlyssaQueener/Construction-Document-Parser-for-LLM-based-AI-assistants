@@ -21,8 +21,8 @@ def financial_boq(path):
 if __name__ == "__main__":
     
     
-    path = 'examples/FinancialDocuments/BOQ3.pdf'
-    flav = 'lattice'
+    path = 'examples/FinancialDocuments/BOQ2.pdf'
+    flav = 'stream'
     page_num = 'all'
     #tables_boq4 = cam.cam_extract(path,flav,page_num)
    
@@ -56,7 +56,7 @@ if __name__ == "__main__":
     response_json = gemini.call_gemini_return_json(prompt)
 
     output_folder = "output/Financial"
-    output_file = "BOQ3_extracted_boq_data.json"
+    output_file = "BOQ2_extracted_boq_data.json"
     output_path = os.path.join(output_folder, output_file)
     os.makedirs(output_folder, exist_ok=True)
     print(response_json)
