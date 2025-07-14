@@ -14,7 +14,7 @@ class Response(BaseModel):
     input_format: str
     is_extraction_succesful: bool
     extraction_method: str
-    result: str
+    result: str | dict | list 
 
 
 description = """
@@ -83,7 +83,7 @@ async def create_upload_file_gantt(file: UploadFile, chart_format):
 
         response = Response(
             input_format=file.content_type,  
-            is_extraction_successful= is_succesful,
+            is_extraction_succesful= is_succesful,
             extraction_method=method,
             result=result
         )
@@ -152,7 +152,7 @@ async def create_upload_file_floorplans(file: UploadFile):
 
         response = Response(
             input_format=file.content_type,  
-            is_extraction_successful= is_succesful,
+            is_extraction_succesful= is_succesful,
             extraction_method=method,
             result=result
         )

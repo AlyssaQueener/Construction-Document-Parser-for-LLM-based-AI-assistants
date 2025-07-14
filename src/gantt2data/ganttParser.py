@@ -140,8 +140,7 @@ def parse_gantt_chart(path, chart_format):
         tasks = create_tasks(column_order, processed_df)
         if tasks:
             is_succesful=True
-        json_string = json.dumps([ob.__dict__ for ob in tasks],indent=4)
-        return json_string, method, is_succesful
+        return tasks, method, is_succesful
     else:
         json_string, method_visual, is_succesful_visual = visual.parse_gant_chart_visual(path)
         return json_string, method_visual, is_succesful_visual

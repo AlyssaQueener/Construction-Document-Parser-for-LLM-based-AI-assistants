@@ -339,5 +339,5 @@ def parse_gant_chart_visual(path):
         if activites_with_dates:
             is_succesful = True
         json_string = json.dumps(activites_with_dates, indent=4)
-        return json_string, method, is_succesful
+        return activites_with_dates, method, is_succesful
 
