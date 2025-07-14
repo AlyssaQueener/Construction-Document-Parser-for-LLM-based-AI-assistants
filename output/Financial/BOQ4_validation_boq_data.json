@@ -1,252 +1,3205 @@
 [
   {
-    "Section Title": "1.1.1 Mechanical Plant",
+    "Section Title": "1.1 Preliminaries",
     "Subsections": [
       {
-        "Subsection Title": "1.1.1.1 Cranes",
-        "Items": [
+        "Subsection Title": "1.1.1 Mechanical Plant",
+        "Subsections": [
           {
-            "Item Number": "1.1.1.1.1",
-            "Item Description": "Crane and slings Mobile tele-crane (25 tonne) and driver",
-            "Unit": "day",
-            "Quantity": "1.00",
-            "Rate": null,
-            "Amount": "352.00",
-            "Currency": null
-          },
-          {
-            "Item Number": null,
-            "Item Description": "Subtotal Preliminaries",
-            "Unit": null,
-            "Quantity": null,
-            "Rate": null,
-            "Amount": "352.00",
-            "Currency": "£"
+            "Subsection Title": "1.1.1.1 Cranes",
+            "Items": [
+              {
+                "Item Number": "1.1.1.1.1",
+                "Item Description": "Crane and slings Mobile tele-crane (25 tonne) and driver",
+                "Unit": "day",
+                "Quantity": 1.0,
+                "Rate": null,
+                "Amount": 352.0,
+                "Currency": "£"
+              }
+            ]
           }
         ]
+      }
+    ],
+    "Items": [
+      {
+        "Item Number": null,
+        "Item Description": "Subtotal Preliminaries",
+        "Unit": null,
+        "Quantity": null,
+        "Rate": null,
+        "Amount": 352.0,
+        "Currency": "£"
       }
     ]
   },
   {
-    "Section Title": "2.5.1 Fillings",
+    "Section Title": "2.5 Excavating & filling",
     "Subsections": [
       {
-        "Subsection Title": "2.5.1.1 Filling obtained from excavated material",
-        "Items": [
+        "Subsection Title": "2.5.1 Fillings",
+        "Subsections": [
           {
-            "Item Number": "2.5.1.1.1",
-            "Item Description": "Fill obtained from temporary spoil heaps to foundations, level compacted in max 150mm layers by hand >500mm thick",
-            "Unit": "m³",
-            "Quantity": "2.80",
-            "Rate": null,
-            "Amount": "65.65",
-            "Currency": null
+            "Subsection Title": "2.5.1.1 Filling obtained from excavated material",
+            "Items": [
+              {
+                "Item Number": "2.5.1.1.1",
+                "Item Description": "Fill obtained from temporary spoil heaps to foundations, level compacted in max 150mm layers by hand >500mm thick",
+                "Unit": "m³",
+                "Quantity": 2.8,
+                "Rate": null,
+                "Amount": 65.65,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "2.5.1.1.2",
+                "Item Description": "Fill obtained from excavated material to foundations 150mm thick compacted in max 150mm layers, laid level",
+                "Unit": "m²",
+                "Quantity": 7.69,
+                "Rate": null,
+                "Amount": 26.99,
+                "Currency": "£"
+              }
+            ]
           },
           {
-            "Item Number": "2.5.1.1.2",
-            "Item Description": "Fill obtained from excavated material to foundations 150mm thick compacted in max 150mm layers, laid level",
-            "Unit": "m²",
-            "Quantity": "7.69",
-            "Rate": null,
-            "Amount": "26.99",
-            "Currency": null
+            "Subsection Title": "2.5.1.2 Sub base",
+            "Items": [
+              {
+                "Item Number": "2.5.1.2.1",
+                "Item Description": "Imported filling 100mm thick level sub base to paving compacted in max 150mm layers Sub base MOT type 1",
+                "Unit": "m²",
+                "Quantity": 73.59,
+                "Rate": null,
+                "Amount": 1292.63,
+                "Currency": "£"
+              }
+            ]
           }
         ]
       },
       {
-        "Subsection Title": "2.5.1.2 Sub base",
-        "Items": [
+        "Subsection Title": "2.5.2 Excavations",
+        "Subsections": [
           {
-            "Item Number": "2.5.1.2.1",
-            "Item Description": "Imported filling 100mm thick level sub base to paving compacted in max 150mm layers Sub base MOT type 1",
-            "Unit": "m²",
-            "Quantity": "73.59",
-            "Rate": null,
-            "Amount": "1292.63",
-            "Currency": null
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "Section Title": "2.5.2 Excavations",
-    "Subsections": [
-      {
-        "Subsection Title": "2.5.2.1 Foundations",
-        "Items": [
-          {
-            "Item Number": "2.5.2.1.1",
-            "Item Description": "Excavation from foundations max depth <2m Backhoe loader and driver",
-            "Unit": "m³",
-            "Quantity": "22.20",
-            "Rate": null,
-            "Amount": "523.40",
-            "Currency": null
-          },
-          {
-            "Item Number": "2.5.2.1.2",
-            "Item Description": "Preparing bottom of excavations",
-            "Unit": "m²",
-            "Quantity": "24.66",
-            "Rate": null,
-            "Amount": "59.75",
-            "Currency": null
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "Section Title": "2.5.3 Disposal",
-    "Subsections": [
-      {
-        "Subsection Title": "2.5.3.1 Excavated material disposal",
-        "Items": [
-          {
-            "Item Number": "2.5.3.1.1",
-            "Item Description": "Disposal of excavated material off site Tipper (20 tonne) and driver inc. land fill tax",
-            "Unit": "m³",
-            "Quantity": "48.97",
-            "Rate": null,
-            "Amount": "1245.34",
-            "Currency": null
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "Section Title": "2.5.4 Membranes",
-    "Subsections": [
-      {
-        "Subsection Title": "2.5.4.1 Damp proof membrane",
-        "Items": [
-          {
-            "Item Number": "2.5.4.1.1",
-            "Item Description": "DPM to beam and block floor construction >500mm wide horizontal Visqueen EcoMembrane polythene DPM black 1200 gauge (300mu) BBA",
-            "Unit": "m²",
-            "Quantity": "61.81",
-            "Rate": null,
-            "Amount": "96.30",
-            "Currency": null
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "Section Title": "2.5.5 Excavation support",
-    "Subsections": [
-      {
-        "Subsection Title": "2.5.5.1 Excavation support",
-        "Items": [
-          {
-            "Item Number": "2.5.5.1.1",
-            "Item Description": "Support to faces of excavation",
-            "Unit": "m²",
-            "Quantity": "101.52",
-            "Rate": null,
-            "Amount": "1832.46",
-            "Currency": null
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "Section Title": "2.5.6 Retaining excavated material",
-    "Subsections": [
-      {
-        "Subsection Title": "2.5.6.1 Excavated material retention",
-        "Items": [
-          {
-            "Item Number": "2.5.6.1.1",
-            "Item Description": "Retain excavated subsoil on site in spoil heaps 50m from excavation by machine Dumper (3 tonne)",
-            "Unit": "m³",
-            "Quantity": "3.96",
-            "Rate": null,
-            "Amount": "16.43",
-            "Currency": null
-          },
-          {
-            "Item Number": null,
-            "Item Description": "Subtotal Excavating & filling",
-            "Unit": null,
-            "Quantity": null,
-            "Rate": null,
-            "Amount": "5158.95",
-            "Currency": "£"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "Section Title": "3.11.1 Reinforcement",
-    "Subsections": [
-      {
-        "Subsection Title": "3.11.1.1 Screeds",
-        "Items": [
-          {
-            "Item Number": "3.11.1.1.1",
-            "Item Description": "Mesh minimum laps 300mm A142 steel fabric reinforcement mesh",
-            "Unit": "m²",
-            "Quantity": "61.81",
-            "Rate": null,
-            "Amount": "463.36",
-            "Currency": null
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "Section Title": "3.11.2 Plain in-situ concrete",
-    "Subsections": [
-      {
-        "Subsection Title": "3.11.2.1 Wall cavity",
-        "Items": [
-          {
-            "Item Number": "3.11.2.1.1",
-            "Item Description": "Concrete cavity fill Ready mix concrete GEN1, S3",
-            "Unit": "m³",
-            "Quantity": "0.74",
-            "Rate": null,
-            "Amount": "173.27",
-            "Currency": null
+            "Subsection Title": "2.5.2.1 Foundations",
+            "Items": [
+              {
+                "Item Number": "2.5.2.1.1",
+                "Item Description": "Excavation from foundations max depth <2m Backhoe loader and driver",
+                "Unit": "m³",
+                "Quantity": 22.2,
+                "Rate": null,
+                "Amount": 523.4,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "2.5.2.1.2",
+                "Item Description": "Preparing bottom of excavations",
+                "Unit": "m²",
+                "Quantity": 24.66,
+                "Rate": null,
+                "Amount": 59.75,
+                "Currency": "£"
+              }
+            ]
           }
         ]
       },
       {
-        "Subsection Title": "3.11.2.2 Strip foundations",
-        "Items": [
+        "Subsection Title": "2.5.3 Disposal",
+        "Subsections": [
           {
-            "Item Number": "3.11.2.2.1",
-            "Item Description": "Horizontal work >300mm thick to strip foundations poured direct Ready mix concrete GEN1, S3",
-            "Unit": "m³",
-            "Quantity": "14.27",
-            "Rate": null,
-            "Amount": "1655.19",
-            "Currency": null
+            "Subsection Title": "2.5.3.1 Excavated material disposal",
+            "Items": [
+              {
+                "Item Number": "2.5.3.1.1",
+                "Item Description": "Disposal of excavated material off site Tipper (20 tonne) and driver inc. land fill tax",
+                "Unit": "m³",
+                "Quantity": 48.97,
+                "Rate": null,
+                "Amount": 1245.34,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Subsection Title": "2.5.4 Membranes",
+        "Subsections": [
+          {
+            "Subsection Title": "2.5.4.1 Damp proof membrane",
+            "Items": [
+              {
+                "Item Number": "2.5.4.1.1",
+                "Item Description": "DPM to beam and block floor construction >500mm wide horizontal Visqueen EcoMembrane polythene DPM black 1200 gauge (300mu) BBA",
+                "Unit": "m²",
+                "Quantity": 61.81,
+                "Rate": null,
+                "Amount": 96.3,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Subsection Title": "2.5.5 Excavation support",
+        "Subsections": [
+          {
+            "Subsection Title": "2.5.5.1 Excavation support",
+            "Items": [
+              {
+                "Item Number": "2.5.5.1.1",
+                "Item Description": "Support to faces of excavation",
+                "Unit": "m²",
+                "Quantity": 101.52,
+                "Rate": null,
+                "Amount": 1832.46,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Subsection Title": "2.5.6 Retaining excavated material",
+        "Subsections": [
+          {
+            "Subsection Title": "2.5.6.1 Excavated material retention",
+            "Items": [
+              {
+                "Item Number": "2.5.6.1.1",
+                "Item Description": "Retain excavated subsoil on site in spoil heaps 50m from excavation by machine Dumper (3 tonne)",
+                "Unit": "m³",
+                "Quantity": 3.96,
+                "Rate": null,
+                "Amount": 16.43,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Items": [
+      {
+        "Item Number": null,
+        "Item Description": "Subtotal Excavating & filling",
+        "Unit": null,
+        "Quantity": null,
+        "Rate": null,
+        "Amount": 5158.95,
+        "Currency": "£"
+      }
+    ]
+  },
+  {
+    "Section Title": "3.11 Insitu concrete works",
+    "Subsections": [
+      {
+        "Subsection Title": "3.11.1 Reinforcement",
+        "Subsections": [
+          {
+            "Subsection Title": "3.11.1.1 Screeds",
+            "Items": [
+              {
+                "Item Number": "3.11.1.1.1",
+                "Item Description": "Mesh minimum laps 300mm A142 steel fabric reinforcement mesh",
+                "Unit": "m²",
+                "Quantity": 61.81,
+                "Rate": null,
+                "Amount": 463.36,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Subsection Title": "3.11.2 Plain in-situ concrete",
+        "Subsections": [
+          {
+            "Subsection Title": "3.11.2.1 Wall cavity",
+            "Items": [
+              {
+                "Item Number": "3.11.2.1.1",
+                "Item Description": "Concrete cavity fill Ready mix concrete GEN1, S3",
+                "Unit": "m³",
+                "Quantity": 0.74,
+                "Rate": null,
+                "Amount": 173.27,
+                "Currency": "£"
+              }
+            ]
           },
           {
-            "Item Number": "3.11.2.2.2",
-            "Item Description": "Horizontal work <300mm thick to strip foundations poured direct Ready mix concrete GEN1, S3",
-            "Unit": "m³",
-            "Quantity": "1.69",
-            "Rate": null,
-            "Amount": "195.97",
-            "Currency": null
+            "Subsection Title": "3.11.2.2 Strip foundations",
+            "Items": [
+              {
+                "Item Number": "3.11.2.2.1",
+                "Item Description": "Horizontal work >300mm thick to strip foundations poured direct Ready mix concrete GEN1, S3",
+                "Unit": "m³",
+                "Quantity": 14.27,
+                "Rate": null,
+                "Amount": 1655.19,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "3.11.2.2.2",
+                "Item Description": "Horizontal work <300mm thick to strip foundations poured direct Ready mix concrete GEN1, S3",
+                "Unit": "m³",
+                "Quantity": 1.69,
+                "Rate": null,
+                "Amount": 195.97,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Items": [
+      {
+        "Item Number": null,
+        "Item Description": "Subtotal Insitu concrete works",
+        "Unit": null,
+        "Quantity": null,
+        "Rate": null,
+        "Amount": 2487.79,
+        "Currency": "£"
+      }
+    ]
+  },
+  {
+    "Section Title": "4.12 Composite precast concrete",
+    "Subsections": [
+      {
+        "Subsection Title": "4.12.1 Composite flooring",
+        "Subsections": [
+          {
+            "Subsection Title": "4.12.1.1 Beam and block floor",
+            "Items": [
+              {
+                "Item Number": "4.12.1.1.1",
+                "Item Description": "Prestressed beams at 488mm centres and 100mm block floor grouted 48 x 150mm Cube 6 concrete floor beam, Hanson Thermalite floorblock 4.0N 440 x 100 x 350mm aerated concrete block and Grout between blocks to beam and block floor, Cemex Rugby masonry cement and Tarmac premium yellow building sand",
+                "Unit": "m²",
+                "Quantity": 61.81,
+                "Rate": null,
+                "Amount": 3315.56,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Items": [
+      {
+        "Item Number": null,
+        "Item Description": "Subtotal Composite precast concrete",
+        "Unit": null,
+        "Quantity": null,
+        "Rate": null,
+        "Amount": 3315.56,
+        "Currency": "£"
+      }
+    ]
+  },
+  {
+    "Section Title": "5.13 Precast concrete",
+    "Subsections": [
+      {
+        "Subsection Title": "5.13.1 Precast concrete slabs",
+        "Subsections": [
+          {
+            "Subsection Title": "5.13.1.1 Restraint straps",
+            "Items": [
+              {
+                "Item Number": "5.13.1.1.1",
+                "Item Description": "Metal fixings, beam and block floor restraint straps Simpson H06B10 restraint strap bent (at 100mm) 5 x 600mm",
+                "Unit": "nr",
+                "Quantity": 9.0,
+                "Rate": null,
+                "Amount": 70.67,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Items": [
+      {
+        "Item Number": null,
+        "Item Description": "Subtotal Precast concrete",
+        "Unit": null,
+        "Quantity": null,
+        "Rate": null,
+        "Amount": 70.67,
+        "Currency": "£"
+      }
+    ]
+  },
+  {
+    "Section Title": "6.14 Masonry",
+    "Subsections": [
+      {
+        "Subsection Title": "6.14.1 Brick/block walling",
+        "Subsections": [
+          {
+            "Subsection Title": "6.14.1.1 Facing brickwork",
+            "Items": [
+              {
+                "Item Number": "6.14.1.1.1",
+                "Item Description": "102.5mm stretcher bond pointed one side facing brick skin to cavity wall Wienerberger Old Castle Blend 215 x 102.5 x 65mm facing brick and Site mix mortar 1:2:9, Cemex Rugby masonry cement, Tarmac premium yellow building sand and Cemex Rugby hydrated lime",
+                "Unit": "m²",
+                "Quantity": 116.2,
+                "Rate": null,
+                "Amount": 8797.69,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "6.14.1.1.2",
+                "Item Description": "102.5mm stretcher bond pointed both sides facing brick wall Wienerberger Old Castle Blend 215 x 102.5 x 65mm facing brick and Site mix mortar 1:2:9, Cemex Rugby masonry cement, Tarmac premium yellow building sand and Cemex Rugby hydrated lime",
+                "Unit": "m²",
+                "Quantity": 77.01,
+                "Rate": null,
+                "Amount": 6307.65,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "6.14.1.1.3",
+                "Item Description": "102.5mm stretcher bond pointed one side facing brick skin to cavity wall Ibstock Roughdales Red Multi Rustic 215 x 102.5 x 65mm facing brick and Site mix mortar 1:2:9, Cemex Rugby masonry cement, Tarmac premium yellow building sand and Cemex Rugby hydrated lime",
+                "Unit": "m²",
+                "Quantity": 2.46,
+                "Rate": null,
+                "Amount": 177.37,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "6.14.1.1.4",
+                "Item Description": "102.5mm stretcher bond pointed both sides facing brick wall Ibstock Roughdales Red Multi Rustic 215 x 102.5 x 65mm facing brick and Site mix mortar 1:2:9, Cemex Rugby masonry cement, Tarmac premium yellow building sand and Cemex Rugby hydrated lime",
+                "Unit": "m²",
+                "Quantity": 0.77,
+                "Rate": null,
+                "Amount": 60.07,
+                "Currency": "£"
+              }
+            ]
           },
           {
-            "Item Number": null,
-            "Item Description": "Subtotal Insitu concrete works",
-            "Unit": null,
-            "Quantity": null,
-            "Rate": null,
-            "Amount": "2487.79",
-            "Currency": "£"
+            "Subsection Title": "6.14.1.2 Blockwork",
+            "Items": [
+              {
+                "Item Number": "6.14.1.2.1",
+                "Item Description": "100mm aerated concrete blockwork skin to cavity wall above DPC Hanson Thermalite Turbo 2.9N 440 x 215 x 100mm aerated concrete block and Site mix mortar 1:1:6, Cemex Rugby masonry cement, Tarmac premium yellow building sand and Cemex Rugby hydrated lime",
+                "Unit": "m²",
+                "Quantity": 136.08,
+                "Rate": null,
+                "Amount": 5105.15,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "6.14.1.2.2",
+                "Item Description": "100mm solid dense concrete blockwork wall above DPC Lignacite Lignacrete 7.3N 440 x 215 x 100mm solid dense concrete block and Site mix mortar 1:1:6, Cemex Rugby masonry cement, Tarmac premium yellow building sand and Cemex Rugby hydrated lime",
+                "Unit": "m²",
+                "Quantity": 48.93,
+                "Rate": null,
+                "Amount": 1833.22,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "6.14.1.2.3",
+                "Item Description": "100mm thick solid dense concrete blockwork skin to cavity wall above DPC Lignacite Lignacrete 7.3N 440 x 215 x 100mm solid dense concrete block and Site mix mortar 1:1:6, Cemex Rugby masonry cement, Tarmac premium yellow building sand and Cemex Rugby hydrated lime",
+                "Unit": "m²",
+                "Quantity": 19.88,
+                "Rate": null,
+                "Amount": 744.87,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "6.14.1.2.4",
+                "Item Description": "100mm solid dense concrete blockwork skin to cavity wall below DPC Lignacite Lignacrete 7.3N 440 x 215 x 100mm solid dense concrete block and Site mix mortar 1:1:6, Cemex Rugby masonry cement, Tarmac premium yellow building sand and Cemex Rugby hydrated lime",
+                "Unit": "m²",
+                "Quantity": 22.18,
+                "Rate": null,
+                "Amount": 727.89,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "6.14.1.2.5",
+                "Item Description": "100mm solid dense concrete blockwork wall below DPC Lignacite Lignacrete 7.3N 440 x 215 x 100mm solid dense concrete block and Site mix mortar 1:1:6, Cemex Rugby masonry cement, Tarmac premium yellow building sand and Cemex Rugby hydrated lime",
+                "Unit": "m²",
+                "Quantity": 12.51,
+                "Rate": null,
+                "Amount": 410.64,
+                "Currency": "£"
+              }
+            ]
+          },
+          {
+            "Subsection Title": "6.14.1.3 Wall cavity",
+            "Items": [
+              {
+                "Item Number": "6.14.1.3.1",
+                "Item Description": "Forming 100mm cavity in hollow walls with wall ties at 2.5 per m² Ancon stainless steel Staifix ST1 225mm tie for 76-100mm cavity",
+                "Unit": "m²",
+                "Quantity": 136.08,
+                "Rate": null,
+                "Amount": 473.92,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "6.14.1.3.2",
+                "Item Description": "Pre-formed stepped cavity tray in brickwork to gable abutment IG cavity tray gable abutment GA1/50",
+                "Unit": "m",
+                "Quantity": 3.43,
+                "Rate": null,
+                "Amount": 425.95,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "6.14.1.3.3",
+                "Item Description": "Pre-formed cavity tray to wall opening Manthorpe lintel tray 400mm wide GW281",
+                "Unit": "m",
+                "Quantity": 13.2,
+                "Rate": null,
+                "Amount": 190.08,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "6.14.1.3.4",
+                "Item Description": "Pre-formed cavity tray to horizontal abutment Manthorpe horizontal cavity tray GW295",
+                "Unit": "m",
+                "Quantity": 1.15,
+                "Rate": null,
+                "Amount": 14.47,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "6.14.1.3.5",
+                "Item Description": "Cavity tray stop end Manthorpe adjustable lintel stop end G956",
+                "Unit": "nr",
+                "Quantity": 14.0,
+                "Rate": null,
+                "Amount": 44.17,
+                "Currency": "£"
+              }
+            ]
+          },
+          {
+            "Subsection Title": "6.14.1.4 Engineering brickwork",
+            "Items": [
+              {
+                "Item Number": "6.14.1.4.1",
+                "Item Description": "102.5mm stretcher bond pointed one side engineering brick skin to cavity wall Ketley Class A blue solid 215 x 102.5 x 65mm engineering brick and Site mix mortar 1:3 builder's sand, Cemex Rugby masonry cement and Tarmac premium yellow building sand",
+                "Unit": "m²",
+                "Quantity": 4.93,
+                "Rate": null,
+                "Amount": 502.81,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "6.14.1.4.2",
+                "Item Description": "102.5mm stretcher bond pointed both sides engineering brick wall Ketley Class A blue solid 215 x 102.5 x 65mm engineering brick and Site mix mortar 1:3 builder's sand, Cemex Rugby masonry cement and Tarmac premium yellow building sand",
+                "Unit": "m²",
+                "Quantity": 1.54,
+                "Rate": null,
+                "Amount": 161.59,
+                "Currency": "£"
+              }
+            ]
+          },
+          {
+            "Subsection Title": "6.14.1.5 Cavity insulation",
+            "Items": [
+              {
+                "Item Number": "6.14.1.5.1",
+                "Item Description": "Cavity insulation fixed with clips Kingspan Kooltherm K8 50mm cavity insulation board, Timloc insulation retaining disc and Packex foil insulation tape (30 micron) 75mm",
+                "Unit": "m²",
+                "Quantity": 135.05,
+                "Rate": null,
+                "Amount": 2505.16,
+                "Currency": "£"
+              }
+            ]
+          },
+          {
+            "Subsection Title": "6.14.1.6 DPCs",
+            "Items": [
+              {
+                "Item Number": "6.14.1.6.1",
+                "Item Description": "Damp proof courses, horizontal IKO Hyload Original DPC 100mm",
+                "Unit": "m",
+                "Quantity": 126.02,
+                "Rate": null,
+                "Amount": 144.36,
+                "Currency": "£"
+              }
+            ]
+          },
+          {
+            "Subsection Title": "6.14.1.7 Brick slips",
+            "Items": [
+              {
+                "Item Number": "6.14.1.7.1",
+                "Item Description": "Infill slips between beam and block floor beams at 488mm centres Supreme coursing slips 390mm x 100mm x 40mm and Site mix mortar 1:3 builder's sand, Cemex Rugby masonry cement and Tarmac premium yellow building sand",
+                "Unit": "m",
+                "Quantity": 28.43,
+                "Rate": null,
+                "Amount": 134.28,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "6.14.1.7.2",
+                "Item Description": "Slips supporting beam and block floor beams Supreme coursing slips 390mm x 100mm x 40mm and Site mix mortar 1:3 builder's sand, Cemex Rugby masonry cement and Tarmac premium yellow building sand",
+                "Unit": "m",
+                "Quantity": 17.72,
+                "Rate": null,
+                "Amount": 107.95,
+                "Currency": "£"
+              }
+            ]
+          },
+          {
+            "Subsection Title": "6.14.1.8 Opening jambs",
+            "Items": [
+              {
+                "Item Number": "6.14.1.8.1",
+                "Item Description": "Opening jambs with additional wall ties at 225mm centres Ancon stainless steel Staifix ST1 225mm tie for 76-100mm cavity",
+                "Unit": "m",
+                "Quantity": 40.5,
+                "Rate": null,
+                "Amount": 317.52,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "6.14.1.8.2",
+                "Item Description": "Forming wall opening jambs in solid masonry",
+                "Unit": "m",
+                "Quantity": 40.46,
+                "Rate": null,
+                "Amount": 100.34,
+                "Currency": "£"
+              }
+            ]
+          },
+          {
+            "Subsection Title": "6.14.1.9 Cavity closers",
+            "Items": [
+              {
+                "Item Number": "6.14.1.9.1",
+                "Item Description": "Proprietary closer to cavity wall opening TDI Thermocor cavity closer 100mm",
+                "Unit": "m",
+                "Quantity": 63.64,
+                "Rate": null,
+                "Amount": 646.41,
+                "Currency": "£"
+              }
+            ]
+          },
+          {
+            "Subsection Title": "6.14.1.10 Verge wall ties",
+            "Items": [
+              {
+                "Item Number": "6.14.1.10.1",
+                "Item Description": "Gable wall verge to cavity wall including extra wall ties at 300mm centres Ancon stainless steel Staifix ST1 225mm tie for 76-100mm cavity",
+                "Unit": "m",
+                "Quantity": 2.03,
+                "Rate": null,
+                "Amount": 44.67,
+                "Currency": "£"
+              }
+            ]
+          },
+          {
+            "Subsection Title": "6.14.1.11 Lintels",
+            "Items": [
+              {
+                "Item Number": "6.14.1.11.1",
+                "Item Description": "Galvanized steel lintel Birtley Supergalv SB100 steel internal wall lintel standard duty 100mm wall x 1200mm",
+                "Unit": "nr",
+                "Quantity": 10.0,
+                "Rate": null,
+                "Amount": 335.2,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "6.14.1.11.2",
+                "Item Description": "Galvanized steel lintels bedded in mortar Birtley Supergalv CB90 steel cavity combination lintel standard duty 90-110 cavity x 1500mm",
+                "Unit": "nr",
+                "Quantity": 6.0,
+                "Rate": null,
+                "Amount": 308.76,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "6.14.1.11.3",
+                "Item Description": "Galvanized steel lintels bedded in mortar Birtley Supergalv CB90 steel cavity combination lintel standard duty 90-110 cavity x 2100mm",
+                "Unit": "nr",
+                "Quantity": 3.0,
+                "Rate": null,
+                "Amount": 209.73,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "6.14.1.11.4",
+                "Item Description": "Galvanized steel lintels bedded in mortar Birtley Supergalv CB90 steel cavity combination lintel standard duty 90-110 cavity x 2700mm",
+                "Unit": "nr",
+                "Quantity": 2.0,
+                "Rate": null,
+                "Amount": 202.36,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "6.14.1.11.5",
+                "Item Description": "Galvanized steel lintels bedded in mortar Birtley Supergalv CB90 steel cavity combination lintel standard duty 90-110 cavity x 3000mm",
+                "Unit": "nr",
+                "Quantity": 1.0,
+                "Rate": null,
+                "Amount": 124.75,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "6.14.1.11.6",
+                "Item Description": "Galvanized steel lintels bedded in mortar Birtley Supergalv CB90 steel cavity combination lintel standard duty 90-110 cavity x 900mm",
+                "Unit": "nr",
+                "Quantity": 2.0,
+                "Rate": null,
+                "Amount": 71.16,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "6.14.1.11.7",
+                "Item Description": "Galvanized steel lintels bedded in mortar Birtley Supergalv CB90 steel cavity combination lintel standard duty 90-110 cavity x 1350mm",
+                "Unit": "nr",
+                "Quantity": 1.0,
+                "Rate": null,
+                "Amount": 48.39,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "6.14.1.11.8",
+                "Item Description": "Galvanized steel lintels bedded in mortar Birtley Supergalv CB90 steel cavity combination lintel standard duty 90-110 cavity x 1200mm",
+                "Unit": "nr",
+                "Quantity": 1.0,
+                "Rate": null,
+                "Amount": 43.26,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "6.14.1.11.9",
+                "Item Description": "Concrete lintel to masonry external wall footing Stressline prestressed concrete lintel 600 x 100 x 65mm",
+                "Unit": "nr",
+                "Quantity": 1.0,
+                "Rate": null,
+                "Amount": 12.7,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "6.14.1.11.10",
+                "Item Description": "Concrete lintel to masonry internal wall footing Stressline prestressed concrete lintel 600 x 100 x 65mm",
+                "Unit": "nr",
+                "Quantity": 1.0,
+                "Rate": null,
+                "Amount": 12.7,
+                "Currency": "£"
+              }
+            ]
+          },
+          {
+            "Subsection Title": "6.14.1.12 Air bricks",
+            "Items": [
+              {
+                "Item Number": "6.14.1.12.1",
+                "Item Description": "Air brick with periscope sleeve Glidevale Maxi vent wall ventilator, terracotta, 215 x 65 x 57mm",
+                "Unit": "nr",
+                "Quantity": 11.0,
+                "Rate": null,
+                "Amount": 157.56,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Subsection Title": "6.14.2 Proprietary items",
+        "Subsections": [
+          {
+            "Subsection Title": "6.14.2.1 Masonry accessories",
+            "Items": [
+              {
+                "Item Number": "6.14.2.1.1",
+                "Item Description": "Cavity weep vent Manthorpe plastic weep vent brown",
+                "Unit": "nr",
+                "Quantity": 68.0,
+                "Rate": null,
+                "Amount": 61.88,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Items": [
+      {
+        "Item Number": null,
+        "Item Description": "Subtotal Masonry",
+        "Unit": null,
+        "Quantity": null,
+        "Rate": null,
+        "Amount": 31566.68,
+        "Currency": "£"
+      }
+    ]
+  },
+  {
+    "Section Title": "7.16 Carpentry",
+    "Subsections": [
+      {
+        "Subsection Title": "7.16.1 Metal and plastic accessories",
+        "Subsections": [
+          {
+            "Subsection Title": "7.16.1.1 Roof accessories",
+            "Items": [
+              {
+                "Item Number": "7.16.1.1.1",
+                "Item Description": "Eaves strip ventilators Glidevale continuous soffit vent white for 6-10mm board",
+                "Unit": "m",
+                "Quantity": 41.44,
+                "Rate": null,
+                "Amount": 370.38,
+                "Currency": "£"
+              }
+            ]
+          },
+          {
+            "Subsection Title": "7.16.1.2 Roof timbers",
+            "Items": [
+              {
+                "Item Number": "7.16.1.2.1",
+                "Item Description": "Wall plate straps Simpson H12B10 restraint strap bent (at 100mm) 5 x 1200mm",
+                "Unit": "nr",
+                "Quantity": 16.1,
+                "Rate": null,
+                "Amount": 167.25,
+                "Currency": "£"
+              }
+            ]
+          },
+          {
+            "Subsection Title": "7.16.1.3 Timber floors",
+            "Items": [
+              {
+                "Item Number": "7.16.1.3.1",
+                "Item Description": "Metal fixings, built in joist hanger Expamet SPHS20050 joist hanger heavy duty 50 x 200mm",
+                "Unit": "nr",
+                "Quantity": 96.0,
+                "Rate": null,
+                "Amount": 730.8,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "7.16.1.3.2",
+                "Item Description": "Metal fixings, timber floor joist straps Simpson H11B15 restraint strap bent (at 150mm) 5 x 1100mm",
+                "Unit": "nr",
+                "Quantity": 12.0,
+                "Rate": null,
+                "Amount": 129.64,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "7.16.1.3.3",
+                "Item Description": "Metal fixings, timber floor joist straps Simpson H12B15 restraint strap bent (at 150mm) 5 x 1200mm",
+                "Unit": "nr",
+                "Quantity": 6.0,
+                "Rate": null,
+                "Amount": 73.96,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Subsection Title": "7.16.2 Timber framing",
+        "Subsections": [
+          {
+            "Subsection Title": "7.16.2.1 Roof trusses",
+            "Items": [
+              {
+                "Item Number": "7.16.2.1.1",
+                "Item Description": "Roof trusses at 600mm centres Roof trusses (Includes a PC Sum Allowance: Roof trusses)",
+                "Unit": "m²",
+                "Quantity": 89.37,
+                "Rate": null,
+                "Amount": 3324.47,
+                "Currency": "£"
+              }
+            ]
+          },
+          {
+            "Subsection Title": "7.16.2.2 Roof timbers",
+            "Items": [
+              {
+                "Item Number": "7.16.2.2.1",
+                "Item Description": "Noggings between roof joists 47 x 50mm sawn carcassing treated FSC",
+                "Unit": "m",
+                "Quantity": 51.66,
+                "Rate": null,
+                "Amount": 272.24,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "7.16.2.2.2",
+                "Item Description": "Roof wall plate 75 x 100mm regularised joist kiln dried treated C16 graded FSC",
+                "Unit": "m",
+                "Quantity": 32.21,
+                "Rate": null,
+                "Amount": 212.98,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "7.16.2.2.3",
+                "Item Description": "Valley lay boards 25 x 225mm sawn dry structural softwood treated FSC",
+                "Unit": "m",
+                "Quantity": 7.76,
+                "Rate": null,
+                "Amount": 94.25,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "7.16.2.2.4",
+                "Item Description": "Valley boards 25 x 175mm sawn dry structural softwood treated FSC",
+                "Unit": "m",
+                "Quantity": 15.52,
+                "Rate": null,
+                "Amount": 63.26,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "7.16.2.2.5",
+                "Item Description": "Hip corner tie to roof 47 x 100mm regularised joist kiln dried treated C16 graded FSC",
+                "Unit": "m",
+                "Quantity": 1.0,
+                "Rate": null,
+                "Amount": 20.21,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "7.16.2.2.6",
+                "Item Description": "Valley tile undercloak strip 25 x 38mm sawn batten treated FSC",
+                "Unit": "m",
+                "Quantity": 15.52,
+                "Rate": null,
+                "Amount": 19.28,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "7.16.2.2.7",
+                "Item Description": "Lean to roof apex wall plate 47 x 150mm regularised joist kiln dried treated C16 graded FSC",
+                "Unit": "m",
+                "Quantity": 1.15,
+                "Rate": null,
+                "Amount": 15.58,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "7.16.2.2.8",
+                "Item Description": "Loft hatch horizontal trimmer 47 x 150mm regularised joist kiln dried treated C16 graded FSC",
+                "Unit": "m",
+                "Quantity": 1.12,
+                "Rate": null,
+                "Amount": 9.91,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "7.16.2.2.9",
+                "Item Description": "Tilting fillet 0.3m long to rafters 47 x 50mm sawn firring treated FSC",
+                "Unit": "nr",
+                "Quantity": 71.99,
+                "Rate": null,
+                "Amount": 118.93,
+                "Currency": "£"
+              }
+            ]
+          },
+          {
+            "Subsection Title": "7.16.2.3 Dummy frames",
+            "Items": [
+              {
+                "Item Number": "7.16.2.3.1",
+                "Item Description": "Window dummy frame 47 x 75mm sawn carcassing FSC",
+                "Unit": "m",
+                "Quantity": 71.1,
+                "Rate": null,
+                "Amount": 379.24,
+                "Currency": "£"
+              }
+            ]
+          },
+          {
+            "Subsection Title": "7.16.2.4 Timber floors",
+            "Items": [
+              {
+                "Item Number": "7.16.2.4.1",
+                "Item Description": "Timber floor joist 47 x 200mm regularised joist kiln dried C16 graded FSC",
+                "Unit": "m",
+                "Quantity": 140.06,
+                "Rate": null,
+                "Amount": 891.82,
+                "Currency": "£"
+              }
+            ]
+          },
+          {
+            "Subsection Title": "7.16.2.5 Roof rafters",
+            "Items": [
+              {
+                "Item Number": "7.16.2.5.1",
+                "Item Description": "Roof rafter 47 x 150mm regularised joist kiln dried treated C16 graded FSC",
+                "Unit": "m",
+                "Quantity": 9.68,
+                "Rate": null,
+                "Amount": 61.81,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "7.16.2.5.2",
+                "Item Description": "Roof hip ridge rafter 47 x 200mm regularised joist kiln dried C16 graded FSC",
+                "Unit": "m",
+                "Quantity": 2.04,
+                "Rate": null,
+                "Amount": 55.37,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Subsection Title": "7.16.3 Timber first fixings",
+        "Subsections": [
+          {
+            "Subsection Title": "7.16.3.1 Roof timbers",
+            "Items": [
+              {
+                "Item Number": "7.16.3.1.1",
+                "Item Description": "Soffit carrier 25 x 38mm sawn batten treated FSC",
+                "Unit": "m",
+                "Quantity": 21.56,
+                "Rate": null,
+                "Amount": 65.05,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "7.16.3.1.2",
+                "Item Description": "Roof lathe to eaves 25 x 38mm sawn batten treated FSC",
+                "Unit": "m",
+                "Quantity": 41.44,
+                "Rate": null,
+                "Amount": 51.36,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "7.16.3.1.3",
+                "Item Description": "Roof lathe to ridge 25 x 38mm sawn batten treated FSC",
+                "Unit": "m",
+                "Quantity": 7.5,
+                "Rate": null,
+                "Amount": 9.28,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "7.16.3.1.4",
+                "Item Description": "Roof lathe to abutment 25 x 38mm sawn batten treated FSC",
+                "Unit": "m",
+                "Quantity": 1.15,
+                "Rate": null,
+                "Amount": 1.43,
+                "Currency": "£"
+              }
+            ]
+          },
+          {
+            "Subsection Title": "7.16.3.2 Timber studwork",
+            "Items": [
+              {
+                "Item Number": "7.16.3.2.1",
+                "Item Description": "Vertical studs to stud wall 47 x 75mm sawn carcassing treated FSC",
+                "Unit": "m",
+                "Quantity": 99.44,
+                "Rate": null,
+                "Amount": 330.79,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "7.16.3.2.2",
+                "Item Description": "Vertical studs to stud wall 47 x 100mm sawn carcassing treated FSC",
+                "Unit": "m",
+                "Quantity": 27.05,
+                "Rate": null,
+                "Amount": 114.63,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "7.16.3.2.3",
+                "Item Description": "Noggings to vertical stud wall 47 x 75mm sawn carcassing treated FSC",
+                "Unit": "m",
+                "Quantity": 14.17,
+                "Rate": null,
+                "Amount": 111.85,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "7.16.3.2.4",
+                "Item Description": "Sole plate to stud wall 47 x 75mm sawn carcassing treated FSC",
+                "Unit": "m",
+                "Quantity": 14.17,
+                "Rate": null,
+                "Amount": 51.36,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "7.16.3.2.5",
+                "Item Description": "Head runner to vertical stud wall 47 x 75mm sawn carcassing treated FSC",
+                "Unit": "m",
+                "Quantity": 14.17,
+                "Rate": null,
+                "Amount": 51.36,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "7.16.3.2.6",
+                "Item Description": "Noggings to vertical stud wall 47 x 100mm sawn dry structural softwood treated FSC",
+                "Unit": "m",
+                "Quantity": 5.92,
+                "Rate": null,
+                "Amount": 50.8,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "7.16.3.2.7",
+                "Item Description": "Head runner to vertical stud wall 47 x 100mm sawn dry structural softwood treated FSC",
+                "Unit": "m",
+                "Quantity": 8.59,
+                "Rate": null,
+                "Amount": 37.05,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "7.16.3.2.8",
+                "Item Description": "Sole plate to stud wall 47 x 100mm sawn dry structural softwood treated FSC",
+                "Unit": "m",
+                "Quantity": 5.92,
+                "Rate": null,
+                "Amount": 25.54,
+                "Currency": "£"
+              }
+            ]
+          },
+          {
+            "Subsection Title": "7.16.3.3 Timber floors",
+            "Items": [
+              {
+                "Item Number": "7.16.3.3.1",
+                "Item Description": "Solid bridging between floor joists 47 x 200mm regularised joist kiln dried C16 graded FSC",
+                "Unit": "m",
+                "Quantity": 16.43,
+                "Rate": null,
+                "Amount": 185.6,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "7.16.3.3.2",
+                "Item Description": "Floor joist trimmer 75 x 225mm regularised joist kiln dried treated C16 graded FSC",
+                "Unit": "m",
+                "Quantity": 6.74,
+                "Rate": null,
+                "Amount": 103.67,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Subsection Title": "7.16.4 Boarding, sheeting, decking, casings and linings",
+        "Subsections": [
+          {
+            "Subsection Title": "7.16.4.1 Timber floors",
+            "Items": [
+              {
+                "Item Number": "7.16.4.1.1",
+                "Item Description": "Chipboard flooring to floor area >600mm wide horizontal 22.0mm TG4 P5 moisture resistant chipboard flooring",
+                "Unit": "m²",
+                "Quantity": 58.34,
+                "Rate": null,
+                "Amount": 921.51,
+                "Currency": "£"
+              }
+            ]
+          },
+          {
+            "Subsection Title": "7.16.4.2 Boxing out",
+            "Items": [
+              {
+                "Item Number": "7.16.4.2.1",
+                "Item Description": "Pipe casings >600mm thick, vertical",
+                "Unit": "m²",
+                "Quantity": 1.5,
+                "Rate": null,
+                "Amount": 43.12,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "7.16.4.2.2",
+                "Item Description": "Pipe casings to two sides <600mm wide, horizontal 47 x 50mm sawn carcassing treated FSC, Gyproc Soundbloc MR tapered edge wall board 15.0mm and Knauf Earthwool Universal RS80 40mm thick insulation slab",
+                "Unit": "m",
+                "Quantity": 8.0,
+                "Rate": null,
+                "Amount": 186.91,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "7.16.4.2.3",
+                "Item Description": "Carcassing to bath side panel 47 x 50mm sawn carcassing treated FSC",
+                "Unit": "m",
+                "Quantity": 10.0,
+                "Rate": null,
+                "Amount": 28.68,
+                "Currency": "£"
+              }
+            ]
+          },
+          {
+            "Subsection Title": "7.16.4.3 Roof accessories",
+            "Items": [
+              {
+                "Item Number": "7.16.4.3.1",
+                "Item Description": "Tilting fillet support board Soffit board non a/c 2400 x 4.5 x 150mm",
+                "Unit": "m",
+                "Quantity": 41.44,
+                "Rate": null,
+                "Amount": 116.18,
+                "Currency": "£"
+              }
+            ]
+          },
+          {
+            "Subsection Title": "7.16.4.4 Roof timbers",
+            "Items": [
+              {
+                "Item Number": "7.16.4.4.1",
+                "Item Description": "Eaves fascia <600mm wide 25 x 175 standard redwood grooved fascia board FSC",
+                "Unit": "m",
+                "Quantity": 38.08,
+                "Rate": null,
+                "Amount": 407.88,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "7.16.4.4.2",
+                "Item Description": "Soffit board <600mm width, 300mm wide 18.0mm Q- Mark exterior grade plywood sheet",
+                "Unit": "m",
+                "Quantity": 38.08,
+                "Rate": null,
+                "Amount": 238.86,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "7.16.4.4.3",
+                "Item Description": "Eaves fascia <600mm wide 25 x 150 standard redwood grooved fascia board FSC",
+                "Unit": "m",
+                "Quantity": 3.36,
+                "Rate": null,
+                "Amount": 32.51,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "7.16.4.4.4",
+                "Item Description": "Soffit board <600mm width, 275mm wide 18.0mm Q- Mark exterior grade plywood sheet",
+                "Unit": "m",
+                "Quantity": 3.36,
+                "Rate": null,
+                "Amount": 20.3,
+                "Currency": "£"
+              }
+            ]
+          },
+          {
+            "Subsection Title": "7.16.4.5 Thresholds",
+            "Items": [
+              {
+                "Item Number": "7.16.4.5.1",
+                "Item Description": "Threshold board Joinery redwood nosed and tongued window board 32.0 x 225mm",
+                "Unit": "m",
+                "Quantity": 3.64,
+                "Rate": null,
+                "Amount": 84.62,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Items": [
+      {
+        "Item Number": null,
+        "Item Description": "Subtotal Carpentry",
+        "Unit": null,
+        "Quantity": null,
+        "Rate": null,
+        "Amount": 10281.72,
+        "Currency": "£"
+      }
+    ]
+  },
+  {
+    "Section Title": "8.17 Sheet roof coverings",
+    "Subsections": [
+      {
+        "Subsection Title": "8.17.1 Flashings",
+        "Subsections": [
+          {
+            "Subsection Title": "8.17.1.1 Flashings",
+            "Items": [
+              {
+                "Item Number": "8.17.1.1.1",
+                "Item Description": "Stepped flashing 300mm wide Lead flashing code 4 300mm",
+                "Unit": "m",
+                "Quantity": 3.43,
+                "Rate": null,
+                "Amount": 197.0,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "8.17.1.1.2",
+                "Item Description": "Horizontal flashing 300mm wide Lead flashing code 4 300mm",
+                "Unit": "m",
+                "Quantity": 1.15,
+                "Rate": null,
+                "Amount": 38.71,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Subsection Title": "8.17.2 Sheet metals",
+        "Subsections": [
+          {
+            "Subsection Title": "8.17.2.1 Roof valleys",
+            "Items": [
+              {
+                "Item Number": "8.17.2.1.1",
+                "Item Description": "Forming valley Lead flashing code 5 600mm",
+                "Unit": "m",
+                "Quantity": 7.76,
+                "Rate": null,
+                "Amount": 364.08,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Items": [
+      {
+        "Item Number": null,
+        "Item Description": "Subtotal Sheet roof coverings",
+        "Unit": null,
+        "Quantity": null,
+        "Rate": null,
+        "Amount": 599.79,
+        "Currency": "£"
+      }
+    ]
+  },
+  {
+    "Section Title": "9.18 Tile and slate roof and wall coverings",
+    "Subsections": [
+      {
+        "Subsection Title": "9.18.1 Roof coverings",
+        "Subsections": [
+          {
+            "Subsection Title": "9.18.1.1 Roof tiles",
+            "Items": [
+              {
+                "Item Number": "9.18.1.1.1",
+                "Item Description": "Pitch roof coverings with underlay and battens Hawkins clay plain tile heather mixture, 25 x 38mm sawn batten treated FSC and Icopal Monarflex Monarperm 700 breather membrane",
+                "Unit": "m²",
+                "Quantity": 115.33,
+                "Rate": null,
+                "Amount": 12637.15,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "9.18.1.1.2",
+                "Item Description": "Boundary work, hip ridge tiles bedded and mortared Marley segmental ridge smooth brown, Marley mortar bedded security hip system and Site mix roofing mortar 1:3 builder's/sharp sand mix, Cemex Rugby masonry cement, Tarmac premium yellow building sand and Sharp sand",
+                "Unit": "m",
+                "Quantity": 34.94,
+                "Rate": null,
+                "Amount": 927.7,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "9.18.1.1.3",
+                "Item Description": "Boundary work, raking mitred hip tiles Hawkins clay tile and half heather mixture",
+                "Unit": "m",
+                "Quantity": 53.96,
+                "Rate": null,
+                "Amount": 751.25,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "9.18.1.1.4",
+                "Item Description": "Boundary work to pitched roof eaves tiles fixed with nails, horizontal Hawkins clay eaves tile heather mixture",
+                "Unit": "m",
+                "Quantity": 41.44,
+                "Rate": null,
+                "Amount": 612.93,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "9.18.1.1.5",
+                "Item Description": "Boundary work, sloping valley gutter tile cutting, bedding and pointing for plain tiles Hawkins clay tile and half heather mixture and Site mix roofing mortar 1:3 builder's/sharp sand mix, Cemex Rugby masonry cement, Tarmac premium yellow building sand and Sharp sand",
+                "Unit": "m",
+                "Quantity": 12.32,
+                "Rate": null,
+                "Amount": 176.2,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "9.18.1.1.6",
+                "Item Description": "Boundary work, top tiles, sloping Hawkins clay eaves tile heather mixture",
+                "Unit": "m",
+                "Quantity": 8.65,
+                "Rate": null,
+                "Amount": 127.94,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "9.18.1.1.7",
+                "Item Description": "Boundary work, ridge tiles bedded and pointed Marley segmental ridge smooth brown, Marley mortar bedded security ridge system and Site mix roofing mortar 1:3 builder's/sharp sand mix, Cemex Rugby masonry cement, Tarmac premium yellow building sand and Sharp sand",
+                "Unit": "m",
+                "Quantity": 3.75,
+                "Rate": null,
+                "Amount": 85.63,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "9.18.1.1.8",
+                "Item Description": "Boundary work, sloping gable abutment tiles Hawkins clay tile and half heather mixture",
+                "Unit": "m",
+                "Quantity": 3.43,
+                "Rate": null,
+                "Amount": 65.11,
+                "Currency": "£"
+              }
+            ]
+          },
+          {
+            "Subsection Title": "9.18.1.2 Roof accessories",
+            "Items": [
+              {
+                "Item Number": "9.18.1.2.1",
+                "Item Description": "Fittings, hip irons Hip irons 300 x 150 x 4mm",
+                "Unit": "nr",
+                "Quantity": 7.0,
+                "Rate": null,
+                "Amount": 43.29,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Items": [
+      {
+        "Item Number": null,
+        "Item Description": "Subtotal Tile and slate roof and wall coverings",
+        "Unit": null,
+        "Quantity": null,
+        "Rate": null,
+        "Amount": 15427.2,
+        "Currency": "£"
+      }
+    ]
+  },
+  {
+    "Section Title": "10.22 General joinery",
+    "Subsections": [
+      {
+        "Subsection Title": "10.22.1 Unframed isolated trims, skirtings and joinery items",
+        "Subsections": [
+          {
+            "Subsection Title": "10.22.1.1 Decorative joinery",
+            "Items": [
+              {
+                "Item Number": "10.22.1.1.1",
+                "Item Description": "Skirting board Redwood torus skirting board 25 x 125mm",
+                "Unit": "m",
+                "Quantity": 135.32,
+                "Rate": null,
+                "Amount": 1046.9,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "10.22.1.1.2",
+                "Item Description": "Window board Joinery redwood nosed and tongued window board 32.0 x 225mm",
+                "Unit": "m",
+                "Quantity": 19.5,
+                "Rate": null,
+                "Amount": 451.76,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "10.22.1.1.3",
+                "Item Description": "Landing nosing B&P softwood staircase grooved nosing",
+                "Unit": "m",
+                "Quantity": 4.0,
+                "Rate": null,
+                "Amount": 46.6,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Items": [
+      {
+        "Item Number": null,
+        "Item Description": "Subtotal General joinery",
+        "Unit": null,
+        "Quantity": null,
+        "Rate": null,
+        "Amount": 1545.26,
+        "Currency": "£"
+      }
+    ]
+  },
+  {
+    "Section Title": "11.23 Windows, screens and lights",
+    "Subsections": [
+      {
+        "Subsection Title": "11.23.1 Windows",
+        "Subsections": [
+          {
+            "Subsection Title": "11.23.1.1 Timber windows",
+            "Items": [
+              {
+                "Item Number": "11.23.1.1.1",
+                "Item Description": "Window JELD-WEN Softwood Elegance Casement, 1188mm wide x 1188mm high, U-value = 1.4",
+                "Unit": "nr",
+                "Quantity": 3.0,
+                "Rate": null,
+                "Amount": 3455.49,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "11.23.1.1.2",
+                "Item Description": "Window JELD-WEN Softwood Elegance Casement, 1188mm wide x 1038mm high, U-value = 1.4",
+                "Unit": "nr",
+                "Quantity": 3.0,
+                "Rate": null,
+                "Amount": 3327.66,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "11.23.1.1.3",
+                "Item Description": "Window JELD-WEN Softwood Elegance Casement, 2388mm wide x 1338mm high, U-value = 1.4",
+                "Unit": "nr",
+                "Quantity": 1.0,
+                "Rate": null,
+                "Amount": 2008.24,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "11.23.1.1.4",
+                "Item Description": "Window JELD-WEN Softwood Elegance Casement, 2388mm wide x 1188mm high, U-value = 1.4",
+                "Unit": "nr",
+                "Quantity": 1.0,
+                "Rate": null,
+                "Amount": 1924.38,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "11.23.1.1.5",
+                "Item Description": "Window JELD-WEN Softwood Elegance Casement, 1788mm wide x 1338mm high, U-value = 1.4",
+                "Unit": "nr",
+                "Quantity": 1.0,
+                "Rate": null,
+                "Amount": 1602.98,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "11.23.1.1.6",
+                "Item Description": "Window JELD-WEN Softwood Elegance Casement, 1788mm wide x 1188mm high, U-value = 1.4",
+                "Unit": "nr",
+                "Quantity": 1.0,
+                "Rate": null,
+                "Amount": 1539.75,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "11.23.1.1.7",
+                "Item Description": "Window JELD-WEN Softwood Elegance Casement, 1788mm wide x 1038mm high, U-value = 1.4",
+                "Unit": "nr",
+                "Quantity": 1.0,
+                "Rate": null,
+                "Amount": 1476.54,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "11.23.1.1.8",
+                "Item Description": "Window JELD-WEN Softwood Elegance Casement, 588mm wide x 1038mm high, U-value = 1.4",
+                "Unit": "nr",
+                "Quantity": 2.0,
+                "Rate": null,
+                "Amount": 1313.84,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "11.23.1.1.9",
+                "Item Description": "Window JELD-WEN Softwood Elegance Casement Narrow Module, 888mm wide x 1038mm high, U-value = 1.4",
+                "Unit": "nr",
+                "Quantity": 1.0,
+                "Rate": null,
+                "Amount": 1026.73,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Items": [
+      {
+        "Item Number": null,
+        "Item Description": "Subtotal Windows, screens and lights",
+        "Unit": null,
+        "Quantity": null,
+        "Rate": null,
+        "Amount": 17675.61,
+        "Currency": "£"
+      }
+    ]
+  },
+  {
+    "Section Title": "12.24 Doors, shutters and hatches",
+    "Subsections": [
+      {
+        "Subsection Title": "12.24.1 Opening in ceiling",
+        "Subsections": [
+          {
+            "Subsection Title": "12.24.1.1 Loft hatches",
+            "Items": [
+              {
+                "Item Number": "12.24.1.1.1",
+                "Item Description": "Glidevale loft access trap push up class O fire resisting LA5",
+                "Unit": "nr",
+                "Quantity": 1.0,
+                "Rate": null,
+                "Amount": 112.69,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Subsection Title": "12.24.2 Doors and frames",
+        "Subsections": [
+          {
+            "Subsection Title": "12.24.2.1 Door frames",
+            "Items": [
+              {
+                "Item Number": "12.24.2.1.1",
+                "Item Description": "Single internal door frames 32 x 102 x 5100mm stock door lining set",
+                "Unit": "nr",
+                "Quantity": 6.0,
+                "Rate": null,
+                "Amount": 190.38,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "12.24.2.1.2",
+                "Item Description": "Single internal door frames 32 x 133 x 5100mm stock door lining set",
+                "Unit": "nr",
+                "Quantity": 4.0,
+                "Rate": null,
+                "Amount": 143.32,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "12.24.2.1.3",
+                "Item Description": "Single internal door frames 32 x 115mm softwood door lining set",
+                "Unit": "nr",
+                "Quantity": 1.0,
+                "Rate": null,
+                "Amount": 30.71,
+                "Currency": "£"
+              }
+            ]
+          },
+          {
+            "Subsection Title": "12.24.2.2 Panel doors",
+            "Items": [
+              {
+                "Item Number": "12.24.2.2.1",
+                "Item Description": "Doors JELD-WEN Atherton Smooth 4 Panel Standard Core Internal Door 762 x 1981 x 35mm",
+                "Unit": "nr",
+                "Quantity": 6.0,
+                "Rate": null,
+                "Amount": 753.18,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "12.24.2.2.2",
+                "Item Description": "Doors JELD-WEN Atherton Smooth 4 Panel Middleweight Core Internal Door 762 x 1981 x 35mm",
+                "Unit": "nr",
+                "Quantity": 4.0,
+                "Rate": null,
+                "Amount": 596.0,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "12.24.2.2.3",
+                "Item Description": "Door furniture to softwood doors Georgian polished brass internal latch pack",
+                "Unit": "nr",
+                "Quantity": 11.0,
+                "Rate": null,
+                "Amount": 403.92,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "12.24.2.2.4",
+                "Item Description": "Doors JELD-WEN Atherton Smooth 4 Panel Standard Core Internal Door 686 x 1981 x 35mm",
+                "Unit": "nr",
+                "Quantity": 1.0,
+                "Rate": null,
+                "Amount": 125.53,
+                "Currency": "£"
+              }
+            ]
+          },
+          {
+            "Subsection Title": "12.24.2.3 Composite external doors",
+            "Items": [
+              {
+                "Item Number": "12.24.2.3.1",
+                "Item Description": "Door set Crystal Direct Composite Edwardian 4 External Door Duck Egg Blue with Andaman Zinc glazing, 2088 x 930mm, 1.2 U value",
+                "Unit": "nr",
+                "Quantity": 1.0,
+                "Rate": null,
+                "Amount": 742.85,
+                "Currency": "£"
+              }
+            ]
+          },
+          {
+            "Subsection Title": "12.24.2.4 Patio doors",
+            "Items": [
+              {
+                "Item Number": "12.24.2.4.1",
+                "Item Description": "Door set Crystal Direct PVCu Evolve 3 pane Sliding Patio doors White, 2090 x 2690mm wide Double Sliding Door with 1 Fixed Pane, 1.6 U-value, Sliding left",
+                "Unit": "nr",
+                "Quantity": 1.0,
+                "Rate": null,
+                "Amount": 992.08,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Items": [
+      {
+        "Item Number": null,
+        "Item Description": "Subtotal Doors, shutters and hatches",
+        "Unit": null,
+        "Quantity": null,
+        "Rate": null,
+        "Amount": 4090.66,
+        "Currency": "£"
+      }
+    ]
+  },
+  {
+    "Section Title": "13.25 Stairs, walkways and balustrades",
+    "Subsections": [
+      {
+        "Subsection Title": "13.25.1 Timber staircases",
+        "Subsections": [
+          {
+            "Subsection Title": "13.25.1.1 Staircases",
+            "Items": [
+              {
+                "Item Number": "13.25.1.1.1",
+                "Item Description": "Straight flight timber stairs in one flight Straight staircase allowance",
+                "Unit": "nr",
+                "Quantity": 1.0,
+                "Rate": null,
+                "Amount": 586.5,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Subsection Title": "13.25.2 Timber balustrades",
+        "Subsections": [
+          {
+            "Subsection Title": "13.25.2.1 Balustrades",
+            "Items": [
+              {
+                "Item Number": "13.25.2.1.1",
+                "Item Description": "Balustrade with balusters at 125mm horizontal centres excluding newels",
+                "Unit": "nr",
+                "Quantity": 1.0,
+                "Rate": null,
+                "Amount": 623.41,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "13.25.2.1.2",
+                "Item Description": "Balustrades, newel post and cap Softwood staircase turned newel post and Softwood staircase acorn turned newel cap",
+                "Unit": "nr",
+                "Quantity": 5.0,
+                "Rate": null,
+                "Amount": 495.12,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "13.25.2.1.3",
+                "Item Description": "Balustrades, half newel post and cap Softwood staircase plain half newel post and Softwood staircase acorn turned newel cap half",
+                "Unit": "nr",
+                "Quantity": 1.0,
+                "Rate": null,
+                "Amount": 24.43,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Subsection Title": "13.25.3 Timber guardrails",
+        "Subsections": [
+          {
+            "Subsection Title": "13.25.3.1 Handrails",
+            "Items": [
+              {
+                "Item Number": "13.25.3.1.1",
+                "Item Description": "Handrails Softwood staircase hand rail and Brass handrail bracket",
+                "Unit": "m",
+                "Quantity": 3.99,
+                "Rate": null,
+                "Amount": 108.96,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Items": [
+      {
+        "Item Number": null,
+        "Item Description": "Subtotal Stairs, walkways and balustrades",
+        "Unit": null,
+        "Quantity": null,
+        "Rate": null,
+        "Amount": 1838.42,
+        "Currency": "£"
+      }
+    ]
+  },
+  {
+    "Section Title": "14.28 Floor, wall, ceiling and roof finishings",
+    "Subsections": [
+      {
+        "Subsection Title": "14.28.1 Rendering to walls",
+        "Subsections": [
+          {
+            "Subsection Title": "14.28.1.1 Render",
+            "Items": [
+              {
+                "Item Number": "14.28.1.1.1",
+                "Item Description": "18mm cement and sand two coat wood floated finish >600mm wide",
+                "Unit": "m²",
+                "Quantity": 19.88,
+                "Rate": null,
+                "Amount": 435.29,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "14.28.1.1.2",
+                "Item Description": "Render drip bead Expamet PVC bell cast bead white 16-20mm",
+                "Unit": "m",
+                "Quantity": 9.78,
+                "Rate": null,
+                "Amount": 62.18,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "14.28.1.1.3",
+                "Item Description": "Rendering to window reveals 100mm average width Render 18mm cement and sand two coat wood float finish ≤600mm wide, Site mix mortar 1:4 for rendering, Cemex Rugby masonry cement, Sharp sand and Tarmac premium yellow building sand",
+                "Unit": "m",
+                "Quantity": 9.9,
+                "Rate": null,
+                "Amount": 34.3,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "14.28.1.1.4",
+                "Item Description": "Render corner bead Expamet PVC angle bead white 13-15mm",
+                "Unit": "m",
+                "Quantity": 5.1,
+                "Rate": null,
+                "Amount": 17.85,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Subsection Title": "14.28.2 Plastering to walls",
+        "Subsections": [
+          {
+            "Subsection Title": "14.28.2.1 Skimmed plasterboard",
+            "Items": [
+              {
+                "Item Number": "14.28.2.1.1",
+                "Item Description": "Width >600mm, 12.5mm plasterboard with plaster finish coat fixed with adhesive to walls Gyproc square edge wall board 12.5mm, Gyproc Dri-wall adhesive and Thistle multi finish plaster",
+                "Unit": "m²",
+                "Quantity": 214.45,
+                "Rate": null,
+                "Amount": 3518.02,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "14.28.2.1.2",
+                "Item Description": "Width >600mm, 12.5mm plasterboard with plaster finish coat fixed to stud walls Gyproc square edge wall board 12.5mm and Thistle multi finish plaster",
+                "Unit": "m²",
+                "Quantity": 86.8,
+                "Rate": null,
+                "Amount": 1308.07,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "14.28.2.1.3",
+                "Item Description": "Plastering to window reveals 122mm average width Skimmed 12.5mm plasterboard fixed with adhesive to walls ≤600mm wide, Gyproc square edge wall board 12.5mm, Gyproc Dri-wall adhesive, Thistle multi finish plaster and Thistle Pro Tape FT50 50mm",
+                "Unit": "m",
+                "Quantity": 41.7,
+                "Rate": null,
+                "Amount": 125.17,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "14.28.2.1.4",
+                "Item Description": "Plastering to window reveals 136mm average width Skimmed 12.5mm plasterboard fixed with adhesive to walls ≤600mm wide, Gyproc square edge wall board 12.5mm, Gyproc Dri-wall adhesive, Thistle multi finish plaster and Thistle Pro Tape FT50 50mm",
+                "Unit": "m",
+                "Quantity": 9.9,
+                "Rate": null,
+                "Amount": 32.97,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "14.28.2.1.5",
+                "Item Description": "Plastering to door reveals 164mm average width Skimmed 12.5mm plasterboard fixed with adhesive to walls ≤600mm wide, Gyproc square edge wall board 12.5mm, Gyproc Dri-wall adhesive, Thistle multi finish plaster and Thistle Pro Tape FT50 50mm",
+                "Unit": "m",
+                "Quantity": 5.14,
+                "Rate": null,
+                "Amount": 20.75,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "14.28.2.1.6",
+                "Item Description": "Plastering to door reveals 80mm average width Skimmed 12.5mm plasterboard fixed with adhesive to walls ≤600mm wide, Gyproc square edge wall board 12.5mm, Gyproc Dri-wall adhesive, Thistle multi finish plaster and Thistle Pro Tape FT50 50mm",
+                "Unit": "m",
+                "Quantity": 6.9,
+                "Rate": null,
+                "Amount": 13.58,
+                "Currency": "£"
+              }
+            ]
+          },
+          {
+            "Subsection Title": "14.28.2.2 Plastering accessories",
+            "Items": [
+              {
+                "Item Number": "14.28.2.2.1",
+                "Item Description": "Plastering angle bead Thistle thin coat angle bead",
+                "Unit": "m",
+                "Quantity": 4.0,
+                "Rate": null,
+                "Amount": 13.91,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Subsection Title": "14.28.3 Plastering to ceilings",
+        "Subsections": [
+          {
+            "Subsection Title": "14.28.3.1 Skimmed plasterboard",
+            "Items": [
+              {
+                "Item Number": "14.28.3.1.1",
+                "Item Description": "Width >600mm, 12.5mm plasterboard with plaster finish coat fixed to ceiling timbers Gyproc square edge wall board 12.5mm and Thistle multi finish plaster",
+                "Unit": "m²",
+                "Quantity": 120.35,
+                "Rate": null,
+                "Amount": 2053.41,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "14.28.3.1.2",
+                "Item Description": "Width <600mm, 12.5mm plasterboard with plaster finish coat fixed to ceiling timbers Gyproc square edge wall board 12.5mm and Thistle multi finish plaster",
+                "Unit": "m",
+                "Quantity": 4.0,
+                "Rate": null,
+                "Amount": 41.45,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Subsection Title": "14.28.4 Joints and strips",
+        "Subsections": [
+          {
+            "Subsection Title": "14.28.4.1 Sealant",
+            "Items": [
+              {
+                "Item Number": "14.28.4.1.1",
+                "Item Description": "6mm sealant beads to opening perimeter Silicone sealant white",
+                "Unit": "m",
+                "Quantity": 86.78,
+                "Rate": null,
+                "Amount": 278.13,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Subsection Title": "14.28.5 Floor screeds",
+        "Subsections": [
+          {
+            "Subsection Title": "14.28.5.1 Screed",
+            "Items": [
+              {
+                "Item Number": "14.28.5.1.1",
+                "Item Description": "75mm thick cement and sand hand mix floor screed to beam and block floor >600mm horizontal Site mix screed 1:4, Cemex Rugby masonry cement and Sharp sand",
+                "Unit": "m²",
+                "Quantity": 61.81,
+                "Rate": null,
+                "Amount": 1692.98,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Items": [
+      {
+        "Item Number": null,
+        "Item Description": "Subtotal Floor, wall, ceiling and roof finishings",
+        "Unit": null,
+        "Quantity": null,
+        "Rate": null,
+        "Amount": 9648.06,
+        "Currency": "£"
+      }
+    ]
+  },
+  {
+    "Section Title": "15.29 Decoration",
+    "Subsections": [
+      {
+        "Subsection Title": "15.29.1 Painting and clear finishes",
+        "Subsections": [
+          {
+            "Subsection Title": "15.29.1.1 Painting",
+            "Items": [
+              {
+                "Item Number": "15.29.1.1.1",
+                "Item Description": "Decoration to wall internal >300mm wide; mist coat & two coats emulsion Dulux Trade emulsion vinyl matt magnolia",
+                "Unit": "m²",
+                "Quantity": 301.24,
+                "Rate": null,
+                "Amount": 1490.46,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "15.29.1.1.2",
+                "Item Description": "Painting to general surfaces >300mm girth to internal doors; primer, undercoat & one coat gloss Dulux Trade high gloss brilliant white, Dulux Trade undercoat white and Dulux all purpose primer",
+                "Unit": "m²",
+                "Quantity": 37.17,
+                "Rate": null,
+                "Amount": 638.0,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "15.29.1.1.3",
+                "Item Description": "Decoration to ceiling internal >300mm wide; mist coat & two coats emulsion Dulux Trade emulsion vinyl matt pure brilliant white",
+                "Unit": "m²",
+                "Quantity": 120.35,
+                "Rate": null,
+                "Amount": 514.33,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "15.29.1.1.4",
+                "Item Description": "Decoration to wall render/brickwork >300mm wide; two coats Dulux Trade Weathershield smooth masonry pure brilliant white",
+                "Unit": "m²",
+                "Quantity": 19.88,
+                "Rate": null,
+                "Amount": 87.77,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "15.29.1.1.5",
+                "Item Description": "Painting to general surfaces, girth <300mm to skirting board; primer, undercoat & one coat gloss Dulux Trade high gloss brilliant white, Dulux Trade undercoat white and Dulux all purpose primer",
+                "Unit": "m",
+                "Quantity": 135.32,
+                "Rate": null,
+                "Amount": 394.64,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "15.29.1.1.6",
+                "Item Description": "Painting to general surfaces, external fascias <300mm; primer, undercoat & one coat gloss Dulux Trade high gloss brilliant white, Dulux Trade undercoat white and Dulux all purpose primer",
+                "Unit": "m",
+                "Quantity": 41.44,
+                "Rate": null,
+                "Amount": 231.31,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "15.29.1.1.7",
+                "Item Description": "Painting to general surfaces, external soffits <300mm; primer, undercoat & one coat gloss Dulux Trade high gloss brilliant white, Dulux Trade undercoat white and Dulux all purpose primer",
+                "Unit": "m",
+                "Quantity": 41.44,
+                "Rate": null,
+                "Amount": 231.31,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "15.29.1.1.8",
+                "Item Description": "Painting to general surfaces, girth <300mm to balusters; primer, undercoat & two coats gloss Dulux Trade high gloss brilliant white, Dulux Trade undercoat white and Dulux all purpose primer",
+                "Unit": "m",
+                "Quantity": 56.0,
+                "Rate": null,
+                "Amount": 202.65,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "15.29.1.1.9",
+                "Item Description": "Painting to general surfaces <300mm girth to internal door frame; primer, undercoat & one coat gloss Dulux Trade high gloss brilliant white, Dulux Trade undercoat white and Dulux all purpose primer",
+                "Unit": "m",
+                "Quantity": 53.69,
+                "Rate": null,
+                "Amount": 193.99,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "15.29.1.1.10",
+                "Item Description": "Painting to internal window boards <300mm girth; primer, undercoat & one coat gloss Dulux Trade high gloss brilliant white, Dulux Trade undercoat white and Dulux all purpose primer",
+                "Unit": "m",
+                "Quantity": 19.5,
+                "Rate": null,
+                "Amount": 124.47,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "15.29.1.1.11",
+                "Item Description": "Painting to general surfaces, girth <300mm to newel posts; primer, undercoat & one coat gloss Dulux Trade high gloss brilliant white, Dulux Trade undercoat white and Dulux all purpose primer",
+                "Unit": "m",
+                "Quantity": 32.64,
+                "Rate": null,
+                "Amount": 103.86,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "15.29.1.1.12",
+                "Item Description": "Painting to general surfaces, girth <300mm to staircase stringers; primer, undercoat & one coat gloss Dulux Trade high gloss brilliant white, Dulux Trade undercoat white and Dulux all purpose primer",
+                "Unit": "m",
+                "Quantity": 11.96,
+                "Rate": null,
+                "Amount": 38.08,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "15.29.1.1.13",
+                "Item Description": "Decoration to window reveals 122mm average width Painting to wall ≤300mm wide; mist coat & two coats emulsion, Dulux Trade emulsion vinyl matt magnolia",
+                "Unit": "m",
+                "Quantity": 41.7,
+                "Rate": null,
+                "Amount": 35.35,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "15.29.1.1.14",
+                "Item Description": "Painting to general surfaces, girth <300mm to handrail decoration; primer, undercoat & two coats gloss Dulux Trade high gloss brilliant white, Dulux Trade undercoat white and Dulux all purpose primer",
+                "Unit": "m",
+                "Quantity": 7.99,
+                "Rate": null,
+                "Amount": 28.88,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "15.29.1.1.15",
+                "Item Description": "Painting to general surfaces, girth <300mm to stair floor rail; primer, undercoat & two coats gloss Dulux Trade high gloss brilliant white, Dulux Trade undercoat white and Dulux all purpose primer",
+                "Unit": "m",
+                "Quantity": 7.99,
+                "Rate": null,
+                "Amount": 28.88,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "15.29.1.1.16",
+                "Item Description": "Painting to general surfaces <300mm girth to threshold boards; primer, undercoat & one coat gloss Dulux Trade high gloss brilliant white, Dulux Trade undercoat white and Dulux all purpose primer",
+                "Unit": "m",
+                "Quantity": 3.64,
+                "Rate": null,
+                "Amount": 23.25,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "15.29.1.1.17",
+                "Item Description": "Painting to general surfaces, girth <300mm to handrail decoration; primer, undercoat & one coat gloss Dulux Trade high gloss brilliant white, Dulux Trade undercoat white and Dulux all purpose primer",
+                "Unit": "m",
+                "Quantity": 3.99,
+                "Rate": null,
+                "Amount": 11.63,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "15.29.1.1.18",
+                "Item Description": "Decoration to window reveals 136mm average width Painting to wall ≤300mm wide; mist coat & two coats emulsion, Dulux Trade emulsion vinyl matt magnolia",
+                "Unit": "m",
+                "Quantity": 9.9,
+                "Rate": null,
+                "Amount": 9.33,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "15.29.1.1.19",
+                "Item Description": "Decoration to ceiling internal <300mm wide; mist coat & two coats emulsion Dulux Trade emulsion vinyl matt pure brilliant white",
+                "Unit": "m",
+                "Quantity": 4.0,
+                "Rate": null,
+                "Amount": 7.61,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "15.29.1.1.20",
+                "Item Description": "Decoration to window reveals 100mm average width Decoration to wall render/brickwork ≤300mm wide; two coats, Dulux Trade Weathershield smooth masonry pure brilliant white",
+                "Unit": "m",
+                "Quantity": 9.9,
+                "Rate": null,
+                "Amount": 6.35,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "15.29.1.1.21",
+                "Item Description": "Decoration to door reveals 164mm average width Painting to wall ≤300mm wide; mist coat & two coats emulsion, Dulux Trade emulsion vinyl matt magnolia",
+                "Unit": "m",
+                "Quantity": 5.14,
+                "Rate": null,
+                "Amount": 5.86,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "15.29.1.1.22",
+                "Item Description": "Decoration to door reveals 80mm average width Painting to wall ≤300mm wide; mist coat & two coats emulsion, Dulux Trade emulsion vinyl matt magnolia",
+                "Unit": "m",
+                "Quantity": 6.9,
+                "Rate": null,
+                "Amount": 3.84,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Items": [
+      {
+        "Item Number": null,
+        "Item Description": "Subtotal Decoration",
+        "Unit": null,
+        "Quantity": null,
+        "Rate": null,
+        "Amount": 4411.85,
+        "Currency": "£"
+      }
+    ]
+  },
+  {
+    "Section Title": "16.31 Insulation, fire stopping & fire protection",
+    "Subsections": [
+      {
+        "Subsection Title": "16.31.1 Boards",
+        "Subsections": [
+          {
+            "Subsection Title": "16.31.1.1 Insulation to slab",
+            "Items": [
+              {
+                "Item Number": "16.31.1.1.1",
+                "Item Description": "Boards to plain horizontal plain areas Kingspan Kooltherm K3 60mm thick floor insulation board",
+                "Unit": "m²",
+                "Quantity": 61.81,
+                "Rate": null,
+                "Amount": 1112.5,
+                "Currency": "£"
+              }
+            ]
+          },
+          {
+            "Subsection Title": "16.31.1.2 Insulation to screed",
+            "Items": [
+              {
+                "Item Number": "16.31.1.2.1",
+                "Item Description": "Boards to perimeter of 75mm thick floor screed Kingspan Kooltherm K3 25mm thick floor insulation board",
+                "Unit": "m",
+                "Quantity": 33.46,
+                "Rate": null,
+                "Amount": 47.3,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Subsection Title": "16.31.2 Sheets",
+        "Subsections": [
+          {
+            "Subsection Title": "16.31.2.1 Vapour barriers",
+            "Items": [
+              {
+                "Item Number": "16.31.2.1.1",
+                "Item Description": "Vapour barrier to floor screed Visqueen vapour check green 125mu",
+                "Unit": "m²",
+                "Quantity": 61.81,
+                "Rate": null,
+                "Amount": 192.59,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Subsection Title": "16.31.3 Quilts",
+        "Subsections": [
+          {
+            "Subsection Title": "16.31.3.1 Insulation to rafters",
+            "Items": [
+              {
+                "Item Number": "16.31.3.1.1",
+                "Item Description": "Quilt insulation laid between roof rafters at 600mm centres sloping",
+                "Unit": "m²",
+                "Quantity": 8.01,
+                "Rate": null,
+                "Amount": 110.91,
+                "Currency": "£"
+              }
+            ]
+          },
+          {
+            "Subsection Title": "16.31.3.2 Insulation to joists",
+            "Items": [
+              {
+                "Item Number": "16.31.3.2.1",
+                "Item Description": "Quilt insulation laid between roof joists at 600mm centres horizontal Isover Spacesaver Plus and Ready- Cut 150mm thick insulation roll",
+                "Unit": "m²",
+                "Quantity": 62.02,
+                "Rate": null,
+                "Amount": 858.27,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "16.31.3.2.2",
+                "Item Description": "Quilt insulation laid across roof joists at 600mm centres horizontal Isover Spacesaver Plus and Ready-Cut 150mm thick insulation roll",
+                "Unit": "m²",
+                "Quantity": 62.02,
+                "Rate": null,
+                "Amount": 844.6,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "16.31.3.2.3",
+                "Item Description": "Quilt insulation laid between floor joists at 450mm centres horizontal Isover Spacesaver Plus and Ready- Cut 150mm thick insulation roll",
+                "Unit": "m²",
+                "Quantity": 58.34,
+                "Rate": null,
+                "Amount": 734.3,
+                "Currency": "£"
+              }
+            ]
+          },
+          {
+            "Subsection Title": "16.31.3.3 Insulation to studwork",
+            "Items": [
+              {
+                "Item Number": "16.31.3.3.1",
+                "Item Description": "Quilt insulation laid between vertical studs at 400mm centres Black Mountain Sheep Wool (400 width) 75mm thick insulation batt",
+                "Unit": "m²",
+                "Quantity": 34.02,
+                "Rate": null,
+                "Amount": 460.27,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "16.31.3.3.2",
+                "Item Description": "Quilt insulation laid between vertical studs at 600mm centres Black Mountain Sheep Wool (600 width) 100mm thick insulation batt",
+                "Unit": "m²",
+                "Quantity": 7.41,
+                "Rate": null,
+                "Amount": 104.61,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Items": [
+      {
+        "Item Number": null,
+        "Item Description": "Subtotal Insulation, fire stopping & fire protection",
+        "Unit": null,
+        "Quantity": null,
+        "Rate": null,
+        "Amount": 4465.35,
+        "Currency": "£"
+      }
+    ]
+  },
+  {
+    "Section Title": "17.32 Furniture, fittings and equipment",
+    "Subsections": [
+      {
+        "Subsection Title": "17.32.1 Sanitary appliances and fittings",
+        "Subsections": [
+          {
+            "Subsection Title": "17.32.1.1 Plumbing",
+            "Items": [
+              {
+                "Item Number": "17.32.1.1.1",
+                "Item Description": "Basin waste PVD",
+                "Unit": "nr",
+                "Quantity": 2.0,
+                "Rate": null,
+                "Amount": 20.1,
+                "Currency": "£"
+              }
+            ]
+          },
+          {
+            "Subsection Title": "17.32.1.2 Bathroom appliances",
+            "Items": [
+              {
+                "Item Number": "17.32.1.2.1",
+                "Item Description": "Electric shower Mira advance 8.7kW ATL memory thermo electric shower white",
+                "Unit": "nr",
+                "Quantity": 2.0,
+                "Rate": null,
+                "Amount": 841.46,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "17.32.1.2.2",
+                "Item Description": "Close coupled toilet; pan, cistern, seat and lid Ideal Standard Alto close coupled pan 6/4 7 4/2.6l, Ideal Standard Alto dual flush cistern 4/2.6l and Ideal Standard Alto toilet seat and cover white",
+                "Unit": "nr",
+                "Quantity": 2.0,
+                "Rate": null,
+                "Amount": 522.78,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "17.32.1.2.3",
+                "Item Description": "Basin and pedestal Ideal Standard Alto handrinse basin 2TH 450mm and Ideal Standard Alto semi- pedestal",
+                "Unit": "nr",
+                "Quantity": 2.0,
+                "Rate": null,
+                "Amount": 357.58,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "17.32.1.2.4",
+                "Item Description": "Square 2 sided shower enclosure Swirl square shower tray cast stone acrylic capped 760 x 760 x 95mm, Swirl glass pivot shower enclosure door chrome 760mm, Swirl white 760mm side panel for shower enclosure and Genesis bath seal plus self adhesive champagne",
+                "Unit": "nr",
+                "Quantity": 1.0,
+                "Rate": null,
+                "Amount": 337.35,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "17.32.1.2.5",
+                "Item Description": "Basin pack Ideal Standard Sandringham 21 1TH cloakroom basin",
+                "Unit": "nr",
+                "Quantity": 1.0,
+                "Rate": null,
+                "Amount": 238.25,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "17.32.1.2.6",
+                "Item Description": "Close coupled toilet; pan, cistern, seat and lid Ideal Standard Sandringham eco toilet",
+                "Unit": "nr",
+                "Quantity": 1.0,
+                "Rate": null,
+                "Amount": 216.29,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "17.32.1.2.7",
+                "Item Description": "Acrylic bath Ideal Standard Alto bath 2TH 1700 x 700mm",
+                "Unit": "nr",
+                "Quantity": 1.0,
+                "Rate": null,
+                "Amount": 207.09,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "17.32.1.2.8",
+                "Item Description": "Acrylic bath side panel",
+                "Unit": "nr",
+                "Quantity": 1.0,
+                "Rate": null,
+                "Amount": 114.05,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "17.32.1.2.9",
+                "Item Description": "Acrylic bath end panel",
+                "Unit": "nr",
+                "Quantity": 1.0,
+                "Rate": null,
+                "Amount": 67.48,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "17.32.1.2.10",
+                "Item Description": "Bath handle Alterna universal bath grip pack chrome",
+                "Unit": "nr",
+                "Quantity": 2.0,
+                "Rate": null,
+                "Amount": 15.61,
+                "Currency": "£"
+              }
+            ]
+          },
+          {
+            "Subsection Title": "17.32.1.3 Taps",
+            "Items": [
+              {
+                "Item Number": "17.32.1.3.1",
+                "Item Description": "Basin taps Ideal Standard Elements 1/2\" basin pillar taps inc. cross handles",
+                "Unit": "nr",
+                "Quantity": 2.0,
+                "Rate": null,
+                "Amount": 119.84,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Items": [
+      {
+        "Item Number": null,
+        "Item Description": "Subtotal Furniture, fittings and equipment",
+        "Unit": null,
+        "Quantity": null,
+        "Rate": null,
+        "Amount": 3057.88,
+        "Currency": "£"
+      }
+    ]
+  },
+  {
+    "Section Title": "18.33 Drainage above ground",
+    "Subsections": [
+      {
+        "Subsection Title": "18.33.1 Rainwater installations",
+        "Subsections": [
+          {
+            "Subsection Title": "18.33.1.1 Guttering",
+            "Items": [
+              {
+                "Item Number": "18.33.1.1.1",
+                "Item Description": "Gutters Polypipe rainwater half round 112mm 4m gutter black",
+                "Unit": "m",
+                "Quantity": 41.44,
+                "Rate": null,
+                "Amount": 498.2,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "18.33.1.1.2",
+                "Item Description": "Fittings and accessories Polypipe rainwater half round 112mm gutter angle 90° black",
+                "Unit": "nr",
+                "Quantity": 6.0,
+                "Rate": null,
+                "Amount": 74.47,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "18.33.1.1.3",
+                "Item Description": "Fittings and accessories Polypipe rainwater half round 112mm gutter running outlet black",
+                "Unit": "nr",
+                "Quantity": 3.0,
+                "Rate": null,
+                "Amount": 31.7,
+                "Currency": "£"
+              }
+            ]
+          },
+          {
+            "Subsection Title": "18.33.1.2 Downpipes",
+            "Items": [
+              {
+                "Item Number": "18.33.1.2.1",
+                "Item Description": "Pipework Polypipe rainwater round pipe 68mm 2.5m black, Polypipe rainwater round pipe 68mm pipe connector black and Polypipe rainwater round pipe 68mm pipe socket bracket black",
+                "Unit": "m",
+                "Quantity": 14.1,
+                "Rate": null,
+                "Amount": 172.76,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "18.33.1.2.2",
+                "Item Description": "Fittings and accessories, swan neck Polypipe rainwater round pipe 68mm 112½° bend black and Polypipe rainwater round pipe 68mm 112½° bend black",
+                "Unit": "nr",
+                "Quantity": 3.0,
+                "Rate": null,
+                "Amount": 44.31,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Subsection Title": "18.33.2 Foul drainage installations",
+        "Subsections": [
+          {
+            "Subsection Title": "18.33.2.1 Waste pipework",
+            "Items": [
+              {
+                "Item Number": "18.33.2.1.1",
+                "Item Description": "40mm diameter solvent weld soil pipe OSMA MUPVC waste pipe white 40mm",
+                "Unit": "m",
+                "Quantity": 4.5,
+                "Rate": null,
+                "Amount": 91.62,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "18.33.2.1.2",
+                "Item Description": "40mm diameter solvent weld 87.5 degree bend FloPlast 92.5 degree bend 40mm pushfit",
+                "Unit": "nr",
+                "Quantity": 3.0,
+                "Rate": null,
+                "Amount": 55.53,
+                "Currency": "£"
+              }
+            ]
+          },
+          {
+            "Subsection Title": "18.33.2.2 Soil pipework",
+            "Items": [
+              {
+                "Item Number": "18.33.2.2.1",
+                "Item Description": "110mm diameter horizontal pushfit pipework clipped to wall FloPlast single socket soil pipe black",
+                "Unit": "m",
+                "Quantity": 12.0,
+                "Rate": null,
+                "Amount": 434.49,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "18.33.2.2.2",
+                "Item Description": "110mm diameter vertical pushfit pipework clipped to wall FloPlast single socket soil pipe black",
+                "Unit": "m",
+                "Quantity": 12.0,
+                "Rate": null,
+                "Amount": 411.51,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "18.33.2.2.3",
+                "Item Description": "40mm compression bottle trap Osma V-Joint 40mm bottle trap 76mm",
+                "Unit": "nr",
+                "Quantity": 3.0,
+                "Rate": null,
+                "Amount": 89.25,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "18.33.2.2.4",
+                "Item Description": "110mm diameter pushfit toilet pan connector FloPlast SP101 straight connector",
+                "Unit": "nr",
+                "Quantity": 3.0,
+                "Rate": null,
+                "Amount": 50.16,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "18.33.2.2.5",
+                "Item Description": "110mm diameter pushfit bottom offset bend FloPlast black bottom offset bend SP435",
+                "Unit": "nr",
+                "Quantity": 4.0,
+                "Rate": null,
+                "Amount": 47.0,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "18.33.2.2.6",
+                "Item Description": "110mm diameter pushfit 87.5 degree rest bend set in concrete FloPlast 92.5 degree bend single socket black SP161 and Hanson Gen1 ready mixed concrete",
+                "Unit": "nr",
+                "Quantity": 2.0,
+                "Rate": null,
+                "Amount": 44.83,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "18.33.2.2.7",
+                "Item Description": "110mm diameter pushfit 87.5 degree access branch FloPlast 92.5 degree access branch black SP502",
+                "Unit": "nr",
+                "Quantity": 2.0,
+                "Rate": null,
+                "Amount": 42.98,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "18.33.2.2.8",
+                "Item Description": "110mm diameter pushfit boss pipe FloPlast black boss pipe SP581",
+                "Unit": "nr",
+                "Quantity": 2.0,
+                "Rate": null,
+                "Amount": 31.83,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "18.33.2.2.9",
+                "Item Description": "40mm compression bath trap Osma Certus 40mm bath trap shallow seal",
+                "Unit": "nr",
+                "Quantity": 1.0,
+                "Rate": null,
+                "Amount": 16.2,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "18.33.2.2.10",
+                "Item Description": "110mm diameter pushfit vent cowl FloPlast black vent terminal SP302",
+                "Unit": "nr",
+                "Quantity": 2.0,
+                "Rate": null,
+                "Amount": 14.79,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Items": [
+      {
+        "Item Number": null,
+        "Item Description": "Subtotal Drainage above ground",
+        "Unit": null,
+        "Quantity": null,
+        "Rate": null,
+        "Amount": 2151.63,
+        "Currency": "£"
+      }
+    ]
+  },
+  {
+    "Section Title": "19.34 Drainage below ground",
+    "Subsections": [
+      {
+        "Subsection Title": "19.34.1 Manholes",
+        "Subsections": [
+          {
+            "Subsection Title": "19.34.1.1 Plastic manhole systems",
+            "Items": [
+              {
+                "Item Number": "19.34.1.1.1",
+                "Item Description": "Plastic manhole consisting of Plastic manhole 475mm diameter base unit, Hepworth 475mm diameter universal manhole access chamber base unit 225 x 100mm , Plastic manhole 475mm diameter raising piece, Hepworth 475mm diameter universal manhole inspection chamber raising piece 175mm and Plastic manhole cover and frame, Hepworth round ductile iron cover and plastic frame B125 seated on 150mm thick concrete base and backfilled with Concrete surrounds to manhole poured direct against face of excavation, Ready mix concrete GEN1, S3 , refer to drawings for channel layout; 650mm invert depth, includes Excavating pits for drainage, Backhoe loader and driver",
+                "Unit": "nr",
+                "Quantity": 1.0,
+                "Rate": null,
+                "Amount": 690.2,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Subsection Title": "19.34.2 Drain runs",
+        "Subsections": [
+          {
+            "Subsection Title": "19.34.2.1 Drainage",
+            "Items": [
+              {
+                "Item Number": "19.34.2.1.1",
+                "Item Description": "Single drain run PVCu drainage pipes laid in trench, OsmaDrain pipe plain end 110mm and FloPlast underground pipe coupling double socket 110mm , 850mm average depth to invert in 1000mm deep 300mm wide excavation, laid on 150mm thick bedding with 250mm thick cover material, capped with 200mm thick concrete protection and backfilled, including Drainage trench excavation max depth ≤2m, Backhoe loader and driver",
+                "Unit": "m",
+                "Quantity": 45.33,
+                "Rate": null,
+                "Amount": 1807.88,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Subsection Title": "19.34.3 Pipe fittings",
+        "Subsections": [
+          {
+            "Subsection Title": "19.34.3.1 Drainage",
+            "Items": [
+              {
+                "Item Number": "19.34.3.1.1",
+                "Item Description": "Drainage bend OsmaDrain double socket bend 45 degree 110mm",
+                "Unit": "nr",
+                "Quantity": 4.0,
+                "Rate": null,
+                "Amount": 105.0,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "19.34.3.1.2",
+                "Item Description": "Drainage junction OsmaDrain double socket equal junction 45 degree 110mm",
+                "Unit": "nr",
+                "Quantity": 3.0,
+                "Rate": null,
+                "Amount": 103.95,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "19.34.3.1.3",
+                "Item Description": "Drainage bend OsmaDrain double socket bend 87 degree 110mm",
+                "Unit": "nr",
+                "Quantity": 1.0,
+                "Rate": null,
+                "Amount": 26.25,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "19.34.3.1.4",
+                "Item Description": "Drainage rodding point FloPlast D881 PVC oval rodding point (spigot) 110mmm black",
+                "Unit": "nr",
+                "Quantity": 1.0,
+                "Rate": null,
+                "Amount": 23.1,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Subsection Title": "19.34.4 Soakaways",
+        "Subsections": [
+          {
+            "Subsection Title": "19.34.4.1 Soakaways",
+            "Items": [
+              {
+                "Item Number": "19.34.4.1.1",
+                "Item Description": "Precast concrete soakaway 1050mm internal diameter, 225mm thick in-situ concrete base, Manhole cover and frame, Clark Drain manhole cover and frame ductile iron 600 x 600 x 40mm , 225mm high regulating brickwork, Manhole cover slab, FP McCann precast manhole cover slab c/w square opening 1050mm 600mm x 600mm , geotextile wrap and gravel backfill; 2.13m invert depth, includes Excavating pits for drainage, Backhoe loader and driver",
+                "Unit": "nr",
+                "Quantity": 1.0,
+                "Rate": null,
+                "Amount": 1489.08,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Items": [
+      {
+        "Item Number": null,
+        "Item Description": "Subtotal Drainage below ground",
+        "Unit": null,
+        "Quantity": null,
+        "Rate": null,
+        "Amount": 4245.46,
+        "Currency": "£"
+      }
+    ]
+  },
+  {
+    "Section Title": "20.35 Site works",
+    "Subsections": [
+      {
+        "Subsection Title": "20.35.1 Road and path pavings",
+        "Subsections": [
+          {
+            "Subsection Title": "20.35.1.1 Paving",
+            "Items": [
+              {
+                "Item Number": "20.35.1.1.1",
+                "Item Description": "Paving slabs >300mm wide to paved areas laid to falls on 25mm sand/cement bedding Marshalls Richmond paving buff 450 x 450 x 32",
+                "Unit": "m²",
+                "Quantity": 36.14,
+                "Rate": null,
+                "Amount": 1516.43,
+                "Currency": "£"
+              }
+            ]
+          },
+          {
+            "Subsection Title": "20.35.1.2 Block paving",
+            "Items": [
+              {
+                "Item Number": "20.35.1.2.1",
+                "Item Description": "Paviors >300mm wide to paved areas laid to falls on 50mm sand bedding Charcon driveway block 200 x 100 x 50mm",
+                "Unit": "m²",
+                "Quantity": 37.45,
+                "Rate": null,
+                "Amount": 1540.02,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "20.35.1.2.2",
+                "Item Description": "Pavior edgings laid in single stretcher course with 200mm x 200mm concrete haunching Charcon driveway block 200 x 100 x 50mm and Ready mix concrete GEN0, S1",
+                "Unit": "m",
+                "Quantity": 25.83,
+                "Rate": null,
+                "Amount": 564.07,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Items": [
+      {
+        "Item Number": null,
+        "Item Description": "Subtotal Site works",
+        "Unit": null,
+        "Quantity": null,
+        "Rate": null,
+        "Amount": 3620.52,
+        "Currency": "£"
+      }
+    ]
+  },
+  {
+    "Section Title": "21.37 Soft landscaping",
+    "Subsections": [
+      {
+        "Subsection Title": "21.37.1 Turfing",
+        "Subsections": [
+          {
+            "Subsection Title": "21.37.1.1 Laying turf",
+            "Items": [
+              {
+                "Item Number": "21.37.1.1.1",
+                "Item Description": "Turfing Turf medium quality",
+                "Unit": "m²",
+                "Quantity": 183.96,
+                "Rate": null,
+                "Amount": 1685.66,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Items": [
+      {
+        "Item Number": null,
+        "Item Description": "Subtotal Soft landscaping",
+        "Unit": null,
+        "Quantity": null,
+        "Rate": null,
+        "Amount": 1685.66,
+        "Currency": "£"
+      }
+    ]
+  },
+  {
+    "Section Title": "22.38 Mechanical services",
+    "Subsections": [
+      {
+        "Subsection Title": "22.38.1 Pipework",
+        "Subsections": [
+          {
+            "Subsection Title": "22.38.1.1 Pipework",
+            "Items": [
+              {
+                "Item Number": "22.38.1.1.1",
+                "Item Description": "Pipework surface mounted, 15mm copper end feed, clipped Copper tube table X. EN1057 15mm, End feed 15mm coupler and Talon copper pipe clips 15mm",
+                "Unit": "m",
+                "Quantity": 10.5,
+                "Rate": null,
+                "Amount": 103.26,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "22.38.1.1.2",
+                "Item Description": "Pipework in timber stud wall, 15mm copper end feed, clipped Copper tube table X. EN1057 15mm, End feed 15mm coupler and Masefield plastic 15mm nail in type/microbore pipe clip",
+                "Unit": "m",
+                "Quantity": 4.0,
+                "Rate": null,
+                "Amount": 47.42,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "22.38.1.1.3",
+                "Item Description": "Pipe fittings 15mm chrome isolating ball valve copper x copper",
+                "Unit": "nr",
+                "Quantity": 13.0,
+                "Rate": null,
+                "Amount": 85.8,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "22.38.1.1.4",
+                "Item Description": "Pipe fittings End feed 15mm x 1/2 inch straight tap connector",
+                "Unit": "nr",
+                "Quantity": 6.0,
+                "Rate": null,
+                "Amount": 41.16,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Subsection Title": "22.38.2 Terminal equipment",
+        "Subsections": [
+          {
+            "Subsection Title": "22.38.2.1 Heat emitters",
+            "Items": [
+              {
+                "Item Number": "22.38.2.1.1",
+                "Item Description": "Towel rail with heater fixed with brackets Essential 690mm x 500mm curved chrome towel warmer",
+                "Unit": "nr",
+                "Quantity": 3.0,
+                "Rate": null,
+                "Amount": 502.29,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Items": [
+      {
+        "Item Number": null,
+        "Item Description": "Subtotal Mechanical services",
+        "Unit": null,
+        "Quantity": null,
+        "Rate": null,
+        "Amount": 779.93,
+        "Currency": "£"
+      }
+    ]
+  },
+  {
+    "Section Title": "23.39 Electrical services",
+    "Subsections": [
+      {
+        "Subsection Title": "23.39.1 Terminal equipment and fittings",
+        "Subsections": [
+          {
+            "Subsection Title": "23.39.1.1 Electrics",
+            "Items": [
+              {
+                "Item Number": "23.39.1.1.1",
+                "Item Description": "Single socket in solid wall Electronic heating element controller",
+                "Unit": "nr",
+                "Quantity": 3.0,
+                "Rate": null,
+                "Amount": 113.4,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "23.39.1.1.2",
+                "Item Description": "Fused spur switch - flush mounted to solid wall White 13A DP sw FCU and neon",
+                "Unit": "nr",
+                "Quantity": 3.0,
+                "Rate": null,
+                "Amount": 84.06,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Subsection Title": "23.39.2 Cable containment",
+        "Subsections": [
+          {
+            "Subsection Title": "23.39.2.1 Electrics",
+            "Items": [
+              {
+                "Item Number": "23.39.2.1.1",
+                "Item Description": "Channel nailed to surfaces Time galvanised steel channel 25mm",
+                "Unit": "m",
+                "Quantity": 6.0,
+                "Rate": null,
+                "Amount": 13.14,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Subsection Title": "23.39.3 Cables",
+        "Subsections": [
+          {
+            "Subsection Title": "23.39.3.1 Electrics",
+            "Items": [
+              {
+                "Item Number": "23.39.3.1.1",
+                "Item Description": "Cables drawn into conduit Prysmian 6242Y twin and earth cable grey 2.5mm²",
+                "Unit": "m",
+                "Quantity": 6.0,
+                "Rate": null,
+                "Amount": 16.65,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Items": [
+      {
+        "Item Number": null,
+        "Item Description": "Subtotal Electrical services",
+        "Unit": null,
+        "Quantity": null,
+        "Rate": null,
+        "Amount": 227.25,
+        "Currency": "£"
+      }
+    ]
+  },
+  {
+    "Section Title": "24.41 Builder’s work in connection with mechanical, electrical & transportation installations",
+    "Subsections": [
+      {
+        "Subsection Title": "24.41.1 Work for services installations in existing buildings",
+        "Subsections": [
+          {
+            "Subsection Title": "24.41.1.1 Forming holes for services",
+            "Items": [
+              {
+                "Item Number": "24.41.1.1.1",
+                "Item Description": "Cutting 45mm hole through existing 200mm thick masonry structure Faithfull diamond core drill bit 117mm x 150mm",
+                "Unit": "nr",
+                "Quantity": 2.0,
+                "Rate": null,
+                "Amount": 36.1,
+                "Currency": "£"
+              },
+              {
+                "Item Number": "24.41.1.1.2",
+                "Item Description": "Cutting 45mm hole through existing 200mm thick masonry structure Faithfull diamond dry core bit 45mm x 150mm",
+                "Unit": "nr",
+                "Quantity": 2.0,
+                "Rate": null,
+                "Amount": 29.92,
+                "Currency": "£"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Items": [
+      {
+        "Item Number": null,
+        "Item Description": "Subtotal Builder’s work in connection with mechanical, electrical & transportation installations",
+        "Unit": null,
+        "Quantity": null,
+        "Rate": null,
+        "Amount": 66.02,
+        "Currency": "£"
+      }
+    ]
+  },
+  {
+    "Section Title": "25.11 Main contractor's overheads and profit",
+    "Subsections": [
+      {
+        "Subsection Title": "25.11.1 Main contractor's overheads",
+        "Subsections": [
+          {
+            "Subsection Title": "25.11.1.1 Main contractor's overheads",
+            "Items": [
+              {
+                "Item Number": "25.11.1.1.1",
+                "Item Description": "Contractor's overheads",
+                "Unit": null,
+                "Quantity": 0.0,
+                "Rate": null,
+                "Amount": 12877.23,
+                "Currency": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Subsection Title": "25.11.2 Main contractor's profit",
+        "Subsections": [
+          {
+            "Subsection Title": "25.11.2.1 Main contractor's profit",
+            "Items": [
+              {
+                "Item Number": "25.11.2.1.1",
+                "Item Description": "Contractor's profit",
+                "Unit": null,
+                "Quantity": 0.0,
+                "Rate": null,
+                "Amount": 38631.26,
+                "Currency": null
+              }
+            ]
           }
         ]
       }

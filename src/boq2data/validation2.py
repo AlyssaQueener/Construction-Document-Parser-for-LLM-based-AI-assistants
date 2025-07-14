@@ -78,6 +78,8 @@ def items_match(item1, item2):
             return False
     return True
 
+def clean_description(text):
+    return ' '.join(text.strip().lower().split())
 
 def compare_flat_items(extracted_items, validated_items):
     """Compare items regardless of order and count matches."""
@@ -89,62 +91,73 @@ def compare_flat_items(extracted_items, validated_items):
     matched_Amount=0
     matched_Currency=0
     matched_total =0 
+    matched_items = []
 
     for e_item in extracted_items:
         for v_item in validated_items:
             if e_item["Item Number"] == v_item["Item Number"]:
                     matched_Item_Number=matched_Item_Number+1
-            else:
-                break
-            if e_item["Item Description"] == v_item["Item Description"]:
+            if  clean_description(e_item["Item Description"] )== clean_description(v_item["Item Description"]):
                  matched_Item_Description=matched_Item_Description+1
-            else:
-                break
+            
             if e_item["Unit"] == v_item["Unit"]:
                  matched_Unit=matched_Unit+1
-            else:
-                 break
+           
             if e_item["Quantity"] == v_item["Quantity"]:
                  matched_Quantity=matched_Quantity+1
-            else:
-                 break
+            
             if e_item["Rate"] == v_item["Rate"]:
                  matched_Rate=matched_Rate+1
-            else:
-                 break
+           
             if e_item["Amount"] == v_item["Amount"]:
                  matched_Amount=matched_Amount+1
-            else:
-                break
+            
             if e_item["Currency"] == v_item["Currency"]:
                  matched_Currency=matched_Currency+1
-            else:
-                 break
+            
+            matched_total= matched_Amount+matched_Item_Number+matched_Currency+matched_Item_Description+matched_Quantity+matched_Rate+matched_Unit
+            if matched_total==6:
+                matched_items.append(e_item)
+            matched_total=0
+            matched_Item_Number=0
+            matched_Item_Description=0
+            matched_Unit=0
+            matched_Quantity=0
+            matched_Rate=0
+            matched_Amount=0
+            matched_Currency=0
+        
 
-    print(f'Item Number: {matched_Item_Number}')
-    print(f'Item Description: {matched_Item_Description}')
-    print(f'Unit: {matched_Unit}')
-    print(f'Quantity: {matched_Quantity}')
-    print(f'Rate: {matched_Rate}')
-    print(f'Amount: {matched_Amount}')
-    print(f'Currency: {matched_Currency}')
 
-    total = len(validated_items)
-    print(total)
-    match_percentages = {
-        "Item Number": round((matched_Item_Number / total) * 100, 2) if total else 0.0,
-        "Item Description": round((matched_Item_Description / total) * 100, 2) if total else 0.0,
-        "Unit": round((matched_Unit / total) * 100, 2) if total else 0.0,
-        "Quantity": round((matched_Quantity / total) * 100, 2) if total else 0.0,
-        "Rate": round((matched_Rate / total) * 100, 2) if total else 0.0,
-        "Amount": round((matched_Amount / total) * 100, 2) if total else 0.0,
-        "Currency": round((matched_Currency / total) * 100, 2) if total else 0.0,
-    }
+    # print(f'Item Number: {matched_Item_Number}')
+    # print(f'Item Description: {matched_Item_Description}')
+    # print(f'Unit: {matched_Unit}')
+    # print(f'Quantity: {matched_Quantity}')
+    # print(f'Rate: {matched_Rate}')
+    # print(f'Amount: {matched_Amount}')
+    # print(f'Currency: {matched_Currency}')
 
-    # Optional: total match (e.g., all fields matched)
-    overall_avg = round(sum(match_percentages.values()) / len(match_percentages), 2)
+    total_val = len(validated_items)
+    total_match = len(matched_items)
+    print(f'Total match: {total_match}')
+    print(f'number of validated items: {total_val}')
+    match_percent = round((total_match/total_val)*100,2)
+    print(matched_items)
+    print(f'percentage of absolut matching items: {match_percent} %')
+    # match_percentages = {
+    #     "Item Number": round((matched_Item_Number / total) * 100, 2) if total else 0.0,
+    #     "Item Description": round((matched_Item_Description / total) * 100, 2) if total else 0.0,
+    #     "Unit": round((matched_Unit / total) * 100, 2) if total else 0.0,
+    #     "Quantity": round((matched_Quantity / total) * 100, 2) if total else 0.0,
+    #     "Rate": round((matched_Rate / total) * 100, 2) if total else 0.0,
+    #     "Amount": round((matched_Amount / total) * 100, 2) if total else 0.0,
+    #     "Currency": round((matched_Currency / total) * 100, 2) if total else 0.0,
+    # }
 
-    return match_percentages, total, overall_avg
+    # # Optional: total match (e.g., all fields matched)
+    # overall_avg = round(sum(match_percentages.values()) / len(match_percentages), 2)
+
+    return total_match
 
 path_extracted= "output/Financial/BOQ3_extracted_boq_data.json"
 path_validated = "output/Financial/BOQ3_validation_boq_data.json"
@@ -158,11 +171,11 @@ validated_items = flatten_items(validated_data)
 #print(extracted_items)
 #print(validated_items)
 # === Compare ===
-match_percent, matched_count, total_validated = compare_flat_items(extracted_items, validated_items)
+match_total = compare_flat_items(extracted_items, validated_items)
 
-# === Output ===
-print(f"Item Match Total: {match_percent}%")
-print(f"Matched {matched_count} of {total_validated} validated items.")
+# # === Output ===
+# print(f"Item Match Total: {match_percent}%")
+# print(f"Matched {matched_count} of {total_validated} validated items.")
 
 
 

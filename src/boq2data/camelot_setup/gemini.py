@@ -71,6 +71,7 @@ If there are nested subsections:
             "Subsection Title": "2.5.1.1 Filling obtained from excavated material",
             "Items": [
               {{
+                "Internal Number": "0",
                 "Item Number": "2.5.1.1.1",
                 "Item Description": "Fill obtained from temporary spoil heaps ...",
                 "Unit": "m³",
@@ -81,6 +82,7 @@ If there are nested subsections:
               }},
               ...
               {{
+                "Internal Number": "1",
                 "Item Number": null,
                 "Item Description": "Subtotal Excavating & filling",
                 "Unit": null,
@@ -103,6 +105,7 @@ If no nested subsections:
     "Section Title": "1.1 Preliminaries",
     "Items": [
       {{
+        "Internal Number": "0",
         "Item Number": "1.1.1.1",
         "Item Description": "Mobile tele-crane and driver",
         "Unit": "day",
@@ -129,7 +132,7 @@ If no nested subsections:
    ➤ Otherwise, treat it as a normal item.
 
 5. Ensure item keys follow this **exact naming and order**:
-
+"Internal Number"
 "Item Number"  
 "Item Description"  
 "Unit"  
@@ -137,7 +140,7 @@ If no nested subsections:
 "Rate"  
 "Amount"  
 "Currency"
-
+6. Add a unique "Internal Number" to each item (not headers or subsections), starting from 0, increasing by 1 regardless of its section/subsection position.
 If a field is not available, set its value to null.
 
 📌 Subtotal Rule:
