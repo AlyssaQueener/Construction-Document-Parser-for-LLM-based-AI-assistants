@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"name": "templates",
+			"path": "../../../../Desktop/softwarelab3/templates"
+		},
+		{
+			"name": "Construction-Document-Parser-for-LLM-based-AI-assistants",
+			"path": ".."
+		}
+	],
+	"settings": {
+		"zencoder.enableRepoIndexing": true
+	}
+}
