@@ -313,11 +313,13 @@ def parse_gant_chart_visual(path):
         df = df.dropna(how='all')
         df = df.dropna(axis='columns', how='all')
         activities = extract_activities(df)
-        if len(activities)<2:
+        row_count = len(df.index)
+        if len(activities)< row_count - 5:
             activities = json.loads(mistral.call_mistral_activities(image_path))
         time_line_rows= extract_timeline_rows(df)
         timeline = create_single_timeline(time_line_rows)
-        if len(timeline) < 2:
+        column_count = len(df.columns)
+        if len(timeline) < column_count-5:
             timeline = json.loads(mistral.call_mistral_timeline(image_path))
         time_line_with_localization, unfound_timestamps = localize_timestamps(timeline, page)
         if unfound_timestamps > len(timeline) - tolerance:
