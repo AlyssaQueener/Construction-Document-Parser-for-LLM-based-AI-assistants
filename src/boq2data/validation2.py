@@ -203,7 +203,18 @@ def relative_item_match(extracted_items, validated_items):
             matched_Amount=0
             matched_Currency=0
         
-
+            # for e_item in extracted_items:
+            #     for v_item in validated_items:
+            #     if (
+            #         e_item["Item Number"] == v_item["Item Number"] and
+            #         e_item["Unit"] == v_item["Unit"] and
+            #         e_item["Quantity"] == v_item["Quantity"] and
+            #         e_item["Rate"] == v_item["Rate"] and
+            #         e_item["Amount"] == v_item["Amount"] and
+            #         e_item["Currency"] == v_item["Currency"]
+            #         # and clean_description(e_item["Item Description"]) == clean_description(v_item["Item Description"])
+            #     ):
+            #         matched_total += 1  # All fields matched
 
     # print(f'Item Number: {matched_Item_Number}')
     # print(f'Item Description: {matched_Item_Description}')
