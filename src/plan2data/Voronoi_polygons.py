@@ -1,3 +1,4 @@
+import os
 import fitz
 import json
 import re 
@@ -237,7 +238,7 @@ def analyze_room_connectivity(neighbors):
     for room, count in sorted_rooms:
         print(f"  {room}: {count} connections")
 
-def process_simple_voronoi(centerpoints, bounds=None):
+def process_simple_voronoi(centerpoints, filename, bounds=None):
     """
     Complete simple workflow for neighbor extraction and visualization.
     """
@@ -248,7 +249,7 @@ def process_simple_voronoi(centerpoints, bounds=None):
         neighbors, vor = extract_voronoi_neighbors(centerpoints)
         
         # Save neighbors
-        save_neighbors_only(neighbors)
+        save_neighbors_only(neighbors,filename)
         
         # Print summary
         print_neighbors_summary(neighbors)
@@ -301,9 +302,16 @@ def find_path_between_rooms(neighbors, start_room, end_room):
     return None  # No path found
 
 
+
 if __name__=="__main__":
-    pdf_path = "examples/FloorplansAndSectionViews/bemasster-grundriss-plankopf.pdf"
-        #pdf_path= "examples/FloorplansAndSectionViews/BasicTestPlan.pdf"
+    #pdf_path = "examples/FloorplansAndSectionViews/bemasster-grundriss-plankopf.pdf"
+    #pdf_path= "examples/FloorplansAndSectionViews/BasicTestPlan.pdf"
+    pdf_path = "examples/FloorplansAndSectionViews/eg-musterplan-1-50_2023 (1).pdf"
+
+    filename = os.path.splitext(os.path.basename(pdf_path))[0]
+    json_path = f'output/Floorplan/Neighbouring rooms/{filename}_neighbouring_rooms.json'
+
+    
     doc = fitz.open(pdf_path)
 
     page = doc[0]
@@ -348,5 +356,5 @@ if __name__=="__main__":
     # create voronoi polygons around the center points 
     page_width, page_height = page.rect.width, page.rect.height
     flipped_centerpoints = flip_y_coordinates(centerpoints,page_height)
-    voronoi_polygons =process_simple_voronoi(flipped_centerpoints)
+    voronoi_polygons =process_simple_voronoi(flipped_centerpoints,json_path)
 
