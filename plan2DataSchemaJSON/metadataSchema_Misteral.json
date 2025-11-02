@@ -1,0 +1,23 @@
+{
+  "titleBlock": {
+    "projectName": "",
+    "architect": "",
+    "client": "",
+    "location": "",
+    "author": "",
+    "engineers": [],
+    "yearOfCompletion": "",
+    "approvalDate": "",
+    "date": "",
+    "planType": "",
+    "scale": ""
+  },
+  "rooms": [
+    {
+      "roomName": "",
+      "area": null,
+      "adjacentRooms": [],
+      "neighboringRooms": []
+    }
+  ]
+}

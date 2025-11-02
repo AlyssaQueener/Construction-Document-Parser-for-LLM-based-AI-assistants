@@ -1,0 +1,36 @@
+{
+  "title": "Floor Plan Extraction Schema",
+  "type": "object",
+  "properties": {
+    "titleBlock": {
+      "type": "object",
+      "properties": {
+        "projectId": {"type": "string"},
+        "projectName": {"type": "string"},
+        "location": {"type": "string"},
+        "author": {"type": "string"},
+        "client": {"type": "string"},
+        "architect": {"type": "string"},
+        "engineers": {"type": "array", "items": {"type": "string"}},
+        "yearOfCompletion": {"type": "string"},
+        "approvalDate": {"type": "string"},
+        "planType": {"type": "string"},
+        "planFormat": {"type": "string"},
+        "scale": {"type": "string"},
+        "date": {"type": "string"}
+      }
+    },
+    "rooms": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "roomName": {"type": "string"},
+          "area": {"type": ["number", "null"]},
+          "adjacentRooms": {"type": "array", "items": {"type": "string"}},
+          "neighboringRooms": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    }
+  }
+}
