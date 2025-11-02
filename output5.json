@@ -1,0 +1,66 @@
+
+{
+  "titleBlock": {
+    "projectName": "Muster Beispiel 1",
+    "architect": "Butlerium GmbH",
+    "client": "Max Muster",
+    "location": "20095 Musterhausen",
+    "author": null,
+    "engineers": ["Butlerium GmbH"],
+    "yearOfCompletion": null,
+    "approvalDate": null,
+    "date": "01.01.2021",
+    "planType": "Erdgeschoss",
+    "scale": "1:100"
+  },
+  "rooms": [
+    {
+      "roomName": "GÄSTEZIMMER",
+      "area": null,
+      "adjacentRooms": ["DIELE", "ABSTELL ZIMMER"],
+      "neighboringRooms": ["DIELE", "ABSTELL ZIMMER"]
+    },
+    {
+      "roomName": "ABSTELL ZIMMER",
+      "area": null,
+      "adjacentRooms": ["GÄSTEZIMMER", "DIELE"],
+      "neighboringRooms": ["GÄSTEZIMMER", "DIELE"]
+    },
+    {
+      "roomName": "DIELE",
+      "area": null,
+      "adjacentRooms": ["GÄSTEZIMMER", "ABSTELL ZIMMER", "WOHN/ESSZIMMER"],
+      "neighboringRooms": ["GÄSTEZIMMER", "ABSTELL ZIMMER", "WOHN/ESSZIMMER", "KÜCHE"]
+    },
+    {
+      "roomName": "WOHN/ESSZIMMER",
+      "area": null,
+      "adjacentRooms": ["DIELE", "KÜCHE", "TERRASE"],
+      "neighboringRooms": ["DIELE", "KÜCHE", "TERRASE"]
+    },
+    {
+      "roomName": "KÜCHE",
+      "area": null,
+      "adjacentRooms": ["WOHN/ESSZIMMER", "DIELE"],
+      "neighboringRooms": ["WOHN/ESSZIMMER", "DIELE"]
+    },
+    {
+      "roomName": "BAD",
+      "area": null,
+      "adjacentRooms": ["HWR"],
+      "neighboringRooms": ["HWR", "DIELE"]
+    },
+    {
+      "roomName": "HWR",
+      "area": null,
+      "adjacentRooms": ["BAD"],
+      "neighboringRooms": ["BAD", "DIELE"]
+    },
+    {
+      "roomName": "TERRASE",
+      "area": null,
+      "adjacentRooms": ["WOHN/ESSZIMMER"],
+      "neighboringRooms": ["WOHN/ESSZIMMER"]
+    }
+  ]
+}

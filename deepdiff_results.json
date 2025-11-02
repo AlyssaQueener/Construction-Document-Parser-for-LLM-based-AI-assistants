@@ -1,0 +1,195 @@
+{
+  "total_fields": 35,
+  "matching_fields": 29,
+  "different_fields": 6,
+  "overall_match": false,
+  "overall_score": 82.85714285714286,
+  "titleBlock": {
+    "total": 11,
+    "matching": 11,
+    "different": 0,
+    "score": 100.0,
+    "differences": []
+  },
+  "rooms": {
+    "total": 24,
+    "matching": 18,
+    "different": 6,
+    "score": 75.0,
+    "differences": [
+      {
+        "path": "root['rooms'][0]",
+        "expected": {
+          "roomName": "GÄSTEZIMMER",
+          "area": null,
+          "adjacentRooms": [
+            "DIELE"
+          ],
+          "neighboringRooms": [
+            "DIELE",
+            "ABSTELL ZIMMER"
+          ]
+        },
+        "got": {
+          "roomName": "GÄSTEZIMMER",
+          "area": null,
+          "adjacentRooms": [
+            "DIELE",
+            "ABSTELL ZIMMER"
+          ],
+          "neighboringRooms": [
+            "DIELE",
+            "ABSTELL ZIMMER"
+          ]
+        }
+      },
+      {
+        "path": "root['rooms'][1]",
+        "expected": {
+          "roomName": "ABSTELL ZIMMER",
+          "area": null,
+          "adjacentRooms": [
+            "DIELE"
+          ],
+          "neighboringRooms": [
+            "GÄSTEZIMMER",
+            "DIELE"
+          ]
+        },
+        "got": {
+          "roomName": "ABSTELL ZIMMER",
+          "area": null,
+          "adjacentRooms": [
+            "GÄSTEZIMMER",
+            "DIELE"
+          ],
+          "neighboringRooms": [
+            "GÄSTEZIMMER",
+            "DIELE"
+          ]
+        }
+      },
+      {
+        "path": "root['rooms'][4]",
+        "expected": {
+          "roomName": "KÜCHE",
+          "area": null,
+          "adjacentRooms": [
+            "WOHN/ESSZIMMER",
+            "DIELE"
+          ],
+          "neighboringRooms": [
+            "WOHN/ESSZIMMER",
+            "DIELE",
+            "ABSTELL ZIMMER"
+          ]
+        },
+        "got": {
+          "roomName": "KÜCHE",
+          "area": null,
+          "adjacentRooms": [
+            "WOHN/ESSZIMMER",
+            "DIELE"
+          ],
+          "neighboringRooms": [
+            "WOHN/ESSZIMMER",
+            "DIELE"
+          ]
+        }
+      },
+      {
+        "path": "root['rooms'][3]",
+        "expected": {
+          "roomName": "WOHN/ESSZIMMER",
+          "area": null,
+          "adjacentRooms": [
+            "DIELE",
+            "KÜCHE",
+            "TERRASE"
+          ],
+          "neighboringRooms": [
+            "DIELE",
+            "KÜCHE",
+            "TERRASE",
+            "HWR"
+          ]
+        },
+        "got": {
+          "roomName": "WOHN/ESSZIMMER",
+          "area": null,
+          "adjacentRooms": [
+            "DIELE",
+            "KÜCHE",
+            "TERRASE"
+          ],
+          "neighboringRooms": [
+            "DIELE",
+            "KÜCHE",
+            "TERRASE"
+          ]
+        }
+      },
+      {
+        "path": "root['rooms'][6]",
+        "expected": {
+          "roomName": "HWR",
+          "area": null,
+          "adjacentRooms": [
+            "DIELE"
+          ],
+          "neighboringRooms": [
+            "BAD",
+            "DIELE",
+            "WOHN/ESSZIMMER"
+          ]
+        },
+        "got": {
+          "roomName": "HWR",
+          "area": null,
+          "adjacentRooms": [
+            "BAD"
+          ],
+          "neighboringRooms": [
+            "BAD",
+            "DIELE"
+          ]
+        }
+      },
+      {
+        "path": "root['rooms'][2]",
+        "expected": {
+          "roomName": "DIELE",
+          "area": null,
+          "adjacentRooms": [
+            "GÄSTEZIMMER",
+            "ABSTELL ZIMMER",
+            "WOHN/ESSZIMMER",
+            "HWR"
+          ],
+          "neighboringRooms": [
+            "GÄSTEZIMMER",
+            "ABSTELL ZIMMER",
+            "WOHN/ESSZIMMER",
+            "KÜCHE"
+          ]
+        },
+        "got": {
+          "roomName": "DIELE",
+          "area": null,
+          "adjacentRooms": [
+            "GÄSTEZIMMER",
+            "ABSTELL ZIMMER",
+            "WOHN/ESSZIMMER"
+          ],
+          "neighboringRooms": [
+            "GÄSTEZIMMER",
+            "ABSTELL ZIMMER",
+            "WOHN/ESSZIMMER",
+            "KÜCHE"
+          ]
+        }
+      }
+    ]
+  },
+  "diff_summary": "{'values_changed': {\"root['rooms'][0]\": {'new_value': {'roomName': 'GÄSTEZIMMER', 'area': None, 'adjacentRooms': ['DIELE', 'ABSTELL ZIMMER'], 'neighboringRooms': ['DIELE', 'ABSTELL ZIMMER']}, 'old_value': {'roomName': 'GÄSTEZIMMER', 'area': None, 'adjacentRooms': ['DIELE'], 'neighboringRooms': ['DIELE', 'ABSTELL ZIMMER']}}, \"root['rooms'][1]\": {'new_value': {'roomName': 'ABSTELL ZIMMER', 'area': None, 'adjacentRooms': ['GÄSTEZIMMER', 'DIELE'], 'neighboringRooms': ['GÄSTEZIMMER', 'DIELE']}, 'old_value': {'roomName': 'ABSTELL ZIMMER', 'area': None, 'adjacentRooms': ['DIELE'], 'neighboringRooms': ['GÄSTEZIMMER', 'DIELE']}}, \"root['rooms'][4]\": {'new_value': {'roomName': 'KÜCHE', 'area': None, 'adjacentRooms': ['WOHN/ESSZIMMER', 'DIELE'], 'neighboringRooms': ['WOHN/ESSZIMMER', 'DIELE']}, 'old_value': {'roomName': 'KÜCHE', 'area': None, 'adjacentRooms': ['WOHN/ESSZIMMER', 'DIELE'], 'neighboringRooms': ['WOHN/ESSZIMMER', 'DIELE', 'ABSTELL ZIMMER']}}, \"root['rooms'][3]\": {'new_value': {'roomName': 'WOHN/ESSZIMMER', 'area': None, 'adjacentRooms': ['DIELE', 'KÜCHE', 'TERRASE'], 'neighboringRooms': ['DIELE', 'KÜCHE', 'TERRASE']}, 'old_value': {'roomName': 'WOHN/ESSZIMMER', 'area': None, 'adjacentRooms': ['DIELE', 'KÜCHE', 'TERRASE'], 'neighboringRooms': ['DIELE', 'KÜCHE', 'TERRASE', 'HWR']}}, \"root['rooms'][6]\": {'new_value': {'roomName': 'HWR', 'area': None, 'adjacentRooms': ['BAD'], 'neighboringRooms': ['BAD', 'DIELE']}, 'old_value': {'roomName': 'HWR', 'area': None, 'adjacentRooms': ['DIELE'], 'neighboringRooms': ['BAD', 'DIELE', 'WOHN/ESSZIMMER']}}, \"root['rooms'][2]\": {'new_value': {'roomName': 'DIELE', 'area': None, 'adjacentRooms': ['GÄSTEZIMMER', 'ABSTELL ZIMMER', 'WOHN/ESSZIMMER'], 'neighboringRooms': ['GÄSTEZIMMER', 'ABSTELL ZIMMER', 'WOHN/ESSZIMMER', 'KÜCHE']}, 'old_value': {'roomName': 'DIELE', 'area': None, 'adjacentRooms': ['GÄSTEZIMMER', 'ABSTELL ZIMMER', 'WOHN/ESSZIMMER', 'HWR'], 'neighboringRooms': ['GÄSTEZIMMER', 'ABSTELL ZIMMER', 'WOHN/ESSZIMMER', 'KÜCHE']}}}}"
+}
