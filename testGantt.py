@@ -281,6 +281,7 @@ def visualize_with_matplotlib(pdf_path, gantt_chart_bars, activities_with_loc):
 
 print(visual_parser.parse_gant_chart_visual(path1))
 #print(parser.parse_gantt_chart(path2,"visual"))
+#visual_parser.parse_gant_chart_visual(path1)
     
     
 

@@ -4,7 +4,7 @@ import base64
 ## Retrieve the API key from environment variables
 #api_key = os.environ["MISTRAL_API_KEY"]
 
-model = "mistral-small-latest"
+model = "mistral-small-2503"
 api_key = "mVTgI1ELSkn5Q28v2smHK0O4E02nMaxG"
 client = Mistral(api_key=api_key)
 
@@ -33,7 +33,7 @@ Please extract the relevant information based on the examples above. Return only
 {{
     "client": "value or null",
     "creation_date": "value or null",
-    "drawing_name": "value or null",
+    "drawing_name/ plan type": "value or null",
     "project_name": "value or null",
     "location": "value or null",
     "scale": "value or null",

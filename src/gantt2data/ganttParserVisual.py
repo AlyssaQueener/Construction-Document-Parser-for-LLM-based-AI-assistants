@@ -11,6 +11,7 @@ import matplotlib.patches as patches
 from matplotlib.patches import Rectangle
 import numpy as np
 import src.gantt2data.helper as helper
+from collections import Counter
 
 
 class Task_visual(BaseModel):
@@ -299,7 +300,83 @@ def determine_start_end_of_activity(activity_timestamps):
 
     return activities_with_dates
 
+def check_bar_recognition(gantt_chart_bars):
+    print("GANTT CHART BARS:")
+    total_bars = len(gantt_chart_bars)
+    print(total_bars)
+    bar_lengths = []
+    for bar in gantt_chart_bars.values():
+        print("length of matching rectangles")
+        print(len(bar))
+        bar_lengths.append(len(bar))
+    counter = Counter(bar_lengths)
+    print(counter)
+    most_common_length, most_common_count = counter.most_common(1)[0]
+    if most_common_count/total_bars > 0.8:
+        print(most_common_count/total_bars)
+        print("bar recognition failed")
+        return False
+    return True
 
+def identify_bars_with_colours(gantt_chart_bars):
+    colors = extract_present_colours(gantt_chart_bars)
+    filter_colors = analyze_colors(colors)
+    ## 1. assumption-> most common color is background color (further possible check -> is it white /gray)
+    color_filtered_gantt_chart_bars = filter_gantt_chart_bars(gantt_chart_bars, filter_colors)
+    return color_filtered_gantt_chart_bars
+
+def filter_gantt_chart_bars(gantt_chart_bars, filter_colors):
+    color_filtered_gantt_chart_bars = {}
+    for name_activity, rectangles in gantt_chart_bars.items():
+        filtered_rects = []
+        for rect in rectangles:
+            if rect['non_stroking_color'] not in filter_colors:
+                filtered_rects.append(rect)
+        color_filtered_gantt_chart_bars[name_activity]= filtered_rects
+    return color_filtered_gantt_chart_bars
+
+
+
+def analyze_colors(colors):
+    all_colors = []
+    for activity_colors in colors.values():
+        all_colors.extend(activity_colors)
+    
+    color_counter = Counter(all_colors)
+    total_rectangles = len(all_colors)
+    
+    print(f"Color frequency analysis:")
+    for color, count in color_counter.most_common():
+        percentage = (count / total_rectangles) * 100
+        print(f"  {color}: {count} occurrences ({percentage:.1f}%)")
+
+    most_common_colors = color_counter.most_common(3)
+    filter_colors = []
+    for color in most_common_colors:
+        if is_very_bright(color[0]):
+            filter_color = color[0]
+            filter_colors.append(filter_color)
+    print("Most common color:")
+    print(most_common_colors)
+    print("Filter colors")
+    print(filter_colors)
+    #print(color_analysis)
+    return filter_colors
+
+def is_very_bright(color):
+    if color[0]> 0.7 and color[1] > 0.7 and color[2] > 0.7:
+        return True
+    else:
+        return False
+
+def extract_present_colours(gantt_chart_bars):
+    colours_of_bars = {}
+    for name_activity, rectangles in gantt_chart_bars.items():
+        colours = []
+        for rect in rectangles:
+            colours.append(rect['non_stroking_color'])
+        colours_of_bars[name_activity]= colours
+    return colours_of_bars
 
 def parse_gant_chart_visual(path):
     tolerance = 2
@@ -330,6 +407,9 @@ def parse_gant_chart_visual(path):
             activities = json.loads(mistral.call_mistral_activities(image_path))
             activities_with_loc, unfound_activites = localize_activities(activities, page)
         gantt_chart_bars = find_bars(boxes, activities_with_loc,2)
+        success = check_bar_recognition(gantt_chart_bars)
+        if not success:
+            gantt_chart_bars = identify_bars_with_colours(gantt_chart_bars)
         activity_timestamps = match_bars_with_timeline(gantt_chart_bars,time_line_with_localization)
         activites_with_dates = determine_start_end_of_activity(activity_timestamps)
         json_string = json.dumps(activites_with_dates, indent=4)
