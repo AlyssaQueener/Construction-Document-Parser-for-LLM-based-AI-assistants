@@ -1,7 +1,7 @@
 import src.plan2data.titleBlockInfo as parser
 import src.plan2data.helper as helper
 import src.validation.titleblock.validator as validator
-
+import src.validation.titleblock.llm_as_a_judge as llm_judge
 ### workflow to identify title block in floorplan and extract the keyfeatures (Keyfeatures are shown in terminal)
 
 #image_path = "examples/FloorplansAndSectionViews/bemasster-grundriss-plankopf_page1.png"
@@ -30,4 +30,5 @@ validation_path_1 = "src/validation/titleblock/testdata/floorplan-test-1.json"
 result1 = {"client": "Landesbetrieb für Straßenbau", "creation_date": '10.06.2025', 'drawing_name/ plan type': 'Grundriss Erdgeschoss', 'project_name': 'LFS Lebach - Neubau Verwaltungsgebäude', 'location': 'Schlesierallee, 66822 Lebach', 'scale': '1:100', 'architect': None}
 #validator.validate(validation_path_1, result1)
 #helper.convert_pdf2img(pdf_path)
-validator.test2(validation_path_1, result1)
+#validator.test2(validation_path_1, result1)
+print(llm_judge.llm_as_a_judge_titleblock(validation_path_1, result1))
