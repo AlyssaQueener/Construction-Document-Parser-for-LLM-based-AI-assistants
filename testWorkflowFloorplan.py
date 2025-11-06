@@ -2,7 +2,6 @@ import src.plan2data.titleBlockInfo as parser
 import src.plan2data.helper as helper
 import src.validation.titleblock.validator as validator
 
-
 ### workflow to identify title block in floorplan and extract the keyfeatures (Keyfeatures are shown in terminal)
 
 #image_path = "examples/FloorplansAndSectionViews/bemasster-grundriss-plankopf_page1.png"
