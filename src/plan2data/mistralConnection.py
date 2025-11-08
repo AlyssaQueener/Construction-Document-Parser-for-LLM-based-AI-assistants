@@ -1,11 +1,11 @@
 from mistralai import Mistral
 import base64
+import os
 
 ## Retrieve the API key from environment variables
-#api_key = os.environ["MISTRAL_API_KEY"]
+api_key = os.environ["MISTRAL_API_KEY"]
 
 model = "mistral-small-2503"
-api_key = "mVTgI1ELSkn5Q28v2smHK0O4E02nMaxG"
 client = Mistral(api_key=api_key)
 
 def call_mistral_for_content_extraction(text_title_block):

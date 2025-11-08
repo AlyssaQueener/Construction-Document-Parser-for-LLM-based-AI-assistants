@@ -160,12 +160,13 @@ async def create_upload_file_floorplans(file: UploadFile):
 
         is_succesful = False
 
-        result, method, is_succesful = floorplan_parser.get_title_block_info(file_path)
+        result, method, is_succesful, confidence = floorplan_parser.get_title_block_info(file_path)
 
 
         response = Response(
             input_format=file.content_type,  
             is_extraction_succesful= is_succesful,
+            confident_value=confidence,
             extraction_method=method,
             result=result
         )
