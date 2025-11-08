@@ -8,21 +8,15 @@ import src.plan2data.helper as helper
 def get_title_block_info(path):
     is_succesful = False
     method = "hybrid"
-    output_with_ai = extract_title_block_info_with_ai(path)
-    output_without_ai = extract_title_block_info(path)
-    final_output = compare_results(output_with_ai,output_without_ai)
-    if final_output:
+    output= json.loads(extract_title_block_info(path))
+    if output["confidence"] < 0.6:
+        print("Ai localization started")
+        output = json.loads(extract_title_block_info_with_ai(path))
+    if output["confidence"] > 0.6:
         is_succesful= True
-    json_string = json.dumps(final_output, indent=4)
+    json_string = json.dumps(output, indent=4)
     return json_string, method, is_succesful
 
-def compare_results(output_with_ai,output_without_ai):
-    ai_ouput = json.loads(output_with_ai)
-    non_ai_output = json.loads(output_without_ai)
-    for i in ai_ouput:
-        if ai_ouput[i] == None and non_ai_output[i] !=None:
-            ai_ouput[i] = non_ai_output[i]
-    return ai_ouput
 
 def extract_title_block_info(image_path):
     title_block_region = title_block.init_title_block_extraction(image_path)

@@ -13,6 +13,7 @@ from pydantic import BaseModel
 class Response(BaseModel):
     input_format: str
     is_extraction_succesful: bool
+    confident_value: float | None
     extraction_method: str
     result: str | dict | list 
 
@@ -126,7 +127,7 @@ async def create_upload_file_fin(file: UploadFile):
         
         os.remove(file_path)  
         
-        return result
+        return response
         
     except HTTPException:
         raise
@@ -159,9 +160,7 @@ async def create_upload_file_floorplans(file: UploadFile):
 
         is_succesful = False
 
-        result = {
-            "This feature": "is currently under construction"
-        }
+        result, method, is_succesful = floorplan_parser.get_title_block_info(file_path)
 
 
         response = Response(
