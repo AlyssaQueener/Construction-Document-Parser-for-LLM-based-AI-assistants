@@ -14,7 +14,7 @@ def is_number_like(text):
     text = text.strip().replace(",", ".")
     text = text.replace("\n", " ")  # Normalize multi-line blocks
     # Remove common units and symbols
-    text = re.sub(r"(m²|m|cm|°|%|\s+)", "", text, flags=re.IGNORECASE)
+    text = re.sub(r"(m²|m|cm|°|%|\s+|ca|ca.|m2| qm | og| eg| ug| nr| nr.)", "", text, flags=re.IGNORECASE)
     # Check if it's a pure number now
     try:
         float(text)
@@ -48,7 +48,31 @@ def has_more_than_one_char(s):
     s = s.strip().replace("\n", "").replace(" ", "")
     return len(s) > 2
 
- 
+def is_valid_room_name(text):
+    """
+    Room names should be at least one meaningful word.
+    """
+    text = text.strip()
+    
+    # Minimum length
+    if len(text) < 3:
+        return False
+    
+    # Common abbreviations to exclude
+    excluded = {'ca', 'ca.', 'cm', 'm²', 'm2', 'qm', 'og', 'eg', 'ug', 'nr', 'nr.', 'wc'}
+    if text.lower() in excluded:
+        return False
+    
+    # Must contain at least one letter (not just numbers/symbols)
+    if not any(c.isalpha() for c in text):
+        return False
+    
+    # Optional: Must have at least 3 letters total
+    letter_count = sum(1 for c in text if c.isalpha())
+    if letter_count < 3:
+        return False
+    
+    return True
     
 
 def are_close(e1, e2, y_thresh=10, x_thresh=40):
@@ -203,7 +227,7 @@ def print_neighbors_summary(neighbors):
     for room, room_neighbors in neighbors.items():
         print(f"{room}: {', '.join(room_neighbors)}")
 
-def save_neighbors_only(neighbors, filename="room_neighbors.json"):
+def save_neighbors_only(neighbors, filename):
     """
     Save only the neighbor information to JSON.
     """
@@ -238,7 +262,7 @@ def analyze_room_connectivity(neighbors):
     for room, count in sorted_rooms:
         print(f"  {room}: {count} connections")
 
-def process_simple_voronoi(centerpoints, filename, bounds=None):
+def process_simple_voronoi(centerpoints, filename, bounds):
     """
     Complete simple workflow for neighbor extraction and visualization.
     """
@@ -246,7 +270,8 @@ def process_simple_voronoi(centerpoints, filename, bounds=None):
         print(f"Processing {len(centerpoints)} rooms...")
         
         # Extract neighbors
-        neighbors, vor = extract_voronoi_neighbors(centerpoints)
+        #neighbors, vor = extract_voronoi_neighbors(centerpoints)
+        neighbors, vor = extract_bounded_voronoi_neighbors_detailed(centerpoints, bounds)
         
         # Save neighbors
         save_neighbors_only(neighbors,filename)
@@ -300,24 +325,167 @@ def find_path_between_rooms(neighbors, start_room, end_room):
                 queue.append((neighbor, path + [neighbor]))
     
     return None  # No path found
+def extract_bounded_voronoi_neighbors_detailed(centerpoints, bounds):
+    """
+    Detailed version that prints why each ridge is accepted/rejected.
+    """
+    if len(centerpoints) < 3:
+        raise ValueError("Need at least 3 points for Voronoi diagram")
+    
+    points = np.array([[cp[0], cp[1]] for cp in centerpoints])
+    names = [cp[2] for cp in centerpoints]
+    
+    print(f"\n=== ROOM POSITIONS ===")
+    for i, (cp, name) in enumerate(zip(centerpoints, names)):
+        print(f"{name}: ({cp[0]:.1f}, {cp[1]:.1f})")
+    
+    vor = Voronoi(points)
+    
+    x_min, y_min, x_max, y_max = bounds
+    print(f"\n=== BOUNDS ===")
+    print(f"X: {x_min:.1f} to {x_max:.1f}")
+    print(f"Y: {y_min:.1f} to {y_max:.1f}")
+    
+    neighbors_dict = defaultdict(set)
+    
+    print(f"\n=== PROCESSING RIDGES ===")
+    for ridge_idx, ridge_points in enumerate(vor.ridge_points):
+        point1_idx, point2_idx = ridge_points
+        name1 = names[point1_idx]
+        name2 = names[point2_idx]
+        
+        ridge_vertices = vor.ridge_vertices[ridge_idx]
+        
+        print(f"\n{ridge_idx}. {name1} <-> {name2}")
+        
+        if -1 in ridge_vertices:
+            print(f"   Type: INFINITE ridge")
+            # Get finite vertex
+            finite_idx = ridge_vertices[0] if ridge_vertices[1] == -1 else ridge_vertices[1]
+            if finite_idx >= 0:
+                finite_v = vor.vertices[finite_idx]
+                print(f"   Finite vertex: ({finite_v[0]:.1f}, {finite_v[1]:.1f})")
+                
+                # Check if finite vertex is in bounds
+                v_in = x_min <= finite_v[0] <= x_max and y_min <= finite_v[1] <= y_max
+                print(f"   Vertex in bounds: {v_in}")
+                
+                if v_in:
+                    neighbors_dict[name1].add(name2)
+                    neighbors_dict[name2].add(name1)
+                    print(f"   ✓ ADDED")
+                else:
+                    print(f"   ✗ REJECTED (vertex outside bounds)")
+        else:
+            print(f"   Type: FINITE ridge")
+            v1 = vor.vertices[ridge_vertices[0]]
+            v2 = vor.vertices[ridge_vertices[1]]
+            
+            print(f"   Vertex 1: ({v1[0]:.1f}, {v1[1]:.1f})")
+            print(f"   Vertex 2: ({v2[0]:.1f}, {v2[1]:.1f})")
+            
+            v1_in = x_min <= v1[0] <= x_max and y_min <= v1[1] <= y_max
+            v2_in = x_min <= v2[0] <= x_max and y_min <= v2[1] <= y_max
+            
+            midpoint_x = (v1[0] + v2[0]) / 2
+            midpoint_y = (v1[1] + v2[1]) / 2
+            mid_in = x_min <= midpoint_x <= x_max and y_min <= midpoint_y <= y_max
+            
+            print(f"   V1 in bounds: {v1_in}, V2 in bounds: {v2_in}")
+            print(f"   Midpoint: ({midpoint_x:.1f}, {midpoint_y:.1f}), in bounds: {mid_in}")
+            
+            # Accept if midpoint is in bounds OR if any vertex is in bounds
+            if mid_in or v1_in or v2_in:
+                neighbors_dict[name1].add(name2)
+                neighbors_dict[name2].add(name1)
+                print(f"   ✓ ADDED")
+            else:
+                print(f"   ✗ REJECTED (all points outside bounds)")
+    
+    neighbors = {name: sorted(list(neighs)) for name, neighs in neighbors_dict.items()}
+    return neighbors, vor
+
+def line_intersects_rect(p1, p2, bounds):
+    """
+    Check if a line segment (p1, p2) intersects with or is inside a rectangle.
+    
+    Args:
+        p1, p2: Line segment endpoints [x, y]
+        bounds: (x_min, y_min, x_max, y_max)
+    
+    Returns:
+        bool: True if line intersects or is inside bounds
+    """
+    x_min, y_min, x_max, y_max = bounds
+    x1, y1 = p1
+    x2, y2 = p2
+    
+    # Check if either endpoint is inside bounds
+    p1_inside = x_min <= x1 <= x_max and y_min <= y1 <= y_max
+    p2_inside = x_min <= x2 <= x_max and y_min <= y2 <= y_max
+    
+    if p1_inside or p2_inside:
+        return True
+    
+    # Liang-Barsky algorithm for line-rectangle intersection
+    dx = x2 - x1
+    dy = y2 - y1
+    
+    t_min = 0.0
+    t_max = 1.0
+    
+    # Check against all four bounds
+    p = [-dx, dx, -dy, dy]
+    q = [x1 - x_min, x_max - x1, y1 - y_min, y_max - y1]
+    
+    for i in range(4):
+        if p[i] == 0:
+            # Line is parallel to this bound
+            if q[i] < 0:
+                return False  # Line is outside
+        else:
+            t = q[i] / p[i]
+            if p[i] < 0:
+                t_min = max(t_min, t)
+            else:
+                t_max = min(t_max, t)
+            
+            if t_min > t_max:
+                return False
+    
+    return True
+   
 
 
 
 if __name__=="__main__":
+    # Change to the project root directory
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.dirname(os.path.dirname(script_dir))
+    os.chdir(project_root)
     #pdf_path = "examples/FloorplansAndSectionViews/bemasster-grundriss-plankopf.pdf"
     #pdf_path= "examples/FloorplansAndSectionViews/BasicTestPlan.pdf"
-    pdf_path = "examples/FloorplansAndSectionViews/eg-musterplan-1-50_2023 (1).pdf"
+    #pdf_path = "examples/FloorplansAndSectionViews/GrundrissEG_2022_web.pdf"
+    pdf_path = "examples/FloorplansAndSectionViews/2d-grundriss-wohnflaeche.pdf"
 
+    # NAMING convention of output files 
     filename = os.path.splitext(os.path.basename(pdf_path))[0]
     json_path = f'output/Floorplan/Neighbouring rooms/{filename}_neighbouring_rooms.json'
-
+    output_filename= f'output/Floorplan/Neighbouring rooms/{filename}_textbboxes_rooms.json'
+    output_PDF = f'output/Floorplan/Neighbouring rooms/{filename}_clipped_debug_filltered.pdf'
     
     doc = fitz.open(pdf_path)
 
     page = doc[0]
     # clip rectangle to exclude plan information -> using fitz.Rect(x0, y0, x1, y1) where x0,yo is top left corner and x1,y1 is bottom right corner
     width,height = page.rect.width, page.rect.height
-    clip_rect = fitz.Rect(0, 0, width * 0.8, height * 0.8)
+    clip_rect = fitz.Rect(0, 0, width * 0.72, height * 0.8)
+    flipped_rect =(
+        clip_rect.x0,                    # x_min stays the same
+        height - clip_rect.y1,           # y_min (flip the bottom of clip_rect)
+        clip_rect.x1,                    # x_max stays the same
+        height - clip_rect.y0            # y_max (flip the top of clip_rect)
+    )
     page.add_rect_annot(clip_rect)
 
     # Save to a debug file
@@ -328,17 +496,18 @@ if __name__=="__main__":
 
     # WORKING WITH WORD EXTRACTION
     filtered_bbox_number = [entry for entry in bbox if not is_number_like(entry[4])]
-    filtered_bbox_string = [entry for entry in filtered_bbox_number if has_more_than_one_char(entry[4])]
+    filtered_bbox_string_1 = [entry for entry in filtered_bbox_number if is_valid_room_name(entry[4])]
+    filtered_bbox_string = [entry for entry in filtered_bbox_string_1 if has_more_than_one_char(entry[4])]
     combined_bbox = combine_close_words(filtered_bbox_string)
 
-    for entry in filtered_bbox_string:
+    for entry in combined_bbox:
         x0, y0, x1, y1 = entry[0], entry[1], entry[2], entry[3]
         rect= fitz.Rect(x0, y0, x1, y1)
         page.add_rect_annot(rect)
         
-    doc.save("clipped_debug_filltered.pdf")
+    doc.save(output_PDF)
 
-    output_filename= "textbboxes_rooms"
+
     with open(output_filename, 'w', encoding='utf-8') as f:
                 json.dump(combined_bbox,f, indent=2, ensure_ascii=False)
                 print(f"Successfully saved extracted JSON to '{output_filename}'")
@@ -356,5 +525,6 @@ if __name__=="__main__":
     # create voronoi polygons around the center points 
     page_width, page_height = page.rect.width, page.rect.height
     flipped_centerpoints = flip_y_coordinates(centerpoints,page_height)
-    voronoi_polygons =process_simple_voronoi(flipped_centerpoints,json_path)
+    #voronoi_polygons = extract_bounded_voronoi_neighbors_detailed(flipped_centerpoints, flipped_rect)
+    voronoi_polygons =process_simple_voronoi(flipped_centerpoints,json_path, flipped_rect)
 
