@@ -7,10 +7,11 @@ import src.plan2data.helper as helper
 
 ### workflow to identify title block in floorplan and extract the keyfeatures (Keyfeatures are shown in terminal)
 def get_title_block_info(path):
-    output_with_ai = extract_title_block_info_with_ai(path)
-    output_without_ai = extract_title_block_info(path)
-    final_output = compare_results(output_with_ai,output_without_ai)
-    return final_output
+    output= json.loads(extract_title_block_info(path))
+    if output["confidence"] < 0.6:
+        print("Ai localization started")
+        output = extract_title_block_info_with_ai(path)
+    return output
 
 def compare_results(output_with_ai,output_without_ai):
     ai_ouput = json.loads(output_with_ai)

@@ -162,7 +162,7 @@ def extract_text_titleblock(image_path, titleblock_region):
     x, y, w, h = titleblock_region['x'], titleblock_region['y'], titleblock_region['width'], titleblock_region['height']
     titleblock = image_rgb[y:y+h, x:x+w]
     text_title_block = pytesseract.image_to_string(titleblock)
-    print(text_title_block)
+    #print(text_title_block)
     return text_title_block
 
 def save_image_of_titleblock_and_floorplan(image_path, titleblock_region, output_path_titleblock, output_path_floorplan):

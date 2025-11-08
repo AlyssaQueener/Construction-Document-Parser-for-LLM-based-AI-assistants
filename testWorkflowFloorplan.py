@@ -24,11 +24,6 @@ validation_path_1 = "src/validation/titleblock/testdata/floorplan-test-1.json"
 
 #print(mistral_response_content)
 
-#result = parser.get_title_block_info(image_path_1)
-#print(result)
-#print(type(result))
-result1 = {"client": "Landesbetrieb für Straßenbau", "creation_date": '10.06.2025', 'drawing_name/ plan type': 'Grundriss Erdgeschoss', 'project_name': 'LFS Lebach - Neubau Verwaltungsgebäude', 'location': 'Schlesierallee, 66822 Lebach', 'scale': '1:100', 'architect': None}
-#validator.validate(validation_path_1, result1)
-#helper.convert_pdf2img(pdf_path)
-#validator.test2(validation_path_1, result1)
-print(llm_judge.llm_as_a_judge_titleblock(validation_path_1, result1))
+result = parser.get_title_block_info(image_path_1)
+print(result)
+
