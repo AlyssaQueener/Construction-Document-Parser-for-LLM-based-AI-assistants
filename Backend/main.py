@@ -35,9 +35,9 @@ Please use the parameter chartFormat
 "visual": for charts where activity timing must be inferred from bar positions (with activities on the left and a timeline above)
 "tabular": for charts that include a structured table with explicit start, end, and duration fields
 
-## Program Parser
+## Drawing Parser
 
-upload and parse **Floor Plans and Section Views**.
+upload and parse **Floor Plans**.
 """
 
 
