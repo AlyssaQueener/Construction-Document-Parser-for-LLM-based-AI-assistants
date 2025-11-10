@@ -1,0 +1,36 @@
+{
+  "WOHNEN": [
+    "BAD",
+    "FLUR",
+    "SCHLAFEN"
+  ],
+  "FLUR": [
+    "BAD",
+    "BALKON",
+    "KÜCHE",
+    "SCHLAFEN",
+    "WOHNEN"
+  ],
+  "SCHLAFEN": [
+    "BALKON",
+    "FLUR",
+    "WOHNEN"
+  ],
+  "BAD": [
+    "BALKON",
+    "FLUR",
+    "KÜCHE",
+    "WOHNEN"
+  ],
+  "BALKON": [
+    "BAD",
+    "FLUR",
+    "KÜCHE",
+    "SCHLAFEN"
+  ],
+  "KÜCHE": [
+    "BAD",
+    "BALKON",
+    "FLUR"
+  ]
+}

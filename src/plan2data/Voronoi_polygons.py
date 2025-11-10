@@ -14,7 +14,7 @@ def is_number_like(text):
     text = text.strip().replace(",", ".")
     text = text.replace("\n", " ")  # Normalize multi-line blocks
     # Remove common units and symbols
-    text = re.sub(r"(m²|m|cm|°|%|\s+)", "", text, flags=re.IGNORECASE)
+    text = re.sub(r"(m²|m|cm|°|%|\s+|ca|ca.|m2| qm | og| eg| ug| nr| nr.)", "", text, flags=re.IGNORECASE)
     # Check if it's a pure number now
     try:
         float(text)
@@ -48,7 +48,31 @@ def has_more_than_one_char(s):
     s = s.strip().replace("\n", "").replace(" ", "")
     return len(s) > 2
 
- 
+def is_valid_room_name(text):
+    """
+    Room names should be at least one meaningful word.
+    """
+    text = text.strip()
+    
+    # Minimum length
+    if len(text) < 3:
+        return False
+    
+    # Common abbreviations to exclude
+    excluded = {'ca', 'ca.', 'cm', 'm²', 'm2', 'qm', 'og', 'eg', 'ug', 'nr', 'nr.', 'wc'}
+    if text.lower() in excluded:
+        return False
+    
+    # Must contain at least one letter (not just numbers/symbols)
+    if not any(c.isalpha() for c in text):
+        return False
+    
+    # Optional: Must have at least 3 letters total
+    letter_count = sum(1 for c in text if c.isalpha())
+    if letter_count < 3:
+        return False
+    
+    return True
     
 
 def are_close(e1, e2, y_thresh=10, x_thresh=40):
@@ -126,44 +150,6 @@ def flip_y_coordinates(centerpoints, page_height):
     return flipped_centerpoints
 
 
-def extract_voronoi_neighbors(centerpoints):
-    """
-    Extract only neighbor relationships from Voronoi diagram.
-    
-    Args:
-        centerpoints: List of [cx, cy, name] coordinates
-    
-    Returns:
-        dict: Dictionary with room names as keys and lists of neighbors as values
-    """
-    if len(centerpoints) < 3:
-        raise ValueError("Need at least 3 points for Voronoi diagram")
-    
-    # Extract coordinates and names
-    points = np.array([[cp[0], cp[1]] for cp in centerpoints])
-    names = [cp[2] for cp in centerpoints]
-    
-    # Create Voronoi diagram
-    vor = Voronoi(points)
-    
-    # Find neighbors
-    neighbors_dict = defaultdict(set)
-    
-    # Process ridge information (connections between regions)
-    for ridge in vor.ridge_points:
-        point1_idx, point2_idx = ridge
-        name1 = names[point1_idx]
-        name2 = names[point2_idx]
-        
-        # Add to neighbors
-        neighbors_dict[name1].add(name2)
-        neighbors_dict[name2].add(name1)
-    
-    # Convert to regular dict with sorted lists
-    neighbors = {name: sorted(list(neighbors)) for name, neighbors in neighbors_dict.items()}
-    
-    return neighbors, vor
-
 def visualize_voronoi_cells(vor, centerpoints, neighbors, save_path=None):
     """
     Simple visualization of Voronoi cells with room labels.
@@ -203,7 +189,7 @@ def print_neighbors_summary(neighbors):
     for room, room_neighbors in neighbors.items():
         print(f"{room}: {', '.join(room_neighbors)}")
 
-def save_neighbors_only(neighbors, filename="room_neighbors.json"):
+def save_neighbors_only(neighbors, filename):
     """
     Save only the neighbor information to JSON.
     """
@@ -238,7 +224,98 @@ def analyze_room_connectivity(neighbors):
     for room, count in sorted_rooms:
         print(f"  {room}: {count} connections")
 
-def process_simple_voronoi(centerpoints, filename, bounds=None):
+
+
+def extract_bounded_voronoi_neighbors_detailed(centerpoints, bounds):
+    """
+    Detailed version that prints why each ridge is accepted/rejected.
+      Args:
+        centerpoints of bboxes of identified textboxes which qualify as room names
+        bounds of the floorplan
+    
+    Returns:
+        neighbors: list of neighbours 
+        voronoi cells of rooms         
+
+    """
+    if len(centerpoints) < 3:
+        raise ValueError("Need at least 3 points for Voronoi diagram")
+    
+    points = np.array([[cp[0], cp[1]] for cp in centerpoints])
+    names = [cp[2] for cp in centerpoints]
+    
+    print(f"\n=== ROOM POSITIONS ===")
+    for i, (cp, name) in enumerate(zip(centerpoints, names)):
+        print(f"{name}: ({cp[0]:.1f}, {cp[1]:.1f})")
+    
+    vor = Voronoi(points)
+    
+    x_min, y_min, x_max, y_max = bounds
+    #print(f"\n=== BOUNDS ===")
+    #print(f"X: {x_min:.1f} to {x_max:.1f}")
+    #print(f"Y: {y_min:.1f} to {y_max:.1f}")
+    
+    neighbors_dict = defaultdict(set)
+    
+    print(f"\n=== PROCESSING RIDGES ===")
+    for ridge_idx, ridge_points in enumerate(vor.ridge_points):
+        point1_idx, point2_idx = ridge_points
+        name1 = names[point1_idx]
+        name2 = names[point2_idx]
+        
+        ridge_vertices = vor.ridge_vertices[ridge_idx]
+        
+        #print(f"\n{ridge_idx}. {name1} <-> {name2}")
+        
+        if -1 in ridge_vertices:
+            #print(f"   Type: INFINITE ridge")
+            # Get finite vertex
+            finite_idx = ridge_vertices[0] if ridge_vertices[1] == -1 else ridge_vertices[1]
+            if finite_idx >= 0:
+                finite_v = vor.vertices[finite_idx]
+                #print(f"   Finite vertex: ({finite_v[0]:.1f}, {finite_v[1]:.1f})")
+                
+                # Check if finite vertex is in bounds
+                v_in = x_min <= finite_v[0] <= x_max and y_min <= finite_v[1] <= y_max
+                #print(f"   Vertex in bounds: {v_in}")
+                
+                if v_in:
+                    neighbors_dict[name1].add(name2)
+                    neighbors_dict[name2].add(name1)
+                    print(f"   ✓ ADDED")
+                else:
+                    print(f"   ✗ REJECTED (vertex outside bounds)")
+        else:
+           # print(f"   Type: FINITE ridge")
+            v1 = vor.vertices[ridge_vertices[0]]
+            v2 = vor.vertices[ridge_vertices[1]]
+            
+            #print(f"   Vertex 1: ({v1[0]:.1f}, {v1[1]:.1f})")
+            #print(f"   Vertex 2: ({v2[0]:.1f}, {v2[1]:.1f})")
+            
+            v1_in = x_min <= v1[0] <= x_max and y_min <= v1[1] <= y_max
+            v2_in = x_min <= v2[0] <= x_max and y_min <= v2[1] <= y_max
+            
+            midpoint_x = (v1[0] + v2[0]) / 2
+            midpoint_y = (v1[1] + v2[1]) / 2
+            mid_in = x_min <= midpoint_x <= x_max and y_min <= midpoint_y <= y_max
+            
+            #print(f"   V1 in bounds: {v1_in}, V2 in bounds: {v2_in}")
+            #print(f"   Midpoint: ({midpoint_x:.1f}, {midpoint_y:.1f}), in bounds: {mid_in}")
+            
+            # Accept if midpoint is in bounds OR if any vertex is in bounds
+            if mid_in or v1_in or v2_in:
+                neighbors_dict[name1].add(name2)
+                neighbors_dict[name2].add(name1)
+                print(f"   ✓ ADDED")
+            else:
+                print(f"   ✗ REJECTED (all points outside bounds)")
+    
+    neighbors = {name: sorted(list(neighs)) for name, neighs in neighbors_dict.items()} 
+    return neighbors, vor
+
+
+def process_simple_voronoi(centerpoints, filename, bounds):
     """
     Complete simple workflow for neighbor extraction and visualization.
     """
@@ -246,7 +323,8 @@ def process_simple_voronoi(centerpoints, filename, bounds=None):
         print(f"Processing {len(centerpoints)} rooms...")
         
         # Extract neighbors
-        neighbors, vor = extract_voronoi_neighbors(centerpoints)
+        #neighbors, vor = extract_voronoi_neighbors(centerpoints)
+        neighbors, vor = extract_bounded_voronoi_neighbors_detailed(centerpoints, bounds)
         
         # Save neighbors
         save_neighbors_only(neighbors,filename)
@@ -266,58 +344,34 @@ def process_simple_voronoi(centerpoints, filename, bounds=None):
         print(f"Error processing Voronoi: {e}")
         return None, None
 
-def get_room_neighbors(neighbors, room_name):
-    """
-    Get neighbors of a specific room.
-    """
-    return neighbors.get(room_name, [])
-
-def find_path_between_rooms(neighbors, start_room, end_room):
-    """
-    Find if there's a direct connection or path between two rooms.
-    """
-    if start_room not in neighbors or end_room not in neighbors:
-        return None
-    
-    if end_room in neighbors[start_room]:
-        return [start_room, end_room]  # Direct connection
-    
-    # Simple breadth-first search for shortest path
-    from collections import deque
-    
-    queue = deque([(start_room, [start_room])])
-    visited = {start_room}
-    
-    while queue:
-        current_room, path = queue.popleft()
-        
-        for neighbor in neighbors[current_room]:
-            if neighbor == end_room:
-                return path + [neighbor]
-            
-            if neighbor not in visited:
-                visited.add(neighbor)
-                queue.append((neighbor, path + [neighbor]))
-    
-    return None  # No path found
-
-
-
 if __name__=="__main__":
+    # Change to the project root directory
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.dirname(os.path.dirname(script_dir))
+    os.chdir(project_root)
     #pdf_path = "examples/FloorplansAndSectionViews/bemasster-grundriss-plankopf.pdf"
     #pdf_path= "examples/FloorplansAndSectionViews/BasicTestPlan.pdf"
-    pdf_path = "examples/FloorplansAndSectionViews/eg-musterplan-1-50_2023 (1).pdf"
+    #pdf_path = "examples/FloorplansAndSectionViews/GrundrissEG_2022_web.pdf"
+    pdf_path = "examples/FloorplansAndSectionViews/2d-grundriss-wohnflaeche.pdf"
 
+    # NAMING convention of output files 
     filename = os.path.splitext(os.path.basename(pdf_path))[0]
     json_path = f'output/Floorplan/Neighbouring rooms/{filename}_neighbouring_rooms.json'
-
+    output_filename= f'output/Floorplan/Neighbouring rooms/{filename}_textbboxes_rooms.json'
+    output_PDF = f'output/Floorplan/Neighbouring rooms/{filename}_clipped_debug_filltered.pdf'
     
     doc = fitz.open(pdf_path)
 
     page = doc[0]
     # clip rectangle to exclude plan information -> using fitz.Rect(x0, y0, x1, y1) where x0,yo is top left corner and x1,y1 is bottom right corner
     width,height = page.rect.width, page.rect.height
-    clip_rect = fitz.Rect(0, 0, width * 0.8, height * 0.8)
+    clip_rect = fitz.Rect(0, 0, width * 0.72, height * 0.8)
+    flipped_rect =(
+        clip_rect.x0,                    # x_min stays the same
+        height - clip_rect.y1,           # y_min (flip the bottom of clip_rect)
+        clip_rect.x1,                    # x_max stays the same
+        height - clip_rect.y0            # y_max (flip the top of clip_rect)
+    )
     page.add_rect_annot(clip_rect)
 
     # Save to a debug file
@@ -328,17 +382,18 @@ if __name__=="__main__":
 
     # WORKING WITH WORD EXTRACTION
     filtered_bbox_number = [entry for entry in bbox if not is_number_like(entry[4])]
-    filtered_bbox_string = [entry for entry in filtered_bbox_number if has_more_than_one_char(entry[4])]
+    filtered_bbox_string_1 = [entry for entry in filtered_bbox_number if is_valid_room_name(entry[4])]
+    filtered_bbox_string = [entry for entry in filtered_bbox_string_1 if has_more_than_one_char(entry[4])]
     combined_bbox = combine_close_words(filtered_bbox_string)
 
-    for entry in filtered_bbox_string:
+    for entry in combined_bbox:
         x0, y0, x1, y1 = entry[0], entry[1], entry[2], entry[3]
         rect= fitz.Rect(x0, y0, x1, y1)
         page.add_rect_annot(rect)
         
-    doc.save("clipped_debug_filltered.pdf")
+    doc.save(output_PDF)
 
-    output_filename= "textbboxes_rooms"
+
     with open(output_filename, 'w', encoding='utf-8') as f:
                 json.dump(combined_bbox,f, indent=2, ensure_ascii=False)
                 print(f"Successfully saved extracted JSON to '{output_filename}'")
@@ -356,5 +411,6 @@ if __name__=="__main__":
     # create voronoi polygons around the center points 
     page_width, page_height = page.rect.width, page.rect.height
     flipped_centerpoints = flip_y_coordinates(centerpoints,page_height)
-    voronoi_polygons =process_simple_voronoi(flipped_centerpoints,json_path)
+    #voronoi_polygons = extract_bounded_voronoi_neighbors_detailed(flipped_centerpoints, flipped_rect)
+    voronoi_polygons =process_simple_voronoi(flipped_centerpoints,json_path, flipped_rect)
 

@@ -262,3 +262,5 @@ rever/
 conda/_version.py
 
 .conda/
+
+.conda

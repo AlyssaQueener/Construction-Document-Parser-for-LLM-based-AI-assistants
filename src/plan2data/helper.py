@@ -66,7 +66,7 @@ def convert_pdf2img(input_file: str, pages: Tuple = None):
         # The zoom factor is equal to 2 in order to make text clear
         # Pre-rotate is to rotate if needed.
         mat = pymupdf.Matrix(zoom_x, zoom_y).prerotate(rotate)
-        pix = page.get_pixmap(matrix=mat, alpha=False)
+        pix = page.get_pixmap(dpi=300)
         output_file = f"{os.path.splitext(os.path.basename(input_file))[0]}_page{pg+1}.png"
         pix.save(output_file)
         output_files.append(output_file)

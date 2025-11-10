@@ -1,11 +1,16 @@
 import src.plan2data.titleBlockInfo as parser
-
-
+import src.plan2data.helper as helper
+import src.validation.titleblock.validator as validator
+import src.validation.titleblock.llm_as_a_judge as llm_judge
 ### workflow to identify title block in floorplan and extract the keyfeatures (Keyfeatures are shown in terminal)
 
 #image_path = "examples/FloorplansAndSectionViews/bemasster-grundriss-plankopf_page1.png"
 #image_path = "examples/FloorplansAndSectionViews/floorplan1.png"
-image_path = "examples/FloorplansAndSectionViews/floorplan2.png"
+image_path = "src/validation/titleblock/testdata/floorplan-test_page1.png"
+image_path_1 = "src/validation/titleblock/testdata/floorplan-test-1_page1.png"
+image_path_2 = "src/validation/titleblock/testdata/floorplan-test-2_page1.png"
+
+validation_path_1 = "src/validation/titleblock/testdata/floorplan-test-1.json"
 
 #mistral_response = mistral.call_mistral_for_titleblock_location(image_path)
 #print("Ai title block localization:")
@@ -19,5 +24,6 @@ image_path = "examples/FloorplansAndSectionViews/floorplan2.png"
 
 #print(mistral_response_content)
 
-print(parser.get_title_block_info(image_path))
+result = parser.get_title_block_info(image_path_1)
+print(result)
 
