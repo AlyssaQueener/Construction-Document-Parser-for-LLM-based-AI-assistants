@@ -1,4 +1,5 @@
 from typing import Union
+from fastapi.middleware.cors import CORSMiddleware
 
 from fastapi import FastAPI, UploadFile, HTTPException
 from PIL import Image 
@@ -47,8 +48,17 @@ app = FastAPI(
     description=description
 )
 
+
 ## after installation of fastapi run -- fastapi dev main.py -- in terminal to start server locally 
 ## go to http://127.0.0.1:8000/docs to view the automatically created api docs
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 async def hello_world():
