@@ -361,7 +361,10 @@ if __name__=="__main__":
     #pdf_path = "examples/FloorplansAndSectionViews/GrundrissEG_2022_web.pdf"
     #pdf_path = "examples/FloorplansAndSectionViews/2d-grundriss-wohnflaeche.pdf"
     #pdf_path = "examples/FloorplansAndSectionViews/GrundrissEG_2022_web.pdf"
-    pdf_path = "examples/FloorplansAndSectionViews/modern-stilt-house.pdf"
+    #pdf_path = "examples/FloorplansAndSectionViews/modern-stilt-house.pdf"
+
+    pdf_path = "examples/FloorplansAndSectionViews/Simple Floorplan/04_Simple.pdf"
+
 
     # NAMING convention of output files 
     filename = os.path.splitext(os.path.basename(pdf_path))[0]

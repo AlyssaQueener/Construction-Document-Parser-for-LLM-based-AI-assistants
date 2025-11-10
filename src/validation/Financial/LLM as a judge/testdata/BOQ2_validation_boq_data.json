@@ -1,0 +1,202 @@
+[
+  {
+    "Section Title": "05: EXCAVATING AND FILLING",
+    "Subsections": [
+      {
+        "Subsection Title": "05.10 SITE CLEARANCE/PREPARATION",
+        "Items": [
+          {
+            "Item Number": "1",
+            "Item Description": "Removing trees girth 0.60 - 1.50: filling voids with selected material arising from excavation",
+            "Unit": "nr",
+            "Quantity": "3",
+            "Rate": null,
+            "Amount": null,
+            "Currency": null
+          },
+          {
+            "Item Number": "2",
+            "Item Description": "Removing tree stumps girth 0.60 - 1.50: filling voids with selected material arising from excavation",
+            "Unit": "nr",
+            "Quantity": "3",
+            "Rate": null,
+            "Amount": null,
+            "Currency": null
+          }
+        ]
+      },
+      {
+        "Subsection Title": "05.20 EXCAVATIONS",
+        "Items": [
+          {
+            "Item Number": "3",
+            "Item Description": "To reduce levels maximum depth not exceeding 1.00m",
+            "Unit": "m³",
+            "Quantity": "863",
+            "Rate": null,
+            "Amount": null,
+            "Currency": null
+          },
+          {
+            "Item Number": "4",
+            "Item Description": "To reduce levels maximum depth not exceeding 1.00m for formation level including blinds and insulation",
+            "Unit": "m³",
+            "Quantity": "825",
+            "Rate": null,
+            "Amount": null,
+            "Currency": null
+          },
+          {
+            "Item Number": "5",
+            "Item Description": "Basements and the like: commencing level from reduce level: 59.320m maximum depth not exceeding 2.00m",
+            "Unit": "m³",
+            "Quantity": "1100",
+            "Rate": null,
+            "Amount": null,
+            "Currency": null
+          },
+          {
+            "Item Number": "6",
+            "Item Description": "For pile caps and ground beams between piles not exceeding 2.00m : commencing from reduce level: 59.32m",
+            "Unit": "m³",
+            "Quantity": "655",
+            "Rate": null,
+            "Amount": null,
+            "Currency": null
+          },
+          {
+            "Item Number": "7",
+            "Item Description": "For pile caps and ground beams between piles not exceeding 2.00m : commencing from reduce level: 61.1m",
+            "Unit": "m³",
+            "Quantity": "274",
+            "Rate": null,
+            "Amount": null,
+            "Currency": null
+          },
+          {
+            "Item Number": "8",
+            "Item Description": "For pile caps and ground beams between piles not exceeding 2.00m : commencing from reduce level:57.82m",
+            "Unit": "m³",
+            "Quantity": "57",
+            "Rate": null,
+            "Amount": null,
+            "Currency": null
+          },
+          {
+            "Item Number": "9",
+            "Item Description": "For pile caps and ground beams between piles not exceeding 2.00m : commencing from reducelevel:58.27m ",
+            "Unit": null,
+            "Quantity": null,
+            "Rate": null,
+            "Amount": null,
+            "Currency": null
+          },
+          {
+            "Item Number": "10",
+            "Item Description": "Foundation excavation: commencing from reduce level: 60.61m maximum depth not exceeding 1.00m",
+            "Unit": "m³",
+            "Quantity": "155",
+            "Rate": null,
+            "Amount": null,
+            "Currency": null
+          },
+          {
+            "Item Number": "11",
+            "Item Description": "Extra over excavation irrespective of depth for excavating (Approximate Quantity) next existing drainage service",
+            "Unit": "m",
+            "Quantity": "180",
+            "Rate": null,
+            "Amount": null,
+            "Currency": null
+          },
+          {
+            "Item Number": "12",
+            "Item Description": "Extra over excavation irrespective of depth for excavating (Approximate Quantity) around existing services crossing excavation",
+            "Unit": "nr",
+            "Quantity": "50",
+            "Rate": null,
+            "Amount": null,
+            "Currency": null
+          },
+          {
+            "Item Number": "13",
+            "Item Description": "Extra over excavation irrespective of depth for excavating: breaking out existing materials (Approximate Quantity) concrete",
+            "Unit": "m³",
+            "Quantity": "636",
+            "Rate": null,
+            "Amount": null,
+            "Currency": null
+          },
+          {
+            "Item Number": "14",
+            "Item Description": "Extra over excavation irrespective of depth for excavating: breaking out existing materials (Approximate Quantity) coated macadam or asphalt: 250 thick",
+            "Unit": "m²",
+            "Quantity": "7450",
+            "Rate": null,
+            "Amount": null,
+            "Currency": null
+          },
+          {
+            "Item Number": "15",
+            "Item Description": "Working space allowance to excavations: including additional earthwork support, disposal and backfilling pits",
+            "Unit": "m²",
+            "Quantity": "2035",
+            "Rate": null,
+            "Amount": null,
+            "Currency": null
+          },
+          {
+            "Item Number": "16",
+            "Item Description": "Earthwork support to faces of excavation maximum depth not exceeding 2.00 m",
+            "Unit": "m²",
+            "Quantity": "1945",
+            "Rate": null,
+            "Amount": null,
+            "Currency": null
+          },
+          {
+            "Item Number": "17",
+            "Item Description": "Earthwork support to faces of excavation maximum depth not exceeding 4.00 m",
+            "Unit": "m²",
+            "Quantity": "224",
+            "Rate": null,
+            "Amount": null,
+            "Currency": null
+          },
+          {
+            "Item Number": "18",
+            "Item Description": "Contractors design supports to contractors proposal 05.30 DISPOSAL Surface water",
+            "Unit": "m",
+            "Quantity": "42",
+            "Rate": null,
+            "Amount": null,
+            "Currency": null
+          }
+        ]
+      },
+      {
+        "Subsection Title": "05.30 DISPOSAL",
+        "Items": [
+          {
+            "Item Number": "19",
+            "Item Description": "Surface water generally",
+            "Unit": null,
+            "Quantity": null,
+            "Rate": "Item",
+            "Amount": null,
+            "Currency": null
+          },
+          {
+            "Item Number": "20",
+            "Item Description": "Ground water generally",
+            "Unit": null,
+            "Quantity": null,
+            "Rate": "Item",
+            "Amount": null,
+            "Currency": null
+          }
+        ]
+      }
+    ]
+  }
+]
