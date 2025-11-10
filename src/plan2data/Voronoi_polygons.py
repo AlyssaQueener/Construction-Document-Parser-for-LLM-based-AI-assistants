@@ -150,44 +150,6 @@ def flip_y_coordinates(centerpoints, page_height):
     return flipped_centerpoints
 
 
-def extract_voronoi_neighbors(centerpoints):
-    """
-    Extract only neighbor relationships from Voronoi diagram.
-    
-    Args:
-        centerpoints: List of [cx, cy, name] coordinates
-    
-    Returns:
-        dict: Dictionary with room names as keys and lists of neighbors as values
-    """
-    if len(centerpoints) < 3:
-        raise ValueError("Need at least 3 points for Voronoi diagram")
-    
-    # Extract coordinates and names
-    points = np.array([[cp[0], cp[1]] for cp in centerpoints])
-    names = [cp[2] for cp in centerpoints]
-    
-    # Create Voronoi diagram
-    vor = Voronoi(points)
-    
-    # Find neighbors
-    neighbors_dict = defaultdict(set)
-    
-    # Process ridge information (connections between regions)
-    for ridge in vor.ridge_points:
-        point1_idx, point2_idx = ridge
-        name1 = names[point1_idx]
-        name2 = names[point2_idx]
-        
-        # Add to neighbors
-        neighbors_dict[name1].add(name2)
-        neighbors_dict[name2].add(name1)
-    
-    # Convert to regular dict with sorted lists
-    neighbors = {name: sorted(list(neighbors)) for name, neighbors in neighbors_dict.items()}
-    
-    return neighbors, vor
-
 def visualize_voronoi_cells(vor, centerpoints, neighbors, save_path=None):
     """
     Simple visualization of Voronoi cells with room labels.
@@ -262,6 +224,97 @@ def analyze_room_connectivity(neighbors):
     for room, count in sorted_rooms:
         print(f"  {room}: {count} connections")
 
+
+
+def extract_bounded_voronoi_neighbors_detailed(centerpoints, bounds):
+    """
+    Detailed version that prints why each ridge is accepted/rejected.
+      Args:
+        centerpoints of bboxes of identified textboxes which qualify as room names
+        bounds of the floorplan
+    
+    Returns:
+        neighbors: list of neighbours 
+        voronoi cells of rooms         
+
+    """
+    if len(centerpoints) < 3:
+        raise ValueError("Need at least 3 points for Voronoi diagram")
+    
+    points = np.array([[cp[0], cp[1]] for cp in centerpoints])
+    names = [cp[2] for cp in centerpoints]
+    
+    print(f"\n=== ROOM POSITIONS ===")
+    for i, (cp, name) in enumerate(zip(centerpoints, names)):
+        print(f"{name}: ({cp[0]:.1f}, {cp[1]:.1f})")
+    
+    vor = Voronoi(points)
+    
+    x_min, y_min, x_max, y_max = bounds
+    #print(f"\n=== BOUNDS ===")
+    #print(f"X: {x_min:.1f} to {x_max:.1f}")
+    #print(f"Y: {y_min:.1f} to {y_max:.1f}")
+    
+    neighbors_dict = defaultdict(set)
+    
+    print(f"\n=== PROCESSING RIDGES ===")
+    for ridge_idx, ridge_points in enumerate(vor.ridge_points):
+        point1_idx, point2_idx = ridge_points
+        name1 = names[point1_idx]
+        name2 = names[point2_idx]
+        
+        ridge_vertices = vor.ridge_vertices[ridge_idx]
+        
+        #print(f"\n{ridge_idx}. {name1} <-> {name2}")
+        
+        if -1 in ridge_vertices:
+            #print(f"   Type: INFINITE ridge")
+            # Get finite vertex
+            finite_idx = ridge_vertices[0] if ridge_vertices[1] == -1 else ridge_vertices[1]
+            if finite_idx >= 0:
+                finite_v = vor.vertices[finite_idx]
+                #print(f"   Finite vertex: ({finite_v[0]:.1f}, {finite_v[1]:.1f})")
+                
+                # Check if finite vertex is in bounds
+                v_in = x_min <= finite_v[0] <= x_max and y_min <= finite_v[1] <= y_max
+                #print(f"   Vertex in bounds: {v_in}")
+                
+                if v_in:
+                    neighbors_dict[name1].add(name2)
+                    neighbors_dict[name2].add(name1)
+                    print(f"   ✓ ADDED")
+                else:
+                    print(f"   ✗ REJECTED (vertex outside bounds)")
+        else:
+           # print(f"   Type: FINITE ridge")
+            v1 = vor.vertices[ridge_vertices[0]]
+            v2 = vor.vertices[ridge_vertices[1]]
+            
+            #print(f"   Vertex 1: ({v1[0]:.1f}, {v1[1]:.1f})")
+            #print(f"   Vertex 2: ({v2[0]:.1f}, {v2[1]:.1f})")
+            
+            v1_in = x_min <= v1[0] <= x_max and y_min <= v1[1] <= y_max
+            v2_in = x_min <= v2[0] <= x_max and y_min <= v2[1] <= y_max
+            
+            midpoint_x = (v1[0] + v2[0]) / 2
+            midpoint_y = (v1[1] + v2[1]) / 2
+            mid_in = x_min <= midpoint_x <= x_max and y_min <= midpoint_y <= y_max
+            
+            #print(f"   V1 in bounds: {v1_in}, V2 in bounds: {v2_in}")
+            #print(f"   Midpoint: ({midpoint_x:.1f}, {midpoint_y:.1f}), in bounds: {mid_in}")
+            
+            # Accept if midpoint is in bounds OR if any vertex is in bounds
+            if mid_in or v1_in or v2_in:
+                neighbors_dict[name1].add(name2)
+                neighbors_dict[name2].add(name1)
+                print(f"   ✓ ADDED")
+            else:
+                print(f"   ✗ REJECTED (all points outside bounds)")
+    
+    neighbors = {name: sorted(list(neighs)) for name, neighs in neighbors_dict.items()} 
+    return neighbors, vor
+
+
 def process_simple_voronoi(centerpoints, filename, bounds):
     """
     Complete simple workflow for neighbor extraction and visualization.
@@ -290,173 +343,6 @@ def process_simple_voronoi(centerpoints, filename, bounds):
     except Exception as e:
         print(f"Error processing Voronoi: {e}")
         return None, None
-
-def get_room_neighbors(neighbors, room_name):
-    """
-    Get neighbors of a specific room.
-    """
-    return neighbors.get(room_name, [])
-
-def find_path_between_rooms(neighbors, start_room, end_room):
-    """
-    Find if there's a direct connection or path between two rooms.
-    """
-    if start_room not in neighbors or end_room not in neighbors:
-        return None
-    
-    if end_room in neighbors[start_room]:
-        return [start_room, end_room]  # Direct connection
-    
-    # Simple breadth-first search for shortest path
-    from collections import deque
-    
-    queue = deque([(start_room, [start_room])])
-    visited = {start_room}
-    
-    while queue:
-        current_room, path = queue.popleft()
-        
-        for neighbor in neighbors[current_room]:
-            if neighbor == end_room:
-                return path + [neighbor]
-            
-            if neighbor not in visited:
-                visited.add(neighbor)
-                queue.append((neighbor, path + [neighbor]))
-    
-    return None  # No path found
-def extract_bounded_voronoi_neighbors_detailed(centerpoints, bounds):
-    """
-    Detailed version that prints why each ridge is accepted/rejected.
-    """
-    if len(centerpoints) < 3:
-        raise ValueError("Need at least 3 points for Voronoi diagram")
-    
-    points = np.array([[cp[0], cp[1]] for cp in centerpoints])
-    names = [cp[2] for cp in centerpoints]
-    
-    print(f"\n=== ROOM POSITIONS ===")
-    for i, (cp, name) in enumerate(zip(centerpoints, names)):
-        print(f"{name}: ({cp[0]:.1f}, {cp[1]:.1f})")
-    
-    vor = Voronoi(points)
-    
-    x_min, y_min, x_max, y_max = bounds
-    print(f"\n=== BOUNDS ===")
-    print(f"X: {x_min:.1f} to {x_max:.1f}")
-    print(f"Y: {y_min:.1f} to {y_max:.1f}")
-    
-    neighbors_dict = defaultdict(set)
-    
-    print(f"\n=== PROCESSING RIDGES ===")
-    for ridge_idx, ridge_points in enumerate(vor.ridge_points):
-        point1_idx, point2_idx = ridge_points
-        name1 = names[point1_idx]
-        name2 = names[point2_idx]
-        
-        ridge_vertices = vor.ridge_vertices[ridge_idx]
-        
-        print(f"\n{ridge_idx}. {name1} <-> {name2}")
-        
-        if -1 in ridge_vertices:
-            print(f"   Type: INFINITE ridge")
-            # Get finite vertex
-            finite_idx = ridge_vertices[0] if ridge_vertices[1] == -1 else ridge_vertices[1]
-            if finite_idx >= 0:
-                finite_v = vor.vertices[finite_idx]
-                print(f"   Finite vertex: ({finite_v[0]:.1f}, {finite_v[1]:.1f})")
-                
-                # Check if finite vertex is in bounds
-                v_in = x_min <= finite_v[0] <= x_max and y_min <= finite_v[1] <= y_max
-                print(f"   Vertex in bounds: {v_in}")
-                
-                if v_in:
-                    neighbors_dict[name1].add(name2)
-                    neighbors_dict[name2].add(name1)
-                    print(f"   ✓ ADDED")
-                else:
-                    print(f"   ✗ REJECTED (vertex outside bounds)")
-        else:
-            print(f"   Type: FINITE ridge")
-            v1 = vor.vertices[ridge_vertices[0]]
-            v2 = vor.vertices[ridge_vertices[1]]
-            
-            print(f"   Vertex 1: ({v1[0]:.1f}, {v1[1]:.1f})")
-            print(f"   Vertex 2: ({v2[0]:.1f}, {v2[1]:.1f})")
-            
-            v1_in = x_min <= v1[0] <= x_max and y_min <= v1[1] <= y_max
-            v2_in = x_min <= v2[0] <= x_max and y_min <= v2[1] <= y_max
-            
-            midpoint_x = (v1[0] + v2[0]) / 2
-            midpoint_y = (v1[1] + v2[1]) / 2
-            mid_in = x_min <= midpoint_x <= x_max and y_min <= midpoint_y <= y_max
-            
-            print(f"   V1 in bounds: {v1_in}, V2 in bounds: {v2_in}")
-            print(f"   Midpoint: ({midpoint_x:.1f}, {midpoint_y:.1f}), in bounds: {mid_in}")
-            
-            # Accept if midpoint is in bounds OR if any vertex is in bounds
-            if mid_in or v1_in or v2_in:
-                neighbors_dict[name1].add(name2)
-                neighbors_dict[name2].add(name1)
-                print(f"   ✓ ADDED")
-            else:
-                print(f"   ✗ REJECTED (all points outside bounds)")
-    
-    neighbors = {name: sorted(list(neighs)) for name, neighs in neighbors_dict.items()}
-    return neighbors, vor
-
-def line_intersects_rect(p1, p2, bounds):
-    """
-    Check if a line segment (p1, p2) intersects with or is inside a rectangle.
-    
-    Args:
-        p1, p2: Line segment endpoints [x, y]
-        bounds: (x_min, y_min, x_max, y_max)
-    
-    Returns:
-        bool: True if line intersects or is inside bounds
-    """
-    x_min, y_min, x_max, y_max = bounds
-    x1, y1 = p1
-    x2, y2 = p2
-    
-    # Check if either endpoint is inside bounds
-    p1_inside = x_min <= x1 <= x_max and y_min <= y1 <= y_max
-    p2_inside = x_min <= x2 <= x_max and y_min <= y2 <= y_max
-    
-    if p1_inside or p2_inside:
-        return True
-    
-    # Liang-Barsky algorithm for line-rectangle intersection
-    dx = x2 - x1
-    dy = y2 - y1
-    
-    t_min = 0.0
-    t_max = 1.0
-    
-    # Check against all four bounds
-    p = [-dx, dx, -dy, dy]
-    q = [x1 - x_min, x_max - x1, y1 - y_min, y_max - y1]
-    
-    for i in range(4):
-        if p[i] == 0:
-            # Line is parallel to this bound
-            if q[i] < 0:
-                return False  # Line is outside
-        else:
-            t = q[i] / p[i]
-            if p[i] < 0:
-                t_min = max(t_min, t)
-            else:
-                t_max = min(t_max, t)
-            
-            if t_min > t_max:
-                return False
-    
-    return True
-   
-
-
 
 if __name__=="__main__":
     # Change to the project root directory
