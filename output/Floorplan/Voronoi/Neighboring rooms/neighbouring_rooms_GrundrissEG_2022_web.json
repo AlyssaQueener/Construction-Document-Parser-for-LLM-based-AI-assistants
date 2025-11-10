@@ -1,0 +1,307 @@
+{
+  "Rampenneigung": [
+    "Fahrrad Fahrrad",
+    "Müll Müll",
+    "Rampenneigung",
+    "Rolltor Rolltor",
+    "Stellplatz Stellplatz",
+    "TG-Zufahrt TG-Zufahrt Gehweg Gehweg",
+    "bzw. bzw. mind. mind.",
+    "tücksgrenze tücksgrenze",
+    "über über NHN2016 NHN2016"
+  ],
+  "Rolltor Rolltor": [
+    "Fahrrad Fahrrad",
+    "Müll Müll",
+    "Rampenneigung",
+    "über über NHN2016 NHN2016"
+  ],
+  "tücksgrenze tücksgrenze": [
+    "Rampenneigung",
+    "Spielplatz Spielplatz",
+    "über über NHN2016 NHN2016"
+  ],
+  "über über NHN2016 NHN2016": [
+    "Abstandsfläche Abstandsfläche",
+    "Abstandsfläche Abstandsfläche Balkon Balkon",
+    "Erdgeschoss",
+    "Rampenneigung",
+    "Rolltor Rolltor",
+    "Spielplatz Spielplatz",
+    "Stellplatz Stellplatz",
+    "Stg. Stg.",
+    "TG-Zufahrt TG-Zufahrt Gehweg Gehweg",
+    "Teeküche Teeküche",
+    "Terrasse Terrasse",
+    "Verkaufsfläche Verkaufsfläche",
+    "Zugang Zugang Fahrradabstellsatzung)",
+    "barrierefrei barrierefrei nach nach DIN DIN",
+    "barrierefreier barrierefreier gem. Fahrradabstellsatzung)",
+    "bzw. bzw. mind. mind.",
+    "tücksgrenze tücksgrenze"
+  ],
+  "bzw. bzw. mind. mind.": [
+    "Abstandsfläche Abstandsfläche",
+    "Abstandsfläche Abstandsfläche Balkon Balkon",
+    "Rampenneigung",
+    "Spielplatz Spielplatz",
+    "Stellplatz Stellplatz",
+    "Stg. Stg.",
+    "über über NHN2016 NHN2016"
+  ],
+  "Spielplatz Spielplatz": [
+    "Abstandsfläche Abstandsfläche",
+    "bzw. bzw. mind. mind.",
+    "tücksgrenze tücksgrenze",
+    "über über NHN2016 NHN2016"
+  ],
+  "Teeküche Teeküche": [
+    "Bür Bür",
+    "Flur Flur",
+    "Terrasse Terrasse",
+    "Treppenhaus Treppenhaus",
+    "VDS VDS Flur Flur",
+    "barrierefrei barrierefrei nach nach DIN DIN",
+    "über über NHN2016 NHN2016"
+  ],
+  "Terrasse Terrasse": [
+    "Abstandsfläche Abstandsfläche",
+    "Abstandsfläche Abstandsfläche Gauben Gauben",
+    "Teeküche Teeküche",
+    "Terrasse Terrasse",
+    "Treppenhaus Treppenhaus",
+    "über über NHN2016 NHN2016"
+  ],
+  "Bür Bür": [
+    "Akten Akten",
+    "Teeküche Teeküche",
+    "VDS VDS Flur Flur",
+    "Vordach Vordach"
+  ],
+  "VDS VDS Flur Flur": [
+    "Akten Akten",
+    "Bür Bür",
+    "Stg. Stg.",
+    "Teeküche Teeküche",
+    "Treppenhaus Treppenhaus",
+    "über NHN2016 über NHN2016"
+  ],
+  "Treppenhaus Treppenhaus": [
+    "Flur Flur",
+    "Teeküche Teeküche",
+    "Terrasse Terrasse",
+    "VDS VDS Flur Flur",
+    "über NHN2016 über NHN2016"
+  ],
+  "Müll Müll": [
+    "Fahrrad Fahrrad",
+    "Rampenneigung",
+    "Rolltor Rolltor",
+    "Stellplatz Stellplatz"
+  ],
+  "Stellplatz Stellplatz": [
+    "Abstandsfläche Abstandsfläche",
+    "Fahrrad Fahrrad",
+    "Müll Müll",
+    "Rampenneigung",
+    "Stg. Stg.",
+    "bzw. bzw. mind. mind.",
+    "über über NHN2016 NHN2016"
+  ],
+  "Fahrrad Fahrrad": [
+    "Abstandsfläche Abstandsfläche",
+    "Müll Müll",
+    "Rampenneigung",
+    "Rolltor Rolltor",
+    "Stellplatz Stellplatz",
+    "TG-Zufahrt TG-Zufahrt Gehweg Gehweg",
+    "öffentlicher öffentlicher Grünstreifen Grünstreifen"
+  ],
+  "Stg. Stg.": [
+    "Akten Akten",
+    "Kühlraum Kühlraum",
+    "Stellplatz Stellplatz",
+    "VDS VDS Flur Flur",
+    "Verkaufsfläche Verkaufsfläche",
+    "barrierefreier barrierefreier Zugang Zugang",
+    "bzw. bzw. mind. mind.",
+    "über NHN2016 über NHN2016",
+    "über über NHN2016 NHN2016"
+  ],
+  "Verkaufsfläche Verkaufsfläche": [
+    "Ladeneinheit Ladeneinheit",
+    "Stg. Stg.",
+    "Zugang Zugang Fahrradabstellsatzung)",
+    "barrierefrei barrierefrei nach nach DIN DIN",
+    "über über NHN2016 NHN2016"
+  ],
+  "Abstandsfläche Abstandsfläche": [
+    "(Anzahl der Abstellplätze Abstellplätze",
+    "(Anzahl der gem. Berechnung Berechnung",
+    "Abstandsfläche Abstandsfläche",
+    "Abstandsfläche Abstandsfläche Balkon Balkon",
+    "Abstandsfläche Abstandsfläche Gauben Gauben",
+    "Bertastraße Bertastraße",
+    "Fahrrad Fahrrad",
+    "Neigung Neigung",
+    "Spielplatz Spielplatz",
+    "Stellplatz Stellplatz",
+    "Terrasse Terrasse",
+    "barrierefreier barrierefreier gem. Fahrradabstellsatzung)",
+    "bzw. bzw. mind. mind.",
+    "öffentlicher öffentlicher Grünstreifen Grünstreifen",
+    "über über NHN2016 NHN2016"
+  ],
+  "öffentlicher öffentlicher Grünstreifen Grünstreifen": [
+    "Abstandsfläche Abstandsfläche",
+    "Bertastraße Bertastraße",
+    "Fahrrad Fahrrad",
+    "TG-Zufahrt TG-Zufahrt Gehweg Gehweg"
+  ],
+  "Bertastraße Bertastraße": [
+    "Abstandsfläche Abstandsfläche",
+    "Erdgeschoss",
+    "TG-Zufahrt TG-Zufahrt Gehweg Gehweg",
+    "öffentlicher öffentlicher Grünstreifen Grünstreifen"
+  ],
+  "Erdgeschoss": [
+    "Bertastraße Bertastraße",
+    "TG-Zufahrt TG-Zufahrt Gehweg Gehweg",
+    "über über NHN2016 NHN2016"
+  ],
+  "TG-Zufahrt TG-Zufahrt Gehweg Gehweg": [
+    "Bertastraße Bertastraße",
+    "Erdgeschoss",
+    "Fahrrad Fahrrad",
+    "Rampenneigung",
+    "öffentlicher öffentlicher Grünstreifen Grünstreifen",
+    "über über NHN2016 NHN2016"
+  ],
+  "Abstandsfläche Abstandsfläche Gauben Gauben": [
+    "Abstandsfläche Abstandsfläche",
+    "Terrasse Terrasse"
+  ],
+  "über NHN2016 über NHN2016": [
+    "Bad Bad",
+    "Flur Flur",
+    "Kühlraum Kühlraum",
+    "Stg. Stg.",
+    "Treppenhaus Treppenhaus",
+    "VDS VDS Flur Flur"
+  ],
+  "Flur Flur": [
+    "Bad Bad",
+    "Teeküche Teeküche",
+    "Treppenhaus Treppenhaus",
+    "barrierefrei barrierefrei nach nach DIN DIN",
+    "über NHN2016 über NHN2016"
+  ],
+  "barrierefreier barrierefreier gem. Fahrradabstellsatzung)": [
+    "(Anzahl der gem. Berechnung Berechnung",
+    "Abstandsfläche Abstandsfläche",
+    "Zugang Zugang Fahrradabstellsatzung)",
+    "über über NHN2016 NHN2016"
+  ],
+  "Neigung Neigung": [
+    "(Anzahl der Abstellplätze Abstellplätze",
+    "Abstandsfläche Abstandsfläche",
+    "Abstellraum Abstellraum Kinderwagen/ Kinderwagen/",
+    "Vordach Vordach",
+    "barrierefreier barrierefreier Zugang Zugang"
+  ],
+  "(Anzahl der Abstellplätze Abstellplätze": [
+    "(Anzahl der gem. Berechnung Berechnung",
+    "Abstandsfläche Abstandsfläche",
+    "Abstellraum Abstellraum Kinderwagen/ Kinderwagen/",
+    "Ladeneinheit Ladeneinheit",
+    "Neigung Neigung"
+  ],
+  "(Anzahl der gem. Berechnung Berechnung": [
+    "(Anzahl der Abstellplätze Abstellplätze",
+    "Abstandsfläche Abstandsfläche",
+    "Ladeneinheit Ladeneinheit",
+    "Zugang Zugang Fahrradabstellsatzung)",
+    "barrierefreier barrierefreier gem. Fahrradabstellsatzung)"
+  ],
+  "Zugang Zugang Fahrradabstellsatzung)": [
+    "(Anzahl der gem. Berechnung Berechnung",
+    "Ladeneinheit Ladeneinheit",
+    "Verkaufsfläche Verkaufsfläche",
+    "barrierefreier barrierefreier gem. Fahrradabstellsatzung)",
+    "über über NHN2016 NHN2016"
+  ],
+  "Akten Akten": [
+    "Bür Bür",
+    "Stg. Stg.",
+    "VDS VDS Flur Flur",
+    "Vordach Vordach",
+    "barrierefreier barrierefreier Zugang Zugang"
+  ],
+  "Abstandsfläche Abstandsfläche Balkon Balkon": [
+    "Abstandsfläche Abstandsfläche",
+    "bzw. bzw. mind. mind.",
+    "über über NHN2016 NHN2016"
+  ],
+  "Bad Bad": [
+    "Flur Flur",
+    "Kühlraum Kühlraum",
+    "Ladeneinheit Ladeneinheit",
+    "barrierefrei barrierefrei nach nach DIN DIN",
+    "über NHN2016 über NHN2016"
+  ],
+  "barrierefrei barrierefrei nach nach DIN DIN": [
+    "Bad Bad",
+    "Flur Flur",
+    "Ladeneinheit Ladeneinheit",
+    "Teeküche Teeküche",
+    "Verkaufsfläche Verkaufsfläche",
+    "über über NHN2016 NHN2016"
+  ],
+  "Kühlraum Kühlraum": [
+    "Bad Bad",
+    "Ladeneinheit Ladeneinheit",
+    "Mobilitätshilfen Mobilitätshilfen",
+    "Stg. Stg.",
+    "barrierefreier barrierefreier Zugang Zugang",
+    "über NHN2016 über NHN2016"
+  ],
+  "Ladeneinheit Ladeneinheit": [
+    "(Anzahl der Abstellplätze Abstellplätze",
+    "(Anzahl der gem. Berechnung Berechnung",
+    "Abstellraum Abstellraum Kinderwagen/ Kinderwagen/",
+    "Bad Bad",
+    "Kühlraum Kühlraum",
+    "Mobilitätshilfen Mobilitätshilfen",
+    "Verkaufsfläche Verkaufsfläche",
+    "Zugang Zugang Fahrradabstellsatzung)",
+    "barrierefrei barrierefrei nach nach DIN DIN"
+  ],
+  "Abstellraum Abstellraum Kinderwagen/ Kinderwagen/": [
+    "(Anzahl der Abstellplätze Abstellplätze",
+    "Ladeneinheit Ladeneinheit",
+    "Mobilitätshilfen Mobilitätshilfen",
+    "Neigung Neigung",
+    "barrierefreier barrierefreier Zugang Zugang"
+  ],
+  "Mobilitätshilfen Mobilitätshilfen": [
+    "Abstellraum Abstellraum Kinderwagen/ Kinderwagen/",
+    "Kühlraum Kühlraum",
+    "Ladeneinheit Ladeneinheit",
+    "barrierefreier barrierefreier Zugang Zugang"
+  ],
+  "barrierefreier barrierefreier Zugang Zugang": [
+    "Abstellraum Abstellraum Kinderwagen/ Kinderwagen/",
+    "Akten Akten",
+    "Kühlraum Kühlraum",
+    "Mobilitätshilfen Mobilitätshilfen",
+    "Neigung Neigung",
+    "Stg. Stg.",
+    "Vordach Vordach"
+  ],
+  "Vordach Vordach": [
+    "Akten Akten",
+    "Bür Bür",
+    "Neigung Neigung",
+    "barrierefreier barrierefreier Zugang Zugang"
+  ]
+}
