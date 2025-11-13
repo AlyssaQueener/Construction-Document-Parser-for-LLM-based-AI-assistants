@@ -1,9 +1,23 @@
 {
-    "client": "Landesbetrieb für Strassenbau",
-    "creation_date":"10.06.2025",
-    "drawing_name/ plan type":"Grundriss Blitzschutz Erdgeschoss",
-    "project_name":"22-011 LFS Lebach - Neubau Verwaltungsgebäude",
-    "location":"Schlesierallee 66822 Lebach",
-    "scale":"1:100",
-    "architect":null
+    "projectInfo":{
+       "projectId":"22-011",
+       "projectName":"LFS Lebach - Neubau Verwaltungsgebäude",
+       "location":"Schlesierallee 66822 Lebach",
+       "author":"CA",
+       "stakeholders":{
+          "client":"Landesbetrieb für Strassenbau",
+          "architect":"None",
+          "engineers":"None"
+       },
+       "timeline":{
+          "yearOfCompletion":"None",
+          "approvalDate":"None"
+       }
+    },
+    "planMetadata":{
+       "planType":"Grundriss Blitzschutz Erdgeschoss",
+       "planFormat":"H/B = 420/841",
+       "scale":"1:100",
+       "projectionMethod":"None"
+    }
  }

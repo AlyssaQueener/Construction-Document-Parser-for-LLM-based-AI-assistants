@@ -1,14 +1,14 @@
 import src.plan2data.titleBlockInfo as parser
-import src.validation.titleblock.llm_as_a_judge as llm_judge
+import src.validation.Floorplan.titleblock.llm_as_a_judge as llm_judge
 
 
-image_path = "src/validation/titleblock/testdata/floorplan-test_page1.png"
-image_path_1 = "src/validation/titleblock/testdata/floorplan-test-1_page1.png"
-image_path_2 = "src/validation/titleblock/testdata/floorplan-test-2_page1.png"
+image_path = "src/validation/Floorplan/titleblock/testdata/floorplan-test_page1.png"
+image_path_1 = "src/validation/Floorplan/titleblock/testdata/floorplan-test-1_page1.png"
+image_path_2 = "src/validation/Floorplan/titleblock/testdata/floorplan-test-2_page1.png"
 
-validation_path = "src/validation/titleblock/testdata/floorplan-test.json"
-validation_path_1 = "src/validation/titleblock/testdata/floorplan-test-1.json"
-validation_path_2 = "src/validation/titleblock/testdata/floorplan-test-2.json"
+validation_path = "src/validation/Floorplan/titleblock/testdata/floorplan-test.json"
+validation_path_1 = "src/validation/Floorplan/titleblock/testdata/floorplan-test-1.json"
+validation_path_2 = "src/validation/Floorplan/titleblock/testdata/floorplan-test-2.json"
 
 result = parser.get_title_block_info(image_path)
 #result_1 = parser.get_title_block_info(image_path_1)
