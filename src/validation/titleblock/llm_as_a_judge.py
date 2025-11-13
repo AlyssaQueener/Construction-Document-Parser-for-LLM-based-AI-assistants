@@ -148,7 +148,7 @@ def call_mistral_evaluation(ground_truth, parser_result):
     messages = [
         {
         "role": "user",
-        "content": message,
+        "content": message
         }
     ]
     chat_response = client.chat.complete(
