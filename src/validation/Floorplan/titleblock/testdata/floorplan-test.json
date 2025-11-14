@@ -1,9 +1,23 @@
 {
-    "client": "Max Muster",
-    "creation_date": "01.01.2021",
-    "drawing_name/ plan type": "Erdgeschoss",
-    "project_name": "210101-MNMNMN",
-    "location": "Muster Beispiel 1 20095 Musterhausen",
-    "scale": "1:100",
-    "architect": "Butlerium GmbH"
+    "projectInfo":{
+       "projectId":"210101-MNMNMN",
+       "projectName": null,
+       "location":"20095 Musterhausen",
+       "author":"Butlerium GmbH",
+       "stakeholders":{
+          "client":"Max Muster",
+          "architect":"Grundriss Butler Hamburg",
+          "engineers":null
+       },
+       "timeline":{
+          "yearOfCompletion":null,
+          "approvalDate":null
+       }
+    },
+    "planMetadata":{
+       "planType":"Ergeschoss",
+       "planFormat":"DIN A3",
+       "scale":"1:100",
+       "projectionMethod":null
+    }
 }
