@@ -35,9 +35,9 @@ Please use the parameter chartFormat
 "visual": for charts where activity timing must be inferred from bar positions (with activities on the left and a timeline above)
 "tabular": for charts that include a structured table with explicit start, end, and duration fields
 
-## Program Parser
+## Drawing Parser
 
-upload and parse **Floor Plans and Section Views**.
+upload and parse **Floor Plans**.
 """
 
 
@@ -85,6 +85,7 @@ async def create_upload_file_gantt(file: UploadFile, chart_format):
         response = Response(
             input_format=file.content_type,  
             is_extraction_succesful= is_succesful,
+            confident_value=None,
             extraction_method=method,
             result=result
         )
@@ -121,6 +122,7 @@ async def create_upload_file_fin(file: UploadFile):
         response = Response(
             input_format=file.content_type,  
             is_extraction_succesful= is_success,
+            confident_value=None,
             extraction_method=method,
             result=result
         )
