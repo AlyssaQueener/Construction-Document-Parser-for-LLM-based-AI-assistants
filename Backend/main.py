@@ -85,6 +85,7 @@ async def create_upload_file_gantt(file: UploadFile, chart_format):
         response = Response(
             input_format=file.content_type,  
             is_extraction_succesful= is_succesful,
+            confident_value=None,
             extraction_method=method,
             result=result
         )
@@ -121,6 +122,7 @@ async def create_upload_file_fin(file: UploadFile):
         response = Response(
             input_format=file.content_type,  
             is_extraction_succesful= is_success,
+            confident_value=None,
             extraction_method=method,
             result=result
         )
