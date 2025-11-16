@@ -347,7 +347,7 @@ function App() {
           {/* Find us */}
           <div>
             <h3 className="font-bold text-lg mb-2 text-gray-900">Find us!</h3>
-            <ul className="space-y-1">
+            <ul className="space-y-0.2">
               <li><a href="#" className="text-gray-700 hover:text-blue-600">Alyssa</a></li>
               <li><a href="#" className="text-gray-700 hover:text-blue-600">Bahar</a></li>
               <li><a href="#" className="text-gray-700 hover:text-blue-600">Rebekka</a></li>
