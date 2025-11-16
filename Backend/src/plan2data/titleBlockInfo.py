@@ -9,10 +9,10 @@ def get_title_block_info(path):
     is_succesful = False
     method = "hybrid"
     output= json.loads(extract_title_block_info(path))
-    if output["confidence"] < 0.6:
+    if output["confidence"] < 0.5:
         print("Ai localization started")
         output = json.loads(extract_title_block_info_with_ai(path))
-    if output["confidence"] > 0.6:
+    if output["confidence"] > 0.5:
         is_succesful= True
     confidence = output["confidence"]
     json_string = json.dumps(output, indent=4)
@@ -26,12 +26,8 @@ def extract_title_block_info(image_path):
     return mistral_response_content
 
 def extract_title_block_info_with_ai(image_path):
-    mistral_response = mistral.call_mistral_for_titleblock_location(image_path)
-    horizontal_boundry_percentage, vertical_boundry_percentage, greater_then_horizontal, greater_then_vertical = helper.prepare_for_titleblock_extraction(mistral_response)
-    title_block_region = title_block.init_title_block_extraction_with_ai_localization(image_path, horizontal_boundry_percentage, greater_then_horizontal, vertical_boundry_percentage, greater_then_vertical)
-    text_title_block = title_block.extract_text_titleblock(image_path,title_block_region)
-    mistral_response_content = mistral.call_mistral_for_content_extraction(text_title_block)
-    return mistral_response_content
+    mistral_response = mistral.call_mistral_for_titleblock_extraction_from_image(image_path)
+    return mistral_response
 
 
 
