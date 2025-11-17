@@ -128,6 +128,7 @@ def parse_gantt_chart(path, chart_format):
         column_order, found_matches = match_column_names_with_task_properties(processed_df)
         if found_matches < 3:
             with pdfplumber.open(path) as pdf:
+                print("Ai column name extraction")
                 first_page = pdf.pages[0]
                 text = first_page.extract_text()
                 column_order = json.loads(mistral.call_mistral_for_colums(text))
