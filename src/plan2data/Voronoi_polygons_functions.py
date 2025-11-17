@@ -284,13 +284,13 @@ def extract_bounded_voronoi_neighbors_detailed(centerpoints, bounds):
         raise ValueError("Need at least 3 points for Voronoi diagram")
     points = np.array([[cp[0], cp[1]] for cp in centerpoints])
     names = [cp[2] for cp in centerpoints]
-    print(f"\n=== ROOM POSITIONS ===")
-    for i, (cp, name) in enumerate(zip(centerpoints, names)):
-        print(f"{name}: ({cp[0]:.1f}, {cp[1]:.1f})")
+    #print(f"\n=== ROOM POSITIONS ===")
+    #for i, (cp, name) in enumerate(zip(centerpoints, names)):
+        #print(f"{name}: ({cp[0]:.1f}, {cp[1]:.1f})")
     vor = Voronoi(points)
     x_min, y_min, x_max, y_max = bounds
     neighbors_dict = defaultdict(set)
-    print(f"\n=== PROCESSING RIDGES ===")
+    #print(f"\n=== PROCESSING RIDGES ===")
     for ridge_idx, ridge_points in enumerate(vor.ridge_points):
         point1_idx, point2_idx = ridge_points
         name1 = names[point1_idx]
@@ -304,9 +304,9 @@ def extract_bounded_voronoi_neighbors_detailed(centerpoints, bounds):
                 if v_in:
                     neighbors_dict[name1].add(name2)
                     neighbors_dict[name2].add(name1)
-                    print(f"   ✓ ADDED")
-                else:
-                    print(f"   ✗ REJECTED (vertex outside bounds)")
+                    #print(f"   ✓ ADDED")
+                #else:
+                    #print(f"   ✗ REJECTED (vertex outside bounds)")
         else:
             v1 = vor.vertices[ridge_vertices[0]]
             v2 = vor.vertices[ridge_vertices[1]]
@@ -319,18 +319,17 @@ def extract_bounded_voronoi_neighbors_detailed(centerpoints, bounds):
                 neighbors_dict[name1].add(name2)
                 neighbors_dict[name2].add(name1)
                 #print(f"   ✓ ADDED")
-            else:
-                print(f"   ✗ REJECTED (all points outside bounds)")
+            #else:
+                #print(f"   ✗ REJECTED (all points outside bounds)")
     neighbors = {name: sorted(list(neighs)) for name, neighs in neighbors_dict.items()} 
     return neighbors, vor
 
-def process_simple_voronoi(centerpoints, filename, bounds):
+def process_simple_voronoi(centerpoints, bounds):
     """
     Performs neighbor extraction, saves to file, prints & visualizes results for labeled rooms.
 
     Args:
         centerpoints (list of list): [cx, cy, name] for all rooms.
-        filename (str): Output file path for neighbors.
         bounds (tuple or list): (x_min, y_min, x_max, y_max) bounding box.
 
     Returns:
@@ -339,88 +338,64 @@ def process_simple_voronoi(centerpoints, filename, bounds):
             vor (scipy.spatial.Voronoi): Voronoi diagram object, or None if error.
     """
     try:
-        print(f"Processing {len(centerpoints)} rooms...")
+        #print(f"Processing {len(centerpoints)} rooms...")
         neighbors, vor = extract_bounded_voronoi_neighbors_detailed(centerpoints, bounds)
-        save_neighbors_only(neighbors,filename)
-        print_neighbors_summary(neighbors)
-        analyze_room_connectivity(neighbors)
+        #save_neighbors_only(neighbors)
+        #print_neighbors_summary(neighbors)
+        #analyze_room_connectivity(neighbors)
         visualize_voronoi_cells(vor, centerpoints, neighbors, "voronoi_cells.png")
         return neighbors, vor
     except Exception as e:
         print(f"Error processing Voronoi: {e}")
         return None, None
-
-
-if __name__=="__main__":
-    # Change to the project root directory
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    project_root = os.path.dirname(os.path.dirname(script_dir))
-    os.chdir(project_root)
-    #pdf_path = "examples/FloorplansAndSectionViews/bemasster-grundriss-plankopf.pdf"
-    #pdf_path= "examples/FloorplansAndSectionViews/BasicTestPlan.pdf"
-    #pdf_path = "examples/FloorplansAndSectionViews/GrundrissEG_2022_web.pdf"
-    #pdf_path = "examples/FloorplansAndSectionViews/2d-grundriss-wohnflaeche.pdf"
-    #pdf_path = "examples/FloorplansAndSectionViews/GrundrissEG_2022_web.pdf"
-    #pdf_path = "examples/FloorplansAndSectionViews/modern-stilt-house.pdf"
-
-    pdf_path = "examples/FloorplansAndSectionViews/Simple Floorplan/04_Simple.pdf"
-
-
-    # NAMING convention of output files 
-    filename = os.path.splitext(os.path.basename(pdf_path))[0]
-    json_path = f'output/Floorplan/Voronoi/Neighboring rooms/neighbouring_rooms_{filename}.json'
-    output_filename= f'output/Floorplan/Voronoi/Textbboxes_rooms/textbboxes_rooms_{filename}.json'
-    output_PDF = f'output/Floorplan/Voronoi/PDF_Area_clipped/clipped_filltered_{filename}.pdf'
-    output_centerpoints =  f'output/Floorplan/Voronoi/Centerpoints_Rooms/centerpoints_rooms_{filename}.json'
+def neighboring_rooms_voronoi(pdf_path):
+    """
+    Extract neighboring rooms from a floorplan PDF using Voronoi diagram.
     
+    Args:
+        pdf_path: Path to the PDF file to process
+        
+    Returns:
+        dict: Dictionary mapping room names to their list of neighboring rooms
+    """
     doc = fitz.open(pdf_path)
-
     page = doc[0]
-    # clip rectangle to exclude plan information -> using fitz.Rect(x0, y0, x1, y1) where x0,yo is top left corner and x1,y1 is bottom right corner
-    width,height = page.rect.width, page.rect.height
+    
+    # Clip rectangle to exclude plan information
+    width, height = page.rect.width, page.rect.height
     clip_rect = fitz.Rect(0, 0, width * 0.72, height * 0.8)
-    flipped_rect =(
-        clip_rect.x0,                    # x_min stays the same
-        height - clip_rect.y1,           # y_min (flip the bottom of clip_rect)
-        clip_rect.x1,                    # x_max stays the same
-        height - clip_rect.y0            # y_max (flip the top of clip_rect)
+    flipped_rect = (
+        clip_rect.x0,
+        height - clip_rect.y1,
+        clip_rect.x1,
+        height - clip_rect.y0
     )
-    page.add_rect_annot(clip_rect)
-
-    # Save to a debug file
-    doc.save("clipped_debug.pdf")
-
+    
+    # Extract and filter words
     word = page.get_textpage(clip_rect)
-    bbox = word.extractWORDS() # returns a list [x0, y0, x1, y1, "text", block_no, line_no, word_no]
-
-    # WORKING WITH WORD EXTRACTION
+    bbox = word.extractWORDS()
+    
     filtered_bbox_number = [entry for entry in bbox if not is_number_like(entry[4])]
     filtered_bbox_string_1 = [entry for entry in filtered_bbox_number if is_valid_room_name(entry[4])]
     filtered_bbox_string = [entry for entry in filtered_bbox_string_1 if has_more_than_one_char(entry[4])]
     combined_bbox = combine_close_words(filtered_bbox_string)
-
-    for entry in combined_bbox:
-        x0, y0, x1, y1 = entry[0], entry[1], entry[2], entry[3]
-        rect= fitz.Rect(x0, y0, x1, y1)
-        page.add_rect_annot(rect)
-        
-    doc.save(output_PDF)
-
-    with open(output_filename, 'w', encoding='utf-8') as f:
-                json.dump(combined_bbox,f, indent=2, ensure_ascii=False)
-                print(f"Successfully saved extracted JSON to '{output_filename}'")
-
-    # calculate the centerpoints of the room 
+    
+    # Calculate centerpoints
     centerpoints = []
     for entry in combined_bbox:
         centerpoint = calculate_bbox_center(entry)
         centerpoints.append(centerpoint)
     
-    with open(output_centerpoints, 'w', encoding='utf-8') as f:
-                json.dump(centerpoints,f, indent=2, ensure_ascii=False)
-                print(f"Successfully saved extracted JSON to '{output_filename}'")
-    # create voronoi polygons around the center points 
+    # Create voronoi polygons around the center points
     page_width, page_height = page.rect.width, page.rect.height
-    flipped_centerpoints = flip_y_coordinates(centerpoints,page_height)
-    voronoi_polygons =process_simple_voronoi(flipped_centerpoints,json_path, flipped_rect)
+    flipped_centerpoints = flip_y_coordinates(centerpoints, page_height)
+    neighbors, vor = extract_bounded_voronoi_neighbors_detailed(flipped_centerpoints, flipped_rect)
+    
+    doc.close()
+    
+    # Print as JSON and return
+    output_json = json.dumps(neighbors, indent=2, ensure_ascii=False)
+    return output_json
+
+
 
