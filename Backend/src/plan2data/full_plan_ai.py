@@ -1,0 +1,40 @@
+from mistralai import Mistral
+import base64
+
+model = "mistral-small-latest"
+api_key = "mVTgI1ELSkn5Q28v2smHK0O4E02nMaxG"
+image_path = "test5.png"  # Your local image path
+# === STRUCTURED PROMPT ===
+question = (
+    "You are an assistant that extracts structured data from architectural floor plans. "
+    "Given the image, return all title block metadata and a list of rooms and their spatial relationships. "
+    "Use exactly this JSON format:\n\n"
+    "{\n"
+    "  \"titleBlock\": {\n"
+    "    \"projectName\": \"string\",\n"
+    "    \"architect\": \"string\",\n"
+    "    \"client\": \"string\",\n"
+    "    \"location\": \"string\",\n"
+    "    \"author\": \"string\",\n"
+    "    \"engineers\": [\"string\"],\n"
+    "    \"yearOfCompletion\": \"string\",  \n"
+    "    \"approvalDate\": \"string\",\n"
+    "    \"date\": \"string\",\n"
+    "    \"planType\": \"string\",\n"
+    "    \"scale\": \"string\"\n"
+    "  },\n"
+    "  \"rooms\": [\n"
+    "    {\n"
+    "      \"roomName\": \"string\",\n"
+    "      \"area\": null,  # or number, if labeled\n"
+    "      \"adjacentRooms\": [\"string\"],\n"
+    "      \"neighboringRooms\": [\"string\"]\n"
+    "    }\n"
+    "  ]\n"
+    "}\n\n"
+    "Instructions:\n"
+    "- Fill all title block fields with values found on the drawing. If a field is missing, use null or an empty string.\n"
+    "- For boundingBox, use normalized coordinates (0–1).\n"
+    "- For rooms, list every detected room with its name and bounding box, area if labeled, and adjacency/neighbors using room names from the plan.\n"
+    "- Return ONLY proper JSON—do not output explanations, headers, or code.\n"
+)
