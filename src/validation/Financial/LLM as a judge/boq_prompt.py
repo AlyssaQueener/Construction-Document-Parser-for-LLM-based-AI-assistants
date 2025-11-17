@@ -186,8 +186,8 @@ def llm_as_a_judge_boq(path_to_ground_truth: str, path_to_parser_result: str) ->
 
 
 if __name__ == "__main__":
-    groundtruth = "Construction-Document-Parser-for-LLM-based-AI-assistants/output/Financial/BOQ1_validation_boq_data.json"
-    parserresult = "Construction-Document-Parser-for-LLM-based-AI-assistants/output/Financial/BOQ1_extracted_boq_data.json"
+    groundtruth = "Construction-Document-Parser-for-LLM-based-AI-assistants/src/validation/Financial/LLM as a judge/testdata/BOQ4_validation_boq_data.json"
+    parserresult = "Construction-Document-Parser-for-LLM-based-AI-assistants/src/validation/Financial/LLM as a judge/testdata/BOQ4_extracted_boq_data.json"
     
     evaluation_result = llm_as_a_judge_boq(groundtruth, parserresult)
     
@@ -196,5 +196,8 @@ if __name__ == "__main__":
         # Pretty print the JSON
         result_dict = json.loads(evaluation_result)
         print(json.dumps(result_dict, indent=2))
+        path = "Construction-Document-Parser-for-LLM-based-AI-assistants/src/validation/Financial/LLM as a judge/BOQ4_output.json"
+        with open(path, "w") as file:
+            json.dump(result_dict, file, indent=2)
     else:
         print("\nEvaluation failed!")

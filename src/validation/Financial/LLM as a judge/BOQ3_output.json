@@ -1,0 +1,416 @@
+{
+  "section_analysis": [
+    {
+      "section_title": "EARTH WORK",
+      "item_analysis": [
+        {
+          "internal_number": "0",
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": "1",
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        }
+      ]
+    },
+    {
+      "section_title": "PLAIN CEMENT CONCRETE WORK",
+      "item_analysis": [
+        {
+          "internal_number": "2",
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        }
+      ]
+    },
+    {
+      "section_title": "REINFORCED CEMENT CONCRETE WORK",
+      "item_analysis": [
+        {
+          "internal_number": "3",
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 0.8,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Minor formatting difference",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": "4",
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 0.8,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Minor formatting difference",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": "5",
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 0.8,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Minor formatting difference",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": "6",
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 0.8,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Minor formatting difference",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": "7",
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 0.8,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Minor formatting difference",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        }
+      ]
+    },
+    {
+      "section_title": "BRICK WORK",
+      "item_analysis": [
+        {
+          "internal_number": "8",
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 0.8,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Minor formatting difference",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": "9",
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 0.8,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Minor formatting difference",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": "10",
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 0.8,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Minor formatting difference",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        }
+      ]
+    },
+    {
+      "section_title": "FINISHING & CLADDING WORK",
+      "item_analysis": [
+        {
+          "internal_number": "11",
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 0.8,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Minor formatting difference",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": "12",
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 0.8,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Minor formatting difference",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": "13",
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 0.8,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Minor formatting difference",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": "14",
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 0.8,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Minor formatting difference",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        }
+      ]
+    },
+    {
+      "section_title": "MISCELLANEOUS WORK",
+      "item_analysis": [
+        {
+          "internal_number": "15",
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 0.8,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Minor formatting difference",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": "16",
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 0.5,
+            "unit": 1.0,
+            "quantity": 0.8,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Core info present, some differences",
+            "unit": "Exact match",
+            "quantity": "Minor formatting difference",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": "17",
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 0.5,
+            "unit": 1.0,
+            "quantity": 0.8,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Core info present, some differences",
+            "unit": "Exact match",
+            "quantity": "Minor formatting difference",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        }
+      ]
+    }
+  ],
+  "completeness": 10.0,
+  "accuracy": 9.6,
+  "overall_score": 9.8,
+  "confidence_calibration": "well-calibrated"
+}
