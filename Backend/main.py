@@ -8,7 +8,9 @@ import io
 import os
 import uuid
 import src.gantt2data.ganttParser as gantt_parser
-import boq2data_gemini as boq
+import src.boq2data.camelot_setup.boq2data_gemini as boq
+import src.plan2data.voronoi_functions as vor
+#from voronoi_functions import*
 from pydantic import BaseModel
 from enum import Enum
 
@@ -165,19 +167,36 @@ async def create_upload_file_floorplans(file: UploadFile, content_type: ContentT
     os.makedirs(upload_dir, exist_ok=True)
     
     try:
-        if not file.content_type.startswith('image/'):
-            raise HTTPException(status_code=400, detail="File must be an image")
+        # Validiere Dateityp basierend auf content_type
+        if content_type == "plan-deterministic":
+            # Für deterministic: PDF erforderlich
+            if not file.content_type == 'application/pdf':
+                raise HTTPException(status_code=400, detail="Deterministic plan parsing requires PDF file")
+        else:
+            if not file.content_type.startswith('image/'):
+                raise HTTPException(status_code=400, detail="File must be an image")
         
-        file_extension = os.path.splitext(file.filename)[1] if file.filename else '.jpg'
+        file_extension = os.path.splitext(file.filename)[1] if file.filename else '.jpg'# Bestimme Dateiendung
+        if content_type == "plan-deterministic":
+            file_extension = '.pdf'
+        else:
+            file_extension = os.path.splitext(file.filename)[1] if file.filename else '.jpg'
+        
         unique_filename = f"{uuid.uuid4()}{file_extension}"
         file_path = os.path.join(upload_dir, unique_filename)
         
         file_content = await file.read()
         
-        with Image.open(io.BytesIO(file_content)) as im:
-            if im.mode in ("RGBA", "P"):
-                im = im.convert("RGB")
-            im.save(file_path, 'JPEG')
+        if content_type == "plan-deterministic":
+            # PDF direkt speichern
+            with open(file_path, 'wb') as f:
+                f.write(file_content)
+        else:
+            # Bild verarbeiten und als JPEG speichern
+            with Image.open(io.BytesIO(file_content)) as im:
+                if im.mode in ("RGBA", "P"):
+                    im = im.convert("RGB")
+                im.save(file_path, 'JPEG')
         
         method = "None"
 
@@ -186,7 +205,7 @@ async def create_upload_file_floorplans(file: UploadFile, content_type: ContentT
         if content_type == "titleblock":
             result, method, is_succesful, confidence = floorplan_parser.get_title_block_info(file_path)
         elif content_type== "plan-deterministic":
-            result = { "under":"construction"}
+            result = vor.neighboring_rooms_voronoi(file_path)
             method = "deterministic"
             is_succesful= False
             confidence = 0.0
