@@ -1,4 +1,5 @@
 import src.gantt2data.ganttParser as parser
+import src.validation.Gantt.validator as validator
 
 
 path = "src/validation/Gantt/testdata/test-tabular.pdf"
@@ -14,3 +15,4 @@ validation_path_2 = "src/validation/Gantt/testdata/test-tabular.json"
 result_2 = parser.parse_gantt_chart(path, "tabular")
 print(result_2)
 
+print(validator.validate(validation_path, result_2))
