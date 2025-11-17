@@ -5,6 +5,7 @@ import axios from 'axios';
 function App() {
   const [file, setFile] = useState(null);
   const [chartFormat, setChartFormat] = useState('visual');
+  const [contentType, setContentType] = useState('titleblock');
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
@@ -32,6 +33,9 @@ function App() {
       let url = `http://localhost:8000${endpoint}`;
       if (endpoint.includes('gantt')) {
         url = `http://localhost:8000/gantt_parser/${chartFormat}`;
+      }
+      if (endpoint.includes('drawing')){
+        url = `http://localhost:8000/drawing_parser/${contentType}`;
       }
 
       const response = await axios.post(url, formData, {
@@ -101,6 +105,21 @@ function App() {
                     </p>
                   </div>
                 )}
+
+                <div>
+                  <Label htmlFor="content-type" value="Content Type" className="text-lg mb-2" />
+                  <Select
+                    id="content-type"
+                    value={contentType}
+                    onChange={(e) => setContentType(e.target.value)}
+                    className="text-lg"
+                  >
+                    <option value="titleblock">Title Block </option>
+                    <option value="plan-deterministic">Plan - Deterministic</option>
+                    <option value="plan-ai">Plan - Ai</option>
+                    <option value="full-result">Full plan</option>
+                  </Select>
+                </div>
 
                 <Button
                   color="success"

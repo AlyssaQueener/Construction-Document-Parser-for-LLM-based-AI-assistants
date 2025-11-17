@@ -15,8 +15,11 @@ def financial_boq(path):
         tables = camelot.read_pdf(path, flavor=flav, pages=page_num) # -> output camelot table object 
         tables_boq_processed = cam.cam_stream_merge(tables) # json 
         processed_str = json.dumps(tables_boq_processed, indent=2, ensure_ascii=False)
-        prompt = gemini.create_preproccesed_prompt(processed_str)
-        response_json = gemini.call_gemini_return_json(prompt)
+        #prompt = gemini.create_preproccesed_prompt(processed_str)
+        response_json = {
+              "Under":"Construction"
+        }
+        #response_json = gemini.call_gemini_return_json(prompt)
         if response_json:
               is_success = True
         return response_json, method, is_success

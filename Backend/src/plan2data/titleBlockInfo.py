@@ -15,8 +15,7 @@ def get_title_block_info(path):
     if output["confidence"] > 0.5:
         is_succesful= True
     confidence = output["confidence"]
-    json_string = json.dumps(output, indent=4)
-    return json_string, method, is_succesful, confidence
+    return output, method, is_succesful, confidence
 
 
 def extract_title_block_info(image_path):

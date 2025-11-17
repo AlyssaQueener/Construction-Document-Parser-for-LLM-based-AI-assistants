@@ -10,6 +10,7 @@ import uuid
 import src.gantt2data.ganttParser as gantt_parser
 import boq2data_gemini as boq
 from pydantic import BaseModel
+from enum import Enum
 
 class Response(BaseModel):
     input_format: str
@@ -17,6 +18,16 @@ class Response(BaseModel):
     confident_value: float | None
     extraction_method: str
     result: str | dict | list 
+
+class ContentType(str, Enum):
+    titleblock = "titleblock"
+    plan_deterministic = "plan-deterministic"
+    plan_ai= "plan-ai"
+    full_result = "full-result"
+
+class ChartFormat(str, Enum):
+    visual = "visual"
+    tabular = "tabular"
 
 
 description = """
@@ -67,7 +78,7 @@ async def hello_world():
             }
     
 @app.post("/gantt_parser/{chart_format}")
-async def create_upload_file_gantt(file: UploadFile, chart_format):
+async def create_upload_file_gantt(file: UploadFile, chart_format: ChartFormat):
     upload_dir = "uploads"  # Make sure this directory exists
     os.makedirs(upload_dir, exist_ok=True)
     
@@ -148,8 +159,8 @@ async def create_upload_file_fin(file: UploadFile):
         raise HTTPException(status_code=500, detail=f"Error processing file: {str(e)}")
 
 
-@app.post("/drawing_parser/")
-async def create_upload_file_floorplans(file: UploadFile):
+@app.post("/drawing_parser/{content_type}/")
+async def create_upload_file_floorplans(file: UploadFile, content_type: ContentType):
     upload_dir = "uploads"  # Make sure this directory exists
     os.makedirs(upload_dir, exist_ok=True)
     
@@ -172,7 +183,23 @@ async def create_upload_file_floorplans(file: UploadFile):
 
         is_succesful = False
 
-        result, method, is_succesful, confidence = floorplan_parser.get_title_block_info(file_path)
+        if content_type == "titleblock":
+            result, method, is_succesful, confidence = floorplan_parser.get_title_block_info(file_path)
+        elif content_type== "plan-deterministic":
+            result = { "under":"construction"}
+            method = "deterministic"
+            is_succesful= False
+            confidence = 0.0
+        elif content_type == "plan-ai":
+            result = { "under":"construction"}
+            method = "ai"
+            is_succesful= False
+            confidence = 0.0
+        elif content_type== "full-result":
+            result = { "under":"construction"}
+            method = "ai"
+            is_succesful= False
+            confidence = 0.0
 
 
         response = Response(
