@@ -348,7 +348,6 @@ def analyze_colors(colors):
     print(f"Color frequency analysis:")
     for color, count in color_counter.most_common():
         percentage = (count / total_rectangles) * 100
-        print(f"  {color}: {count} occurrences ({percentage:.1f}%)")
 
     most_common_colors = color_counter.most_common(3)
     filter_colors = []
@@ -356,15 +355,11 @@ def analyze_colors(colors):
         if is_very_bright(color[0]):
             filter_color = color[0]
             filter_colors.append(filter_color)
-    print("Most common color:")
-    print(most_common_colors)
-    print("Filter colors")
-    print(filter_colors)
     #print(color_analysis)
     return filter_colors
 
 def is_very_bright(color):
-    if color[0]> 0.7 and color[1] > 0.7 and color[2] > 0.7:
+    if color[0]> 0.8 and color[1] > 0.8 and color[2] > 0.8:
         return True
     else:
         return False

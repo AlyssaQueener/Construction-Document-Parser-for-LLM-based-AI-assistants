@@ -1,0 +1,77 @@
+[   
+    {
+        "task": "Design",
+        "start": "01/2025 Week 1",
+        "finish": "01/2025 Week 4"
+    },
+    {
+        "task": "Preparation of architectural and schematic designs",
+        "start": "01/2025 Week 1",
+        "finish": "01/2025 Week 2"
+    },
+    {
+        "task": "Research into equipment and materials needed, along with costs",
+        "start": "01/2025 Week 2",
+        "finish": "01/2025 Week 4"
+    },
+    {
+        "task": "Pre-Construction",
+        "start": "02/2025 Week 5",
+        "finish": "02/2025 Week 7"
+    },
+    {
+        "task": "Site readied for construction",
+        "start": "02/2025 Week 5",
+        "finish": "02/2025 Week 7"
+    },
+    {
+        "task": "Procurement",
+        "start": "02/2025 Week 6",
+        "finish": "02/2025 Week 8"
+    },
+    {
+        "task": "Project team purchases required equipment and materials and plans for labor needs",
+        "start": "02/2025 Week 6",
+        "finish": "02/2025 Week 8"
+    },
+    {
+        "task": "Construction",
+        "start": "03/2025 Week 9",
+        "finish": "05/2025 Week 18"
+    },
+    {
+        "task": "Setting up on-site or near-site storage facilities",
+        "start": "03/2025 Week 9",
+        "finish": "03/2025 Week 11"
+    },
+    {
+        "task": "Securing the site",
+        "start": "03/2025 Week 9",
+        "finish": "03/2025 Week 11"
+    },
+    {
+        "task": "Establishing safety programs",
+        "start": "03/2025 Week 11",
+        "finish": "04/2025 Week 12"
+    },
+    {
+        "task": "Completing all construction work",
+        "start": "04/2025 Week 12",
+        "finish": "04/2025 Week 18"
+    },
+    {
+        "task": "Commissioning",
+        "start": "05/2025 Week 19",
+        "finish": "05/2025 Week 20"
+    },
+    {
+        "task": "Commissioning - Ensuring all construction is solid and all systems are operational",
+        "start": "05/2025 Week 19",
+        "finish": "05/2025 Week 20"
+    },
+    {
+        "task": "Turning Over to Building to owner",
+        "start": "05/2025 Week 21",
+        "finish": "05/2025 Week 21"
+    }
+]
