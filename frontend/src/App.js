@@ -114,10 +114,10 @@ function App() {
                     onChange={(e) => setContentType(e.target.value)}
                     className="text-lg"
                   >
-                    <option value="titleblock">Title Block </option>
-                    <option value="plan-deterministic">Plan - Deterministic</option>
-                    <option value="plan-ai">Plan - Ai</option>
-                    <option value="full-result">Full plan</option>
+                    <option value="titleblock-hybrid">Title Block </option>
+                    <option value="rooms-deterministic">Rooms - Deterministic</option>
+                    <option value="rooms-ai">Rooms - Ai</option>
+                    <option value="full-plan-ai">Full plan</option>
                   </Select>
                 </div>
 

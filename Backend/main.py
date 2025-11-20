@@ -14,7 +14,8 @@ import src.plan2data.full_plan_ai as full
 #from voronoi_functions import*
 from pydantic import BaseModel
 from enum import Enum
-
+# run fastapi dev main.py
+#     server   Server started at http://127.0.0.1:8000  server   Documentation at http://127.0.0.1:8000/docs
 class Response(BaseModel):
     input_format: str
     is_extraction_succesful: bool
@@ -23,7 +24,7 @@ class Response(BaseModel):
     result: str | dict | list 
 
 class ContentType(str, Enum):
-    titleblock = "titleblock"
+    titleblock = "titleblock-hybrid"
     plan_deterministic = "rooms-deterministic"
     plan_ai= "rooms-ai"
     full_result = "full-plan-ai"
@@ -145,13 +146,14 @@ async def create_upload_file_fin(file: UploadFile):
 
         result, method, is_success = boq.financial_boq(file_path)
 
-        response = Response(
-            input_format=file.content_type,  
-            is_extraction_succesful= is_success,
-            confident_value=None,
-            extraction_method=method,
-            result=result
-        )
+        # response = Response(
+        #     input_format=file.content_type,  
+        #     is_extraction_succesful= is_success,
+        #     confident_value=None,
+        #     extraction_method=method,
+        #     result=result
+        # )
+        response = ("Under Construction")
         
         os.remove(file_path)  
         
