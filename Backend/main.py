@@ -16,6 +16,18 @@ from pydantic import BaseModel
 from enum import Enum
 # run fastapi dev main.py
 #     server   Server started at http://127.0.0.1:8000  server   Documentation at http://127.0.0.1:8000/docs
+from openai import OpenAI
+import json
+from fastapi import Request
+
+
+
+# ========================================
+# OPENAI API KEY
+# ========================================
+OPENAI_API_KEY = "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"  
+openai_client = OpenAI(api_key=OPENAI_API_KEY)
+
 class Response(BaseModel):
     input_format: str
     is_extraction_succesful: bool
@@ -252,5 +264,61 @@ async def create_upload_file_floorplans(file: UploadFile, content_type: ContentT
         print(f"Error processing file: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Error processing file: {str(e)}")
     
+
+# ========================================
+# AI CHATBOT
+# ========================================
+@app.post("/ask_ai/")
+async def ask_ai(request: Request):
+    """Ask AI questions about parsed construction document data"""
+    try:
+        data = await request.json()
+        question = data.get("question")
+        document_data = data.get("document_data")
+        
+        if not question:
+            raise HTTPException(status_code=400, detail="Missing 'question' field")
+        
+        if not document_data:
+            raise HTTPException(status_code=400, detail="Missing 'document_data' field")
+        
+        prompt = f"""You are a helpful assistant analyzing construction document data.
+
+Here is the parsed construction document data in JSON format:
+{json.dumps(document_data, indent=2)}
+
+User question: {question}
+
+Instructions:
+- Answer the question based ONLY on the data provided above
+- Be concise and specific
+- If the information is not in the data, say "This information is not available in the parsed document"
+- Focus on construction-related insights
+
+Answer:"""
+
+        response = openai_client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[{"role": "user", "content": prompt}],
+            max_tokens=500,
+            temperature=0.7
+        )
+        
+        answer = response.choices[0].message.content
+        
+        return {
+            "answer": answer,
+            "model": "gpt-4o-mini",
+            "usage": {
+                "prompt_tokens": response.usage.prompt_tokens,
+                "completion_tokens": response.usage.completion_tokens,
+                "total_tokens": response.usage.total_tokens
+            }
+        }
+        
+    except Exception as e:
+        print(f"Error in ask_ai: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
 
 # #https://fastapi.tiangolo.com/async/#in-a-hurry maybe have a look at this to improve performance
