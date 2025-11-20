@@ -73,29 +73,39 @@ def call_mistral_for_room_adjacency_extraction(path):
     return chat_response.choices[0].message.content
 
 def create_message_for_room_adjacency_extraction(path):
-    base64_image = encode_image(path)
+    base64_data, file_type, media_type = encode_file(path)
     text = create_room_adjacency_extraction_prompt()
+    # Determine content type based on file type
+      # Build the file content dynamically
+    if file_type == 'pdf':
+        file_content = {
+            "type": "document_url",
+            "document_url": f"data:{media_type};base64,{base64_data}"
+        }
+    else:  # image
+        file_content = {
+            "type": "image_url",
+            "image_url": f"data:{media_type};base64,{base64_data}"
+        }
+    
     messages = [
-    {
-        "role": "user",
-        "content": [
-            {
-                "type": "text",
-                "text": text
-            },
-            {
-                "type": "image_url",
-                "image_url": f"data:image/jpeg;base64,{base64_image}"
-            }
-        ]
-    }
-]
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": text
+                },
+                file_content  # Insert the dynamically built dictionary
+            ]
+        }
+    ]
     return messages
 
-################################## Floorplan Metadata ####################
+################################## Full Floorplan Metadata ####################
 def call_mistral_for_floorplan_extraction_from_image(path):
     """Extract both titleblock and room adjacency information from floor plan image"""
-    message = create_message_for_floorplan_extraction_from_image(path)
+    message = create_message_for_full_floorplan_extraction(path)
     chat_response = client.chat.complete(
         model = model,
         messages = message,
@@ -105,25 +115,38 @@ def call_mistral_for_floorplan_extraction_from_image(path):
     )
     return chat_response.choices[0].message.content
 
-def create_message_for_floorplan_extraction_from_image(path):
-    base64_image = encode_image(path)
-    text = create_floorplan_extraction_prompt()
+def create_message_for_full_floorplan_extraction(path):
+    text = create_full_floorplan_extraction_prompt()
+    base64_data, file_type, media_type = encode_file(path)
+    
+    
+    # Build the file content dynamically
+    if file_type == 'pdf':
+        file_content = {
+            "type": "document_url",
+            "document_url": f"data:{media_type};base64,{base64_data}"
+        }
+    else:  # image
+        file_content = {
+            "type": "image_url",
+            "image_url": f"data:{media_type};base64,{base64_data}"
+        }
+    
     messages = [
-    {
-        "role": "user",
-        "content": [
-            {
-                "type": "text",
-                "text": text
-            },
-            {
-                "type": "image_url",
-                "image_url": f"data:image/jpeg;base64,{base64_image}"
-            }
-        ]
-    }
-]
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": text
+                },
+                file_content  # Insert the dynamically built dictionary
+            ]
+        }
+    ]
     return messages
+
+###################### ENCODE IMPORT FILES ########################################
 def encode_image(image_path):
     """Encode the image to base64."""
     try:
@@ -132,11 +155,53 @@ def encode_image(image_path):
     except FileNotFoundError:
         print(f"Error: The file {image_path} was not found.")
         return None
-    except Exception as e:  # Added general exception handling
+    except Exception as e:
         print(f"Error: {e}")
         return None
+
+def encode_pdf(pdf_path):
+    """Encode the PDF to base64."""
+    try:
+        with open(pdf_path, "rb") as pdf_file:
+            return base64.b64encode(pdf_file.read()).decode('utf-8')
+    except FileNotFoundError:
+        print(f"Error: The file {pdf_path} was not found.")
+        return None
+    except Exception as e:
+        print(f"Error: {e}")
+        return None
+
+def get_file_type(file_path):
+    """Determine if file is an image or PDF based on extension."""
+    extension = file_path.lower().split('.')[-1]
+    if extension in ['pdf']:
+        return 'pdf'
+    elif extension in ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp']:
+        return 'image'
+    else:
+        return 'unknown'
+
+def encode_file(file_path):
+    """
+    Encode either an image or PDF to base64.
+    Returns tuple: (base64_data, file_type, media_type)
+    """
+    file_type = get_file_type(file_path)
     
-#########################################################################
+    if file_type == 'pdf':
+        base64_data = encode_pdf(file_path)
+        media_type = "application/pdf"
+    elif file_type == 'image':
+        base64_data = encode_image(file_path)
+        media_type = "image/jpeg"
+    else:
+        raise ValueError(f"Unsupported file type for {file_path}. Supported types: PDF, JPG, JPEG, PNG, GIF, BMP, WEBP")
+    
+    if base64_data is None:
+        raise ValueError(f"Failed to encode file: {file_path}")
+    
+    return base64_data, file_type, media_type
+
 ################## Prompt Titleblock ################################
 def create_titleblock_extraction_prompt():
     prompt = f"""
@@ -472,6 +537,7 @@ Return ONLY valid JSON with no additional text:
         "ROOM_NAME_2": ["CONNECTED_ROOM_1"]
     }},
     "confidence": 0.0
+
 }}
 
 Confidence Score (0.0-1.0):
@@ -494,7 +560,7 @@ Extract the information now.
     return prompt
 
 ###################### Full Flooplan AI #####################################
-def create_floorplan_extraction_prompt():
+def create_full_floorplan_extraction_prompt():
     """Combined prompt for titleblock and room adjacency extraction"""
     prompt = f"""
 Architectural Floor Plan Information Extraction

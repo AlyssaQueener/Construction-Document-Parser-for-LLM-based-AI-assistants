@@ -10,6 +10,7 @@ import uuid
 import src.gantt2data.ganttParser as gantt_parser
 import src.boq2data.camelot_setup.boq2data_gemini as boq
 import src.plan2data.voronoi_functions as vor
+import src.plan2data.full_plan_ai as full
 #from voronoi_functions import*
 from pydantic import BaseModel
 from enum import Enum
@@ -23,9 +24,9 @@ class Response(BaseModel):
 
 class ContentType(str, Enum):
     titleblock = "titleblock"
-    plan_deterministic = "plan-deterministic"
-    plan_ai= "plan-ai"
-    full_result = "full-result"
+    plan_deterministic = "rooms-deterministic"
+    plan_ai= "rooms-ai"
+    full_result = "full-plan-ai"
 
 class ChartFormat(str, Enum):
     visual = "visual"
@@ -78,7 +79,7 @@ async def hello_world():
     return {"This is": "Document Parser for LLM based AI assistants",
             "To try out API" : "Go to -> /docs"
             }
-    
+########################################## GANT##########################################    
 @app.post("/gantt_parser/{chart_format}")
 async def create_upload_file_gantt(file: UploadFile, chart_format: ChartFormat):
     upload_dir = "uploads"  # Make sure this directory exists
@@ -122,6 +123,8 @@ async def create_upload_file_gantt(file: UploadFile, chart_format: ChartFormat):
     except Exception as e:
         print(f"Error processing file: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Error processing file: {str(e)}")
+    
+################################################ FINANCIAL ##########################################################################
 @app.post("/financial_parser/")
 async def create_upload_file_fin(file: UploadFile):
     upload_dir = "uploads"
@@ -160,75 +163,83 @@ async def create_upload_file_fin(file: UploadFile):
         print(f"Error processing file: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Error processing file: {str(e)}")
 
+################################################################## DRAWING ######################################################
 
 @app.post("/drawing_parser/{content_type}/")
 async def create_upload_file_floorplans(file: UploadFile, content_type: ContentType):
-    upload_dir = "uploads"  # Make sure this directory exists
+    upload_dir = "uploads"
     os.makedirs(upload_dir, exist_ok=True)
-    
     try:
-        # Validiere Dateityp basierend auf content_type
-        if content_type == "plan-deterministic":
-            # Für deterministic: PDF erforderlich
+        # Validate file type based on content_type
+        if content_type == "rooms-deterministic":
+            # Deterministic requires PDF
             if not file.content_type == 'application/pdf':
                 raise HTTPException(status_code=400, detail="Deterministic plan parsing requires PDF file")
+        elif content_type == "titleblock-hybrid":
+            # Hybrid Plan requires Image (not PDF)
+            if not file.content_type.startswith('image/'):
+                raise HTTPException(status_code=400, detail="Titleblock Hybrid parsing requires Image file")
+        elif content_type in ["rooms-ai", "full-plan-ai"]:
+            # AI methods accept both images and PDFs
+            if not (file.content_type.startswith('image/') or file.content_type == 'application/pdf'):
+                raise HTTPException(status_code=400, detail="File must be an image or PDF")
         else:
+            # Default: only images
             if not file.content_type.startswith('image/'):
                 raise HTTPException(status_code=400, detail="File must be an image")
         
-        file_extension = os.path.splitext(file.filename)[1] if file.filename else '.jpg'# Bestimme Dateiendung
-        if content_type == "plan-deterministic":
-            file_extension = '.pdf'
-        else:
-            file_extension = os.path.splitext(file.filename)[1] if file.filename else '.jpg'
+        # Determine file extension
+        file_extension = os.path.splitext(file.filename)[1] if file.filename else '.jpg'
         
+        # Generate unique filename
         unique_filename = f"{uuid.uuid4()}{file_extension}"
         file_path = os.path.join(upload_dir, unique_filename)
         
+        # Read file content
         file_content = await file.read()
         
-        if content_type == "plan-deterministic":
-            # PDF direkt speichern
+        # Save file based on type
+        if file.content_type == 'application/pdf':
+            # Save PDF directly - DO NOT CONVERT
             with open(file_path, 'wb') as f:
                 f.write(file_content)
         else:
-            # Bild verarbeiten und als JPEG speichern
+            # Process and save image as JPEG
             with Image.open(io.BytesIO(file_content)) as im:
                 if im.mode in ("RGBA", "P"):
                     im = im.convert("RGB")
                 im.save(file_path, 'JPEG')
         
         method = "None"
-
         is_succesful = False
-
-        if content_type == "titleblock":
+        confidence = None
+        
+        # Process based on content_type
+        if content_type == "titleblock-hybrid":
             result, method, is_succesful, confidence = floorplan_parser.get_title_block_info(file_path)
-        elif content_type== "plan-deterministic":
+            
+        elif content_type == "rooms-deterministic":
             result = vor.neighboring_rooms_voronoi(file_path)
             method = "deterministic"
-            is_succesful= False
-            confidence = 0.0
-        elif content_type == "plan-ai":
-            result = { "under":"construction"}
-            method = "ai"
-            is_succesful= False
-            confidence = 0.0
-        elif content_type== "full-result":
-            result = { "under":"construction"}
-            method = "ai"
-            is_succesful= False
-            confidence = 0.0
-
-
+            is_succesful = None
+            confidence = None
+            
+        elif content_type == "rooms-ai":
+            result, method, is_succesful, confidence = full.get_neighbouring_rooms_with_ai(file_path)
+            
+        elif content_type == "full-plan-ai":
+            result, method, is_succesful, confidence = full.get_full_floorplan_metadata_with_ai(file_path)
+            
+        # Create response
         response = Response(
             input_format=file.content_type,  
-            is_extraction_succesful= is_succesful,
+            is_extraction_succesful=is_succesful,
             confident_value=confidence,
             extraction_method=method,
             result=result
         )
         
+        # Clean up uploaded file
         os.remove(file_path)  
         
         return response
@@ -237,6 +248,7 @@ async def create_upload_file_floorplans(file: UploadFile, content_type: ContentT
         raise
     except Exception as e:
         print(f"Error processing file: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error processing image: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error processing file: {str(e)}")
+    
 
-#https://fastapi.tiangolo.com/async/#in-a-hurry maybe have a look at this to improve performance
+# #https://fastapi.tiangolo.com/async/#in-a-hurry maybe have a look at this to improve performance
