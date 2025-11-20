@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Card, Button, Select, Label, Alert, Spinner, Tabs } from 'flowbite-react';
 import axios from 'axios';
 
+
 function App() {
   const [file, setFile] = useState(null);
   const [chartFormat, setChartFormat] = useState('visual');
@@ -9,12 +10,36 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
+  const [aiQuestion, setAiQuestion] = useState('');
+  const [aiAnswer, setAiAnswer] = useState('');
+  const [aiLoading, setAiLoading] = useState(false);
+  
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
     setResult(null);
     setError(null);
   };
+
+  const askAI = async () => {
+  if (!result || !aiQuestion.trim()) return;
+  
+  setAiLoading(true);
+  setAiAnswer('');
+
+  try {
+    const response = await axios.post('http://localhost:8000/ask_ai/', {
+      question: aiQuestion,
+      document_data: result.result
+    });
+
+    setAiAnswer(response.data.answer);
+  } catch (err) {
+    setAiAnswer('Error: ' + (err.response?.data?.detail || err.message));
+  } finally {
+    setAiLoading(false);
+  }
+};
 
   const handleSubmit = async (endpoint) => {
     if (!file) {
@@ -349,6 +374,92 @@ function App() {
         )}
 
       </div>
+
+
+      {/* AI Question Box */}
+{result && (
+  <Card className="mt-6 shadow-2xl">
+    <h5 className="text-2xl font-bold text-gray-900 mb-2">
+      🤖 Ask AI About This Document
+    </h5>
+    <p className="text-gray-600 mb-4">
+      Ask questions about the parsed construction data
+    </p>
+
+    {/* Question Input */}
+    <div className="flex gap-2 mb-4">
+      <input
+        type="text"
+        value={aiQuestion}
+        onChange={(e) => setAiQuestion(e.target.value)}
+        placeholder="e.g., What is the project location?"
+        className="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        onKeyPress={(e) => e.key === 'Enter' && !aiLoading && askAI()}
+        disabled={aiLoading}
+      />
+      <Button 
+        onClick={askAI} 
+        color="blue"
+        size="lg"
+        disabled={aiLoading || !aiQuestion.trim()}
+      >
+        {aiLoading ? (
+          <>
+            <Spinner size="sm" className="mr-2" />
+            Asking...
+          </>
+        ) : (
+          'Ask AI'
+        )}
+      </Button>
+    </div>
+
+    {/* Answer Display */}
+    {aiAnswer && (
+      <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
+        <p className="font-semibold text-blue-900 mb-2">💡 Answer:</p>
+        <p className="text-gray-800 whitespace-pre-wrap">{aiAnswer}</p>
+      </div>
+    )}
+
+    {/* Example Questions */}
+    {!aiAnswer && (
+      <div className="mt-4">
+        <p className="text-sm text-gray-600 mb-2">💡 Try these questions:</p>
+        <div className="flex flex-wrap gap-2">
+          <button 
+            onClick={() => setAiQuestion('What is the project ID and location?')}
+            className="text-xs bg-gray-200 px-3 py-1 rounded-full hover:bg-gray-300 transition"
+            disabled={aiLoading}
+          >
+            What is the project ID and location?
+          </button>
+          <button 
+            onClick={() => setAiQuestion('Who is the client and architect?')}
+            className="text-xs bg-gray-200 px-3 py-1 rounded-full hover:bg-gray-300 transition"
+            disabled={aiLoading}
+          >
+            Who is the client and architect?
+          </button>
+          <button 
+            onClick={() => setAiQuestion('What is the plan scale and format?')}
+            className="text-xs bg-gray-200 px-3 py-1 rounded-full hover:bg-gray-300 transition"
+            disabled={aiLoading}
+          >
+            What is the plan scale and format?
+          </button>
+          <button 
+            onClick={() => setAiQuestion('Summarize the key information')}
+            className="text-xs bg-gray-200 px-3 py-1 rounded-full hover:bg-gray-300 transition"
+            disabled={aiLoading}
+          >
+            Summarize the key information
+          </button>
+        </div>
+      </div>
+    )}
+  </Card>
+)}
 
       {/* SIMPLE FOOTER - LOGO + FIND US */}
       <footer className="mt-2 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-8  max-w-6xl mx-auto">

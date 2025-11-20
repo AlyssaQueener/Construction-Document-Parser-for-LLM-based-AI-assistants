@@ -1,18 +1,23 @@
 from typing import Union
 from fastapi.middleware.cors import CORSMiddleware
-
-from fastapi import FastAPI, UploadFile, HTTPException
+from fastapi import FastAPI, UploadFile, HTTPException, Request
 from PIL import Image 
 import src.plan2data.titleBlockInfo as floorplan_parser
 import io
 import os
 import uuid
 import src.gantt2data.ganttParser as gantt_parser
-import src.boq2data.camelot_setup.boq2data_gemini as boq
-import src.plan2data.voronoi_functions as vor
-#from voronoi_functions import*
+import boq2data_gemini as boq
 from pydantic import BaseModel
-from enum import Enum
+from openai import OpenAI
+from dotenv import load_dotenv
+import json
+
+# Load environment variables
+load_dotenv()
+
+# Initialize OpenAI client
+openai_client = OpenAI(api_key=os.environ.get("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"))
 
 class Response(BaseModel):
     input_format: str
@@ -20,17 +25,6 @@ class Response(BaseModel):
     confident_value: float | None
     extraction_method: str
     result: str | dict | list 
-
-class ContentType(str, Enum):
-    titleblock = "titleblock"
-    plan_deterministic = "plan-deterministic"
-    plan_ai= "plan-ai"
-    full_result = "full-result"
-
-class ChartFormat(str, Enum):
-    visual = "visual"
-    tabular = "tabular"
-
 
 description = """
 This API helps you to convert your Construction Document into structured JSON files, ideal for further applications and LLM usage.
@@ -54,16 +48,11 @@ Please use the parameter chartFormat
 upload and parse **Floor Plans**.
 """
 
-
-
 app = FastAPI(
-    title="Construction Document Parser for LLM based AI assistants",
-    description=description
+    title="Construction Document Parser",
+    description=description,
+    version="1.0.0"
 )
-
-
-## after installation of fastapi run -- fastapi dev main.py -- in terminal to start server locally 
-## go to http://127.0.0.1:8000/docs to view the automatically created api docs
 
 app.add_middleware(
     CORSMiddleware,
@@ -80,8 +69,8 @@ async def hello_world():
             }
     
 @app.post("/gantt_parser/{chart_format}")
-async def create_upload_file_gantt(file: UploadFile, chart_format: ChartFormat):
-    upload_dir = "uploads"  # Make sure this directory exists
+async def create_upload_file_gantt(file: UploadFile, chart_format):
+    upload_dir = "uploads"
     os.makedirs(upload_dir, exist_ok=True)
     
     try:
@@ -108,9 +97,9 @@ async def create_upload_file_gantt(file: UploadFile, chart_format: ChartFormat):
         response = Response(
             input_format=file.content_type,  
             is_extraction_succesful= is_succesful,
-            confident_value=None,
             extraction_method=method,
-            result=result
+            result=result,
+            confident_value=None
         )
         
         os.remove(file_path)  
@@ -122,12 +111,13 @@ async def create_upload_file_gantt(file: UploadFile, chart_format: ChartFormat):
     except Exception as e:
         print(f"Error processing file: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Error processing file: {str(e)}")
+
 @app.post("/financial_parser/")
 async def create_upload_file_fin(file: UploadFile):
     upload_dir = "uploads"
     os.makedirs(upload_dir, exist_ok=True)
     try:
-        if not (file.content_type == 'application/pdf' or file.content_type.startswith('image/')): # type: ignore
+        if not (file.content_type == 'application/pdf' or file.content_type.startswith('image/')):
             raise HTTPException(status_code=400, detail="File must be a PDF or image")
         
         file_extension = os.path.splitext(file.filename)[1] if file.filename else '.pdf'
@@ -145,9 +135,9 @@ async def create_upload_file_fin(file: UploadFile):
         response = Response(
             input_format=file.content_type,  
             is_extraction_succesful= is_success,
-            confident_value=None,
             extraction_method=method,
-            result=result
+            result=result,
+            confident_value=None
         )
         
         os.remove(file_path)  
@@ -160,66 +150,30 @@ async def create_upload_file_fin(file: UploadFile):
         print(f"Error processing file: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Error processing file: {str(e)}")
 
-
-@app.post("/drawing_parser/{content_type}/")
-async def create_upload_file_floorplans(file: UploadFile, content_type: ContentType):
-    upload_dir = "uploads"  # Make sure this directory exists
+@app.post("/drawing_parser/")
+async def create_upload_file_floorplans(file: UploadFile):
+    upload_dir = "uploads"
     os.makedirs(upload_dir, exist_ok=True)
     
     try:
-        # Validiere Dateityp basierend auf content_type
-        if content_type == "plan-deterministic":
-            # Für deterministic: PDF erforderlich
-            if not file.content_type == 'application/pdf':
-                raise HTTPException(status_code=400, detail="Deterministic plan parsing requires PDF file")
-        else:
-            if not file.content_type.startswith('image/'):
-                raise HTTPException(status_code=400, detail="File must be an image")
+        if not file.content_type.startswith('image/'):
+            raise HTTPException(status_code=400, detail="File must be an image")
         
-        file_extension = os.path.splitext(file.filename)[1] if file.filename else '.jpg'# Bestimme Dateiendung
-        if content_type == "plan-deterministic":
-            file_extension = '.pdf'
-        else:
-            file_extension = os.path.splitext(file.filename)[1] if file.filename else '.jpg'
-        
+        file_extension = os.path.splitext(file.filename)[1] if file.filename else '.jpg'
         unique_filename = f"{uuid.uuid4()}{file_extension}"
         file_path = os.path.join(upload_dir, unique_filename)
         
         file_content = await file.read()
         
-        if content_type == "plan-deterministic":
-            # PDF direkt speichern
-            with open(file_path, 'wb') as f:
-                f.write(file_content)
-        else:
-            # Bild verarbeiten und als JPEG speichern
-            with Image.open(io.BytesIO(file_content)) as im:
-                if im.mode in ("RGBA", "P"):
-                    im = im.convert("RGB")
-                im.save(file_path, 'JPEG')
+        with Image.open(io.BytesIO(file_content)) as im:
+            if im.mode in ("RGBA", "P"):
+                im = im.convert("RGB")
+            im.save(file_path, 'JPEG')
         
         method = "None"
-
         is_succesful = False
 
-        if content_type == "titleblock":
-            result, method, is_succesful, confidence = floorplan_parser.get_title_block_info(file_path)
-        elif content_type== "plan-deterministic":
-            result = vor.neighboring_rooms_voronoi(file_path)
-            method = "deterministic"
-            is_succesful= False
-            confidence = 0.0
-        elif content_type == "plan-ai":
-            result = { "under":"construction"}
-            method = "ai"
-            is_succesful= False
-            confidence = 0.0
-        elif content_type== "full-result":
-            result = { "under":"construction"}
-            method = "ai"
-            is_succesful= False
-            confidence = 0.0
-
+        result, method, is_succesful, confidence = floorplan_parser.get_title_block_info(file_path)
 
         response = Response(
             input_format=file.content_type,  
@@ -239,4 +193,61 @@ async def create_upload_file_floorplans(file: UploadFile, content_type: ContentT
         print(f"Error processing file: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Error processing image: {str(e)}")
 
-#https://fastapi.tiangolo.com/async/#in-a-hurry maybe have a look at this to improve performance
+@app.post("/ask_ai/")
+async def ask_ai(request: Request):
+    """
+    Ask AI questions about parsed construction document data.
+    No conversation memory - each question is independent.
+    """
+    try:
+        data = await request.json()
+        question = data.get("question")
+        document_data = data.get("document_data")
+        
+        if not question:
+            raise HTTPException(status_code=400, detail="Missing question")
+        
+        if not document_data:
+            raise HTTPException(status_code=400, detail="Missing document_data")
+        
+        # Create prompt with document data
+        prompt = f"""You are a helpful assistant analyzing construction document data.
+
+Here is the parsed construction document data in JSON format:
+{json.dumps(document_data, indent=2)}
+
+User question: {question}
+
+Instructions:
+- Answer the question based on the data provided
+- Be concise and specific
+- If the information is not in the data, say so politely
+- Focus on construction-related insights
+
+Answer:"""
+
+        # Call OpenAI API
+        response = openai_client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {"role": "user", "content": prompt}
+            ],
+            max_tokens=500,
+            temperature=0.7
+        )
+        
+        answer = response.choices[0].message.content
+        
+        return {
+            "answer": answer,
+            "model": "gpt-4o-mini",
+            "usage": {
+                "prompt_tokens": response.usage.prompt_tokens,
+                "completion_tokens": response.usage.completion_tokens,
+                "total_tokens": response.usage.total_tokens
+            }
+        }
+        
+    except Exception as e:
+        print(f"Error in ask_ai: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
