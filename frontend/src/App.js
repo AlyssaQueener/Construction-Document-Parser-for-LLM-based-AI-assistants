@@ -2,44 +2,24 @@ import { useState } from 'react';
 import { Card, Button, Select, Label, Alert, Spinner, Tabs } from 'flowbite-react';
 import axios from 'axios';
 
-
 function App() {
   const [file, setFile] = useState(null);
   const [chartFormat, setChartFormat] = useState('visual');
-  const [contentType, setContentType] = useState('titleblock');
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
+  
+  // AI Chatbot States
   const [aiQuestion, setAiQuestion] = useState('');
   const [aiAnswer, setAiAnswer] = useState('');
   const [aiLoading, setAiLoading] = useState(false);
-  
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
     setResult(null);
     setError(null);
+    setAiAnswer('');  // Clear AI answer when new file is selected
   };
-
-  const askAI = async () => {
-  if (!result || !aiQuestion.trim()) return;
-  
-  setAiLoading(true);
-  setAiAnswer('');
-
-  try {
-    const response = await axios.post('http://localhost:8000/ask_ai/', {
-      question: aiQuestion,
-      document_data: result.result
-    });
-
-    setAiAnswer(response.data.answer);
-  } catch (err) {
-    setAiAnswer('Error: ' + (err.response?.data?.detail || err.message));
-  } finally {
-    setAiLoading(false);
-  }
-};
 
   const handleSubmit = async (endpoint) => {
     if (!file) {
@@ -50,6 +30,7 @@ function App() {
     setLoading(true);
     setError(null);
     setResult(null);
+    setAiAnswer('');  // Clear AI answer when new parsing starts
 
     const formData = new FormData();
     formData.append('file', file);
@@ -58,9 +39,6 @@ function App() {
       let url = `http://localhost:8000${endpoint}`;
       if (endpoint.includes('gantt')) {
         url = `http://localhost:8000/gantt_parser/${chartFormat}`;
-      }
-      if (endpoint.includes('drawing')){
-        url = `http://localhost:8000/drawing_parser/${contentType}`;
       }
 
       const response = await axios.post(url, formData, {
@@ -74,6 +52,27 @@ function App() {
       setError(err.response?.data?.detail || 'Error processing file');
     } finally {
       setLoading(false);
+    }
+  };
+
+  // AI Chatbot Function
+  const askAI = async () => {
+    if (!result || !aiQuestion.trim()) return;
+    
+    setAiLoading(true);
+    setAiAnswer('');
+
+    try {
+      const response = await axios.post('http://localhost:8000/ask_ai/', {
+        question: aiQuestion,
+        document_data: result.result
+      });
+
+      setAiAnswer(response.data.answer);
+    } catch (err) {
+      setAiAnswer('Error: ' + (err.response?.data?.detail || err.message));
+    } finally {
+      setAiLoading(false);
     }
   };
 
@@ -130,21 +129,6 @@ function App() {
                     </p>
                   </div>
                 )}
-
-                <div>
-                  <Label htmlFor="content-type" value="Content Type" className="text-lg mb-2" />
-                  <Select
-                    id="content-type"
-                    value={contentType}
-                    onChange={(e) => setContentType(e.target.value)}
-                    className="text-lg"
-                  >
-                    <option value="titleblock">Title Block </option>
-                    <option value="plan-deterministic">Plan - Deterministic</option>
-                    <option value="plan-ai">Plan - Ai</option>
-                    <option value="full-result">Full plan</option>
-                  </Select>
-                </div>
 
                 <Button
                   color="success"
@@ -373,111 +357,110 @@ function App() {
           </Card>
         )}
 
-      </div>
+        {/* AI CHATBOT */}
+        {result && (
+          <Card className="mt-6 shadow-2xl">
+            <h5 className="text-2xl font-bold text-gray-900 mb-2">
+              Ask AI About This Document
+            </h5>
+            <p className="text-gray-600 mb-4">
+              Ask questions about the parsed construction data
+            </p>
 
+            {/* Question Input */}
+            <div className="flex gap-2 mb-4">
+              <input
+                type="text"
+                value={aiQuestion}
+                onChange={(e) => setAiQuestion(e.target.value)}
+                placeholder="e.g., What is the project location?"
+                className="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                onKeyPress={(e) => e.key === 'Enter' && !aiLoading && askAI()}
+                disabled={aiLoading}
+              />
+              <Button 
+                onClick={askAI} 
+                color="blue"
+                size="lg"
+                disabled={aiLoading || !aiQuestion.trim()}
+              >
+                {aiLoading ? (
+                  <>
+                    <Spinner size="sm" className="mr-2" />
+                    Asking...
+                  </>
+                ) : (
+                  'Ask AI'
+                )}
+              </Button>
+            </div>
 
-      {/* AI Question Box */}
-{result && (
-  <Card className="mt-6 shadow-2xl">
-    <h5 className="text-2xl font-bold text-gray-900 mb-2">
-      🤖 Ask AI About This Document
-    </h5>
-    <p className="text-gray-600 mb-4">
-      Ask questions about the parsed construction data
-    </p>
+            {/* Answer Display */}
+            {aiAnswer && (
+              <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
+                <p className="font-semibold text-blue-900 mb-2"> Answer:</p>
+                <p className="text-gray-800 whitespace-pre-wrap">{aiAnswer}</p>
+              </div>
+            )}
 
-    {/* Question Input */}
-    <div className="flex gap-2 mb-4">
-      <input
-        type="text"
-        value={aiQuestion}
-        onChange={(e) => setAiQuestion(e.target.value)}
-        placeholder="e.g., What is the project location?"
-        className="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-        onKeyPress={(e) => e.key === 'Enter' && !aiLoading && askAI()}
-        disabled={aiLoading}
-      />
-      <Button 
-        onClick={askAI} 
-        color="blue"
-        size="lg"
-        disabled={aiLoading || !aiQuestion.trim()}
-      >
-        {aiLoading ? (
-          <>
-            <Spinner size="sm" className="mr-2" />
-            Asking...
-          </>
-        ) : (
-          'Ask AI'
+            {/* Example Questions */}
+            {!aiAnswer && (
+              <div className="mt-4">
+                <p className="text-sm text-gray-600 mb-2">Try these questions:</p>
+                <div className="flex flex-wrap gap-2">
+                  <button 
+                    onClick={() => setAiQuestion('What is the project ID and location?')}
+                    className="text-xs bg-gray-200 px-3 py-1 rounded-full hover:bg-gray-300 transition"
+                    disabled={aiLoading}
+                  >
+                    What is the project ID and location?
+                  </button>
+                  <button 
+                    onClick={() => setAiQuestion('Who is the client and architect?')}
+                    className="text-xs bg-gray-200 px-3 py-1 rounded-full hover:bg-gray-300 transition"
+                    disabled={aiLoading}
+                  >
+                    Who is the client and architect?
+                  </button>
+                  <button 
+                    onClick={() => setAiQuestion('What is the plan scale and format?')}
+                    className="text-xs bg-gray-200 px-3 py-1 rounded-full hover:bg-gray-300 transition"
+                    disabled={aiLoading}
+                  >
+                    What is the plan scale and format?
+                  </button>
+                  <button 
+                    onClick={() => setAiQuestion('Summarize the key information')}
+                    className="text-xs bg-gray-200 px-3 py-1 rounded-full hover:bg-gray-300 transition"
+                    disabled={aiLoading}
+                  >
+                    Summarize the key information
+                  </button>
+                </div>
+              </div>
+            )}
+          </Card>
         )}
-      </Button>
-    </div>
 
-    {/* Answer Display */}
-    {aiAnswer && (
-      <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
-        <p className="font-semibold text-blue-900 mb-2">💡 Answer:</p>
-        <p className="text-gray-800 whitespace-pre-wrap">{aiAnswer}</p>
       </div>
-    )}
 
-    {/* Example Questions */}
-    {!aiAnswer && (
-      <div className="mt-4">
-        <p className="text-sm text-gray-600 mb-2">💡 Try these questions:</p>
-        <div className="flex flex-wrap gap-2">
-          <button 
-            onClick={() => setAiQuestion('What is the project ID and location?')}
-            className="text-xs bg-gray-200 px-3 py-1 rounded-full hover:bg-gray-300 transition"
-            disabled={aiLoading}
-          >
-            What is the project ID and location?
-          </button>
-          <button 
-            onClick={() => setAiQuestion('Who is the client and architect?')}
-            className="text-xs bg-gray-200 px-3 py-1 rounded-full hover:bg-gray-300 transition"
-            disabled={aiLoading}
-          >
-            Who is the client and architect?
-          </button>
-          <button 
-            onClick={() => setAiQuestion('What is the plan scale and format?')}
-            className="text-xs bg-gray-200 px-3 py-1 rounded-full hover:bg-gray-300 transition"
-            disabled={aiLoading}
-          >
-            What is the plan scale and format?
-          </button>
-          <button 
-            onClick={() => setAiQuestion('Summarize the key information')}
-            className="text-xs bg-gray-200 px-3 py-1 rounded-full hover:bg-gray-300 transition"
-            disabled={aiLoading}
-          >
-            Summarize the key information
-          </button>
-        </div>
-      </div>
-    )}
-  </Card>
-)}
-
-      {/* SIMPLE FOOTER - LOGO + FIND US */}
-      <footer className="mt-2 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-8  max-w-6xl mx-auto">
-        <div className="flex items-corner justify-corner gap-8">
+      {/* FOOTER */}
+      <footer className="mt-16 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-8 shadow-lg max-w-6xl mx-auto">
+        <div className="flex items-center justify-center gap-8">
           
           {/* Logo */}
           <div>
             <img 
               src="/logoTUM.png" 
-              alt="tum Logo" 
-              className="w-20.2 h-20"
+              alt="TUM Logo" 
+              className="w-24 h-24"
             />
           </div>
           
           {/* Find us */}
           <div>
             <h3 className="font-bold text-lg mb-2 text-gray-900">Find us!</h3>
-            <ul className="space-y-0.2">
+            <ul className="space-y-1">
               <li><a href="#" className="text-gray-700 hover:text-blue-600">Alyssa</a></li>
               <li><a href="#" className="text-gray-700 hover:text-blue-600">Bahar</a></li>
               <li><a href="#" className="text-gray-700 hover:text-blue-600">Rebekka</a></li>
@@ -486,7 +469,10 @@ function App() {
 
         </div>
 
-  
+        {/* Copyright */}
+        <div className="border-t border-gray-300 mt-8 pt-6 text-center text-gray-600">
+          © 2024 Construction Document Parser™. All rights reserved.
+        </div>
       </footer>
 
     </div>
