@@ -139,89 +139,80 @@ def create_preprossed_prompt__mistral(extracted_text):
     Includes subtotals and organizes items under section headers.
     """
     prompt = f"""
-    You are an expert system for extracting structured data from English or German Bill of Quantities (BoQs).
+You are an expert system for extracting structured data from English or German Bill of Quantities (BoQs).
 
-    Your task:
-    - Extract item rows and organize them into a JSON array.
-    - Group each section under a key called "Section Title".
-    - If subsection titles exist under section titles, include them as "Subsection Title" in a nested structure.
-    - Each section/subsection should contain an "Items" list of line items.
-    - Include subtotals as the last item in the "Items" array of each section/subsection.
+Your task:
+- Extract item rows and organize them into a structured JSON OBJECT (not an array).
+- Group each section under a key called "Section Title".
+- If subsection titles exist under section titles, include them as "Subsection Title" in a nested structure.
+- Each section/subsection should contain an "Items" list of line items.
+- Include subtotals as the last item in the "Items" array of each section/subsection.
 
-    Rules to follow:
-    - Section headers (like "2.5.1 Fillings") should be used as "Section Title".
-    - Subsection headers (like "2.5.1.1 Fillings obtained from excavated material") should be used as "Subsection Title". They can be identified by their consecutive numbering or underlining.
-    - Ensure item keys follow this exact naming and order:
-        "Item Number"
-        "Item Description"
-        "Unit"
-        "Quantity"
-        "Rate"
-        "Amount"
-        "Currency"
+Rules to follow:
+- Section headers (like "VIII SITE WORKS") should be used as "Section Title".
+- Subsection headers should be used as "Subsection Title" if they exist.
+- Ensure item keys follow this exact naming and order:
+    "Item Number"
+    "Item Description"
+    "Unit"
+    "Quantity"
+    "Rate"
+    "Amount"
+    "Currency"
+- If a subtotal row is present, it must:
+  - Appear as the last object in the section's "Items" array
+  - Set "Item Number" to null
+  - Use "Subtotal [Section/Subsection name]" in "Item Description"
+  - Set "Unit", "Quantity", and "Rate" to null
+  - Include "Amount" and "Currency"
+- Do NOT group items under custom keys like "Category" or "Item" — only use "Section Title", "Subsection Title" (if present), and "Items".
 
-    - If a subtotal row is present, it must:
-      - Appear as the last object in the section's "Items" array
-      - Set "Item Number" to null
-      - Use "Subtotal [Section/Subsection name]" in "Item Description" (e.g., "Subtotal Preliminary works")
-      - Set "Unit", "Quantity", and "Rate" to null
-      - Include "Amount" and "Currency"
+Confidence Score:
+Provide a single confidence score (0.0 to 1.0) at the root level of the JSON output based on the overall extraction quality.
 
-    - Do NOT group items under custom keys like "Category" or "Item" — only use "Section Title", "Subsection Title" (if present), and "Items".
-    - Do NOT include any introductory or explanatory text. ONLY output the JSON.
-    - Do NOT wrap the JSON in markdown code blocks.
-    - Output clean, valid JSON.
+EXTRACTED TEXT:
+{extracted_text}
 
-    Confidence Score:
-    Provide a single confidence score (0.0 to 1.0) at the root level of the JSON output based on the overall extraction quality:
-    - 1.0: All fields clearly identified with unambiguous values across all sections
-    - 0.8-0.9: Most fields found, values are clear
-    - 0.6-0.7: Some fields found, minor ambiguity in values
-    - 0.4-0.5: Few fields found, moderate ambiguity
-    - 0.2-0.3: Very few fields found, significant ambiguity
-    - 0.0-0.1: No fields clearly identified
-
-    EXTRACTED TEXT:
-    {extracted_text}
-
-    JSON Schema Example:
+CRITICAL - YOUR RESPONSE MUST FOLLOW THIS EXACT STRUCTURE:
+{{
+  "Sections": [
     {{
-      "Sections": [
+      "Section Title": "VIII SITE WORKS",
+      "Subsections": [],
+      "Items": [
         {{
-          "Section Title": "2.5.1 Fillings",
-          "Subsections": [
-            {{
-              "Subsection Title": "2.5.1.1 Fillings obtained from excavated material",
-              "Items": [
-                {{
-                  "Item Number": "2.5.1.1.1",
-                  "Item Description": "Fill obtained from temporary spoil heaps to foundations, level compacted in max 150mm layers by hand >500mm thick",
-                  "Unit": "m³",
-                  "Quantity": "150",
-                  "Rate": "25.00",
-                  "Amount": "3750.00",
-                  "Currency": "€"
-                }},
-                {{
-                  "Item Number": null,
-                  "Item Description": "Subtotal Fillings obtained from excavated material",
-                  "Unit": null,
-                  "Quantity": null,
-                  "Rate": null,
-                  "Amount": "14230.00",
-                  "Currency": "€"
-                }}
-              ]
-            }}
-          ],
-          "Items": []
+          "Item Number": "1",
+          "Item Description": "Stone Foundation (60 Cm Height)",
+          "Unit": "m3",
+          "Quantity": "50",
+          "Rate": "45,000",
+          "Amount": "2,250,000",
+          "Currency": "USD"
+        }},
+        {{
+          "Item Number": "7",
+          "Item Description": "Retaining wall",
+          "Unit": "m3",
+          "Quantity": "81.2",
+          "Rate": "60,000",
+          "Amount": "4,872,000",
+          "Currency": "USD"
         }}
-      ],
-      "confidence": 0.95
+      ]
     }}
+  ],
+  "confidence": 0.95
+}}
 
-    Output only valid JSON with no additional text or formatting.
-    """
+IMPORTANT REMINDERS:
+1. Your response MUST be a JSON OBJECT starting with {{ and ending with }}
+2. Your response MUST NOT be a JSON ARRAY starting with [ and ending with ]
+3. The top-level object MUST have exactly two keys: "Sections" and "confidence"
+4. Do NOT include any markdown code blocks, explanations, or other text
+5. Output ONLY the JSON object
+
+Begin your response with {{
+"""
     return prompt
 
 """def call_gemini_return_json(prompt):
