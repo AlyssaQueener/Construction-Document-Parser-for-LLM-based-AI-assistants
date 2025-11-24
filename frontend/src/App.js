@@ -39,10 +39,10 @@ function App() {
     try {
       let url = `http://localhost:8000${endpoint}`;
       if (endpoint.includes('gantt')) {
-        url = `http://localhost:8000/gantt_parser/${chartFormat}`;
+        url = `https://construction-document-parser.onrender.com/gantt_parser/${chartFormat}`;
       }
       if (endpoint.includes('drawing')){
-        url = `http://localhost:8000/drawing_parser/${contentType}/`;  // ← WITH TRAILING SLASH
+        url = `https://construction-document-parser.onrender.com/drawing_parser/${contentType}/`;  // ← WITH TRAILING SLASH
       }
 
       const response = await axios.post(url, formData, {
@@ -81,7 +81,7 @@ function App() {
     setAiAnswer('');
 
     try {
-      const response = await axios.post('http://localhost:8000/ask_ai/', {
+      const response = await axios.post('https://construction-document-parser.onrender.com', {
         question: aiQuestion,
         document_data: result.result
       });
