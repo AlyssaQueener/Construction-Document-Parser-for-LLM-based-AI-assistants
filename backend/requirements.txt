@@ -11,3 +11,4 @@ pydantic==2.11.7
 pymupdf==1.26.3
 pytesseract==0.3.13
 scipy==1.16.3
+openai==2.8.1
