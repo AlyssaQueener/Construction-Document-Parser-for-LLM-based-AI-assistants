@@ -494,7 +494,7 @@ function App() {
           {/* Logo */}
           <div>
             <img 
-              src="./public/logotum.png" 
+              src="/logotum.png" 
               alt="TUM Logo" 
               className="w-34 h-20"
             />
