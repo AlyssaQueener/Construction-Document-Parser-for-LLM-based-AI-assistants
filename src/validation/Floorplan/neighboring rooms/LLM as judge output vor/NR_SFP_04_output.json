@@ -1,0 +1,225 @@
+{
+  "room_analysis": {
+    "Bedroom_3": {
+      "name_match_score": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [
+        "Closet",
+        "Kitchen",
+        "Laundry",
+        "WC_2"
+      ],
+      "note": "Missing room"
+    },
+    "Kitchen": {
+      "name_match_score": 1.0,
+      "precision": 0.6,
+      "recall": 0.6,
+      "f1": 0.6,
+      "true_positives": [
+        "Dining",
+        "Entrance",
+        "Laundry"
+      ],
+      "false_positives": [
+        "Bedroom_2",
+        "Architectural plan"
+      ],
+      "false_negatives": [
+        "Bedroom_3",
+        "Living"
+      ],
+      "note": "Missed bedroom 3 and living adjacency"
+    },
+    "WC_2": {
+      "name_match_score": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [
+        "Bedroom_3",
+        "Closet"
+      ],
+      "note": "Missing room"
+    },
+    "Laundry": {
+      "name_match_score": 1.0,
+      "precision": 0.6,
+      "recall": 0.6,
+      "f1": 0.6,
+      "true_positives": [
+        "Dining",
+        "Kitchen",
+        "Living"
+      ],
+      "false_positives": [
+        "Bedroom_2"
+      ],
+      "false_negatives": [
+        "Bedroom_3"
+      ],
+      "note": "Missed bedroom 3 adjacency"
+    },
+    "Closet": {
+      "name_match_score": 1.0,
+      "precision": 0.33,
+      "recall": 0.5,
+      "f1": 0.4,
+      "true_positives": [
+        "Bedroom_3"
+      ],
+      "false_positives": [
+        "Architectural plan",
+        "Bedroom_2",
+        "Laundry"
+      ],
+      "false_negatives": [
+        "WC_2"
+      ],
+      "note": "Hallucinated connections to architectural plan, bedroom 2, and laundry"
+    },
+    "Bedroom": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 0.6,
+      "f1": 0.75,
+      "true_positives": [
+        "Entrance",
+        "Living"
+      ],
+      "false_positives": [],
+      "false_negatives": [
+        "Bedroom_2",
+        "WC"
+      ],
+      "note": "Missed bedroom 2 and WC adjacency"
+    },
+    "WC": {
+      "name_match_score": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [
+        "Bedroom",
+        "Bedroom_2",
+        "Entrance"
+      ],
+      "note": "Missing room"
+    },
+    "Entrance": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "Bedroom",
+        "Dining",
+        "Kitchen",
+        "Living"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "Living": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 0.8,
+      "f1": 0.89,
+      "true_positives": [
+        "Bedroom",
+        "Dining",
+        "Entrance",
+        "Laundry"
+      ],
+      "false_positives": [],
+      "false_negatives": [
+        "Kitchen"
+      ],
+      "note": "Missed kitchen adjacency"
+    },
+    "Bedroom_2": {
+      "name_match_score": 1.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "true_positives": [],
+      "false_positives": [
+        "Architectural plan",
+        "Closet",
+        "Kitchen",
+        "Laundry"
+      ],
+      "false_negatives": [
+        "Bedroom",
+        "WC",
+        "Entrance"
+      ],
+      "note": "Hallucinated connections to architectural plan, closet, kitchen, and laundry"
+    },
+    "Dining": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "Entrance",
+        "Kitchen",
+        "Laundry",
+        "Living"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "Architectural plan": {
+      "name_match_score": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "true_positives": [],
+      "false_positives": [
+        "Bedroom_2",
+        "Closet",
+        "Kitchen"
+      ],
+      "false_negatives": [],
+      "note": "Hallucinated room"
+    }
+  },
+  "summary": {
+    "total_rooms_ground_truth": 10,
+    "total_rooms_parser": 11,
+    "rooms_correctly_detected": 7,
+    "hallucinated_rooms": [
+      "Architectural plan"
+    ],
+    "missing_rooms": [
+      "Bedroom_3",
+      "WC_2",
+      "WC"
+    ],
+    "asymmetric_adjacencies": [
+      "Bedroom_2"
+    ]
+  },
+  "room_detection_score": 7.0,
+  "adjacency_precision": 7.6,
+  "adjacency_recall": 6.8,
+  "adjacency_f1_score": 7.2,
+  "overall_score": 7.2,
+  "key_issues": [
+    "Missing rooms: Bedroom_3, WC_2, WC",
+    "Hallucinated room: Architectural plan",
+    "Asymmetric adjacencies: Bedroom_2",
+    "Self-reference detected: Bedroom_2"
+  ]
+}

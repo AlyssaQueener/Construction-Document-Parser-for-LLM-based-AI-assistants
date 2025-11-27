@@ -1,0 +1,110 @@
+{
+  "room_analysis": {
+    "WOHNEN": {
+      "name_match_score": 1.0,
+      "precision": 0.75,
+      "recall": 0.75,
+      "f1": 0.75,
+      "true_positives": [
+        "BAD",
+        "FLUR",
+        "SCHLAFEN"
+      ],
+      "false_positives": [],
+      "false_negatives": [
+        "K\rcCHE"
+      ],
+      "note": "Missed kitchen adjacency"
+    },
+    "FLUR": {
+      "name_match_score": 1.0,
+      "precision": 0.8,
+      "recall": 1.0,
+      "f1": 0.89,
+      "true_positives": [
+        "BALKON",
+        "K\rcCHE",
+        "SCHLAFEN",
+        "WOHNEN"
+      ],
+      "false_positives": [
+        "BAD"
+      ],
+      "false_negatives": [],
+      "note": "Hallucinated connection to bathroom"
+    },
+    "SCHLAFEN": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "FLUR",
+        "WOHNEN"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "BAD": {
+      "name_match_score": 1.0,
+      "precision": 0.667,
+      "recall": 0.667,
+      "f1": 0.667,
+      "true_positives": [
+        "K\rcCHE",
+        "WOHNEN"
+      ],
+      "false_positives": [
+        "FLUR"
+      ],
+      "false_negatives": [
+        "WOHNEN"
+      ],
+      "note": "Hallucinated connection to hallway, missed living room adjacency"
+    },
+    "K\rcCHE": {
+      "name_match_score": 1.0,
+      "precision": 0.75,
+      "recall": 0.75,
+      "f1": 0.75,
+      "true_positives": [
+        "BAD",
+        "BALKON",
+        "FLUR"
+      ],
+      "false_positives": [],
+      "false_negatives": [
+        "WOHNEN"
+      ],
+      "note": "Missed living room adjacency"
+    },
+    "BALKON": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "FLUR",
+        "K\rcCHE"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    }
+  },
+  "summary": {
+    "total_rooms_ground_truth": 6,
+    "total_rooms_parser": 6,
+    "rooms_correctly_detected": 6,
+    "hallucinated_rooms": [],
+    "missing_rooms": [],
+    "asymmetric_adjacencies": []
+  },
+  "room_detection_score": 10.0,
+  "adjacency_precision": 8.5,
+  "adjacency_recall": 8.5,
+  "adjacency_f1_score": 8.5,
+  "overall_score": 8.55,
+  "key_issues": []
+}
