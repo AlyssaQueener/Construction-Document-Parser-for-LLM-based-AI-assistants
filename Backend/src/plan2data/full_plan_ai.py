@@ -13,8 +13,8 @@ def get_neighbouring_rooms_with_ai(path):
         is_succesful= True
     confidence = output["confidence"]
     return output, method, is_succesful, confidence
-
-def get_full_floorplan_metadata_with_ai(path):
+############
+def get_full_floorplan_metadata_with_ai(path): 
     is_succesful = False
     method = "ai"
     output= json.loads(extract_full_floorplan_metadata_with_ai(path))

@@ -60,6 +60,7 @@ def create_message_for_titleblock_extraction_from_image(path):
 ]
     return messages
 ################################# Neigbouring and Connected rooms ################
+#######################
 def call_mistral_for_room_adjacency_extraction(path):
     """Extract only room adjacency information from floor plan image"""
     message = create_message_for_room_adjacency_extraction(path)

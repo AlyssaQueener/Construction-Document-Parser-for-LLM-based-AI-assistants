@@ -75,7 +75,7 @@ def is_valid_room_name(text):
     text = text.strip()
     if len(text) < 3:
         return False
-    excluded = {'ca', 'ca.', 'cm', 'm²', 'm2', 'qm', 'og', 'eg', 'ug', 'nr', 'nr.', 'wc'}
+    excluded = {'ca', 'ca.', 'cm', 'm²', 'm2', 'qm', 'og', 'eg', 'ug', 'nr', 'nr.' }
     if text.lower() in excluded:
         return False
     if not any(c.isalpha() for c in text):
