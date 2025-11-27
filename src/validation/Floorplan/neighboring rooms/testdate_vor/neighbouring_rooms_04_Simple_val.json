@@ -1,0 +1,66 @@
+{
+  "Bedroom_3": [
+    "Closet",
+    "Kitchen",
+    "Laundry",
+    "WC_2"
+  ],
+  "Kitchen": [
+    "Bedroom_3",
+    "Dining",
+    "Entrance",
+    "Laundry",
+    "Living"
+  ],
+  "WC_2": [
+    "Bedroom_3",
+    "Closet"
+  ],
+  "Laundry": [
+    "Bedroom_3",
+    "Dining",
+    "Kitchen",
+    "Living"
+  ],
+  "Closet": [
+    "Bedroom_3",
+    "WC_2"
+  ],
+  "Bedroom": [
+    "Bedroom_2",
+    "Entrance",
+    "Living",
+    "WC"
+  ],
+  "WC": [
+    "Bedroom",
+    "Bedroom_2",
+    "Entrance"
+  ],
+  "Entrance": [
+    "Bedroom",
+    "Dining",
+    "Kitchen",
+    "Living",
+    "WC",
+    "Bedroom_2"
+  ],
+  "Living": [
+    "Bedroom",
+    "Dining",
+    "Entrance",
+    "Laundry",
+    "Kitchen"
+  ],
+  "Bedroom_2": [
+    "Bedroom",
+    "WC",
+    "Entrance"
+  ],
+  "Dining": [
+    "Entrance",
+    "Kitchen",
+    "Laundry",
+    "Living"
+  ]
+}

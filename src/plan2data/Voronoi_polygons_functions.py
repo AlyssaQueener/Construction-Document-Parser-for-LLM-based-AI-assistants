@@ -60,6 +60,8 @@ def has_more_than_one_char(s):
         bool: True if the length after whitespace and newline stripping exceeds 2, False otherwise.
     """
     s = s.strip().replace("\n", "").replace(" ", "")
+    if s.upper() == 'WC':
+        return True
     return len(s) > 2
 
 def is_valid_room_name(text):
@@ -73,10 +75,14 @@ def is_valid_room_name(text):
         bool: True if considered a valid room name, False otherwise.
     """
     text = text.strip()
+    if text.lower() == 'wc':
+        return True
     if len(text) < 3:
         return False
-    excluded = {'ca', 'ca.', 'cm', 'm²', 'm2', 'qm', 'og', 'eg', 'ug', 'nr', 'nr.', 'wc'}
+    excluded = {'ca', 'ca.', 'cm', 'm²', 'm2', 'qm', 'og', 'eg', 'ug', 'nr', 'nr.', 'no', 'no.', 'plan'}
     if text.lower() in excluded:
+        return False
+    if text.lower().startswith('architectur'):
         return False
     if not any(c.isalpha() for c in text):
         return False
@@ -348,6 +354,34 @@ def process_simple_voronoi(centerpoints, bounds):
     except Exception as e:
         print(f"Error processing Voronoi: {e}")
         return None, None
+def make_names_unique(centerpoints):
+    """
+    Makes duplicate room names unique by adding sequential numbers.
+    
+    Args:
+        centerpoints (list of list): [cx, cy, name] for all rooms.
+        
+    Returns:
+        list of list: Modified centerpoints with unique names.
+    """
+    name_counts = {}
+    unique_centerpoints = []
+    
+    for cp in centerpoints:
+        cx, cy, name = cp[0], cp[1], cp[2]
+        
+        # Check if this name already exists
+        if name in name_counts:
+            name_counts[name] += 1
+            unique_name = f"{name}_{name_counts[name]}"
+        else:
+            name_counts[name] = 1
+            unique_name = name
+        
+        unique_centerpoints.append([cx, cy, unique_name])
+    
+    return unique_centerpoints
+
 def neighboring_rooms_voronoi(pdf_path):
     """
     Extract neighboring rooms from a floorplan PDF using Voronoi diagram.
@@ -363,7 +397,7 @@ def neighboring_rooms_voronoi(pdf_path):
     
     # Clip rectangle to exclude plan information
     width, height = page.rect.width, page.rect.height
-    clip_rect = fitz.Rect(0, 0, width * 0.72, height * 0.8)
+    clip_rect = fitz.Rect(0, 0, width * 0.9, height * 0.8)
     flipped_rect = (
         clip_rect.x0,
         height - clip_rect.y1,
@@ -389,6 +423,7 @@ def neighboring_rooms_voronoi(pdf_path):
     # Create voronoi polygons around the center points
     page_width, page_height = page.rect.width, page.rect.height
     flipped_centerpoints = flip_y_coordinates(centerpoints, page_height)
+    flipped_centerpoints = make_names_unique(flipped_centerpoints)
     neighbors, vor = extract_bounded_voronoi_neighbors_detailed(flipped_centerpoints, flipped_rect)
     
     doc.close()

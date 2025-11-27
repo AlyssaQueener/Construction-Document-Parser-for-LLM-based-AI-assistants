@@ -1,0 +1,28 @@
+{
+  "living room": [
+    "Bedroom",
+    "bedroom",
+    "bedroom_2",
+    "kitchen"
+  ],
+  "kitchen": [
+    "Bedroom",
+    "bedroom",
+    "living room"
+  ],
+  "bedroom": [
+    "bedroom_2",
+    "kitchen",
+    "living room"
+  ],
+  "bedroom_2": [
+    "Bedroom",
+    "bedroom",
+    "living room"
+  ],
+  "Bedroom": [
+    "bedroom_2",
+    "kitchen",
+    "living room"
+  ]
+}
