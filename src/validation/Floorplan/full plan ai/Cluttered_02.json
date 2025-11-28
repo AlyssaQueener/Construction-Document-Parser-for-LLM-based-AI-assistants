@@ -1,0 +1,138 @@
+{
+  "titleBlock": {
+    "projectInfo": {
+      "projectId": null,
+      "projectName": null,
+      "location": null,
+      "author": null,
+      "stakeholders": {
+        "client": null,
+        "architect": null,
+        "engineers": null
+      },
+      "timeline": {
+        "yearOfCompletion": null,
+        "approvalDate": null
+      }
+    },
+    "planMetadata": {
+      "planType": "Grundriss",
+      "planFormat": null,
+      "scale": "1:100",
+      "projectionMethod": null
+    },
+    "confidence": 0.2
+  },
+  "roomAdjacency": {
+    "neighboringRooms": {
+      "Arbeiten (privat)": [
+        "Treppenhaus",
+        "Kochen/Essen",
+        "Wohnen"
+      ],
+      "Bad": [
+        "Flur",
+        "Wohnen"
+      ],
+      "Balcon": [
+        "Wohnen"
+      ],
+      "Flur": [
+        "Bad",
+        "Garderobe",
+        "Kinderzimmer 1",
+        "Kinderzimmer 2",
+        "Schlafen",
+        "Treppenhaus",
+        "Wohnen"
+      ],
+      "Garderobe": [
+        "Flur"
+      ],
+      "Kinderzimmer 1": [
+        "Flur",
+        "Kinderzimmer 2"
+      ],
+      "Kinderzimmer 2": [
+        "Flur",
+        "Kinderzimmer 1"
+      ],
+      "Kochen/Essen": [
+        "Arbeiten (privat)",
+        "Flur",
+        "Treppenhaus",
+        "Wohnen"
+      ],
+      "Schlafen": [
+        "Flur"
+      ],
+      "Treppenhaus": [
+        "Arbeiten (privat)",
+        "Flur",
+        "Kochen/Essen",
+        "Wohnen"
+      ],
+      "Wohnen": [
+        "Arbeiten (privat)",
+        "Bad",
+        "Balcon",
+        "Flur",
+        "Kochen/Essen",
+        "Schlafen",
+        "Treppenhaus"
+      ]
+    },
+    "connectedRooms": {
+      "Arbeiten (privat)": [
+        "Kochen/Essen",
+        "Wohnen"
+      ],
+      "Bad": [
+        "Flur"
+      ],
+      "Balcon": [
+        "Wohnen"
+      ],
+      "Flur": [
+        "Bad",
+        "Garderobe",
+        "Kinderzimmer 1",
+        "Kinderzimmer 2",
+        "Schlafen",
+        "Treppenhaus",
+        "Wohnen"
+      ],
+      "Garderobe": [
+        "Flur"
+      ],
+      "Kinderzimmer 1": [
+        "Flur"
+      ],
+      "Kinderzimmer 2": [
+        "Flur"
+      ],
+      "Kochen/Essen": [
+        "Arbeiten (privat)",
+        "Flur",
+        "Treppenhaus",
+        "Wohnen"
+      ],
+      "Schlafen": [
+        "Flur"
+      ],
+      "Treppenhaus": [
+        "Flur",
+        "Kochen/Essen",
+        "Wohnen"
+      ],
+      "Wohnen": [
+        "Arbeiten (privat)",
+        "Flur",
+        "Kochen/Essen",
+        "Schlafen",
+        "Treppenhaus"
+      ]
+    },
+    "confidence": 0.9
+  }
+}

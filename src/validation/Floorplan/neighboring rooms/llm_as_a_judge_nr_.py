@@ -298,9 +298,9 @@ def llm_as_a_judge_nr(path_to_ground_truth: str, path_to_parser_result: str, out
 
 
 if __name__ == "__main__":
-    groundtruth = "src/validation/Floorplan/neighboring rooms/testdate_vor/neighbouring_rooms_04_Simple_val.json"
-    parserresult = "src/validation/Floorplan/neighboring rooms/testdate_vor/neighbouring_rooms_04_Simple.json"
-    output_path = "src/validation/Floorplan/neighboring rooms/LLM as judge output/NR_SFP_04_output.json"
+    groundtruth = "src/validation/Floorplan/neighboring rooms/testdata_ai/Simple_04_val.json"
+    parserresult = "src/validation/Floorplan/neighboring rooms/testdata_ai/Simple_04.json"
+    output_path = "src/validation/Floorplan/neighboring rooms/LLM as a judge output ai/NR_SFP_ai_04_output.json"
     
     evaluation_result = llm_as_a_judge_nr(groundtruth, parserresult, output_path)
     

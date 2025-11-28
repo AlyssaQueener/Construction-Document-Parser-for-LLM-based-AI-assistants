@@ -1,0 +1,90 @@
+{
+  "titleBlock": {
+    "projectInfo": {
+      "projectId": null,
+      "projectName": null,
+      "location": null,
+      "author": "Elivie Rosepeder",
+      "stakeholders": {
+        "client": null,
+        "architect": null,
+        "engineers": null
+      },
+      "timeline": {
+        "yearOfCompletion": null,
+        "approvalDate": null
+      }
+    },
+    "planMetadata": {
+      "planType": "Floor Plan",
+      "planFormat": null,
+      "scale": "Not to scale",
+      "projectionMethod": null
+    },
+    "confidence": 0.2
+  },
+  "roomAdjacency": {
+    "neighboringRooms": {
+      "Bedroom": [
+        "Closet",
+        "WC",
+        "Laundry",
+        "Living"
+      ],
+      "Closet": [
+        "Bedroom",
+        "WC"
+      ],
+      "WC": [
+        "Bedroom",
+        "Closet",
+        "Living"
+      ],
+      "Laundry": [
+        "Bedroom",
+        "Dining"
+      ],
+      "Living": [
+        "WC",
+        "Bedroom",
+        "Dining"
+      ],
+      "Dining": [
+        "Laundry",
+        "Living",
+        "Kitchen"
+      ],
+      "Kitchen": [
+        "Dining",
+        "Entrance"
+      ],
+      "Entrance": [
+        "Kitchen"
+      ]
+    },
+    "connectedRooms": {
+      "Bedroom": [
+        "WC"
+      ],
+      "WC": [
+        "Bedroom"
+      ],
+      "Laundry": [],
+      "Living": [
+        "Dining"
+      ],
+      "Dining": [
+        "Living",
+        "Kitchen"
+      ],
+      "Kitchen": [
+        "Dining",
+        "Entrance"
+      ],
+      "Entrance": [
+        "Kitchen"
+      ]
+    },
+    "confidence": 0.9
+  }
+}

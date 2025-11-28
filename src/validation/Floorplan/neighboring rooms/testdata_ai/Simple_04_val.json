@@ -1,0 +1,82 @@
+{
+  "neighboringRooms": {
+    "Bedroom": [
+      "Closet",
+      "WC",
+      "Laundry",
+      "kitchen"
+    ],
+    "Bedroom 2": [
+      "Bedroom 3",
+      "WC_2",
+      "Entrance"
+    ],
+    "Bedroom 3": [
+      "Bedroom 2",
+      "WC_2",
+      "Entrance"
+    ],
+    "Closet": [
+      "Bedroom",
+      "WC"
+    ],
+    "Dining": [
+      "Kitchen",
+      "Living",
+      "Laundry",
+      "Entrance"
+    ],
+    "Entrance": [
+      "Kitchen",
+      "Living",
+      "WC_2",
+      "Bedroom 2",
+      "Bedroom 3",
+      "Dining"
+    ],
+    "Kitchen": [
+      "Dining",
+      "Entrance",
+      "Living",
+      "Bedroom"
+    ],
+    "Laundry": [
+      "Bedroom",
+      "Dining"
+    ],
+    "Living": [
+      "Dining",
+      "Kitchen",
+      "Bedroom 2",
+      "Entrance"
+     ],
+    "WC": [
+      "Bedroom",
+      "Closet"
+       ]
+  },
+  "connectedRooms": {
+    "Bedroom": [
+      "WC",
+      "kitchen"
+    ],
+    "Dining": [
+       
+    ],
+    "Kitchen": [
+      "Bedroom"
+    ],
+    "Living": [
+      
+    ],
+    "WC": [
+      "Bedroom"
+    ],
+    "Entrance": [
+      "Bedroom_2",
+      "Bedroom_3",
+      "WC_2"
+    ]
+  },
+  "confidence": 0.9
+}
