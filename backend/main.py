@@ -143,8 +143,9 @@ async def create_upload_file_gantt(file: UploadFile, chart_format: ChartFormat):
     finally:
         if file_path and os.path.exists(file_path):
             os.remove(file_path)
+            gc.collect()
 
-gc.collect()
+
     
 ################################################ FINANCIAL ##########################################################################
 @app.post("/financial_parser/")
@@ -189,9 +190,9 @@ async def create_upload_file_fin(file: UploadFile):
     finally:
         if file_path and os.path.exists(file_path):
             os.remove(file_path)
+            gc.collect()
 
 
-gc.collect()
 
 ################################################################## DRAWING ######################################################
 
@@ -296,6 +297,7 @@ async def create_upload_file_floorplans(file: UploadFile, content_type: ContentT
             os.remove(file_path)
         if converted_image_path and os.path.exists(converted_image_path):
             os.remove(converted_image_path)
+        gc.collect()
     
 
 # ========================================
