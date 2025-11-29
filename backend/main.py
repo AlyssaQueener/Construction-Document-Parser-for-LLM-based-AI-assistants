@@ -1,11 +1,14 @@
-from typing import Union
+import os
 from fastapi.middleware.cors import CORSMiddleware
+import gc
 
+
+os.environ['OMP_NUM_THREADS'] = '1'  # Limit OpenCV threads
+os.environ['OPENBLAS_NUM_THREADS'] = '1' 
 from fastapi import FastAPI, UploadFile, HTTPException
 from PIL import Image 
 import src.plan2data.titleBlockInfo as floorplan_parser
 import io
-import os
 import uuid
 import src.gantt2data.ganttParser as gantt_parser
 import src.boq2data.camelot_setup.boq2data_gemini as boq
@@ -140,6 +143,8 @@ async def create_upload_file_gantt(file: UploadFile, chart_format: ChartFormat):
     finally:
         if file_path and os.path.exists(file_path):
             os.remove(file_path)
+
+gc.collect()
     
 ################################################ FINANCIAL ##########################################################################
 @app.post("/financial_parser/")
@@ -184,6 +189,9 @@ async def create_upload_file_fin(file: UploadFile):
     finally:
         if file_path and os.path.exists(file_path):
             os.remove(file_path)
+
+
+gc.collect()
 
 ################################################################## DRAWING ######################################################
 
@@ -344,6 +352,9 @@ Answer:"""
     except Exception as e:
         print(f"Error in ask_ai: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+    
+
+gc.collect()
 
 
 # #https://fastapi.tiangolo.com/async/#in-a-hurry maybe have a look at this to improve performance
