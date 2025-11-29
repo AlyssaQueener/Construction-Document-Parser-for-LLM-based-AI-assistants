@@ -43,24 +43,26 @@ def preprocess_df_and_check_column_names(df):
          df = rename_columns(df, old_column_names)
     return df, is_empty
 
+import re
+
 def match(column_name):
     patterns = {
-        'id': r'^id$',
-        'task': r'^(task|task name|activity|activity name)$',
-        'start': r'^(start|start date)$',
-        'finish': r'^(finish|end|end date)$',
-        'duration': r'^duration$'
+        'id': r'^(id|nr\.?|nummer)$',
+        'task': r'^(task|task name|activity|activity name|vorgang|vorgangsname|aktivität|aufgabe)$',
+        'start': r'^(start|start date|anfang)$',
+        'finish': r'^(finish|end|end date|ende)$',
+        'duration': r'^(duration|dauer)$'
     }
-    
-    # Convert column name to lowercase for case-insensitive matching
+
     column_lower = column_name.lower().strip()
-    
-    # Check each pattern
+
     for property_name, pattern in patterns.items():
-        if re.match(pattern, column_lower):
+        #if re.match(pattern, column_lower):
+        if re.fullmatch(pattern, column_lower):
             return property_name
-    
+
     return "no match found"
+
 
 def match_column_names_with_task_properties(df):
     column_names = df.columns.tolist()

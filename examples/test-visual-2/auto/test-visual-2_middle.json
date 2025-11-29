@@ -1,0 +1,242 @@
+{
+    "pdf_info": [
+        {
+            "preproc_blocks": [
+                {
+                    "type": "title",
+                    "bbox": [
+                        21,
+                        187,
+                        119,
+                        200
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                19,
+                                185,
+                                120,
+                                201
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        19,
+                                        185,
+                                        120,
+                                        201
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Parking Lot Paving",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 0
+                        }
+                    ],
+                    "index": 0
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        19,
+                        203,
+                        823,
+                        390
+                    ],
+                    "blocks": [
+                        {
+                            "type": "image_body",
+                            "bbox": [
+                                19,
+                                203,
+                                823,
+                                390
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        19,
+                                        203,
+                                        823,
+                                        390
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                19,
+                                                203,
+                                                823,
+                                                390
+                                            ],
+                                            "score": 0.815,
+                                            "type": "image",
+                                            "image_path": "9c695e9d0c34814f7bff31b71704144789876ef13e734ca6dfa0dae787e41608.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 2,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        19,
+                                        203,
+                                        823,
+                                        265.3333333333333
+                                    ],
+                                    "spans": [],
+                                    "index": 1
+                                },
+                                {
+                                    "bbox": [
+                                        19,
+                                        265.3333333333333,
+                                        823,
+                                        327.66666666666663
+                                    ],
+                                    "spans": [],
+                                    "index": 2
+                                },
+                                {
+                                    "bbox": [
+                                        19,
+                                        327.66666666666663,
+                                        823,
+                                        389.99999999999994
+                                    ],
+                                    "spans": [],
+                                    "index": 3
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 2
+                }
+            ],
+            "page_idx": 0,
+            "page_size": [
+                841,
+                595
+            ],
+            "discarded_blocks": [],
+            "para_blocks": [
+                {
+                    "type": "title",
+                    "bbox": [
+                        21,
+                        187,
+                        119,
+                        200
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                19,
+                                185,
+                                120,
+                                201
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        19,
+                                        185,
+                                        120,
+                                        201
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Parking Lot Paving",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 0
+                        }
+                    ],
+                    "index": 0
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        19,
+                        203,
+                        823,
+                        390
+                    ],
+                    "blocks": [
+                        {
+                            "type": "image_body",
+                            "bbox": [
+                                19,
+                                203,
+                                823,
+                                390
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        19,
+                                        203,
+                                        823,
+                                        390
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                19,
+                                                203,
+                                                823,
+                                                390
+                                            ],
+                                            "score": 0.815,
+                                            "type": "image",
+                                            "image_path": "9c695e9d0c34814f7bff31b71704144789876ef13e734ca6dfa0dae787e41608.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 2,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        19,
+                                        203,
+                                        823,
+                                        265.3333333333333
+                                    ],
+                                    "spans": [],
+                                    "index": 1
+                                },
+                                {
+                                    "bbox": [
+                                        19,
+                                        265.3333333333333,
+                                        823,
+                                        327.66666666666663
+                                    ],
+                                    "spans": [],
+                                    "index": 2
+                                },
+                                {
+                                    "bbox": [
+                                        19,
+                                        327.66666666666663,
+                                        823,
+                                        389.99999999999994
+                                    ],
+                                    "spans": [],
+                                    "index": 3
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 2
+                }
+            ]
+        }
+    ],
+    "_backend": "pipeline",
+    "_version_name": "2.6.2"
+}

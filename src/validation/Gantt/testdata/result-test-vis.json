@@ -1,0 +1,77 @@
+[
+    {
+      "task": "ACTIVITY",
+      "start": "1",
+      "finish": "21"
+    },
+    {
+      "task": "DESIGN",
+      "start": "1",
+      "finish": "21"
+    },
+    {
+      "task": "Preparation of architectural and schematic designs",
+      "start": "1",
+      "finish": "21"
+    },
+    {
+      "task": "Research into equipment and materials needed, along with costs",
+      "start": "1",
+      "finish": "21"
+    },
+    {
+      "task": "PRE-CONSTRUCTION",
+      "start": "1",
+      "finish": "21"
+    },
+    {
+      "task": "Site readied for construction",
+      "start": "1",
+      "finish": "21"
+    },
+    {
+      "task": "PROCUREMENT",
+      "start": "1",
+      "finish": "21"
+    },
+    {
+      "task": "Project team purchases required equipment and materials\nand plans for labor needs",
+      "start": "1",
+      "finish": "21"
+    },
+    {
+      "task": "Setting up on-site or near-site storage facilities",
+      "start": "1",
+      "finish": "21"
+    },
+    {
+      "task": "Securing the site",
+      "start": "1",
+      "finish": "21"
+    },
+    {
+      "task": "Establishing safety programs",
+      "start": "1",
+      "finish": "21"
+    },
+    {
+      "task": "Completing all construction work",
+      "start": "1",
+      "finish": "21"
+    },
+    {
+      "task": "COMMISSIONING",
+      "start": "1",
+      "finish": "21"
+    },
+    {
+      "task": "Ensuring all construction is solid and all systems are operational",
+      "start": "1",
+      "finish": "21"
+    },
+    {
+      "task": "TURNING OVER BUILDING TO OWNER",
+      "start": "1",
+      "finish": "21"
+    }
+  ]

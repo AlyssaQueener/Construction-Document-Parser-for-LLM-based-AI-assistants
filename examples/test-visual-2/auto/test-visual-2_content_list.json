@@ -1,0 +1,27 @@
+[
+    {
+        "type": "text",
+        "text": "Parking Lot Paving ",
+        "text_level": 1,
+        "bbox": [
+            24,
+            314,
+            141,
+            336
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "image",
+        "img_path": "images/9c695e9d0c34814f7bff31b71704144789876ef13e734ca6dfa0dae787e41608.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            22,
+            341,
+            978,
+            655
+        ],
+        "page_idx": 0
+    }
+]
