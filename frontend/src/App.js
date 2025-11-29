@@ -15,22 +15,20 @@ function App() {
   const [aiAnswer, setAiAnswer] = useState('');
   const [aiLoading, setAiLoading] = useState(false);
 
-  useEffect(() => {
-    const wakeUpServer = async () => {
-      try {
-        setServerStatus('waking');
-        await axios.get('https://construction-document-parser.onrender.com', {
-          timeout: 30000
-        });
-        setServerStatus('awake');
-      } catch (err) {
-        console.log('Server wake-up call made:', err.message);
-        setServerStatus('awake');
-      }
-    };
-    
-    wakeUpServer();
-  }, []);
+// Wake up the backend server on component mount
+useEffect(() => {
+  const wakeUpServer = async () => {
+    try {
+      await axios.get('https://construction-document-parser.onrender.com', {
+        timeout: 30000
+      });
+    } catch (err) {
+      console.log('Server wake-up call made:', err.message);
+    }
+  };
+  
+  wakeUpServer();
+}, []);
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
