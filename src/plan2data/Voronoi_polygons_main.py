@@ -11,8 +11,9 @@ if __name__=="__main__":
     #pdf_path = "examples/FloorplansAndSectionViews/2d-grundriss-wohnflaeche.pdf"
     #pdf_path = "examples/FloorplansAndSectionViews/GrundrissEG_2022_web.pdf"
     #pdf_path = "examples/FloorplansAndSectionViews/modern-stilt-house.pdf"
+    pdf_path = "src/validation/Floorplan/titleblock/testdata/floorplan-test-1.pdf"
 
-    pdf_path = "examples/FloorplansAndSectionViews/Simple Floorplan/04_Simple.pdf"
+    #pdf_path = "examples/FloorplansAndSectionViews/Simple Floorplan/04_Simple.pdf"
     neighboring_rooms_voronoi(pdf_path)
 
     # NAMING convention of output files 
@@ -71,6 +72,6 @@ if __name__=="__main__":
     # create voronoi polygons around the center points 
     page_width, page_height = page.rect.width, page.rect.height
     flipped_centerpoints = flip_y_coordinates(centerpoints,page_height)
-    voronoi_polygons =process_simple_voronoi(flipped_centerpoints,json_path, flipped_rect)
+    voronoi_polygons =process_simple_voronoi(flipped_centerpoints, flipped_rect)
 
 

@@ -1,26 +1,49 @@
 {
-  "Closet": [
-    "Architectural plan",
-    "Bedroom_2",
+  "Bedroom_3": [
+    "Closet",
+    "Kitchen",
+    "Laundry",
+    "WC_2"
+  ],
+  "Kitchen": [
+    "Bedroom_3",
+    "Dining",
+    "Entrance",
     "Laundry"
   ],
-  "Architectural plan": [
-    "Bedroom_2",
-    "Closet",
-    "Kitchen"
+  "WC_2": [
+    "Bedroom_3",
+    "Closet"
   ],
   "Laundry": [
-    "Bedroom_2",
+    "Bedroom_3",
     "Closet",
     "Dining",
     "Kitchen",
     "Living"
   ],
-  "Bedroom_2": [
-    "Architectural plan",
-    "Closet",
+  "Closet": [
+    "Bedroom_3",
+    "Laundry",
+    "WC_2"
+  ],
+  "Bedroom": [
+    "Bedroom_2",
+    "Entrance",
+    "Living",
+    "WC"
+  ],
+  "WC": [
+    "Bedroom",
+    "Bedroom_2",
+    "Entrance"
+  ],
+  "Entrance": [
+    "Bedroom",
+    "Dining",
     "Kitchen",
-    "Laundry"
+    "Living",
+    "WC"
   ],
   "Living": [
     "Bedroom",
@@ -28,27 +51,14 @@
     "Entrance",
     "Laundry"
   ],
-  "Entrance": [
+  "Bedroom_2": [
     "Bedroom",
-    "Dining",
-    "Kitchen",
-    "Living"
-  ],
-  "Bedroom": [
-    "Entrance",
-    "Living"
+    "WC"
   ],
   "Dining": [
     "Entrance",
     "Kitchen",
     "Laundry",
     "Living"
-  ],
-  "Kitchen": [
-    "Architectural plan",
-    "Bedroom_2",
-    "Dining",
-    "Entrance",
-    "Laundry"
   ]
 }
