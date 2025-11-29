@@ -81,7 +81,7 @@ function App() {
     setAiAnswer('');
 
     try {
-      const response = await axios.post('https://construction-document-parser.onrender.com', {
+      const response = await axios.post('https://construction-document-parser.onrender.com/ask_ai/', {
         question: aiQuestion,
         document_data: result.result
       });

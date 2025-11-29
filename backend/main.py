@@ -11,6 +11,7 @@ import src.gantt2data.ganttParser as gantt_parser
 import src.boq2data.camelot_setup.boq2data_gemini as boq
 import src.plan2data.voronoi_functions as vor
 import src.plan2data.full_plan_ai as full
+import src.plan2data.helper as helper
 #from voronoi_functions import*
 from pydantic import BaseModel
 from enum import Enum
@@ -97,6 +98,7 @@ async def hello_world():
 async def create_upload_file_gantt(file: UploadFile, chart_format: ChartFormat):
     upload_dir = "uploads"  # Make sure this directory exists
     os.makedirs(upload_dir, exist_ok=True)
+    file_path = None
     
     try:
         if not (file.content_type == 'application/pdf'):
@@ -127,7 +129,6 @@ async def create_upload_file_gantt(file: UploadFile, chart_format: ChartFormat):
             result=result
         )
         
-        os.remove(file_path)  
         
         return response
         
@@ -136,12 +137,16 @@ async def create_upload_file_gantt(file: UploadFile, chart_format: ChartFormat):
     except Exception as e:
         print(f"Error processing file: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Error processing file: {str(e)}")
+    finally:
+        if file_path and os.path.exists(file_path):
+            os.remove(file_path)
     
 ################################################ FINANCIAL ##########################################################################
 @app.post("/financial_parser/")
 async def create_upload_file_fin(file: UploadFile):
     upload_dir = "uploads"
     os.makedirs(upload_dir, exist_ok=True)
+    file_path = None
     try:
         if not (file.content_type == 'application/pdf' or file.content_type.startswith('image/')): # type: ignore
             raise HTTPException(status_code=400, detail="File must be a PDF or image")
@@ -166,7 +171,6 @@ async def create_upload_file_fin(file: UploadFile):
             result=result
         )
         
-        os.remove(file_path)  
         
         return response
         
@@ -177,6 +181,9 @@ async def create_upload_file_fin(file: UploadFile):
     except Exception as e:
         print(f"Error processing file: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Error processing file: {str(e)}")
+    finally:
+        if file_path and os.path.exists(file_path):
+            os.remove(file_path)
 
 ################################################################## DRAWING ######################################################
 
@@ -184,22 +191,22 @@ async def create_upload_file_fin(file: UploadFile):
 async def create_upload_file_floorplans(file: UploadFile, content_type: ContentType):
     upload_dir = "uploads"
     os.makedirs(upload_dir, exist_ok=True)
+    file_path = None
+    converted_image_path = None  # Track converted image separately
+    
     try:
         # Validate file type based on content_type
         if content_type == "rooms-deterministic":
-            # Deterministic requires PDF
             if not file.content_type == 'application/pdf':
                 raise HTTPException(status_code=400, detail="Deterministic plan parsing requires PDF file")
         elif content_type == "titleblock-hybrid":
-            # Hybrid Plan requires Image (not PDF)
-            if not file.content_type.startswith('image/'):
-                raise HTTPException(status_code=400, detail="Titleblock Hybrid parsing requires Image file")
+            # Hybrid accepts both Image and PDF
+            if not (file.content_type.startswith('image/') or file.content_type == 'application/pdf'):
+                raise HTTPException(status_code=400, detail="Titleblock Hybrid parsing requires Image or PDF file")
         elif content_type in ["rooms-ai", "full-plan-ai"]:
-            # AI methods accept both images and PDFs
             if not (file.content_type.startswith('image/') or file.content_type == 'application/pdf'):
                 raise HTTPException(status_code=400, detail="File must be an image or PDF")
         else:
-            # Default: only images
             if not file.content_type.startswith('image/'):
                 raise HTTPException(status_code=400, detail="File must be an image")
         
@@ -213,17 +220,31 @@ async def create_upload_file_floorplans(file: UploadFile, content_type: ContentT
         # Read file content
         file_content = await file.read()
         
-        # Save file based on type
+        # Save file based on type and content_type
         if file.content_type == 'application/pdf':
-            # Save PDF directly - DO NOT CONVERT
-            with open(file_path, 'wb') as f:
-                f.write(file_content)
+            if content_type == "titleblock-hybrid":
+                # For titleblock-hybrid: Convert PDF to image
+                # First save the PDF temporarily
+                with open(file_path, 'wb') as f:
+                    f.write(file_content)
+                
+                # Convert PDF to image (first page only)
+                converted_image_path = helper.convert_pdf2img(file_path, pages=(0,))
+                
+                # Use the converted image for processing
+                processing_file_path = converted_image_path
+            else:
+                # For other content types: Save PDF directly
+                with open(file_path, 'wb') as f:
+                    f.write(file_content)
+                processing_file_path = file_path
         else:
             # Process and save image as JPEG
             with Image.open(io.BytesIO(file_content)) as im:
                 if im.mode in ("RGBA", "P"):
                     im = im.convert("RGB")
                 im.save(file_path, 'JPEG')
+            processing_file_path = file_path
         
         method = "None"
         is_succesful = False
@@ -231,19 +252,19 @@ async def create_upload_file_floorplans(file: UploadFile, content_type: ContentT
         
         # Process based on content_type
         if content_type == "titleblock-hybrid":
-            result, method, is_succesful, confidence = floorplan_parser.get_title_block_info(file_path)
+            result, method, is_succesful, confidence = floorplan_parser.get_title_block_info(processing_file_path)
             
         elif content_type == "rooms-deterministic":
-            result = vor.neighboring_rooms_voronoi(file_path)
+            result = vor.neighboring_rooms_voronoi(processing_file_path)
             method = "deterministic"
             is_succesful = None
             confidence = None
             
         elif content_type == "rooms-ai":
-            result, method, is_succesful, confidence = full.get_neighbouring_rooms_with_ai(file_path)
+            result, method, is_succesful, confidence = full.get_neighbouring_rooms_with_ai(processing_file_path)
             
         elif content_type == "full-plan-ai":
-            result, method, is_succesful, confidence = full.get_full_floorplan_metadata_with_ai(file_path)
+            result, method, is_succesful, confidence = full.get_full_floorplan_metadata_with_ai(processing_file_path)
             
         # Create response
         response = Response(
@@ -254,9 +275,6 @@ async def create_upload_file_floorplans(file: UploadFile, content_type: ContentT
             result=result
         )
         
-        # Clean up uploaded file
-        os.remove(file_path)  
-        
         return response
         
     except HTTPException:
@@ -264,6 +282,12 @@ async def create_upload_file_floorplans(file: UploadFile, content_type: ContentT
     except Exception as e:
         print(f"Error processing file: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Error processing file: {str(e)}")
+    finally:
+        # Cleanup: remove both original and converted files
+        if file_path and os.path.exists(file_path):
+            os.remove(file_path)
+        if converted_image_path and os.path.exists(converted_image_path):
+            os.remove(converted_image_path)
     
 
 # ========================================
