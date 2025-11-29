@@ -238,8 +238,14 @@ async def create_upload_file_floorplans(file: UploadFile, content_type: ContentT
                     f.write(file_content)
                 
                 # Convert PDF to image (first page only)
-                converted_image_path = helper.convert_pdf2img(file_path, pages=(0,))
-                
+                converted_image_paths = helper.convert_pdf2img(file_path, pages=(0,))
+
+                # Extract the first image path from the list
+                if isinstance(converted_image_paths, list) and len(converted_image_paths) > 0:
+                    converted_image_path = converted_image_paths[0]  # Get first element
+                else:
+                    converted_image_path = converted_image_paths
+
                 # Use the converted image for processing
                 processing_file_path = converted_image_path
             else:
