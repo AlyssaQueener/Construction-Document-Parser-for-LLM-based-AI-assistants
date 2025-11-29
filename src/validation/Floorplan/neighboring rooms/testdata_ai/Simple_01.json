@@ -1,0 +1,77 @@
+{
+  "neighboringRooms": {
+    "ABSTELL ZIMMER": [
+      "DIELE",
+      "GÄSTEZIMMER",
+      "KÜCHE",
+      "WOHN/ESSZIMMER"
+    ],
+    "BAD": [
+      "DIELE",
+      "HWR"
+    ],
+    "DIELE": [
+      "ABSTELL ZIMMER",
+      "BAD",
+      "GÄSTEZIMMER",
+      "HWR",
+      "KÜCHE",
+      "WOHN/ESSZIMMER"
+    ],
+    "GÄSTEZIMMER": [
+      "ABSTELL ZIMMER",
+      "DIELE"
+    ],
+    "HWR": [
+      "BAD",
+      "DIELE"
+    ],
+    "KÜCHE": [
+      "DIELE",
+      "TERRASSE",
+      "WOHN/ESSZIMMER"
+    ],
+    "TERRASSE": [
+      "KÜCHE",
+      "WOHN/ESSZIMMER"
+    ],
+    "WOHN/ESSZIMMER": [
+      "ABSTELL ZIMMER",
+      "DIELE",
+      "KÜCHE",
+      "TERRASSE"
+    ]
+  },
+  "connectedRooms": {
+    "ABSTELL ZIMMER": [
+      "DIELE"
+    ],
+    "BAD": [
+      "DIELE"
+    ],
+    "DIELE": [
+      "ABSTELL ZIMMER",
+      "BAD",
+      "GÄSTEZIMMER",
+      "HWR",
+      "KÜCHE",
+      "WOHN/ESSZIMMER"
+    ],
+    "GÄSTEZIMMER": [
+      "DIELE"
+    ],
+    "HWR": [
+      "DIELE"
+    ],
+    "KÜCHE": [
+      "DIELE",
+      "WOHN/ESSZIMMER"
+    ],
+    "TERRASSE": [],
+    "WOHN/ESSZIMMER": [
+      "DIELE",
+      "KÜCHE"
+    ]
+  },
+  "confidence": 0.9
+}

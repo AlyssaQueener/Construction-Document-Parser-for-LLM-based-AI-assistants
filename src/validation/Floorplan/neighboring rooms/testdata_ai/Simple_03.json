@@ -1,0 +1,38 @@
+{
+  "neighboringRooms": {
+    "bedroom": [
+      "kitchen",
+      "living room",
+      "bedroom"
+    ],
+    "kitchen": [
+      "bedroom",
+      "living room"
+    ],
+    "living room": [
+      "kitchen",
+      "bedroom",
+      "bedroom"
+    ],
+    "Bedroom": [
+      "kitchen",
+      "living room"
+    ]
+  },
+  "connectedRooms": {
+    "bedroom": [
+      "living room"
+    ],
+    "kitchen": [
+      "living room"
+    ],
+    "living room": [
+      "kitchen",
+      "bedroom"
+    ],
+    "Bedroom": [
+      "living room"
+    ]
+  },
+  "confidence": 0.9
+}

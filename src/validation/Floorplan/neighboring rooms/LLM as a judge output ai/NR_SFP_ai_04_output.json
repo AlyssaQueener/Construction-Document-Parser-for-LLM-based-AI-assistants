@@ -1,0 +1,178 @@
+{
+  "room_analysis": {
+    "Bedroom": {
+      "name_match_score": 1.0,
+      "precision": 0.75,
+      "recall": 0.75,
+      "f1": 0.75,
+      "true_positives": [
+        "Closet",
+        "WC",
+        "Laundry"
+      ],
+      "false_positives": [],
+      "false_negatives": [
+        "kitchen"
+      ],
+      "note": "Missed kitchen adjacency"
+    },
+    "Bedroom 2": {
+      "name_match_score": 1.0,
+      "precision": 0.5,
+      "recall": 0.5,
+      "f1": 0.5,
+      "true_positives": [
+        "Bedroom 3"
+      ],
+      "false_positives": [],
+      "false_negatives": [
+        "WC_2",
+        "Entrance"
+      ],
+      "note": "Missed WC_2 and Entrance adjacencies"
+    },
+    "Bedroom 3": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.67,
+      "true_positives": [
+        "Bedroom 2"
+      ],
+      "false_positives": [],
+      "false_negatives": [
+        "WC_2",
+        "Entrance"
+      ],
+      "note": "Missed WC_2 and Entrance adjacencies"
+    },
+    "Closet": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "Bedroom",
+        "WC"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "Dining": {
+      "name_match_score": 1.0,
+      "precision": 0.75,
+      "recall": 0.75,
+      "f1": 0.75,
+      "true_positives": [
+        "Kitchen",
+        "Living",
+        "Laundry"
+      ],
+      "false_positives": [],
+      "false_negatives": [
+        "Entrance"
+      ],
+      "note": "Missed Entrance adjacency"
+    },
+    "Entrance": {
+      "name_match_score": 1.0,
+      "precision": 0.25,
+      "recall": 0.17,
+      "f1": 0.2,
+      "true_positives": [
+        "Kitchen"
+      ],
+      "false_positives": [],
+      "false_negatives": [
+        "Living",
+        "WC_2",
+        "Bedroom 2",
+        "Bedroom 3",
+        "Dining"
+      ],
+      "note": "Missed multiple adjacencies"
+    },
+    "Kitchen": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "Dining",
+        "Entrance",
+        "Living"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "Laundry": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "Bedroom",
+        "Dining"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "Living": {
+      "name_match_score": 1.0,
+      "precision": 0.75,
+      "recall": 0.75,
+      "f1": 0.75,
+      "true_positives": [
+        "Dining",
+        "Kitchen"
+      ],
+      "false_positives": [
+        "WC"
+      ],
+      "false_negatives": [
+        "Bedroom 2",
+        "Entrance"
+      ],
+      "note": "Hallucinated WC adjacency, missed Bedroom 2 and Entrance"
+    },
+    "WC": {
+      "name_match_score": 1.0,
+      "precision": 0.67,
+      "recall": 0.67,
+      "f1": 0.67,
+      "true_positives": [
+        "Bedroom",
+        "Closet"
+      ],
+      "false_positives": [
+        "Living"
+      ],
+      "false_negatives": [],
+      "note": "Hallucinated Living adjacency"
+    }
+  },
+  "summary": {
+    "total_rooms_ground_truth": 10,
+    "total_rooms_parser": 10,
+    "rooms_correctly_detected": 10,
+    "hallucinated_rooms": [],
+    "missing_rooms": [],
+    "asymmetric_adjacencies": [
+      "Living",
+      "WC"
+    ]
+  },
+  "room_detection_score": 10.0,
+  "adjacency_precision": 7.0,
+  "adjacency_recall": 6.5,
+  "adjacency_f1_score": 6.7,
+  "overall_score": 8.0,
+  "key_issues": [
+    "Asymmetric adjacencies detected",
+    "Missed multiple adjacencies for Entrance",
+    "Hallucinated WC adjacency for Living"
+  ]
+}

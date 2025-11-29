@@ -1,0 +1,96 @@
+{
+  "titleBlock": {
+    "projectInfo": {
+      "projectId": "210101-MNMMIN",
+      "projectName": null,
+      "location": "20095 Musterhausen",
+      "author": "Bullerium GmbH",
+      "stakeholders": {
+        "client": "Max Muster",
+        "architect": "Bullerium GmbH",
+        "engineers": null
+      },
+      "timeline": {
+        "yearOfCompletion": null,
+        "approvalDate": "2021-01-01"
+      }
+    },
+    "planMetadata": {
+      "planType": null,
+      "planFormat": null,
+      "scale": "1:100",
+      "projectionMethod": null
+    },
+    "confidence": 0.6
+  },
+  "roomAdjacency": {
+    "neighboringRooms": {
+      "BAD": [
+        "DIELE",
+        "HWR"
+      ],
+      "DIELE": [
+        "BAD",
+        "GÄSTEZIMMER",
+        "ABSTELL ZIMMER",
+        "HWR",
+        "WOHN/ESSZIMMER"
+      ],
+      "GÄSTEZIMMER": [
+        "DIELE",
+        "ABSTELL ZIMMER"
+      ],
+      "ABSTELL ZIMMER": [
+        "GÄSTEZIMMER",
+        "DIELE"
+      ],
+      "HWR": [
+        "BAD",
+        "DIELE"
+      ],
+      "KÜCHE": [
+        "WOHN/ESSZIMMER",
+        "TERRASSE"
+      ],
+      "WOHN/ESSZIMMER": [
+        "DIELE",
+        "KÜCHE",
+        "TERRASSE"
+      ],
+      "TERRASSE": [
+        "KÜCHE",
+        "WOHN/ESSZIMMER"
+      ]
+    },
+    "connectedRooms": {
+      "BAD": [
+        "DIELE"
+      ],
+      "DIELE": [
+        "BAD",
+        "GÄSTEZIMMER",
+        "ABSTELL ZIMMER",
+        "HWR",
+        "WOHN/ESSZIMMER"
+      ],
+      "GÄSTEZIMMER": [
+        "DIELE"
+      ],
+      "ABSTELL ZIMMER": [
+        "DIELE"
+      ],
+      "HWR": [
+        "DIELE"
+      ],
+      "KÜCHE": [
+        "WOHN/ESSZIMMER"
+      ],
+      "WOHN/ESSZIMMER": [
+        "DIELE",
+        "KÜCHE"
+      ],
+      "TERRASSE": []
+    },
+    "confidence": 0.9
+  }
+}
