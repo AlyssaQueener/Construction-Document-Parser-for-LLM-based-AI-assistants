@@ -1,8 +1,6 @@
 
 import camelot
 import json
-import matplotlib
-import pandas as pd
 import json
 
 

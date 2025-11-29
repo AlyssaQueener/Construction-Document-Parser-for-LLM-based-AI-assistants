@@ -14,9 +14,6 @@ class Task(BaseModel):
     finish: str | None = None
     duration: str | None = None
 
-path = "examples/ganttDiagrams/commercial-building-construction-gantt-chart.pdf"
-path1 = "examples/ganttDiagrams/GANTT CHART EXAMPLE.pdf"
-path2 = "examples/FinancialDocuments/BoQExample.pdf"
 
 def rename_columns(df, old_column_names):
     new_column_names = df.iloc[0].tolist()  

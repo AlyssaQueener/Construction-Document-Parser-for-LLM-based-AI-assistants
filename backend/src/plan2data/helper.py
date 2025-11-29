@@ -1,6 +1,6 @@
 import os
 import io
-from typing import Tuple, List
+from typing import Tuple
 import pymupdf  
 import json
 

@@ -1,12 +1,10 @@
 camelot_py==1.0.0
 fastapi[standard]==0.116.0
-matplotlib==3.10.3
 mistralai==1.9.2
 numpy==2.3.1
 opencv_python_headless==4.11.0.86
 pandas==2.3.1
 pdfplumber==0.11.7
-Pillow==11.3.0
 pydantic==2.11.7
 pymupdf==1.26.3
 pytesseract==0.3.13

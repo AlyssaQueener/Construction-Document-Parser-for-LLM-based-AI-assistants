@@ -1,5 +1,5 @@
 import os
-from typing import Tuple, List
+from typing import Tuple
 import pymupdf  
 def convert_pdf2img(input_file: str, pages: Tuple = None):
     """Converts pdf to image and generates a file by page"""

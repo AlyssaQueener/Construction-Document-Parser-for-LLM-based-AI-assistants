@@ -1,15 +1,16 @@
-import cv2
-import pytesseract
-import numpy as np
-from matplotlib import pyplot as plt
-
-
 ## inits-> loading and preprocessing image 
-def init_title_block_extraction(image_path):
+def extract_text_titleblock(image_path):
+    import cv2
+    import pytesseract
     image = cv2.imread(image_path)
     image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)    
     data = pytesseract.image_to_data(image_rgb, output_type=pytesseract.Output.DICT)
-    return extract_right_side_titleblock(image_rgb, data)
+    titleblock_region = extract_right_side_titleblock(image_rgb, data)
+    x, y, w, h = titleblock_region['x'], titleblock_region['y'], titleblock_region['width'], titleblock_region['height']
+    titleblock = image_rgb[y:y+h, x:x+w]
+    text_title_block = pytesseract.image_to_string(titleblock)
+    print(text_title_block)
+    return text_title_block
 
 
 ## extracts titleblock under the assumption that it is localized in the right third of image
@@ -52,17 +53,7 @@ def extract_right_side_titleblock(image_rgb, data):
     
     return None
     
-def extract_text_titleblock(image_path, titleblock_region):
-    if titleblock_region == None:
-        return " "
-    image = cv2.imread(image_path)
-    image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    
-    x, y, w, h = titleblock_region['x'], titleblock_region['y'], titleblock_region['width'], titleblock_region['height']
-    titleblock = image_rgb[y:y+h, x:x+w]
-    text_title_block = pytesseract.image_to_string(titleblock)
-    print(text_title_block)
-    return text_title_block
+
 
 
     

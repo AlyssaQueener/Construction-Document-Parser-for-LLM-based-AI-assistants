@@ -4,12 +4,6 @@ import pandas as pd
 import src.gantt2data.mistral as mistral
 import pymupdf as pymupdf
 import pdfplumber
-import pandas as pd
-from PIL import Image
-import matplotlib.pyplot as plt
-import matplotlib.patches as patches
-from matplotlib.patches import Rectangle
-import numpy as np
 import src.gantt2data.helper as helper
 
 
@@ -223,54 +217,7 @@ def find_applicable_timestamp(target_col_idx, row_timestamps):
     
     return row_timestamps.get(applicable_col_idx) if applicable_col_idx is not None else None
 
-def visualize_with_matplotlib(pdf_path, gantt_chart_bars, activities_with_loc):
-    """
-    Convert PDF page to image and overlay bounding boxes using matplotlib
-    """
-    # Convert PDF to image
-    doc = pymupdf.open(pdf_path)
-    page = doc[0]
-    pix = page.get_pixmap(matrix=pymupdf.Matrix(2, 2))  # 2x scaling for better quality
-    img_data = pix.tobytes("png")
-    
-    # Convert to PIL image then to numpy array
-    from io import BytesIO
-    img = Image.open(BytesIO(img_data))
-    img_array = np.array(img)
-    
-    # Create matplotlib figure
-    fig, ax = plt.subplots(1, 1, figsize=(15, 10))
-    ax.imshow(img_array)
-    
-    # Define colors for different activities
-    colors = plt.cm.Set3(np.linspace(0, 1, len(gantt_chart_bars)))
-    
-    # Draw bounding boxes for activities (in green)
-    for activity in activities_with_loc:
-        rect = Rectangle((activity['x0']*2, activity['top']*2), 
-                        (activity['x1'] - activity['x0'])*2, 
-                        (activity['bottom'] - activity['top'])*2,
-                        linewidth=2, edgecolor='green', facecolor='none', alpha=0.7)
-        ax.add_patch(rect)
-        ax.text(activity['x0']*2, activity['top']*2-10, activity['text'], 
-                fontsize=8, color='green', weight='bold')
-    
-    # Draw bounding boxes for bars (different color for each activity)
-    for i, (activity_name, rectangles) in enumerate(gantt_chart_bars.items()):
-        color = colors[i]
-        for rect_data in rectangles:
-            rect = Rectangle((rect_data['x0']*2, rect_data['top']*2), 
-                            (rect_data['x1'] - rect_data['x0'])*2, 
-                            (rect_data['bottom'] - rect_data['top'])*2,
-                            linewidth=2, edgecolor=color, facecolor=color, alpha=0.3)
-            ax.add_patch(rect)
-    
-    ax.set_title('Gantt Chart with Bounding Boxes\n(Green: Activities, Colors: Bars)', fontsize=14)
-    ax.axis('off')
-    plt.tight_layout()
-    plt.show()
-    
-    doc.close()
+
 
 def determine_start_end_of_activity(activity_timestamps):
     '''

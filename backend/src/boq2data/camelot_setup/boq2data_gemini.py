@@ -1,11 +1,4 @@
-import sys
-from pathlib import Path
-
-
-
 import src.boq2data.camelot_setup.Camelot_Functions as cam 
-#import Camelot_Functions as cam
-#import gemini as gemini
 import json
 import camelot
 import src.boq2data.camelot_setup.gemini as gemini 
