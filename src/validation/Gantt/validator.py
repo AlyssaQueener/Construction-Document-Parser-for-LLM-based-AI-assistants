@@ -290,13 +290,15 @@ def call_mistral_evaluation_visual(ground_truth, parser_result):
     response = chat_response.choices[0].message.content
     return response
 
-def validate(path_to_ground_truth, parsing_result):
+def validate(path_to_ground_truth, path_parsing_result):
     ground_truth = read_json(path_to_ground_truth)
+    parsing_result = read_json(path_parsing_result)
     evaluation_result = call_mistral_evaluation(ground_truth,parsing_result)
     return evaluation_result
 
-def validate_visual(path_to_ground_truth, parsing_result):
+def validate_visual(path_to_ground_truth, path_parsing_result):
     ground_truth = read_json(path_to_ground_truth)
+    parsing_result = read_json(path_parsing_result)
     evaluation_result = call_mistral_evaluation_visual(ground_truth,parsing_result)
     return evaluation_result
 

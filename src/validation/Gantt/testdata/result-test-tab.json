@@ -1,0 +1,219 @@
+[
+    {
+      "id": 1,
+      "task": "Planning and Design",
+      "start": "2018-09-27",
+      "finish": "2018-10-15",
+      "duration": "12.5 d"
+    },
+    {
+      "id": 2,
+      "task": "Architectural Programming",
+      "start": "2018-09-27",
+      "finish": "2018-10-12",
+      "duration": "12 d"
+    },
+    {
+      "id": 3,
+      "task": "Schematic Plans",
+      "start": "2018-09-27",
+      "finish": "2018-10-15",
+      "duration": "12 d"
+    },
+    {
+      "id": 4,
+      "task": "Contracts Management",
+      "start": "2018-10-15",
+      "finish": "2018-10-29",
+      "duration": "10 d"
+    },
+    {
+      "id": 5,
+      "task": "Working Drawings",
+      "start": "2018-10-15",
+      "finish": "2018-10-23",
+      "duration": "6 d"
+    },
+    {
+      "id": 6,
+      "task": "Architectural Plans",
+      "start": "2018-10-15",
+      "finish": "2018-10-23",
+      "duration": "6 d"
+    },
+    {
+      "id": 7,
+      "task": "Structural Plans",
+      "start": "2018-10-16",
+      "finish": "2018-10-24",
+      "duration": "6 d"
+    },
+    {
+      "id": 8,
+      "task": "Mechanical Plans",
+      "start": "2018-10-17",
+      "finish": "2018-10-25",
+      "duration": "6 d"
+    },
+    {
+      "id": 9,
+      "task": "Electrical Plans",
+      "start": "2018-10-18",
+      "finish": "2018-10-26",
+      "duration": "5.9 d"
+    },
+    {
+      "id": 10,
+      "task": "Finish of Planning",
+      "start": "2018-10-26",
+      "finish": "2018-10-29",
+      "duration": "1 d"
+    },
+    {
+      "id": 11,
+      "task": "Bidding",
+      "start": "2018-10-29",
+      "finish": "2018-11-26",
+      "duration": "21 d"
+    },
+    {
+      "id": 12,
+      "task": "Obtains the Copy",
+      "start": "2018-10-29",
+      "finish": "2018-11-05",
+      "duration": "6 d"
+    },
+    {
+      "id": 13,
+      "task": "Reviews the Contract",
+      "start": "2018-11-06",
+      "finish": "2018-11-13",
+      "duration": "6 d"
+    },
+    {
+      "id": 14,
+      "task": "Solicits and Evaluates Bids",
+      "start": "2018-11-14",
+      "finish": "2018-11-21",
+      "duration": "6 d"
+    },
+    {
+      "id": 15,
+      "task": "Setting Project Starting Date",
+      "start": "2018-11-22",
+      "finish": "2018-11-26",
+      "duration": "3 d"
+    },
+    {
+      "id": 16,
+      "task": "Construction",
+      "start": "2018-11-27",
+      "finish": "2019-05-02",
+      "duration": "113 d"
+    },
+    {
+      "id": 17,
+      "task": "Building Permits",
+      "start": "2018-11-27",
+      "finish": "2018-12-11",
+      "duration": "11 d"
+    },
+    {
+      "id": 18,
+      "task": "Scheduling of Subcontractors",
+      "start": "2018-12-12",
+      "finish": "2019-05-02",
+      "duration": "102 d"
+    },
+    {
+      "id": 19,
+      "task": "Excavate the Land",
+      "start": "2018-12-12",
+      "finish": "2018-12-26",
+      "duration": "11 d"
+    },
+    {
+      "id": 20,
+      "task": "Do Rough Framing",
+      "start": "2018-12-27",
+      "finish": "2019-01-14",
+      "duration": "13 d"
+    },
+    {
+      "id": 21,
+      "task": "Do Rough Electrical",
+      "start": "2019-01-15",
+      "finish": "2019-01-29",
+      "duration": "11 d"
+    },
+    {
+      "id": 22,
+      "task": "Undertake Flooring",
+      "start": "2019-01-30",
+      "finish": "2019-02-13",
+      "duration": "11 d"
+    },
+    {
+      "id": 23,
+      "task": "Undertake Roofing",
+      "start": "2019-02-14",
+      "finish": "2019-02-28",
+      "duration": "11 d"
+    },
+    {
+      "id": 24,
+      "task": "Finish of Rough Construction",
+      "start": "2019-03-01",
+      "finish": "2019-03-01",
+      "duration": "1 d"
+    },
+    {
+      "id": 25,
+      "task": "Install Heating and Air Conditioning",
+      "start": "2019-03-04",
+      "finish": "2019-03-18",
+      "duration": "11 d"
+    },
+    {
+      "id": 26,
+      "task": "Install Elevators",
+      "start": "2019-03-19",
+      "finish": "2019-04-02",
+      "duration": "11 d"
+    },
+    {
+      "id": 27,
+      "task": "Frame Windows and Doors",
+      "start": "2019-04-03",
+      "finish": "2019-04-17",
+      "duration": "11 d"
+    },
+    {
+      "id": 28,
+      "task": "Install Meeting Rooms Facilities",
+      "start": "2019-04-18",
+      "finish": "2019-04-25",
+      "duration": "6 d"
+    },
+    {
+      "id": 29,
+      "task": "Install Network Facilities",
+      "start": "2019-04-26",
+      "finish": "2019-05-02",
+      "duration": "5 d"
+    },
+    {
+      "id": 30,
+      "task": "Payments of Construction",
+      "start": "2019-05-03",
+      "finish": "2019-05-09",
+      "duration": "5 d"
+    },
+    {
+      "id": 31,
+      "task": "Completion",
+      "start": "2019-05-13",
+      "finish": "2019-05-13",
+      "duration": "1 d"
+    }
+  ]
