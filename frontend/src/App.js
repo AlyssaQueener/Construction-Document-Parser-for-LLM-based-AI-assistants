@@ -521,9 +521,9 @@ useEffect(() => {
           <div>
             <h3 className="font-bold text-lg mb-2 text-gray-900">Find us!</h3>
             <ul className="space-y-1">
-              <li><a href="#" className="text-gray-700 hover:text-blue-600">Alyssa</a></li>
+              <li><a href="https://www.linkedin.com/in/alyssa-queener-8932b2318?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BfReaJrcdQb%2BuvLYnrqWlng%3D%3D" className="text-gray-700 hover:text-blue-600">Alyssa</a></li>
               <li><a href="https://www.linkedin.com/in/bahar-moradi-b21969190?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BRYdfj5hATpSZ5jil3zmsqQ%3D%3D" className="text-gray-700 hover:text-blue-600">Bahar</a></li>
-              <li><a href="#" className="text-gray-700 hover:text-blue-600">Rebekka</a></li>
+              <li><a href="https://www.linkedin.com/in/rebekka-buter-4532b926b?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BLV4gW%2FZfRaiBv%2BcF3fLhJw%3D%3D" className="text-gray-700 hover:text-blue-600">Rebekka</a></li>
             </ul>
           </div>
 
