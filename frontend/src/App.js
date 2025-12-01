@@ -222,7 +222,7 @@ useEffect(() => {
                   disabled={loading || !file}
                   className="
                     w-40 h-12                      // FIXED SIZE
-                    border-2 border-white 
+                    border-2 border-gray-300
                     bg-gray-300 hover:bg-gray-400 
                     text-gray-800 textbase font-semibold 
                     rounded-lg 
@@ -310,7 +310,7 @@ useEffect(() => {
                   disabled={loading || !file}
                   className="
                     w-40 h-12                      // FIXED SIZE
-                    border-2 border-white 
+                    border-2 border-gray-300 
                     bg-gray-300 hover:bg-gray-400 
                     text-gray-800 textbase font-semibold 
                     rounded-lg 
@@ -382,7 +382,7 @@ useEffect(() => {
                   disabled={loading || !file}
                   className="
                     w-40 h-12                      // FIXED SIZE
-                    border-2 border-white 
+                    border-2 border-gray-300 
                     bg-gray-300 hover:bg-gray-400 
                     text-gray-800 textbase font-semibold 
                     rounded-lg 
