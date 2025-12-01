@@ -10,16 +10,16 @@ validation_path = "src/validation/Floorplan/titleblock/testdata/floorplan-test.j
 validation_path_1 = "src/validation/Floorplan/titleblock/testdata/floorplan-test-1.json"
 validation_path_2 = "src/validation/Floorplan/titleblock/testdata/floorplan-test-2.json"
 
-#result = parser.get_title_block_info(image_path)
-#result_1 = parser.get_title_block_info(image_path_1)
-result_2 = parser.get_title_block_info(image_path_2)
+#result = parser.get_title_block_info_ai(image_path)
+result_1 = parser.get_title_block_info(image_path_1)
+#result_2 = parser.get_title_block_info_ai(image_path_2)
 
 print("Result of first example")
 #print(result)
 print("Result of second example")
-#print(result_1)
+print(result_1)
 print("Result of third example")
-print(result_2)
+#print(result_2)
 
 print("Validation Results:")
 #print("1. Example:")
@@ -27,5 +27,5 @@ print("Validation Results:")
 #print("2. Example:")
 #print(llm_judge.llm_as_a_judge_titleblock(validation_path_1, result_1))
 #print("3. Example:")
-print(llm_judge.llm_as_a_judge_titleblock(validation_path_2, result_2))
+print(llm_judge.llm_as_a_judge_titleblock(validation_path_1, result_1))
 

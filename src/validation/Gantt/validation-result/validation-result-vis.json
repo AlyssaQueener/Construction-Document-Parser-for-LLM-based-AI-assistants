@@ -1,0 +1,176 @@
+{
+    "completeness": 6.67,
+    "accuracy": 5.69,
+    "overall_score": 5.78,
+    "field_evaluations": [
+        {
+            "ground_truth_id": 0,
+            "parser_id": 1,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 0.8,
+                "start": 0.3,
+                "finish": 0.3
+            },
+            "notes": "Task is case difference. Start and finish dates are significantly off."
+        },
+        {
+            "ground_truth_id": 1,
+            "parser_id": 2,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 0.3,
+                "finish": 0.3
+            },
+            "notes": "Start and finish dates are significantly off."
+        },
+        {
+            "ground_truth_id": 2,
+            "parser_id": 3,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 0.3,
+                "finish": 0.3
+            },
+            "notes": "Start and finish dates are significantly off."
+        },
+        {
+            "ground_truth_id": 3,
+            "parser_id": 4,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 0.8,
+                "start": 0.3,
+                "finish": 0.3
+            },
+            "notes": "Task is case difference. Start and finish dates are significantly off."
+        },
+        {
+            "ground_truth_id": 4,
+            "parser_id": 5,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 0.3,
+                "finish": 0.3
+            },
+            "notes": "Start and finish dates are significantly off."
+        },
+        {
+            "ground_truth_id": 5,
+            "parser_id": 6,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 0.8,
+                "start": 0.3,
+                "finish": 0.3
+            },
+            "notes": "Task is case difference. Start and finish dates are significantly off."
+        },
+        {
+            "ground_truth_id": 6,
+            "parser_id": 7,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 0.8,
+                "start": 0.3,
+                "finish": 0.3
+            },
+            "notes": "Task has extra newline. Start and finish dates are significantly off."
+        },
+        {
+            "ground_truth_id": 7,
+            "parser_id": null,
+            "fields_evaluated": [],
+            "field_scores": {},
+            "notes": "No matching activity found in parser output."
+        },
+        {
+            "ground_truth_id": 8,
+            "parser_id": 8,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 0.3,
+                "finish": 0.3
+            },
+            "notes": "Start and finish dates are significantly off."
+        },
+        {
+            "ground_truth_id": 9,
+            "parser_id": 9,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 0.3,
+                "finish": 0.3
+            },
+            "notes": "Start and finish dates are significantly off."
+        },
+        {
+            "ground_truth_id": 10,
+            "parser_id": 10,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 0.3,
+                "finish": 0.3
+            },
+            "notes": "Start and finish dates are significantly off."
+        },
+        {
+            "ground_truth_id": 11,
+            "parser_id": 11,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 0.3,
+                "finish": 0.3
+            },
+            "notes": "Start and finish dates are significantly off."
+        },
+        {
+            "ground_truth_id": 12,
+            "parser_id": 12,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 0.8,
+                "start": 0.3,
+                "finish": 0.3
+            },
+            "notes": "Task is case difference. Start and finish dates are significantly off."
+        },
+        {
+            "ground_truth_id": 13,
+            "parser_id": 13,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 0.8,
+                "start": 0.3,
+                "finish": 0.3
+            },
+            "notes": "Task is a partial match. Start and finish dates are significantly off."
+        },
+        {
+            "ground_truth_id": 14,
+            "parser_id": 14,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 0.8,
+                "start": 0.3,
+                "finish": 0.3
+            },
+            "notes": "Task is case difference and extra words. Start and finish dates are significantly off."
+        }
+    ],
+    "summary": {
+        "total_ground_truth_activities": 15,
+        "total_matched_activities": 13,
+        "total_fields_evaluated": 45,
+        "false_positives": 2,
+        "false_negatives": 2,
+        "common_fields": ["task", "start", "finish"]
+    }
+}

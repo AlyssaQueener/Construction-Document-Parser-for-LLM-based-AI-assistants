@@ -1,0 +1,24 @@
+{
+    "projectInfo":{
+       "projectId":"22-011",
+       "projectName":"LFS Lebach - Neubau Verwaltungsgebäude",
+       "location":"Schlesierallee, 66822 Lebach",
+       "author":null,
+       "stakeholders":{
+          "client":"Landesbetrieb für Straßenbau",
+          "architect":null,
+          "engineers":null
+       },
+       "timeline":{
+          "yearOfCompletion":"2025",
+          "approvalDate":null
+       }
+    },
+    "planMetadata":{
+       "planType":"Grundriss Blitzschutz Erdgeschoss",
+       "planFormat":"A0",
+       "scale":"1:100",
+       "projectionMethod":null
+    },
+    "confidence":0.7
+ }

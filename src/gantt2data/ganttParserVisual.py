@@ -22,19 +22,23 @@ class Task_visual(BaseModel):
 def extract_activities(df):
         activities = []
         
+        try:
         # Get the first column (assuming it contains activities)
-        first_column = df.iloc[:, 0]
+            first_column = df.iloc[:, 0]
 
         
         
-        for value in first_column:
-            if value is not None and value != 'None':
-                # Clean the activity name
-                activity = str(value)
-                activities.append(activity)
+            for value in first_column:
+                if value is not None and value != 'None':
+                    # Clean the activity name
+                    activity = str(value)
+                    activities.append(activity)
         
-        activities = activities
-        return activities
+            activities = activities
+            return activities
+        except:
+            print("Activities couldn't be extracted from data frame")
+            return None
     
 def extract_timeline_rows(df):
         ## TO DO validation checker-> the granularity counter should equal the amount of columns-1 (one column for where activities are listed) -> if that isn't achieved yet i might should loop thourgh more rows or AI 
@@ -144,7 +148,7 @@ def is_horizontally_aligned(timestamp, rectangle, tolerance=5):
     # Check if timestamp is within or overlaps with rectangle horizontally
     return (rect_left - tolerance <= timestamp_center_x <= rect_right + tolerance)
 
-def match_bars_with_timeline(gantt_chart_bars, timeline_with_localization):
+def match_bars_with_timeline(gantt_chart_bars, timeline_with_localization, ai_extraction):
     '''
     Calculates if the bar of a activity (matching_rectangles) match with timestemps, returns a dict in which all matching timestemps a mapped to the name of a activity
     '''
@@ -156,11 +160,18 @@ def match_bars_with_timeline(gantt_chart_bars, timeline_with_localization):
         for timestamp in timeline_with_localization:
             for rectangle in matching_rectangles:
                 if is_horizontally_aligned(timestamp, rectangle):
-                    relevant_timestamp_info = {
-                        'timestamp': timestamp['timestamp_value'],
-                        'column_index': timestamp['column_index'],
-                        'additional_info': timestamp['additional_info']
-                    }
+                    if ai_extraction == False:
+                        relevant_timestamp_info = {
+                            'timestamp': timestamp['timestamp_value'],
+                            'column_index': timestamp['column_index'],
+                            'additional_info': timestamp['additional_info']
+                        }
+                    if ai_extraction == True:
+                        relevant_timestamp_info = {
+                            'timestamp': timestamp['timestamp_value'],
+                            'column_index': timestamp['index'],
+                            'additional_info': timestamp['additional_info']
+                        }
                     matching_timestamps.append(relevant_timestamp_info)
         
         activity_timestamps[activity] = matching_timestamps
@@ -289,8 +300,8 @@ def determine_start_end_of_activity(activity_timestamps):
             # Find timestamp with minimum column_index
             min_timestamp = min(timestamps, key=lambda x: x['column_index'])
             max_timestamp = max(timestamps, key=lambda x: x['column_index'])
-            start_date = str(min_timestamp['timestamp'])
-            end_date = str(max_timestamp['timestamp'])
+            start_date = str(min_timestamp['timestamp'] + " " + min_timestamp['additional_info'])
+            end_date = str(max_timestamp['timestamp']+ " " + max_timestamp['additional_info'])
             activity_with_date = {
                 "task" : activity,
                 "start" : start_date,
@@ -386,15 +397,22 @@ def parse_gant_chart_visual(path):
         df = df.dropna(axis='columns', how='all')
         activities = extract_activities(df)
         row_count = len(df.index)
-        if len(activities)< row_count - 5:
+        if activities == None:
+            activities = json.loads(mistral.call_mistral_activities(image_path))
+        elif len(activities)< row_count - 5:
             activities = json.loads(mistral.call_mistral_activities(image_path))
         time_line_rows= extract_timeline_rows(df)
         timeline = create_single_timeline(time_line_rows)
         column_count = len(df.columns)
-        if len(timeline) < column_count-5:
-            timeline = json.loads(mistral.call_mistral_timeline(image_path))
+        ai_extraction = False
+        if len(timeline) == 0:
+             timeline = json.loads(mistral.call_mistral_timeline(image_path,"no timeline"))
+             ai_extraction = True
+        if len(timeline) != 0 and len(timeline) < column_count-5:
+            timeline = json.loads(mistral.call_mistral_timeline(image_path, "badly extracted"))
+            ai_extraction = True
         time_line_with_localization, unfound_timestamps = localize_timestamps(timeline, page)
-        if unfound_timestamps > len(timeline) - tolerance:
+        if unfound_timestamps > len(timeline) - tolerance and ai_extraction== False:
             timeline = json.loads(mistral.call_mistral_timeline(image_path))
             time_line_with_localization, unfound_timestamps = localize_timestamps(timeline, page)
         activities_with_loc, unfound_activites = localize_activities(activities, page)
@@ -405,7 +423,7 @@ def parse_gant_chart_visual(path):
         success = check_bar_recognition(gantt_chart_bars)
         if not success:
             gantt_chart_bars = identify_bars_with_colours(gantt_chart_bars)
-        activity_timestamps = match_bars_with_timeline(gantt_chart_bars,time_line_with_localization)
+        activity_timestamps = match_bars_with_timeline(gantt_chart_bars,time_line_with_localization, ai_extraction)
         activites_with_dates = determine_start_end_of_activity(activity_timestamps)
         json_string = json.dumps(activites_with_dates, indent=4)
         return(json_string)

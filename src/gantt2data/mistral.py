@@ -8,8 +8,8 @@ model = "mistral-small-latest"
 api_key = "mVTgI1ELSkn5Q28v2smHK0O4E02nMaxG"
 client = Mistral(api_key=api_key)
 
-def call_mistral_timeline(path):
-    message = create_message_for_timeline_extraction(path)
+def call_mistral_timeline(path, option):
+    message = create_message_for_timeline_extraction(path, option)
     chat_response = client.chat.complete(
         model = model,
         messages = message,
@@ -20,9 +20,13 @@ def call_mistral_timeline(path):
 
     return chat_response.choices[0].message.content
 
-def create_message_for_timeline_extraction(path):
+def create_message_for_timeline_extraction(path, option):
     base64_image = encode_image(path)
-    text = create_timeline_prompt()
+    if option == "badly extracted":
+        text = create_timeline_prompt_new()
+    if option == "no timeline":
+        text = create_timeline_prompt_new()
+    
     messages = [
     {
         "role": "user",
@@ -114,7 +118,9 @@ def encode_image(image_path):
 def create_activities_prompt():
     prompt = """
 You are an expert in identifying the activities/ tasks which are listed in a gantt chart.
-Look at the image and return all the activities in following format, an array list of all the names of the activities :
+Look at the image and return all the activities stated in the gantt chart. Use the exact order in which the activities are listed, dont omit or hallucinate a activity.
+Return activities in the following format:
+** array list of all the names of the activities **
 [ "name of the recognized activity exactly written like in chart", "name of the recognized activity exactly written like in chart"]
 Please include the names of the activies/task exactly as they are spelled in the chart. Return them as a list, don't do something like { "actvities" : ["a","b"]} since i cannot handle any other format in my further application.
 Return the answer in valid JSON.
@@ -219,3 +225,46 @@ If no match is found for a column:
 Analyze this raw text, identify the column headers, and return ONLY the JSON array mapping as specified above.
     """
     return promt 
+
+
+def create_timeline_prompt_new():
+    prompt = """
+You are given an image of a Gantt chart.
+
+1. Identify the smallest repeated time unit on the x-axis (for example: individual days, weeks, months, quarters, or years).
+2. Treat that smallest repeated unit as "timestamp_value".
+3. For each "timestamp_value", set "additional_info" to a string that concatenates all higher-level time headers that apply to that unit, separated by spaces, ordered from lowest to highest level. Use exactly the labels as written in the chart, without translating or normalizing.
+4. Additionally, output an integer field "index" for each timestamp:
+   - "index" MUST start at 0 for the leftmost (earliest) timestamp on the x-axis.
+   - "index" MUST increase by exactly 1 when moving one step to the right on the x-axis.
+   - Each timestamp must have a unique "index".
+
+Examples of possible values (do NOT copy them, just follow the format):
+- "Monday"
+- "Monday October"
+- "27 Monday October"
+- "Week 3 2025"
+
+Return ONLY a JSON array of objects with this exact schema, no wrapper object, no extra keys:
+
+[
+  {
+    "timestamp_value": "27",
+    "additional_info": "Monday October",
+    "index": 4
+  }
+]
+
+Additional rules:
+- Do not include any tasks or bars, only time axis values.
+- If the chart has multiple header rows (e.g., years, then months, then days):
+  - Use the lowest row (e.g., days) as "timestamp_value".
+  - Combine the headers above (e.g., month, year) into "additional_info".
+- If there is no higher-level header, set "additional_info" to an empty string "".
+- The response must be valid JSON.
+- The root element MUST be a JSON array.
+- Use double quotes for all keys and string values.
+- Do not add comments, explanations, or any extra text.
+- The only allowed keys are "timestamp_value", "additional_info", and "index".
+"""
+    return prompt
