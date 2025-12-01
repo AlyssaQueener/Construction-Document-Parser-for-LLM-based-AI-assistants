@@ -185,7 +185,7 @@ useEffect(() => {
                   size="lg"
                   onClick={() => handleSubmit('/drawing_parser/')}
                   disabled={loading || !file}
-                  className="w-full"
+                  className="w-full border-3 border-white"
                 >
                   {loading ? (
                     <>
@@ -257,7 +257,7 @@ useEffect(() => {
                   size="lg"
                   onClick={() => handleSubmit('/gantt_parser/')}
                   disabled={loading || !file}
-                  className="w-full"
+                  className="w-full border-3 border-white"
                 >
                   {loading ? (
                     <>
@@ -316,7 +316,7 @@ useEffect(() => {
                   size="lg"
                   onClick={() => handleSubmit('/financial_parser/')}
                   disabled={loading || !file}
-                  className="w-full"
+                  className="w-full border-3 border-white"
                 >
                   {loading ? (
                     <>
