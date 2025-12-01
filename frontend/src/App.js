@@ -186,7 +186,7 @@ useEffect(() => {
                     <option value="titleblock-hybrid">Title Block</option>
                     <option value="rooms-deterministic">Rooms - Deterministic</option>
                     <option value="rooms-ai">Rooms - AI</option>
-                    <option value="full-plan-ai">Full Plan</option>
+                    <option value="full-plan-ai">Full Plan - AI</option>
                   </Select>
                 </div>
                 {/* Dynamic Info Box */}
@@ -209,7 +209,7 @@ useEffect(() => {
                     )}
                     {contentType === 'full-plan-ai' && (
                       <>
-                        <span className="font-bold"> Full Plan:</span> Comprehensive AI analysis extracting both title block information and complete room layout with spatial relationships in one pass. Limited accuracy on complex plans.
+                        <span className="font-bold"> Full Plan:</span> Comprehensive AI analysis extracting both title block information and complete room layout with spatial relationships in one pass. Limited accuracy on complex plans. Better Performance if extracted seperately.
                       </>
                     )}
                   
