@@ -21,10 +21,10 @@
     "confidence": 0.5}, 
     "roomAdjacency": 
       {"neighboringRooms": 
-            {"WC": ["Dusche", "Flur"], 
-            "Dusche": ["WC", "Flur"], 
-            "Flur": ["WC", "Dusche", "Küche", "Wohnzimmer", "Schlafzimmer", "Badezimmer"],
-            "Küche": ["Flur", "Wohnzimmer"], 
+            {"Lager/Müll": ["Lagerfläche", "Güteraufzug", "Treppenhaus","Foyer"], 
+            "Lagerfläche": ["Güteraufzug", "Lager/Müll","Bad"], 
+            "Bad": ["Lagerfläche", "Zimmer 1.1"],
+            "Zimmer 1.1": ["Bad", "Wohnzimmer"], 
             "Wohnzimmer": ["Flur", "Küche", "Schlafzimmer"],
             "Schlafzimmer": ["Flur", "Wohnzimmer", "Badezimmer"], 
             "Badezimmer": ["Flur", "Schlafzimmer"]}, 
