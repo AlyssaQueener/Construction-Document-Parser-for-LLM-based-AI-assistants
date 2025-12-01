@@ -204,23 +204,31 @@ useEffect(() => {
                     )}
                     {contentType === 'rooms-ai' && (
                       <>
-                        <span className="font-bold"> Rooms - AI:</span> Uses AI vision models to intelligently detect room names, boundaries, and adjacencies. Better for complex or hand-drawn plans.
+                        <span className="font-bold"> Rooms - AI:</span> Uses AI vision models to intelligently detect room names, boundaries, and adjacencies. Struggles with complex plans.
                       </>
                     )}
                     {contentType === 'full-plan-ai' && (
                       <>
-                        <span className="font-bold"> Full Plan:</span> Comprehensive AI analysis extracting both title block information and complete room layout with spatial relationships in one pass.
+                        <span className="font-bold"> Full Plan:</span> Comprehensive AI analysis extracting both title block information and complete room layout with spatial relationships in one pass. Limited accuracy on complex plans.
                       </>
                     )}
                   
                 </div>
+              <div className="flex justify-center">
                 <Button
                   color="success"
                   size="lg"
                   onClick={() => handleSubmit('/drawing_parser/')}
                   disabled={loading || !file}
-                  className="w-full border-3 border-black"
-                >
+                  className="
+                    w-40 h-12                      // FIXED SIZE
+                    border-2 border-white 
+                    bg-gray-300 hover:bg-gray-400 
+                    text-gray-800 textbase font-semibold 
+                    rounded-lg 
+                    flex items-center justify-center 
+                    mx-auto
+                  ">
                   {loading ? (
                     <>
                       <Spinner size="sm" className="mr-2" />
@@ -230,6 +238,7 @@ useEffect(() => {
                     'Parse Floor Plan'
                   )}
                 </Button>
+              </div>
               
               </div>
             </Card>
@@ -293,24 +302,31 @@ useEffect(() => {
                 </div>
 
                
-
+              <div className="flex justify-center">
                 <Button
                   color="success"
                   size="lg"
                   onClick={() => handleSubmit('/gantt_parser/')}
                   disabled={loading || !file}
-                  className="w-full border-3 border-black"
-                >
+                  className="
+                    w-40 h-12                      // FIXED SIZE
+                    border-2 border-white 
+                    bg-gray-300 hover:bg-gray-400 
+                    text-gray-800 textbase font-semibold 
+                    rounded-lg 
+                    flex items-center justify-center 
+                    mx-auto
+                  ">                
                   {loading ? (
                     <>
                       <Spinner size="sm" className="mr-2" />
                       Processing...
                     </>
                   ) : (
-                    'Parse Gantt Chart'
+                    'Parse Gantt-Chart'
                   )}
                 </Button>
-              
+              </div>
               </div>
             </Card>
           </Tabs.Item>
@@ -358,14 +374,21 @@ useEffect(() => {
                   {" "}
                   {"Extracts itemized cost data including quantities, unit prices, and total costs from Bills of Quantities documents used in construction projects."}
                 </div>
-              
+              <div className="flex justify-center">
                 <Button
                   color="success"
                   size="lg"
                   onClick={() => handleSubmit('/financial_parser/')}
                   disabled={loading || !file}
-                  className="w-full border-3 border-black"
-                >
+                  className="
+                    w-40 h-12                      // FIXED SIZE
+                    border-2 border-white 
+                    bg-gray-300 hover:bg-gray-400 
+                    text-gray-800 textbase font-semibold 
+                    rounded-lg 
+                    flex items-center justify-center 
+                    mx-auto
+                  ">
                   {loading ? (
                     <>
                       <Spinner size="sm" className="mr-2" />
@@ -375,6 +398,7 @@ useEffect(() => {
                     'Parse BOQ'
                   )}
                 </Button>
+              </div>
               
               </div>
             </Card>
