@@ -1,4 +1,4 @@
-import { Card, Button, Select, Label, Alert, Spinner, Tabs,Tooltip  } from 'flowbite-react';
+import { Card, Button, Select, Label, Alert, Spinner, Tabs  } from 'flowbite-react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';  
 
@@ -179,7 +179,31 @@ useEffect(() => {
                     <option value="full-plan-ai">Full Plan</option>
                   </Select>
                 </div>
-              <Tooltip content="Extract title block info, room labels, and spatial relationships from architectural floor plans">
+                {/* Dynamic Info Box */}
+                <div className="p-4 bg-blue-50 border-l-4 border-blue-500 rounded-lg">
+                  <p className="text-sm text-gray-700">
+                    {contentType === 'titleblock-hybrid' && (
+                      <>
+                        <span className="font-semibold">📋 Title Block:</span> Extracts project metadata like project ID, architect, client, scale, and date from the title block section of floor plans.
+                      </>
+                    )}
+                    {contentType === 'rooms-deterministic' && (
+                      <>
+                        <span className="font-semibold">🏠 Rooms - Deterministic:</span> Uses rule-based algorithms to identify room labels and calculate spatial relationships using Voronoi diagrams. Works best with clearly labeled floor plans.
+                      </>
+                    )}
+                    {contentType === 'rooms-ai' && (
+                      <>
+                        <span className="font-semibold">🤖 Rooms - AI:</span> Uses AI vision models to intelligently detect room names, boundaries, and adjacencies. Better for complex or hand-drawn plans.
+                      </>
+                    )}
+                    {contentType === 'full-plan-ai' && (
+                      <>
+                        <span className="font-semibold">🎯 Full Plan:</span> Comprehensive AI analysis extracting both title block information and complete room layout with spatial relationships in one pass.
+                      </>
+                    )}
+                  </p>
+                </div>
                 <Button
                   color="success"
                   size="lg"
@@ -196,7 +220,7 @@ useEffect(() => {
                     'Parse Floor Plan'
                   )}
                 </Button>
-              </Tooltip>
+              
               </div>
             </Card>
           </Tabs.Item>
@@ -252,7 +276,7 @@ useEffect(() => {
                     <option value="tabular">Tabular (explicit dates)</option>
                   </Select>
                 </div>
-              <Tooltip content="Extract project tasks, durations, dependencies, and timeline data from Gantt charts">
+              
                 <Button
                   color="success"
                   size="lg"
@@ -269,7 +293,7 @@ useEffect(() => {
                     'Parse Gantt Chart'
                   )}
                 </Button>
-              </Tooltip>
+              
               </div>
             </Card>
           </Tabs.Item>
@@ -312,7 +336,7 @@ useEffect(() => {
                     </p>
                   </div>
                 )}
-              <Tooltip content="Extract cost items, quantities, and prices from Bills of Quantities">
+              
                 <Button
                   color="success"
                   size="lg"
@@ -329,7 +353,7 @@ useEffect(() => {
                     'Parse BOQ'
                   )}
                 </Button>
-              </Tooltip>
+              
               </div>
             </Card>
           </Tabs.Item>
