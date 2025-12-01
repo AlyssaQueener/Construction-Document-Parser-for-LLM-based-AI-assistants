@@ -21,21 +21,28 @@
     "confidence": 0.5}, 
     "roomAdjacency": 
       {"neighboringRooms": 
-            {"Lager/Müll": ["Lagerfläche", "Güteraufzug", "Treppenhaus","Foyer"], 
+            {"Lager/Müll": ["Lagerfläche", "Güteraufzug", "Foyer"], 
             "Lagerfläche": ["Güteraufzug", "Lager/Müll","Bad"], 
             "Bad": ["Lagerfläche", "Zimmer 1.1"],
-            "Zimmer 1.1": ["Bad", "Wohnzimmer"], 
-            "Wohnzimmer": ["Flur", "Küche", "Schlafzimmer"],
-            "Schlafzimmer": ["Flur", "Wohnzimmer", "Badezimmer"], 
-            "Badezimmer": ["Flur", "Schlafzimmer"]}, 
-    "connectedRooms":
-             {"WC": ["Flur"], 
-             "Dusche": ["Flur"],
-              "Flur": ["WC", "Dusche", "Küche", "Wohnzimmer", "Schlafzimmer", "Badezimmer"],
-              "Küche": ["Flur", "Wohnzimmer"], 
-              "Wohnzimmer": ["Flur", "Küche", "Schlafzimmer"],
-              "Schlafzimmer": ["Flur", "Wohnzimmer", "Badezimmer"],
-              "Badezimmer": ["Flur", "Schlafzimmer"]
-            
-          }
+            "Zimmer 1.1": ["Bad", "Pflegebad", "Pflegeoase"], 
+            "Pflegebad": ["Zimmer 1.1", "Foyer", "Schlafzimmer"],
+            "Pflegeoase": ["Pflegebad", "Foyer", "Teeküche", "Grünes Zimmer"], 
+            "Teeküche": ["Grünes Zimmer", "Empfang/foyer", "Pflegeoase"],
+            "Grünes Zimmer": ["Teeküche", "Empfang/foyer", "Pflegeoase"],
+            "Empfang/foyer": ["Teeküche", "Grünes Zimmer", "WC D", "WC Behind." ],
+            "WC D": ["Empfang/foyer", "WC Behind."],
+            "WC Behind.": ["Empfang/foyer", "WC D", "Empfang/Büro"],
+            "Empfang/Büro": ["WC Behind.", "Windfang"],
+            "Windfang": ["Empfang/Büro", "Treppenhaus", "Empfang/Foyer"],
+            "Treppenhaus": ["Windfang", "Therapie", "Foyer"],
+            "Therapie": ["Treppenhaus", "Foyer", "Pflegedienstleitung"],
+            "Pflegedienstleitung": ["Therapie", "Heimleitung","Foyer"],
+            "Heimleitung": ["Pflegedienstleitung", "Foyer", ""],
+            "Foyer": ["Treppenhaus", "Therapie", "Lager/Müll", "Pflegebad", "Pflegeoase", "Heimleitung", "ELT EG"],
+            "ELT EG": ["Besucher", "Lager", "Foyer"],
+            "Lager": ["ELT EG", "Unrein EG", "Foyer"],
+            "Unrein EG": ["Lager", "Foyer", "Wäsche"],
+            "Wäsche": ["Unrein EG", "Foyer", "Stützpunkt EG"],
+            "Stützpunkt EG": ["Wäsche", "Foyer"]} 
+      
         }}

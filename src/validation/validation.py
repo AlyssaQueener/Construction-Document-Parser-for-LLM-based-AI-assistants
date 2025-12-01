@@ -1,3 +1,6 @@
+### 
+
+
 def display_comparison_view(ai_files_data, det_files_data):
     """Display AI vs Deterministic comparison for neighboring rooms"""
     
@@ -31,7 +34,7 @@ def display_comparison_view(ai_files_data, det_files_data):
             
             styled_df = df_ai.style.applymap(
                 highlight_scores,
-                subset=['Overall Score', 'Room Detection', 'Adjacency F1']
+                subset=['Overall Score', 'Room Detection', 'Adjacency F1', 'TB Score', 'TB Accuracy', 'TB completeness']
             )
             st.dataframe(styled_df, use_container_width=True)
             
@@ -224,8 +227,30 @@ def calculate_stats(json_data, parser_type):
             'avg_field_score': avg_field_score
         }
     
+    elif parser_type == 'fullplan':
+        # Full Plan AI combines title block + room adjacency
+        title_block = json_data.get('title_block_analysis', {})
+        room_adjacency = json_data.get('room_adjacency_analysis', {})
+        
+        return {
+            'overall_score': json_data.get('overall_score', 0),
+            # Title block metrics
+            'title_block_completeness': title_block.get('completeness', 0),
+            'title_block_accuracy': title_block.get('accuracy', 0),
+            'title_block_score': title_block.get('title_block_score', 0),
+            # Room adjacency metrics
+            'room_detection_score': room_adjacency.get('room_detection_score', 0),
+            'adjacency_precision': room_adjacency.get('adjacency_precision', 0),
+            'adjacency_recall': room_adjacency.get('adjacency_recall', 0),
+            'adjacency_f1': room_adjacency.get('adjacency_f1_score', 0),
+            'room_adjacency_score': room_adjacency.get('room_adjacency_score', 0),
+            # Combined
+            'total_rooms': room_adjacency.get('summary', {}).get('total_rooms_ground_truth', 0),
+            'key_issues': json_data.get('key_issues', [])
+        }
+    
     else:
-        # Drawing parser structure (original)
+        # Drawing parser structure (neighboring rooms only)
         return {
             'overall_score': json_data.get('overall_score', 0),
             'room_detection_score': json_data.get('room_detection_score', 0),
@@ -235,15 +260,6 @@ def calculate_stats(json_data, parser_type):
             'total_rooms': json_data.get('summary', {}).get('total_rooms_ground_truth', 0),
             'key_issues': json_data.get('key_issues', [])
         }
-
-def get_score_color(score):
-    """Return color based on score"""
-    if score >= 9:
-        return '#10b981'  # green
-    elif score >= 7:
-        return '#f59e0b'  # yellow
-    else:
-        return '#ef4444'  # red
 
 def create_comparison_table(files_data, parser_type):
     """Create comparison DataFrame based on parser type"""
@@ -277,6 +293,19 @@ def create_comparison_table(files_data, parser_type):
                 'False Positives': stats['false_positives'],
                 'False Negatives': stats['false_negatives']
             })
+        elif parser_type == 'fullplan':
+            rows.append({
+                'File': file_name,
+                'Overall Score': stats['overall_score'],
+                'TB Completeness': stats['title_block_completeness'],
+                'TB Accuracy': stats['title_block_accuracy'],
+                'TB Score': stats['title_block_score'],
+                'Room Detection': stats['room_detection_score'],
+                'Adjacency F1': stats['adjacency_f1'],
+                'Room Score': stats['room_adjacency_score'],
+                'Total Rooms': stats['total_rooms'],
+                'Issues': len(stats['key_issues'])
+            })
         else:
             rows.append({
                 'File': file_name,
@@ -290,6 +319,401 @@ def create_comparison_table(files_data, parser_type):
             })
     
     return pd.DataFrame(rows)
+
+def display_aggregate_stats(files_data, parser_type):
+    """Display aggregate statistics based on parser type"""
+    if not files_data:
+        return
+    
+    all_stats = [calculate_stats(data, parser_type) for _, data in files_data]
+    
+    if parser_type == 'financial':
+        col1, col2, col3, col4 = st.columns(4)
+        
+        with col1:
+            avg_overall = sum(s['overall_score'] for s in all_stats) / len(all_stats)
+            st.metric("Avg Overall Score", f"{avg_overall:.2f}")
+        
+        with col2:
+            avg_completeness = sum(s['completeness'] for s in all_stats) / len(all_stats)
+            st.metric("Avg Completeness", f"{avg_completeness:.2f}")
+        
+        with col3:
+            avg_accuracy = sum(s['accuracy'] for s in all_stats) / len(all_stats)
+            st.metric("Avg Accuracy", f"{avg_accuracy:.2f}")
+        
+        with col4:
+            total_items = sum(s['total_items'] for s in all_stats)
+            st.metric("Total Items", total_items)
+    
+    elif parser_type == 'gantt':
+        col1, col2, col3, col4 = st.columns(4)
+        
+        with col1:
+            avg_overall = sum(s['overall_score'] for s in all_stats) / len(all_stats)
+            st.metric("Avg Overall Score", f"{avg_overall:.2f}")
+        
+        with col2:
+            avg_completeness = sum(s['completeness'] for s in all_stats) / len(all_stats)
+            st.metric("Avg Completeness", f"{avg_completeness:.2f}")
+        
+        with col3:
+            total_activities = sum(s['total_activities'] for s in all_stats)
+            st.metric("Total Activities", total_activities)
+        
+        with col4:
+            total_fps = sum(s['false_positives'] for s in all_stats)
+            total_fns = sum(s['false_negatives'] for s in all_stats)
+            st.metric("Total FP + FN", total_fps + total_fns)
+    
+    elif parser_type == 'fullplan':
+        # Full Plan AI - show both title block and room metrics
+        st.markdown("### 📋 Title Block Performance")
+        col1, col2, col3 = st.columns(3)
+        
+        with col1:
+            avg_tb_score = sum(s['title_block_score'] for s in all_stats) / len(all_stats)
+            st.metric("Avg TB Score", f"{avg_tb_score:.2f}")
+        
+        with col2:
+            avg_completeness = sum(s['title_block_completeness'] for s in all_stats) / len(all_stats)
+            st.metric("Avg TB Completeness", f"{avg_completeness:.2f}")
+        
+        with col3:
+            avg_accuracy = sum(s['title_block_accuracy'] for s in all_stats) / len(all_stats)
+            st.metric("Avg TB Accuracy", f"{avg_accuracy:.2f}")
+        
+        st.markdown("### 🏠 Room Adjacency Performance")
+        col1, col2, col3, col4 = st.columns(4)
+        
+        with col1:
+            avg_room_score = sum(s['room_adjacency_score'] for s in all_stats) / len(all_stats)
+            st.metric("Avg Room Score", f"{avg_room_score:.2f}")
+        
+        with col2:
+            avg_room_det = sum(s['room_detection_score'] for s in all_stats) / len(all_stats)
+            st.metric("Avg Room Detection", f"{avg_room_det:.2f}")
+        
+        with col3:
+            avg_f1 = sum(s['adjacency_f1'] for s in all_stats) / len(all_stats)
+            st.metric("Avg Adjacency F1", f"{avg_f1:.2f}")
+        
+        with col4:
+            avg_overall = sum(s['overall_score'] for s in all_stats) / len(all_stats)
+            st.metric("Avg Overall Score", f"{avg_overall:.2f}")
+    
+    else:
+        # Drawing parsers
+        col1, col2, col3, col4 = st.columns(4)
+        
+        with col1:
+            avg_overall = sum(s['overall_score'] for s in all_stats) / len(all_stats)
+            st.metric("Avg Overall Score", f"{avg_overall:.2f}")
+        
+        with col2:
+            avg_room = sum(s['room_detection_score'] for s in all_stats) / len(all_stats)
+            st.metric("Avg Room Detection", f"{avg_room:.2f}")
+        
+        with col3:
+            avg_f1 = sum(s['adjacency_f1'] for s in all_stats) / len(all_stats)
+            st.metric("Avg Adjacency F1", f"{avg_f1:.2f}")
+        
+        with col4:
+            total_issues = sum(len(s['key_issues']) for s in all_stats)
+            st.metric("Total Issues", total_issues)
+
+def create_score_chart(files_data, parser_type):
+    """Create bar chart comparing scores based on parser type"""
+    if not files_data:
+        return None
+    
+    data = []
+    for file_name, json_data in files_data:
+        stats = calculate_stats(json_data, parser_type)
+        short_name = file_name[:20] + '...' if len(file_name) > 20 else file_name
+        
+        if parser_type == 'financial':
+            data.append({
+                'File': short_name,
+                'Overall Score': stats['overall_score'],
+                'Completeness': stats['completeness'],
+                'Accuracy': stats['accuracy']
+            })
+        elif parser_type == 'gantt':
+            data.append({
+                'File': short_name,
+                'Overall Score': stats['overall_score'],
+                'Completeness': stats['completeness'],
+                'Accuracy': stats['accuracy']
+            })
+        elif parser_type == 'fullplan':
+            data.append({
+                'File': short_name,
+                'Overall Score': stats['overall_score'],
+                'Title Block': stats['title_block_score'],
+                'Room Adjacency': stats['room_adjacency_score']
+            })
+        else:
+            data.append({
+                'File': short_name,
+                'Overall Score': stats['overall_score'],
+                'Room Detection': stats['room_detection_score'],
+                'Adjacency F1': stats['adjacency_f1']
+            })
+    
+    df = pd.DataFrame(data)
+    
+    fig = go.Figure()
+    
+    if parser_type in ['financial', 'gantt']:
+        fig.add_trace(go.Bar(
+            name='Overall Score',
+            x=df['File'],
+            y=df['Overall Score'],
+            marker_color='#3b82f6'
+        ))
+        
+        fig.add_trace(go.Bar(
+            name='Completeness',
+            x=df['File'],
+            y=df['Completeness'],
+            marker_color='#10b981'
+        ))
+        
+        fig.add_trace(go.Bar(
+            name='Accuracy',
+            x=df['File'],
+            y=df['Accuracy'],
+            marker_color='#f59e0b'
+        ))
+    elif parser_type == 'fullplan':
+        fig.add_trace(go.Bar(
+            name='Overall Score',
+            x=df['File'],
+            y=df['Overall Score'],
+            marker_color='#3b82f6'
+        ))
+        
+        fig.add_trace(go.Bar(
+            name='Title Block',
+            x=df['File'],
+            y=df['Title Block'],
+            marker_color='#8b5cf6'
+        ))
+        
+        fig.add_trace(go.Bar(
+            name='Room Adjacency',
+            x=df['File'],
+            y=df['Room Adjacency'],
+            marker_color='#10b981'
+        ))
+    else:
+        fig.add_trace(go.Bar(
+            name='Overall Score',
+            x=df['File'],
+            y=df['Overall Score'],
+            marker_color='#3b82f6'
+        ))
+        
+        fig.add_trace(go.Bar(
+            name='Room Detection',
+            x=df['File'],
+            y=df['Room Detection'],
+            marker_color='#10b981'
+        ))
+        
+        fig.add_trace(go.Bar(
+            name='Adjacency F1',
+            x=df['File'],
+            y=df['Adjacency F1'],
+            marker_color='#f59e0b'
+        ))
+    
+    fig.update_layout(
+        barmode='group',
+        title='Score Comparison',
+        yaxis_title='Score',
+        xaxis_title='File',
+        height=400
+    )
+    
+    return fig
+
+def display_fullplan_detailed_analysis(file_name, json_data):
+    """Display detailed analysis for Full Plan AI parser"""
+    st.subheader(f"Full Plan Analysis - {file_name}")
+    
+    # Title Block Section
+    st.markdown("## 📋 Title Block Analysis")
+    title_block = json_data.get('title_block_analysis', {})
+    field_analysis = title_block.get('field_analysis', {})
+    
+    # Overall title block metrics
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        st.metric("TB Completeness", f"{title_block.get('completeness', 0):.2f}")
+    with col2:
+        st.metric("TB Accuracy", f"{title_block.get('accuracy', 0):.2f}")
+    with col3:
+        st.metric("TB Score", f"{title_block.get('title_block_score', 0):.2f}")
+    with col4:
+        st.metric("Confidence", title_block.get('confidence_calibration', 'N/A'))
+    
+    # Project Info Fields
+    with st.expander("🏗️ Project Information Fields", expanded=True):
+        project_info = field_analysis.get('projectInfo', {})
+        
+        fields_data = []
+        for field_name, field_data in project_info.items():
+            if isinstance(field_data, dict) and 'match_score' in field_data:
+                fields_data.append({
+                    'Field': field_name,
+                    'Score': field_data.get('match_score', 0),
+                    'Note': field_data.get('note', '')
+                })
+            elif field_name == 'stakeholders':
+                for sub_field, sub_data in field_data.items():
+                    if isinstance(sub_data, dict):
+                        fields_data.append({
+                            'Field': f'stakeholders.{sub_field}',
+                            'Score': sub_data.get('match_score', 0),
+                            'Note': sub_data.get('note', '')
+                        })
+            elif field_name == 'timeline':
+                for sub_field, sub_data in field_data.items():
+                    if isinstance(sub_data, dict):
+                        fields_data.append({
+                            'Field': f'timeline.{sub_field}',
+                            'Score': sub_data.get('match_score', 0),
+                            'Note': sub_data.get('note', '')
+                        })
+        
+        if fields_data:
+            df = pd.DataFrame(fields_data)
+            df['Score'] = pd.to_numeric(df['Score'], errors='coerce')
+            def highlight_scores(val):
+                if isinstance(val, (int, float)):
+                    if val >= 0.9:
+                        return 'background-color: #d1fae5'
+                    elif val >= 0.7:
+                        return 'background-color: #fef3c7'
+                    elif val > 0:
+                        return 'background-color: #fee2e2'
+                return ''
+            df['Score'] = pd.to_numeric(df['Score'], errors='coerce')
+
+            styled_df = df.style.applymap(highlight_scores, subset=['Score'])
+            st.dataframe(styled_df, use_container_width=True)
+    
+    # Plan Metadata Fields
+    with st.expander("📐 Plan Metadata Fields", expanded=True):
+        plan_metadata = field_analysis.get('planMetadata', {})
+        
+        metadata_data = []
+        for field_name, field_data in plan_metadata.items():
+            if isinstance(field_data, dict):
+                metadata_data.append({
+                    'Field': field_name,
+                    'Score': field_data.get('match_score', 0),
+                    'Note': field_data.get('note', '')
+                })
+        
+        if metadata_data:
+            df = pd.DataFrame(metadata_data)
+            
+            def highlight_scores(val):
+                if isinstance(val, (int, float)):
+                    if val >= 0.9:
+                        return 'background-color: #d1fae5'
+                    elif val >= 0.7:
+                        return 'background-color: #fef3c7'
+                    elif val > 0:
+                        return 'background-color: #fee2e2'
+                return ''
+            
+            styled_df = df.style.applymap(highlight_scores, subset=['Score'])
+            st.dataframe(styled_df, use_container_width=True)
+    
+    st.divider()
+    
+    # Room Adjacency Section
+    st.markdown("## 🏠 Room Adjacency Analysis")
+    room_adjacency = json_data.get('room_adjacency_analysis', {})
+    
+    # Overall room metrics
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        st.metric("Room Detection", f"{room_adjacency.get('room_detection_score', 0):.2f}")
+    with col2:
+        st.metric("Adjacency Precision", f"{room_adjacency.get('adjacency_precision', 0):.2f}")
+    with col3:
+        st.metric("Adjacency Recall", f"{room_adjacency.get('adjacency_recall', 0):.2f}")
+    with col4:
+        st.metric("Adjacency F1", f"{room_adjacency.get('adjacency_f1_score', 0):.2f}")
+    
+    # Room summary
+    summary = room_adjacency.get('summary', {})
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.metric("Total Rooms (GT)", summary.get('total_rooms_ground_truth', 0))
+    with col2:
+        st.metric("Total Rooms (Parser)", summary.get('total_rooms_parser', 0))
+    with col3:
+        st.metric("Correctly Detected", summary.get('rooms_correctly_detected', 0))
+    
+    if summary.get('hallucinated_rooms'):
+        st.warning(f"🔴 Hallucinated rooms: {', '.join(summary['hallucinated_rooms'])}")
+    if summary.get('missing_rooms'):
+        st.warning(f"🟠 Missing rooms: {', '.join(summary['missing_rooms'])}")
+    if summary.get('asymmetric_adjacencies'):
+        st.warning(f"⚠️ Asymmetric adjacencies found: {len(summary['asymmetric_adjacencies'])}")
+    
+    # Room-by-room analysis
+    room_analysis = room_adjacency.get('room_analysis', {})
+    if room_analysis:
+        st.markdown("### Room-by-Room Details")
+        
+        cols = st.columns(3)
+        for idx, (room_name, data) in enumerate(room_analysis.items()):
+            with cols[idx % 3]:
+                with st.container():
+                    st.markdown(f"**{room_name}**")
+                    
+                    # Metrics
+                    col1, col2, col3 = st.columns(3)
+                    with col1:
+                        st.metric("F1", f"{data.get('f1', 0):.2f}")
+                    with col2:
+                        st.metric("Precision", f"{data.get('precision', 0):.2f}")
+                    with col3:
+                        st.metric("Recall", f"{data.get('recall', 0):.2f}")
+                    
+                    # False positives
+                    if data.get('false_positives'):
+                        st.markdown("🔴 **False Positives:**")
+                        for fp in data['false_positives']:
+                            st.markdown(f"- {fp}")
+                    
+                    # False negatives
+                    if data.get('false_negatives'):
+                        st.markdown("🟠 **False Negatives:**")
+                        for fn in data['false_negatives']:
+                            st.markdown(f"- {fn}")
+                    
+                    # Note
+                    if data.get('note'):
+                        st.info(data['note'])
+                    
+                    st.divider()
+    
+    # Key issues
+    key_issues = json_data.get('key_issues', [])
+    if key_issues:
+        st.markdown("## ⚠️ Key Issues")
+        for issue in key_issues:
+            st.markdown(f"- {issue}")
+
+# UPDATE THE TABS CONFIG
 
 def display_aggregate_stats(files_data, parser_type):
     """Display aggregate statistics based on parser type"""
@@ -706,7 +1130,8 @@ def display_detailed_analysis(file_name, json_data, parser_type):
                     except:
                         pass
                 return ''
-            
+            df['Score'] = pd.to_numeric(df['Score'], errors='coerce')
+
             styled_df = df.style.applymap(highlight_issues)
             st.dataframe(styled_df, use_container_width=True)
             
@@ -727,6 +1152,7 @@ def display_detailed_analysis(file_name, json_data, parser_type):
     else:
         # Drawing parser - use existing room analysis
         display_room_analysis(file_name, json_data)
+
 
 def display_comparison_view(ai_files_data, det_files_data):
     """Display AI vs Deterministic comparison for neighboring rooms"""
@@ -758,7 +1184,8 @@ def display_comparison_view(ai_files_data, det_files_data):
                     elif val < 7 and val > 0:
                         return 'background-color: #fee2e2'
                 return ''
-            
+            df['Score'] = pd.to_numeric(df['Score'], errors='coerce')
+
             styled_df = df_ai.style.applymap(
                 highlight_scores,
                 subset=['Overall Score', 'Room Detection', 'Adjacency F1']
@@ -841,8 +1268,9 @@ tabs_config = [
     (tab3, 'drawing_titleblock', 'Drawing - Titleblock', 'drawing'),
     (tab4, 'drawing_neighboring_ai', 'Drawing - Neighboring (AI)', 'drawing'),
     (tab5, 'drawing_neighboring_deterministic', 'Drawing - Neighboring (Deterministic)', 'drawing'),
-    (tab6, 'drawing_fullplan_ai', 'Drawing - Full Plan AI', 'drawing')
+    (tab6, 'drawing_fullplan_ai', 'Drawing - Full Plan AI', 'fullplan')  # Changed to 'fullplan'
 ]
+
 
 for tab, key, label, parser_type in tabs_config:
     with tab:
@@ -906,6 +1334,11 @@ for tab, key, label, parser_type in tabs_config:
                             highlight_scores,
                             subset=['Overall Score', 'Completeness', 'Accuracy']
                         )
+                    elif parser_type == 'fullplan':
+                        styled_df = df.style.applymap(
+                            highlight_scores,
+                            subset=['Overall Score', 'TB Completeness','TB Accuracy', 'TB Score', 'Room Detection','Adjacency F1','Room Score']
+                        )
                     else:
                         styled_df = df.style.applymap(
                             highlight_scores,
@@ -965,11 +1398,17 @@ for tab, key, label, parser_type in tabs_config:
                 st.divider()
                 
                 # Detailed analysis
-                if parser_type in ['financial', 'gantt']:
+                if parser_type == 'fullplan':
+                    st.subheader("🔍 Detailed Full Plan Analysis")
+                    for file_name, json_data in files_data:
+                        with st.expander(f"View details for {file_name}"):
+                            display_fullplan_detailed_analysis(file_name, json_data)
+                elif parser_type in ['financial', 'gantt']:
                     st.subheader("🔍 Detailed Analysis")
                     for file_name, json_data in files_data:
                         with st.expander(f"View details for {file_name}"):
                             display_detailed_analysis(file_name, json_data, parser_type)
+                
                 else:
                     # Room analysis for drawing parsers
                     st.subheader("🏠 Detailed Room Analysis")

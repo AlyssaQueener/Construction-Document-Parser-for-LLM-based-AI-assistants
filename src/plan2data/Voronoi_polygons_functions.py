@@ -425,7 +425,7 @@ def neighboring_rooms_voronoi(pdf_path):
     flipped_centerpoints = flip_y_coordinates(centerpoints, page_height)
     flipped_centerpoints = make_names_unique(flipped_centerpoints)
     neighbors, vor = extract_bounded_voronoi_neighbors_detailed(flipped_centerpoints, flipped_rect)
-    
+    visualize_voronoi_cells(vor, flipped_centerpoints, neighbors)   
     doc.close()
     
     # Print as JSON and return
@@ -433,4 +433,8 @@ def neighboring_rooms_voronoi(pdf_path):
     return output_json
 
 
-
+if __name__ == "__main__":
+    pdf_path = "src/validation/Floorplan/titleblock/testdata/floorplan-test-2.pdf"  # Replace with your PDF path
+    neighbors_json = neighboring_rooms_voronoi(pdf_path)
+    print(neighbors_json)
+    

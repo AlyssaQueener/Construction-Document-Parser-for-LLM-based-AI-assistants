@@ -1,0 +1,320 @@
+{
+  "title_block_analysis": {
+    "field_analysis": {
+      "projectInfo": {
+        "projectId": {
+          "match_score": 1.0,
+          "note": "Exact match (both null)"
+        },
+        "projectName": {
+          "match_score": 1.0,
+          "note": "Exact match (both null)"
+        },
+        "location": {
+          "match_score": 1.0,
+          "note": "Exact match"
+        },
+        "author": {
+          "match_score": 1.0,
+          "note": "Exact match (both null)"
+        },
+        "stakeholders": {
+          "client": {
+            "match_score": 1.0,
+            "note": "Exact match"
+          },
+          "architect": {
+            "match_score": 1.0,
+            "note": "Exact match"
+          },
+          "engineers": {
+            "match_score": 1.0,
+            "note": "Exact match (both null)"
+          }
+        },
+        "timeline": {
+          "yearOfCompletion": {
+            "match_score": 1.0,
+            "note": "Exact match (both null)"
+          },
+          "approvalDate": {
+            "match_score": 0.0,
+            "note": "Missing in parser"
+          }
+        }
+      },
+      "planMetadata": {
+        "planType": {
+          "match_score": 1.0,
+          "note": "Exact match"
+        },
+        "planFormat": {
+          "match_score": 1.0,
+          "note": "Exact match"
+        },
+        "scale": {
+          "match_score": 1.0,
+          "note": "Exact match"
+        },
+        "projectionMethod": {
+          "match_score": 1.0,
+          "note": "Exact match (both null)"
+        }
+      }
+    },
+    "completeness": 8.46,
+    "accuracy": 9.23,
+    "title_block_score": 8.84,
+    "confidence_calibration": "well-calibrated"
+  },
+  "room_adjacency_analysis": {
+    "room_analysis": {
+      "Lager/M\u0000ll": {
+        "name_match_score": 0.0,
+        "note": "Room not found in parser"
+      },
+      "Lagerfl\u0000che": {
+        "name_match_score": 0.0,
+        "note": "Room not found in parser"
+      },
+      "Bad": {
+        "name_match_score": 0.0,
+        "note": "Room not found in parser"
+      },
+      "Zimmer 1.1": {
+        "name_match_score": 0.0,
+        "note": "Room not found in parser"
+      },
+      "Pflegebad": {
+        "name_match_score": 0.0,
+        "note": "Room not found in parser"
+      },
+      "Pflegeoase": {
+        "name_match_score": 0.0,
+        "note": "Room not found in parser"
+      },
+      "Teek\u0000cche": {
+        "name_match_score": 0.0,
+        "note": "Room not found in parser"
+      },
+      "Gr\u0000cnes Zimmer": {
+        "name_match_score": 0.0,
+        "note": "Room not found in parser"
+      },
+      "Empfang/foyer": {
+        "name_match_score": 0.0,
+        "note": "Room not found in parser"
+      },
+      "WC D": {
+        "name_match_score": 0.0,
+        "note": "Room not found in parser"
+      },
+      "WC Behind.": {
+        "name_match_score": 0.0,
+        "note": "Room not found in parser"
+      },
+      "Empfang/B\u0000ro": {
+        "name_match_score": 0.0,
+        "note": "Room not found in parser"
+      },
+      "Windfang": {
+        "name_match_score": 0.0,
+        "note": "Room not found in parser"
+      },
+      "Treppenhaus": {
+        "name_match_score": 0.0,
+        "note": "Room not found in parser"
+      },
+      "Therapie": {
+        "name_match_score": 0.0,
+        "note": "Room not found in parser"
+      },
+      "Pflegedienstleitung": {
+        "name_match_score": 0.0,
+        "note": "Room not found in parser"
+      },
+      "Heimleitung": {
+        "name_match_score": 0.0,
+        "note": "Room not found in parser"
+      },
+      "Foyer": {
+        "name_match_score": 0.0,
+        "note": "Room not found in parser"
+      },
+      "ELT EG": {
+        "name_match_score": 0.0,
+        "note": "Room not found in parser"
+      },
+      "Lager": {
+        "name_match_score": 0.0,
+        "note": "Room not found in parser"
+      },
+      "Unrein EG": {
+        "name_match_score": 0.0,
+        "note": "Room not found in parser"
+      },
+      "W\u0000sche": {
+        "name_match_score": 0.0,
+        "note": "Room not found in parser"
+      },
+      "St\u0000tzpunkt EG": {
+        "name_match_score": 0.0,
+        "note": "Room not found in parser"
+      },
+      "WC": {
+        "name_match_score": 0.6,
+        "note": "Semantic match (WC vs WC D/WC Behind.)",
+        "precision": 0.5,
+        "recall": 0.5,
+        "f1": 0.5,
+        "true_positives": [
+          "Flur"
+        ],
+        "false_positives": [
+          "Dusche"
+        ],
+        "false_negatives": [
+          "Empfang/foyer",
+          "WC D",
+          "WC Behind."
+        ]
+      },
+      "Dusche": {
+        "name_match_score": 0.0,
+        "note": "Room not found in ground truth"
+      },
+      "Flur": {
+        "name_match_score": 0.6,
+        "note": "Semantic match (Flur vs Foyer/Empfang/foyer)",
+        "precision": 0.5,
+        "recall": 0.5,
+        "f1": 0.5,
+        "true_positives": [
+          "WC",
+          "Dusche",
+          "K\u0000cche",
+          "Wohnzimmer",
+          "Schlafzimmer",
+          "Badezimmer"
+        ],
+        "false_positives": [],
+        "false_negatives": [
+          "Lager/M\u0000ll",
+          "Lagerfl\u0000che",
+          "Bad",
+          "Zimmer 1.1",
+          "Pflegebad",
+          "Pflegeoase",
+          "Teek\u0000cche",
+          "Gr\u0000cnes Zimmer",
+          "Empfang/foyer",
+          "WC D",
+          "WC Behind.",
+          "Empfang/B\u0000ro",
+          "Windfang",
+          "Treppenhaus",
+          "Therapie",
+          "Pflegedienstleitung",
+          "Heimleitung",
+          "Foyer",
+          "ELT EG",
+          "Lager",
+          "Unrein EG",
+          "W\u0000sche",
+          "St\u0000tzpunkt EG"
+        ]
+      },
+      "K\u0000cche": {
+        "name_match_score": 0.0,
+        "note": "Room not found in ground truth"
+      },
+      "Wohnzimmer": {
+        "name_match_score": 0.6,
+        "note": "Semantic match (Wohnzimmer vs Living)",
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "true_positives": [
+          "Flur",
+          "K\u0000cche",
+          "Schlafzimmer"
+        ],
+        "false_positives": [],
+        "false_negatives": []
+      },
+      "Schlafzimmer": {
+        "name_match_score": 0.6,
+        "note": "Semantic match (Schlafzimmer vs Bedroom)",
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "true_positives": [
+          "Flur",
+          "Wohnzimmer",
+          "Badezimmer"
+        ],
+        "false_positives": [],
+        "false_negatives": []
+      },
+      "Badezimmer": {
+        "name_match_score": 0.6,
+        "note": "Semantic match (Badezimmer vs Bathroom)",
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "true_positives": [
+          "Flur",
+          "Schlafzimmer"
+        ],
+        "false_positives": [],
+        "false_negatives": []
+      }
+    },
+    "summary": {
+      "total_rooms_ground_truth": 24,
+      "total_rooms_parser": 8,
+      "rooms_correctly_detected": 4,
+      "hallucinated_rooms": [
+        "Dusche",
+        "K\u0000cche"
+      ],
+      "missing_rooms": [
+        "Lager/M\u0000ll",
+        "Lagerfl\u0000che",
+        "Bad",
+        "Zimmer 1.1",
+        "Pflegebad",
+        "Pflegeoase",
+        "Teek\u0000cche",
+        "Gr\u0000cnes Zimmer",
+        "Empfang/foyer",
+        "WC D",
+        "WC Behind.",
+        "Empfang/B\u0000ro",
+        "Windfang",
+        "Treppenhaus",
+        "Therapie",
+        "Pflegedienstleitung",
+        "Heimleitung",
+        "Foyer",
+        "ELT EG",
+        "Lager",
+        "Unrein EG",
+        "W\u0000sche",
+        "St\u0000tzpunkt EG"
+      ],
+      "asymmetric_adjacencies": []
+    },
+    "room_detection_score": 1.67,
+    "adjacency_precision": 0.75,
+    "adjacency_recall": 0.75,
+    "adjacency_f1_score": 0.75,
+    "room_adjacency_score": 2.5
+  },
+  "overall_score": 4.92,
+  "key_issues": [
+    "Title block: Missing approval date",
+    "Room adjacency: Significant room detection failure",
+    "Room adjacency: Hallucinated rooms (Dusche, K\u0000cche)"
+  ]
+}
