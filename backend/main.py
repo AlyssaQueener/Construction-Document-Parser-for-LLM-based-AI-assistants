@@ -272,7 +272,7 @@ async def create_upload_file_floorplans(file: UploadFile, content_type: ContentT
         elif content_type == "rooms-deterministic":
             result = vor.neighboring_rooms_voronoi(processing_file_path)
             method = "deterministic"
-            is_succesful = None
+            is_succesful = True
             confidence = None
             
         elif content_type == "rooms-ai":

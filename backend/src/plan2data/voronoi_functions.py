@@ -1,20 +1,12 @@
 import fitz
 import json
 import re 
-from scipy.spatial import Voronoi, voronoi_plot_2d
+from scipy.spatial import Voronoi
 import numpy as np
 from collections import defaultdict
 
 def is_number_like(text):
-    """
-    Returns True if the block is mostly numeric or appears to be a number with units.
-
-    Args:
-        text (str): The text block to analyze.
-
-    Returns:
-        bool: True if the text can be interpreted as mostly number-like, False otherwise.
-    """
+    """Returns True if the block is mostly numeric or appears to be a number with units."""
     text = text.strip().replace(",", ".")
     text = text.replace("\n", " ")
     text = re.sub(r"(m²|m|cm|°|%|\s+|ca|ca.|m2| qm | og| eg| ug| nr| nr.)", "", text, flags=re.IGNORECASE)
@@ -24,57 +16,24 @@ def is_number_like(text):
     except ValueError:
         return False
 
-def is_number_block(text):
-    """
-    Returns True if ALL meaningful parts of the text are numeric.
-
-    Args:
-        text (str): The concatenated text, potentially with numbers and units.
-
-    Returns:
-        bool: True if every part is number-like, False otherwise.
-    """
-    text = text.replace("\n", " ").strip()
-    if not text:
-        return False
-    parts = text.split()
-    for part in parts:
-        clean = part.strip().replace(",", ".")
-        clean = re.sub(r"(m²|m|cm|°|%|\s+)", "", clean, flags=re.IGNORECASE)
-        try:
-            float(clean)
-        except ValueError:
-            return False
-    return True
-
 def has_more_than_one_char(s):
-    """
-    Returns True if the cleaned string has more than 2 characters.
-
-    Args:
-        s (str): Any input string.
-
-    Returns:
-        bool: True if the length after whitespace and newline stripping exceeds 2, False otherwise.
-    """
+    """Returns True if the cleaned string has more than 2 characters."""
     s = s.strip().replace("\n", "").replace(" ", "")
+    if s.upper() == 'WC':
+        return True
     return len(s) > 2
 
 def is_valid_room_name(text):
-    """
-    Determines if the provided text qualifies as a valid room name.
-
-    Args:
-        text (str): The text candidate for a room name.
-
-    Returns:
-        bool: True if considered a valid room name, False otherwise.
-    """
+    """Determines if the provided text qualifies as a valid room name."""
     text = text.strip()
+    if text.lower() == 'wc':
+        return True
     if len(text) < 3:
         return False
-    excluded = {'ca', 'ca.', 'cm', 'm²', 'm2', 'qm', 'og', 'eg', 'ug', 'nr', 'nr.', 'wc'}
+    excluded = {'ca', 'ca.', 'cm', 'm²', 'm2', 'qm', 'og', 'eg', 'ug', 'nr', 'nr.', 'no', 'no.', 'plan'}
     if text.lower() in excluded:
+        return False
+    if text.lower().startswith('architectur'):
         return False
     if not any(c.isalpha() for c in text):
         return False
@@ -84,33 +43,13 @@ def is_valid_room_name(text):
     return True
 
 def are_close(e1, e2, y_thresh=10, x_thresh=40):
-    """
-    Checks if two word-bounding boxes are spatially close.
-
-    Args:
-        e1 (list or tuple of float): [x0, y0, x1, y1, ...] coordinates for the first box.
-        e2 (list or tuple of float): [x0, y0, x1, y1, ...] coordinates for the second box.
-        y_thresh (float, optional): Max allowed y difference to consider as close. Default: 10.
-        x_thresh (float, optional): Max allowed x difference. Default: 40.
-
-    Returns:
-        bool: True if e1 and e2 are spatially close; otherwise False.
-    """
+    """Checks if two word-bounding boxes are spatially close."""
     y_close = abs(e1[1] - e2[1]) < y_thresh
     x_close = abs(e1[2] - e2[0]) < x_thresh
     return y_close and x_close
 
 def merge_entries(e1, e2):
-    """
-    Merges two word bounding box entries into a single one, concatenating text and combining the box.
-
-    Args:
-        e1 (list): Entry 1 [x0, y0, x1, y1, text, block_no, line_no, word_no].
-        e2 (list): Entry 2, same structure.
-
-    Returns:
-        list: Merged entry as [x0, y0, x1, y1, combined_text, block_no, line_no, word_no].
-    """
+    """Merges two word bounding box entries into a single one."""
     x0 = min(e1[0], e2[0])
     y0 = min(e1[1], e2[1])
     x1 = max(e1[2], e2[2])
@@ -119,15 +58,7 @@ def merge_entries(e1, e2):
     return [x0, y0, x1, y1, text, e1[5], e1[6], e1[7]]
 
 def combine_close_words(bboxes):
-    """
-    Scans a list of word bboxes and merges spatially-close words.
-
-    Args:
-        bboxes (list of list): Each list is [x0, y0, x1, y1, text, block_no, line_no, word_no].
-
-    Returns:
-        list of list: Combined word bboxes.
-    """
+    """Scans a list of word bboxes and merges spatially-close words."""
     bboxes = sorted(bboxes, key=lambda x: (x[1], x[0]))
     combined = []
     skip_indices = set()
@@ -146,36 +77,15 @@ def combine_close_words(bboxes):
     return combined
 
 def calculate_bbox_center(bbox):
-    """
-    Calculates the geometric center of a bounding box.
-
-    Args:
-        bbox (list): [x0, y0, x1, y1, name, ...]
-
-    Returns:
-        list: [center_x, center_y, name] (float, float, str).
-    """
-    x1=bbox[0]
-    y1=bbox[1]
-    x2=bbox[2]
-    y2=bbox[3]
+    """Calculates the geometric center of a bounding box."""
+    x1, y1, x2, y2 = bbox[0], bbox[1], bbox[2], bbox[3]
     name = bbox[4]
     cx = (x1 + x2) / 2
     cy = (y1 + y2) / 2
-    center_point=[cx,cy,name]
-    return center_point
+    return [cx, cy, name]
 
 def flip_y_coordinates(centerpoints, page_height):
-    """
-    Converts PyMuPDF Y-coordinates to standard plotting coordinates by flipping over the Y axis.
-
-    Args:
-        centerpoints (list of list): [cx, cy, name] center point data.
-        page_height (float): Height of the page.
-
-    Returns:
-        list of list: Each [cx, flipped_cy, name].
-    """
+    """Converts PyMuPDF Y-coordinates to standard plotting coordinates."""
     flipped_centerpoints = []
     for point in centerpoints:
         cx, cy, name = point[0], point[1], point[2]
@@ -183,88 +93,24 @@ def flip_y_coordinates(centerpoints, page_height):
         flipped_centerpoints.append([cx, cy_flipped, name])
     return flipped_centerpoints
 
-
-def print_neighbors_summary(neighbors):
-    """
-    Prints a summary of room neighbors to the console.
-
-    Args:
-        neighbors (dict): room name to list of neighbor room names.
-
-    Returns:
-        None
-    """
-    print("\n=== ROOM NEIGHBORS ===")
-    for room, room_neighbors in neighbors.items():
-        print(f"{room}: {', '.join(room_neighbors)}")
-
-def save_neighbors_only(neighbors, filename):
-    """
-    Saves neighbor relationships to a JSON file.
-
-    Args:
-        neighbors (dict): room name to neighbor list.
-        filename (str): Output JSON file location.
-
-    Returns:
-        None
-    """
-    with open(filename, 'w', encoding='utf-8') as f:
-        json.dump(neighbors, f, indent=2, ensure_ascii=False)
-    print(f"Neighbors saved to '{filename}'")
-
-def analyze_room_connectivity(neighbors):
-    """
-    Prints analysis of room connectivity including stats, ordering, and most/least connected rooms.
-
-    Args:
-        neighbors (dict): room name to neighbor list.
-
-    Returns:
-        None
-    """
-    print("\n=== CONNECTIVITY ANALYSIS ===")
-    connection_counts = {room: len(neighs) for room, neighs in neighbors.items()}
-    most_connected = max(connection_counts, key=lambda room: connection_counts[room])
-    print(f"Most connected room: {most_connected} ({connection_counts[most_connected]} connections)")
-    least_connected = min(connection_counts, key=lambda room: connection_counts[room])
-    print(f"Least connected room: {least_connected} ({connection_counts[least_connected]} connections)")
-    avg_connections = sum(connection_counts.values()) / len(connection_counts)
-    print(f"Average connections per room: {avg_connections:.1f}")
-    sorted_rooms = sorted(connection_counts.items(), key=lambda x: x[1], reverse=True)
-    print(f"\nRooms by connectivity:")
-    for room, count in sorted_rooms:
-        print(f"  {room}: {count} connections")
-
-def extract_bounded_voronoi_neighbors_detailed(centerpoints, bounds):
-    """
-    Finds Voronoi neighbors for labeled centerpoints; details ridge acceptance; supports floorplan boundary.
-
-    Args:
-        centerpoints (list of list): [cx, cy, name], all room centerpoints.
-        bounds (tuple or list): (x_min, y_min, x_max, y_max) bounding box.
-
-    Returns:
-        tuple: (neighbors_dict, vor)
-            neighbors_dict (dict): room name to list of neighbor names.
-            vor (scipy.spatial.Voronoi): Voronoi diagram object.
-    """
+def extract_bounded_voronoi_neighbors(centerpoints, bounds):
+    """Finds Voronoi neighbors for labeled centerpoints."""
     if len(centerpoints) < 3:
         raise ValueError("Need at least 3 points for Voronoi diagram")
+    
     points = np.array([[cp[0], cp[1]] for cp in centerpoints])
     names = [cp[2] for cp in centerpoints]
-    #print(f"\n=== ROOM POSITIONS ===")
-    #for i, (cp, name) in enumerate(zip(centerpoints, names)):
-        #print(f"{name}: ({cp[0]:.1f}, {cp[1]:.1f})")
+    
     vor = Voronoi(points)
     x_min, y_min, x_max, y_max = bounds
     neighbors_dict = defaultdict(set)
-    #print(f"\n=== PROCESSING RIDGES ===")
+    
     for ridge_idx, ridge_points in enumerate(vor.ridge_points):
         point1_idx, point2_idx = ridge_points
         name1 = names[point1_idx]
         name2 = names[point2_idx]
         ridge_vertices = vor.ridge_vertices[ridge_idx]
+        
         if -1 in ridge_vertices:
             finite_idx = ridge_vertices[0] if ridge_vertices[1] == -1 else ridge_vertices[1]
             if finite_idx >= 0:
@@ -273,9 +119,6 @@ def extract_bounded_voronoi_neighbors_detailed(centerpoints, bounds):
                 if v_in:
                     neighbors_dict[name1].add(name2)
                     neighbors_dict[name2].add(name1)
-                    #print(f"   ✓ ADDED")
-                #else:
-                    #print(f"   ✗ REJECTED (vertex outside bounds)")
         else:
             v1 = vor.vertices[ridge_vertices[0]]
             v2 = vor.vertices[ridge_vertices[1]]
@@ -287,35 +130,29 @@ def extract_bounded_voronoi_neighbors_detailed(centerpoints, bounds):
             if mid_in or v1_in or v2_in:
                 neighbors_dict[name1].add(name2)
                 neighbors_dict[name2].add(name1)
-                #print(f"   ✓ ADDED")
-            #else:
-                #print(f"   ✗ REJECTED (all points outside bounds)")
+    
     neighbors = {name: sorted(list(neighs)) for name, neighs in neighbors_dict.items()} 
-    return neighbors, vor
+    return neighbors
 
-def process_simple_voronoi(centerpoints, bounds):
-    """
-    Performs neighbor extraction, saves to file, prints & visualizes results for labeled rooms.
+def make_names_unique(centerpoints):
+    """Makes duplicate room names unique by adding sequential numbers."""
+    name_counts = {}
+    unique_centerpoints = []
+    
+    for cp in centerpoints:
+        cx, cy, name = cp[0], cp[1], cp[2]
+        
+        if name in name_counts:
+            name_counts[name] += 1
+            unique_name = f"{name}_{name_counts[name]}"
+        else:
+            name_counts[name] = 1
+            unique_name = name
+        
+        unique_centerpoints.append([cx, cy, unique_name])
+    
+    return unique_centerpoints
 
-    Args:
-        centerpoints (list of list): [cx, cy, name] for all rooms.
-        bounds (tuple or list): (x_min, y_min, x_max, y_max) bounding box.
-
-    Returns:
-        tuple: (neighbors_dict, vor)
-            neighbors_dict (dict): room name to neighbor list, or None if error.
-            vor (scipy.spatial.Voronoi): Voronoi diagram object, or None if error.
-    """
-    try:
-        #print(f"Processing {len(centerpoints)} rooms...")
-        neighbors, vor = extract_bounded_voronoi_neighbors_detailed(centerpoints, bounds)
-        #save_neighbors_only(neighbors)
-        #print_neighbors_summary(neighbors)
-        #analyze_room_connectivity(neighbors)
-        return neighbors, vor
-    except Exception as e:
-        print(f"Error processing Voronoi: {e}")
-        return None, None
 def neighboring_rooms_voronoi(pdf_path):
     """
     Extract neighboring rooms from a floorplan PDF using Voronoi diagram.
@@ -324,14 +161,14 @@ def neighboring_rooms_voronoi(pdf_path):
         pdf_path: Path to the PDF file to process
         
     Returns:
-        dict: Dictionary mapping room names to their list of neighboring rooms
+        str: JSON string mapping room names to their list of neighboring rooms
     """
     doc = fitz.open(pdf_path)
     page = doc[0]
     
     # Clip rectangle to exclude plan information
     width, height = page.rect.width, page.rect.height
-    clip_rect = fitz.Rect(0, 0, width * 0.72, height * 0.8)
+    clip_rect = fitz.Rect(0, 0, width * 0.8, height * 0.8)
     flipped_rect = (
         clip_rect.x0,
         height - clip_rect.y1,
@@ -357,13 +194,16 @@ def neighboring_rooms_voronoi(pdf_path):
     # Create voronoi polygons around the center points
     page_width, page_height = page.rect.width, page.rect.height
     flipped_centerpoints = flip_y_coordinates(centerpoints, page_height)
-    neighbors, vor = extract_bounded_voronoi_neighbors_detailed(flipped_centerpoints, flipped_rect)
+    flipped_centerpoints = make_names_unique(flipped_centerpoints)
+    neighbors = extract_bounded_voronoi_neighbors(flipped_centerpoints, flipped_rect)
     
     doc.close()
     
-    # Print as JSON and return
+    # Return as JSON string
     output_json = json.dumps(neighbors, indent=2, ensure_ascii=False)
-    return neighbors
+    return output_json
 
-
-
+if __name__ == "__main__":
+    pdf_path = "sample_floorplan.pdf"  # Replace with your PDF path
+    result = neighboring_rooms_voronoi(pdf_path)
+    print(result)
