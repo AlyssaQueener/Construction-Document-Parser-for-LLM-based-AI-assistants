@@ -1,0 +1,41 @@
+{"titleBlock": 
+{"projectInfo":
+{
+"projectId": null, 
+"projectName": null,
+ "location": "Redtenbacherstraße 14, 76133 Karlsruhe", 
+ "author": null, "stakeholders": 
+ {"client": "Badischer Landesverein für Innere Mission",
+  "architect": "PLANFABRIK Dipl.-Ingenieure Freie Architekten BDA", 
+  "engineers": null},
+   "timeline": 
+          {
+          "yearOfCompletion": null, 
+          "approvalDate": null}
+}, "planMetadata": 
+{
+  "planType": "Grundriss Erdgeschoss",
+   "planFormat": "A0",
+    "scale": "1:50", 
+    "projectionMethod": null}, 
+    "confidence": 0.5}, 
+    "roomAdjacency": 
+      {"neighboringRooms": 
+            {"WC": ["Dusche", "Flur"], 
+            "Dusche": ["WC", "Flur"], 
+            "Flur": ["WC", "Dusche", "Küche", "Wohnzimmer", "Schlafzimmer", "Badezimmer"],
+            "Küche": ["Flur", "Wohnzimmer"], 
+            "Wohnzimmer": ["Flur", "Küche", "Schlafzimmer"],
+            "Schlafzimmer": ["Flur", "Wohnzimmer", "Badezimmer"], 
+            "Badezimmer": ["Flur", "Schlafzimmer"]}, 
+    "connectedRooms":
+             {"WC": ["Flur"], 
+             "Dusche": ["Flur"],
+              "Flur": ["WC", "Dusche", "Küche", "Wohnzimmer", "Schlafzimmer", "Badezimmer"],
+              "Küche": ["Flur", "Wohnzimmer"], 
+              "Wohnzimmer": ["Flur", "Küche", "Schlafzimmer"],
+              "Schlafzimmer": ["Flur", "Wohnzimmer", "Badezimmer"],
+              "Badezimmer": ["Flur", "Schlafzimmer"]
+            
+          }
+        }}

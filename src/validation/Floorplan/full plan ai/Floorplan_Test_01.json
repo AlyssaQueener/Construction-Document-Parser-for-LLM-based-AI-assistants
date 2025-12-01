@@ -1,113 +1,91 @@
 {
   "titleBlock": {
     "projectInfo": {
-      "projectId": null,
-      "projectName": null,
-      "location": null,
-      "author": null,
+      "projectId": "210101-MNMMNM",
+      "projectName": "Muster Beispiel 1",
+      "location": "20095 Musterhausen",
+      "author": "Butlerium GmbH",
       "stakeholders": {
-        "client": null,
-        "architect": null,
+        "client": "Max Muster",
+        "architect": "Butlerium GmbH",
         "engineers": null
       },
       "timeline": {
         "yearOfCompletion": null,
-        "approvalDate": null
+        "approvalDate": "2021-01-01"
       }
     },
     "planMetadata": {
-      "planType": "Grundriss Erdgeschoss",
-      "planFormat": null,
-      "scale": null,
+      "planType": "Grundriss",
+      "planFormat": "DIN A3",
+      "scale": "1:100",
       "projectionMethod": null
     },
-    "confidence": 0
+    "confidence": 0.8
   },
   "roomAdjacency": {
     "neighboringRooms": {
-      "01 Besprechung": [
-        "02 Besprechung",
-        "07 Lager",
-        "20 UG-Treppe"
+      "BAD": [
+        "DIELE",
+        "HWR"
       ],
-      "02 Besprechung": [
-        "01 Besprechung",
-        "03 Besprechung",
-        "08 Eingangshalle"
+      "DIELE": [
+        "BAD",
+        "GÄSTEZIMMER",
+        "ABSTELLZIMMER",
+        "WOHN/ESSZIMMER"
       ],
-      "03 Besprechung": [
-        "02 Besprechung",
-        "04 Empfang",
-        "13 Gedeckte Eingangshalle"
+      "GÄSTEZIMMER": [
+        "DIELE"
       ],
-      "04 Empfang": [
-        "03 Besprechung",
-        "08 Eingangshalle",
-        "13 Gedeckte Eingangshalle"
+      "ABSTELLZIMMER": [
+        "DIELE"
       ],
-      "06 Gewerbe Süd": [
-        "07 Lager",
-        "22 WC D/IV (Einzel-WC)",
-        "23 WC H (Einzel-WC)"
+      "WOHN/ESSZIMMER": [
+        "DIELE",
+        "KÜCHE",
+        "TERRASSE"
       ],
-      "07 Lager": [
-        "01 Besprechung",
-        "06 Gewerbe Süd",
-        "20 UG-Treppe"
+      "KÜCHE": [
+        "WOHN/ESSZIMMER"
       ],
-      "08 Eingangshalle": [
-        "02 Besprechung",
-        "04 Empfang",
-        "13 Gedeckte Eingangshalle"
+      "TERRASSE": [
+        "WOHN/ESSZIMMER"
       ],
-      "13 Gedeckte Eingangshalle": [
-        "03 Besprechung",
-        "04 Empfang",
-        "08 Eingangshalle"
-      ],
-      "20 UG-Treppe": [
-        "01 Besprechung",
-        "07 Lager",
-        "22 WC D/IV (Einzel-WC)",
-        "23 WC H (Einzel-WC)"
-      ],
-      "22 WC D/IV (Einzel-WC)": [
-        "06 Gewerbe Süd",
-        "20 UG-Treppe",
-        "23 WC H (Einzel-WC)"
-      ],
-      "23 WC H (Einzel-WC)": [
-        "06 Gewerbe Süd",
-        "20 UG-Treppe",
-        "22 WC D/IV (Einzel-WC)"
+      "HWR": [
+        "BAD"
       ]
     },
     "connectedRooms": {
-      "01 Besprechung": [
-        "20 UG-Treppe"
+      "BAD": [
+        "DIELE"
       ],
-      "02 Besprechung": [
-        "08 Eingangshalle"
+      "DIELE": [
+        "BAD",
+        "GÄSTEZIMMER",
+        "ABSTELLZIMMER",
+        "WOHN/ESSZIMMER"
       ],
-      "03 Besprechung": [
-        "13 Gedeckte Eingangshalle"
+      "GÄSTEZIMMER": [
+        "DIELE"
       ],
-      "04 Empfang": [
-        "13 Gedeckte Eingangshalle"
+      "ABSTELLZIMMER": [
+        "DIELE"
       ],
-      "08 Eingangshalle": [
-        "02 Besprechung",
-        "04 Empfang"
+      "WOHN/ESSZIMMER": [
+        "DIELE",
+        "KÜCHE"
       ],
-      "13 Gedeckte Eingangshalle": [
-        "03 Besprechung",
-        "04 Empfang",
-        "08 Eingangshalle"
+      "KÜCHE": [
+        "WOHN/ESSZIMMER"
       ],
-      "20 UG-Treppe": [
-        "01 Besprechung"
+      "TERRASSE": [
+        "WOHN/ESSZIMMER"
+      ],
+      "HWR": [
+        "BAD"
       ]
     },
-    "confidence": 0.8
+    "confidence": 0.9
   }
 }

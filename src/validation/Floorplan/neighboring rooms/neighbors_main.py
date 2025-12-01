@@ -9,8 +9,10 @@ from src.plan2data.Voronoi_polygons_functions import neighboring_rooms_voronoi
 from src.plan2data.full_plan_ai import get_full_floorplan_metadata_with_ai
 from src.plan2data.full_plan_ai import get_neighbouring_rooms_with_ai
 
-path = "src/validation/Floorplan/neighboring rooms/Simple Floorplan/04_Simple.pdf"
+path = "src/validation/Floorplan/titleblock/testdata/floorplan-test-1.pdf"
 #output = neighboring_rooms_voronoi(path)
-#output = get_full_floorplan_metadata_with_ai(path)
-output = get_neighbouring_rooms_with_ai(path)   
+print("starting full plan ai extraction")
+output, method, is_succesful, confidence = get_full_floorplan_metadata_with_ai(path)
+#output = get_neighbouring_rooms_with_ai(path)   
 print(output)
+print ("finished printing")
