@@ -87,6 +87,16 @@ useEffect(() => {
       setLoading(false);
     }
   };
+  const ganttInfo = {
+    visual: {
+      title: "Visual",
+      desc: "Extracts tasks and timelines by interpreting the visual bar layout of the Gantt chart."
+    },
+    tabular: {
+      title: "Tabular",
+      desc: "Extracts schedule data from structured date tables within the chart."
+    }
+  };
 
   // AI Chatbot Function
   const askAI = async () => {
@@ -180,36 +190,36 @@ useEffect(() => {
                   </Select>
                 </div>
                 {/* Dynamic Info Box */}
-                <div className="p-4 bg-blue-50 border-l-4 border-blue-500 rounded-lg">
-                  <p className="text-sm text-gray-700">
+                <div className="p-2 border border-gray-300 rounded-lg bg-white mt-3 text-sm">
+    
                     {contentType === 'titleblock-hybrid' && (
                       <>
-                        <span className="font-semibold">📋 Title Block:</span> Extracts project metadata like project ID, architect, client, scale, and date from the title block section of floor plans.
+                        <span className="font-bold"> Title Block:</span> Extracts project metadata like project ID, architect, client, scale, and date from the title block section of floor plans.
                       </>
                     )}
                     {contentType === 'rooms-deterministic' && (
                       <>
-                        <span className="font-semibold">🏠 Rooms - Deterministic:</span> Uses rule-based algorithms to identify room labels and calculate spatial relationships using Voronoi diagrams. Works best with clearly labeled floor plans.
+                        <span className="font-bold"> Rooms - Deterministic:</span> Uses rule-based algorithms to identify room labels and calculate spatial relationships using Voronoi diagrams. Works best with clearly labeled floor plans that are not to complex or cluttered.
                       </>
                     )}
                     {contentType === 'rooms-ai' && (
                       <>
-                        <span className="font-semibold">🤖 Rooms - AI:</span> Uses AI vision models to intelligently detect room names, boundaries, and adjacencies. Better for complex or hand-drawn plans.
+                        <span className="font-bold"> Rooms - AI:</span> Uses AI vision models to intelligently detect room names, boundaries, and adjacencies. Better for complex or hand-drawn plans.
                       </>
                     )}
                     {contentType === 'full-plan-ai' && (
                       <>
-                        <span className="font-semibold">🎯 Full Plan:</span> Comprehensive AI analysis extracting both title block information and complete room layout with spatial relationships in one pass.
+                        <span className="font-bold"> Full Plan:</span> Comprehensive AI analysis extracting both title block information and complete room layout with spatial relationships in one pass.
                       </>
                     )}
-                  </p>
+                  
                 </div>
                 <Button
                   color="success"
                   size="lg"
                   onClick={() => handleSubmit('/drawing_parser/')}
                   disabled={loading || !file}
-                  className="w-full border-3 border-white"
+                  className="w-full border-3 border-black"
                 >
                   {loading ? (
                     <>
@@ -276,13 +286,20 @@ useEffect(() => {
                     <option value="tabular">Tabular (explicit dates)</option>
                   </Select>
                 </div>
-              
+                <div className="p-2 border border-gray-300 rounded-lg bg-white mt-3 text-sm">
+                  <span className="font-bold">{ganttInfo[chartFormat].title}:</span>
+                  {" "}
+                  {ganttInfo[chartFormat].desc}
+                </div>
+
+               
+
                 <Button
                   color="success"
                   size="lg"
                   onClick={() => handleSubmit('/gantt_parser/')}
                   disabled={loading || !file}
-                  className="w-full border-3 border-white"
+                  className="w-full border-3 border-black"
                 >
                   {loading ? (
                     <>
@@ -336,13 +353,18 @@ useEffect(() => {
                     </p>
                   </div>
                 )}
+                <div className="p-2 border border-gray-300 rounded-lg bg-white mt-3 text-sm">
+                  <span className="font-bold">{"Bill of Quantaties"}:</span>
+                  {" "}
+                  {"Extracts itemized cost data including quantities, unit prices, and total costs from Bills of Quantities documents used in construction projects."}
+                </div>
               
                 <Button
                   color="success"
                   size="lg"
                   onClick={() => handleSubmit('/financial_parser/')}
                   disabled={loading || !file}
-                  className="w-full border-3 border-white"
+                  className="w-full border-3 border-black"
                 >
                   {loading ? (
                     <>
