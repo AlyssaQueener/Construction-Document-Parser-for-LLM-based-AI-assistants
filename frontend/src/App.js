@@ -1,4 +1,4 @@
-import { Card, Button, Select, Label, Alert, Spinner, Tabs } from 'flowbite-react';
+import { Card, Button, Select, Label, Alert, Spinner, Tabs,Tooltip  } from 'flowbite-react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';  
 
@@ -179,7 +179,7 @@ useEffect(() => {
                     <option value="full-plan-ai">Full Plan</option>
                   </Select>
                 </div>
-
+              <Tooltip content="Extract title block info, room labels, and spatial relationships from architectural floor plans">
                 <Button
                   color="success"
                   size="lg"
@@ -196,6 +196,7 @@ useEffect(() => {
                     'Parse Floor Plan'
                   )}
                 </Button>
+              </Tooltip>
               </div>
             </Card>
           </Tabs.Item>
@@ -251,7 +252,7 @@ useEffect(() => {
                     <option value="tabular">Tabular (explicit dates)</option>
                   </Select>
                 </div>
-
+              <Tooltip content="Extract project tasks, durations, dependencies, and timeline data from Gantt charts">
                 <Button
                   color="success"
                   size="lg"
@@ -268,6 +269,7 @@ useEffect(() => {
                     'Parse Gantt Chart'
                   )}
                 </Button>
+              </Tooltip>
               </div>
             </Card>
           </Tabs.Item>
@@ -310,7 +312,7 @@ useEffect(() => {
                     </p>
                   </div>
                 )}
-
+              <Tooltip content="Extract cost items, quantities, and prices from Bills of Quantities">
                 <Button
                   color="success"
                   size="lg"
@@ -327,6 +329,7 @@ useEffect(() => {
                     'Parse BOQ'
                   )}
                 </Button>
+              </Tooltip>
               </div>
             </Card>
           </Tabs.Item>
