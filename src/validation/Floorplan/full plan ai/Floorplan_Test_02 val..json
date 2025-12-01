@@ -1,113 +1,41 @@
+{"titleBlock": 
+{"projectInfo":
 {
-  "titleBlock": {
-    "projectInfo": {
-      "projectId": null,
-      "projectName": null,
-      "location": null,
-      "author": null,
-      "stakeholders": {
-        "client": null,
-        "architect": null,
-        "engineers": null
-      },
-      "timeline": {
-        "yearOfCompletion": null,
-        "approvalDate": null
-      }
-    },
-    "planMetadata": {
-      "planType": "Grundriss Erdgeschoss",
-      "planFormat": null,
-      "scale": null,
-      "projectionMethod": null
-    },
-    "confidence": 0
-  },
-  "roomAdjacency": {
-    "neighboringRooms": {
-      "01 Besprechung": [
-        "02 Besprechung",
-        "07 Lager",
-        "20 UG-Treppe"
-      ],
-      "02 Besprechung": [
-        "01 Besprechung",
-        "03 Besprechung",
-        "08 Eingangshalle"
-      ],
-      "03 Besprechung": [
-        "02 Besprechung",
-        "04 Empfang",
-        "13 Gedeckte Eingangshalle"
-      ],
-      "04 Empfang": [
-        "03 Besprechung",
-        "08 Eingangshalle",
-        "13 Gedeckte Eingangshalle"
-      ],
-      "06 Gewerbe Süd": [
-        "07 Lager",
-        "22 WC D/IV (Einzel-WC)",
-        "23 WC H (Einzel-WC)"
-      ],
-      "07 Lager": [
-        "01 Besprechung",
-        "06 Gewerbe Süd",
-        "20 UG-Treppe"
-      ],
-      "08 Eingangshalle": [
-        "02 Besprechung",
-        "04 Empfang",
-        "13 Gedeckte Eingangshalle"
-      ],
-      "13 Gedeckte Eingangshalle": [
-        "03 Besprechung",
-        "04 Empfang",
-        "08 Eingangshalle"
-      ],
-      "20 UG-Treppe": [
-        "01 Besprechung",
-        "07 Lager",
-        "22 WC D/IV (Einzel-WC)",
-        "23 WC H (Einzel-WC)"
-      ],
-      "22 WC D/IV (Einzel-WC)": [
-        "06 Gewerbe Süd",
-        "20 UG-Treppe",
-        "23 WC H (Einzel-WC)"
-      ],
-      "23 WC H (Einzel-WC)": [
-        "06 Gewerbe Süd",
-        "20 UG-Treppe",
-        "22 WC D/IV (Einzel-WC)"
-      ]
-    },
-    "connectedRooms": {
-      "01 Besprechung": [
-        "20 UG-Treppe"
-      ],
-      "02 Besprechung": [
-        "08 Eingangshalle"
-      ],
-      "03 Besprechung": [
-        "13 Gedeckte Eingangshalle"
-      ],
-      "04 Empfang": [
-        "13 Gedeckte Eingangshalle"
-      ],
-      "08 Eingangshalle": [
-        "02 Besprechung",
-        "04 Empfang"
-      ],
-      "13 Gedeckte Eingangshalle": [
-        "03 Besprechung",
-        "04 Empfang",
-        "08 Eingangshalle"
-      ],
-      "20 UG-Treppe": [
-        "01 Besprechung"
-      ]
-    },
-    "confidence": 0.8
-  }
-}
+"projectId": null, 
+"projectName": null,
+ "location": "Redtenbacherstraße 14, 76133 Karlsruhe", 
+ "author": null, "stakeholders": 
+ {"client": "Badischer Landesverein für Innere Mission",
+  "architect": "PLANFABRIK Dipl.-Ingenieure Freie Architekten BDA", 
+  "engineers": null},
+   "timeline": 
+          {
+          "yearOfCompletion": null, 
+          "approvalDate": "04.07.2011"}
+}, "planMetadata": 
+{
+  "planType": "Grundriss Erdgeschoss",
+   "planFormat": "A0",
+    "scale": "1:50", 
+    "projectionMethod": null}, 
+    "confidence": 0.5}, 
+    "roomAdjacency": 
+      {"neighboringRooms": 
+            {"WC": ["Dusche", "Flur"], 
+            "Dusche": ["WC", "Flur"], 
+            "Flur": ["WC", "Dusche", "Küche", "Wohnzimmer", "Schlafzimmer", "Badezimmer"],
+            "Küche": ["Flur", "Wohnzimmer"], 
+            "Wohnzimmer": ["Flur", "Küche", "Schlafzimmer"],
+            "Schlafzimmer": ["Flur", "Wohnzimmer", "Badezimmer"], 
+            "Badezimmer": ["Flur", "Schlafzimmer"]}, 
+    "connectedRooms":
+             {"WC": ["Flur"], 
+             "Dusche": ["Flur"],
+              "Flur": ["WC", "Dusche", "Küche", "Wohnzimmer", "Schlafzimmer", "Badezimmer"],
+              "Küche": ["Flur", "Wohnzimmer"], 
+              "Wohnzimmer": ["Flur", "Küche", "Schlafzimmer"],
+              "Schlafzimmer": ["Flur", "Wohnzimmer", "Badezimmer"],
+              "Badezimmer": ["Flur", "Schlafzimmer"]
+            
+          }
+        }}
