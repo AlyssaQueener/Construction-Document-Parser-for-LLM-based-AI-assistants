@@ -203,7 +203,3 @@ def neighboring_rooms_voronoi(pdf_path):
     output_json = json.dumps(neighbors, indent=2, ensure_ascii=False)
     return neighbors
 
-if __name__ == "__main__":
-    pdf_path = "src/validation/Floorplan/neighboring rooms/Simple Floorplan/Simple Floorplan/01_Simple.pdf"  # Replace with your PDF path
-    result = neighboring_rooms_voronoi(pdf_path)
-    print(result)
