@@ -638,7 +638,7 @@ def extract_full_floorplan(pdf_path):
         # 3. Convert PDF to base64 image
         base64_image = convert_pdf_to_base64(pdf_path)
         
-        titleblock = get_title_block_info(pdf_path)
+        #titleblock = get_title_block_info(pdf_path)
         
         # 4. Call Mistral to identify actual connections
         connected_rooms_response = call_mistral_connected_rooms(base64_image, json.dumps(neighbors_vor))
@@ -651,8 +651,8 @@ def extract_full_floorplan(pdf_path):
         
         # 6. Combine all outputs (als dict, nicht string!)
         full_floorplan = {
-            "titleblock": titleblock,
-            "neighboring_rooms": neighbors_vor,  # Typo korrigiert: "neighbouring romms"
+            #"titleblock": titleblock,
+            "neighboring_rooms": neighbors_vor,  
             "connected_rooms": connected_rooms
         }
         
@@ -669,7 +669,7 @@ def extract_full_floorplan(pdf_path):
     
 if __name__ == "__main__":
     #pdf_path = "src/validation/Floorplan/titleblock/testdata/floorplan-test-2.pdf" 
-    pdf_path = "examples/FloorplansAndSectionViews/Simple Floorplan/01_Simple.pdf" 
+    pdf_path = "src/validation/Floorplan/neighboring rooms/Simple Floorplan/Simple Floorplan/01_Simple.pdf" 
     #pdf_path = "examples/FloorplansAndSectionViews/Simple Floorplan/02_Simple.pdf"
     #pdf_path ="src/validation/Floorplan/titleblock/testdata/floorplan-test-1.pdf"
     #neighbors_json = neighboring_rooms_voronoi(pdf_path)

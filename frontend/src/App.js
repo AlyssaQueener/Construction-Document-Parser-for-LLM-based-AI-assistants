@@ -186,7 +186,7 @@ useEffect(() => {
                     <option value="titleblock-hybrid">Title Block</option>
                     <option value="rooms-deterministic">Rooms - Deterministic</option>
                     <option value="rooms-ai">Rooms - AI</option>
-                    <option value="full-plan-ai">Full Plan - AI</option>
+                    <option value="full-plan-ai">Full Plan - Hybrid</option>
                   </Select>
                 </div>
                 {/* Dynamic Info Box */}
@@ -199,7 +199,7 @@ useEffect(() => {
                     )}
                     {contentType === 'rooms-deterministic' && (
                       <>
-                        <span className="font-bold"> Rooms - Deterministic:</span> Uses rule-based algorithms to identify room labels and calculate spatial relationships using Voronoi diagrams. Works best with clearly labeled floor plans that are not to complex or cluttered.
+                        <span className="font-bold"> Rooms - Deterministic:</span> Uses rule-based algorithms to identify room labels and calculate spatial relationships using Voronoi diagrams. Works best with clearly labeled room names best placed in the center of the rooms works also with more complex plans due to prefilterig.
                       </>
                     )}
                     {contentType === 'rooms-ai' && (
@@ -209,7 +209,7 @@ useEffect(() => {
                     )}
                     {contentType === 'full-plan-ai' && (
                       <>
-                        <span className="font-bold"> Full Plan:</span> Comprehensive AI analysis extracting both title block information and complete room layout with spatial relationships in one pass. Limited accuracy on complex plans. Better Performance if extracted seperately.
+                        <span className="font-bold"> Full Plan:</span> Combined analysis extracting title block information and neigboring rooms hybrid and connected rooms with pure Ai based on neigbouring rooms.
                       </>
                     )}
                   

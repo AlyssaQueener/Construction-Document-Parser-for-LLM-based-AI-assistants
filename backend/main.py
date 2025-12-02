@@ -205,14 +205,14 @@ async def create_upload_file_floorplans(file: UploadFile, content_type: ContentT
     
     try:
         # Validate file type based on content_type
-        if content_type == "rooms-deterministic":
+        if content_type in ["rooms-deterministic", "full-plan-ai"]:
             if not file.content_type == 'application/pdf':
-                raise HTTPException(status_code=400, detail="Deterministic plan parsing requires PDF file")
+                raise HTTPException(status_code=400, detail="Deterministic or Hybrid plan parsing requires PDF file")
         elif content_type == "titleblock-hybrid":
             # Hybrid accepts both Image and PDF
             if not (file.content_type.startswith('image/') or file.content_type == 'application/pdf'):
                 raise HTTPException(status_code=400, detail="Titleblock Hybrid parsing requires Image or PDF file")
-        elif content_type in ["rooms-ai", "full-plan-ai"]:
+        elif content_type =="rooms-ai":
             if not (file.content_type.startswith('image/') or file.content_type == 'application/pdf'):
                 raise HTTPException(status_code=400, detail="File must be an image or PDF")
         else:
@@ -279,7 +279,7 @@ async def create_upload_file_floorplans(file: UploadFile, content_type: ContentT
             result, method, is_succesful, confidence = full.get_neighbouring_rooms_with_ai(processing_file_path)
             
         elif content_type == "full-plan-ai":
-            result, method, is_succesful, confidence = full.get_full_floorplan_metadata_with_ai(processing_file_path)
+            result, method, is_succesful, confidence = vor.extract_full_floorplan(processing_file_path)
             
         # Create response
         response = Response(
