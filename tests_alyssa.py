@@ -18,4 +18,4 @@ path_5 = 'src/validation/Gantt/testdata/test-vis-excel-4.pdf'
 #print("Parsing Result 3:")
 #print(parser.parse_gant_chart_visual(path_4))
 print("Parsing Result 5:")
-print(parser.parse_gant_chart_visual(path_5))
+print(parser.parse_full_ai(path_5))

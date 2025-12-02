@@ -439,16 +439,22 @@ def parse_full_ai(path):
      with pdfplumber.open(path) as pdf:
         page = pdf.pages[0]
         image_path = helper.convert_pdf2img(path)
+        check_for_timeline = json.loads(mistral.call_mistral_timeline(image_path, "check for timeline", None))
+        if check_for_timeline['timeline_present'] == True:
+            option = "w timeline"
         tables = page.extract_table()
         df = pd.DataFrame(tables[1:], columns=tables[0])
         df = df.replace('', None)
         df = df.dropna(how='all')
         df = df.dropna(axis='columns', how='all')
         activities = extract_activities_for_full_ai(df)
+        print(activities)
+        timeline = extract_timeline_rows(df)
+        print(timeline)
         if len(activities) != 0:
             result=  mistral.call_mistral_timeline(image_path, "full ai w activities", activities)
         elif to_be_chunked(image_path):
-            result= parse_from_chunks(path)
+            result= parse_from_chunks(path,option)
         else:
             result =  mistral.call_mistral_timeline(image_path, "full ai", None)
         try:
@@ -492,15 +498,18 @@ def extract_gantt_chart_from_chunks(chunked_chart):
     
     return parsed_chart
      
-def parse_from_chunks(path):
-    chart_chunks = helper.pdf_to_split_images(path,0)
+def parse_from_chunks(path,option):
+    if option == "w timeline":
+        chart_chunks = helper.pdf_to_split_images_with_timeline(path,0)
+    else:
+        chart_chunks = helper.pdf_to_split_images(path,0)
     parsed_chart = extract_gantt_chart_from_chunks(chart_chunks)
     return parsed_chart
     
 def to_be_chunked(image_path):
     from PIL import Image
-    max_dimension=1500
-    max_area_pixels=2_000_000
+    max_dimension=1700
+    max_area_pixels=2_890_000
     try:
         with Image.open(image_path) as img:
             width, height = img.size
