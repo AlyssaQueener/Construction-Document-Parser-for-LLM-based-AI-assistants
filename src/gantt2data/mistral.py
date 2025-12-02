@@ -8,8 +8,8 @@ model = "mistral-small-latest"
 api_key = "mVTgI1ELSkn5Q28v2smHK0O4E02nMaxG"
 client = Mistral(api_key=api_key)
 
-def call_mistral_timeline(path, option):
-    message = create_message_for_timeline_extraction(path, option)
+def call_mistral_timeline(path, option, activties):
+    message = create_message_for_timeline_extraction(path, option, activties)
     chat_response = client.chat.complete(
         model = model,
         messages = message,
@@ -20,12 +20,16 @@ def call_mistral_timeline(path, option):
 
     return chat_response.choices[0].message.content
 
-def create_message_for_timeline_extraction(path, option):
+def create_message_for_timeline_extraction(path, option, activties):
     base64_image = encode_image(path)
     if option == "badly extracted":
         text = create_timeline_prompt_new()
     if option == "no timeline":
         text = create_timeline_prompt_new()
+    if option == "full ai":
+        text = create_promt_full_ai()
+    if option == "full ai w activities":
+        text = create_message_ai_and_provided_activties(activties)
     
     messages = [
     {
@@ -267,4 +271,206 @@ Additional rules:
 - Do not add comments, explanations, or any extra text.
 - The only allowed keys are "timestamp_value", "additional_info", and "index".
 """
+    return prompt
+
+
+def create_promt_full_ai():
+    prompt = """# Gantt Chart Activity Extraction Prompt
+
+You are an AI parser specialized in extracting activity information from Gantt charts. Your task is to identify all activities along with their start and end dates from the provided chart image.
+
+## Task Overview
+Extract each activity with its corresponding start and end dates. The chart may present dates in one of two scenarios:
+
+## Scenario 1: Chart with Timeline
+When a timeline is present at the top or bottom of the chart:
+
+1. **Identify the timeline structure**: Examine all time headers in the chart, which may be hierarchical (e.g., years containing months, months containing weeks, weeks containing days)
+
+2. **Timeline timestamp format**: For each timestamp position on the timeline, construct the full timestamp using this exact structure:
+   - Start with the **smallest unit** (the most granular time division shown)
+   - If higher-level time headers exist above it, **concatenate them** to the smallest unit
+   - Separate multiple levels with **spaces**
+   - Order from **lowest to highest level** (e.g., "15 March 2024" not "2024 March 15")
+   - Use **exactly the labels as written** in the chart - do not translate, normalize, or reformat them
+   
+   Examples of correct timestamp construction:
+   - If the chart shows "Mon 15" under "March" under "2024": timestamp is "Mon 15 March 2024"
+   - If the chart shows "Week 3" under "Q2" under "2024": timestamp is "Week 3 Q2 2024"
+   - If the chart shows only "Jan | Feb | Mar": timestamps are "Jan", "Feb", "Mar"
+   - If the chart shows "1" under "January": timestamp is "1 January"
+
+3. **Match activities to timeline**: For each activity bar:
+   - Identify where the bar **starts** on the horizontal axis
+   - Identify where the bar **ends** on the horizontal axis
+   - Determine the corresponding timestamp at the start position using the format above
+   - Determine the corresponding timestamp at the end position using the format above
+
+## Scenario 2: Dates Attached to Bars
+When dates are directly labeled on or near the activity bars:
+
+1. **Extract direct labels**: Look for date text that is:
+   - Written on the bars themselves
+   - Connected to bars with lines or arrows
+   - Positioned immediately adjacent to the bar start/end points
+
+2. **Record exactly as shown**: Copy the date labels exactly as they appear in the chart
+
+## Output Format
+Provide the results as a JSON array with the following structure:
+
+```json
+[
+    {
+        "task": "Activity Name",
+        "start": "Start Date",
+        "finish": "End Date"
+    },
+    {
+        "task": "Activity Name",
+        "start": "Start Date",
+        "finish": "End Date"
+    }
+]
+```
+
+**Important**: 
+- Use the exact keys: `"task"`, `"start"`, `"finish"`
+- Dates should follow the format as they appear in the timeline or labels
+- The output must be valid JSON
+
+## Important Guidelines
+- Extract ALL activities visible in the chart
+- Maintain the exact spelling and capitalization of activity names
+- For Scenario 1, ensure timeline timestamps follow the specified format precisely
+- If a date is unclear or ambiguous, note this in your output
+- If both scenarios appear to be present, prioritize directly attached dates (Scenario 2)
+- Preserve any special characters or formatting in activity names
+- If the chart uses vertical orientation, apply the same principles horizontally
+
+## Example Output
+
+**Scenario 1 Example:**
+```json
+[
+    {
+        "task": "Design",
+        "start": "01/2025 Week 1",
+        "finish": "01/2025 Week 4"
+    },
+    {
+        "task": "Preparation of architectural and schematic designs",
+        "start": "01/2025 Week 1",
+        "finish": "01/2025 Week 2"
+    },
+    {
+        "task": "Research into equipment and materials needed, along with costs",
+        "start": "01/2025 Week 2",
+        "finish": "01/2025 Week 4"
+    }
+]
+```
+Now, please analyze the provided Gantt chart and extract all activities with their start and end dates."""
+    return prompt
+
+
+def create_message_ai_and_provided_activties(activities):
+    prompt = f"""# Gantt Chart Date Extraction Prompt 
+
+You are an AI parser specialized in extracting start and end dates from Gantt charts where dates are directly attached to or labeled on activity bars.
+
+## Task Overview
+You will be provided with:
+1. A Gantt chart image
+2. A data frame containing activities that have already been extracted from the chart
+
+Your task is to identify the **start date** and **end date** for each activity by finding the date labels that are attached to or associated with each activity's bar.
+
+## Activities to Process
+
+{activities}
+
+
+## Instructions
+
+1. **Locate each activity** in the chart by matching the activity name from the list above
+
+2. **Find date labels** for each activity bar. Dates may be:
+   - Written directly on the bar itself
+   - Positioned at the start and end points of the bar
+   - Connected to the bar with lines, arrows, or markers
+   - Placed immediately above or below the bar
+   - Shown in a legend or annotation near the bar
+
+3. **Extract dates exactly as shown**: 
+   - Copy the date text precisely as it appears in the chart
+   - Preserve the exact format (e.g., "01/03/2024", "Mar 18", "2024-01-15", "Week 3")
+   - Do not convert or normalize date formats
+   - Include any additional context if present (e.g., "Start: 01/03" or just "01/03")
+
+4. **Identify start vs. end dates**:
+   - The start date is typically at the left edge (beginning) of the bar
+   - The end date is typically at the right edge (end) of the bar
+   - Labels may explicitly indicate "Start", "End", "Begin", "Finish", etc.
+   - If only one date is visible, note this in your output
+
+## Output Format
+Return a JSON array with the following structure:
+
+```json
+[
+    {{
+        "task": "Activity Name",
+        "start": "Start Date",
+        "finish": "End Date"
+    }}
+]
+```
+
+**Important**:
+- Include ALL activities from the provided list
+- Use the exact activity names as provided in the list
+- Use the exact keys: `"task"`, `"start"`, `"finish"`
+- If a date cannot be found, use `null` for that field
+- The output must be valid JSON
+- Maintain the order of activities as provided in the list
+-if you find activities on the chart which are not provided in the list insert them in the rightt position with start and finish date
+
+## Example Output
+
+Given activities:
+```
+- Requirements Gathering
+- System Design
+- Development Phase
+```
+
+Output:
+```json
+[
+    {{
+        "task": "Requirements Gathering",
+        "start": "01/03/2024",
+        "finish": "15/03/2024"
+    }},
+    {{
+        "task": "System Design",
+        "start": "16/03/2024",
+        "finish": "30/03/2024"
+    }},
+    {{
+        "task": "Development Phase",
+        "start": "01/04/2024",
+        "finish": "30/06/2024"
+    }}
+]
+```
+
+## Special Cases
+- **If a date is unclear or partially visible**: Extract what you can see and note the uncertainty
+- **If no dates are visible for an activity**: Set both `"start"` and `"finish"` to `null`
+- **If only one date is visible**: Fill in the available date and set the other to `null`
+- **If dates are in different formats**: Keep each date in its original format
+
+Now, please analyze the provided Gantt chart and extract the start and end dates for each activity in the list."""
     return prompt

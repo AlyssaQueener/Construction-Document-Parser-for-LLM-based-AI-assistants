@@ -4,8 +4,9 @@ import json
 import re 
 from scipy.spatial import Voronoi, voronoi_plot_2d
 import matplotlib.pyplot as plt
-import numpy as np
+import numpy as nps
 from collections import defaultdict
+import src.plan2data.helper as helper
 
 def is_number_like(text):
     """
@@ -90,6 +91,36 @@ def is_valid_room_name(text):
     if letter_count < 3:
         return False
     return True
+
+def is_valid_room_name_with_extracted(text, extracted_room_names):
+    """
+    Determines if the provided text qualifies as a valid room name.
+
+    Args:
+        text (str): The text candidate for a room name.
+
+    Returns:
+        bool: True if considered a valid room name, False otherwise.
+    """
+    text = text.strip()
+    if text in extracted_room_names:
+        return True
+    if text.lower() == 'wc':
+        return True
+    if len(text) < 3:
+        return False
+    excluded = {'ca', 'ca.', 'cm', 'm²', 'm2', 'qm', 'og', 'eg', 'ug', 'nr', 'nr.', 'no', 'no.', 'plan'}
+    if text.lower() in excluded:
+        return False
+    if text.lower().startswith('architectur'):
+        return False
+    if not any(c.isalpha() for c in text):
+        return False
+    letter_count = sum(1 for c in text if c.isalpha())
+    if letter_count < 3:
+        return False
+    return True
+
 
 def are_close(e1, e2, y_thresh=10, x_thresh=40):
     """
@@ -433,4 +464,56 @@ def neighboring_rooms_voronoi(pdf_path):
     return output_json
 
 
-
+def neighboring_rooms_voronoi_with_chunking(pdf_path):
+    """
+    Extract neighboring rooms from a floorplan PDF using Voronoi diagram.
+    
+    Args:
+        pdf_path: Path to the PDF file to process
+        
+    Returns:
+        dict: Dictionary mapping room names to their list of neighboring rooms
+    """
+    doc = fitz.open(pdf_path)
+    page = doc[0]
+    
+    # Clip rectangle to exclude plan information
+    width, height = page.rect.width, page.rect.height
+    clip_rect = fitz.Rect(0, 0, width * 0.9, height * 0.8)
+    flipped_rect = (
+        clip_rect.x0,
+        height - clip_rect.y1,
+        clip_rect.x1,
+        height - clip_rect.y0
+    )
+    
+    # Extract and filter words
+    word = page.get_textpage(clip_rect)
+    bbox = word.extractWORDS()
+    
+    filtered_bbox_number = [entry for entry in bbox if not is_number_like(entry[4])]
+    ## valid rooms names -> ai call
+    # pdf to split images
+    chunked_plan = helper.page_to_split_images(page)
+    extracted_room_names = helper.extract_room_names_from_chunks(chunked_plan)
+    filtered_bbox_string_1 = [entry for entry in filtered_bbox_number if is_valid_room_name_with_extracted(entry[4], extracted_room_names)]
+    filtered_bbox_string = [entry for entry in filtered_bbox_string_1 if has_more_than_one_char(entry[4])]
+    combined_bbox = combine_close_words(filtered_bbox_string)
+    
+    # Calculate centerpoints
+    centerpoints = []
+    for entry in combined_bbox:
+        centerpoint = calculate_bbox_center(entry)
+        centerpoints.append(centerpoint)
+    
+    # Create voronoi polygons around the center points
+    page_width, page_height = page.rect.width, page.rect.height
+    flipped_centerpoints = flip_y_coordinates(centerpoints, page_height)
+    flipped_centerpoints = make_names_unique(flipped_centerpoints)
+    neighbors, vor = extract_bounded_voronoi_neighbors_detailed(flipped_centerpoints, flipped_rect)
+    
+    doc.close()
+    
+    # Print as JSON and return
+    output_json = json.dumps(neighbors, indent=2, ensure_ascii=False)
+    return output_json

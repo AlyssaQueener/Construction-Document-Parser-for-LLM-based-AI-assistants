@@ -19,6 +19,15 @@ class Task_visual(BaseModel):
     start: str | None = None
     finish: str | None = None
 
+def extract_activities_for_full_ai(df):
+    try:
+        first_six_columns = df.iloc[:, :6]   # all rows, first 6 columns
+        return first_six_columns
+    except Exception as e:
+        print("Activities couldn't be extracted from data frame:", e)
+        return None
+
+
 def extract_activities(df):
         activities = []
         
@@ -405,15 +414,12 @@ def parse_gant_chart_visual(path):
         timeline = create_single_timeline(time_line_rows)
         column_count = len(df.columns)
         ai_extraction = False
-        if len(timeline) == 0:
-             timeline = json.loads(mistral.call_mistral_timeline(image_path,"no timeline"))
+        if len(timeline) < column_count-5 or len(timeline) < 4:
+             timeline = json.loads(mistral.call_mistral_timeline(image_path,"no timeline", None))
              ai_extraction = True
-        if len(timeline) != 0 and len(timeline) < column_count-5:
-            timeline = json.loads(mistral.call_mistral_timeline(image_path, "badly extracted"))
-            ai_extraction = True
         time_line_with_localization, unfound_timestamps = localize_timestamps(timeline, page)
         if unfound_timestamps > len(timeline) - tolerance and ai_extraction== False:
-            timeline = json.loads(mistral.call_mistral_timeline(image_path))
+            timeline = json.loads(mistral.call_mistral_timeline(image_path, "badly extracted", None))
             time_line_with_localization, unfound_timestamps = localize_timestamps(timeline, page)
         activities_with_loc, unfound_activites = localize_activities(activities, page)
         if unfound_activites > len(activities)-tolerance:
@@ -424,7 +430,23 @@ def parse_gant_chart_visual(path):
         if not success:
             gantt_chart_bars = identify_bars_with_colours(gantt_chart_bars)
         activity_timestamps = match_bars_with_timeline(gantt_chart_bars,time_line_with_localization, ai_extraction)
-        activites_with_dates = determine_start_end_of_activity(activity_timestamps)
-        json_string = json.dumps(activites_with_dates, indent=4)
+        activities_with_dates = determine_start_end_of_activity(activity_timestamps)
+        json_string = json.dumps(activities_with_dates, indent=4)
         return(json_string)
 
+
+def parse_full_ai(path):
+     with pdfplumber.open(path) as pdf:
+        page = pdf.pages[0]
+        image_path = helper.convert_pdf2img(path)
+        tables = page.extract_table()
+        df = pd.DataFrame(tables[1:], columns=tables[0])
+        df = df.replace('', None)
+        df = df.dropna(how='all')
+        df = df.dropna(axis='columns', how='all')
+        activities = extract_activities_for_full_ai(df)
+        if len(activities) != 0:
+            return mistral.call_mistral_timeline(image_path, "full ai w activities", activities)
+        return mistral.call_mistral_timeline(image_path, "full ai", None)
+     
+    

@@ -1,0 +1,222 @@
+[
+    {
+        "task": "LPH 1 Vorplanung",
+        "start": "15.05.25",
+        "finish": "30.09.25"
+    },
+    {
+        "task": "Vorstellung Lph. 02",
+        "start": "15.05.25",
+        "finish": "30.09.25"
+    },
+    {
+        "task": "LPH 2 Entwurfsplanung",
+        "start": "12.06.25",
+        "finish": "04.12.25"
+    },
+    {
+        "task": "Bearbeitung Architekt",
+        "start": "12.06.25",
+        "finish": "28.11.25"
+    },
+    {
+        "task": "Vorstellung Lph. 3",
+        "start": "29.10.25",
+        "finish": "04.11.25"
+    },
+    {
+        "task": "Prüfzeugnis Bauherr und Freigabe LPH 3",
+        "start": "09.10.25",
+        "finish": "01.12.25"
+    },
+    {
+        "task": "Kostenberechnung",
+        "start": "22.07.25",
+        "finish": "19.08.25"
+    },
+    {
+        "task": "Abstimmung Bauzeitplanung",
+        "start": "03.07.25",
+        "finish": "05.08.25"
+    },
+    {
+        "task": "Konzeption Sektionaltor",
+        "start": "28.07.25",
+        "finish": "26.08.25"
+    },
+    {
+        "task": "Design Freeze",
+        "start": "26.08.25",
+        "finish": "26.08.25"
+    },
+    {
+        "task": "Tragwerksplanung Waschbeton",
+        "start": "18.06.25",
+        "finish": "21.11.25"
+    },
+    {
+        "task": "Entscheidungsvorlage Waschbeton",
+        "start": "21.11.25",
+        "finish": "25.11.25"
+    },
+    {
+        "task": "Entscheidung Waschbeton",
+        "start": "25.11.25",
+        "finish": "25.11.25"
+    },
+    {
+        "task": "Bearbeitung Fachplaner",
+        "start": "18.06.25",
+        "finish": "26.11.25"
+    },
+    {
+        "task": "Tragwerksplanung | Shortlist",
+        "start": "09.07.25",
+        "finish": "02.10.25"
+    },
+    {
+        "task": "Bauphysik | PMI",
+        "start": "14.07.25",
+        "finish": "02.10.25"
+    },
+    {
+        "task": "Brandschutz | Bauart",
+        "start": "14.07.25",
+        "finish": "02.10.25"
+    },
+    {
+        "task": "HSL | IPV",
+        "start": "14.07.25",
+        "finish": "02.10.25"
+    },
+    {
+        "task": "HSL | IPV Berechnungen Abgabe LPH 3",
+        "start": "23.10.25",
+        "finish": "11.12.25"
+    },
+    {
+        "task": "HSL (Bestand) | Linsmeier",
+        "start": "14.07.25",
+        "finish": "02.10.25"
+    },
+    {
+        "task": "ELT | DICK",
+        "start": "14.07.25",
+        "finish": "02.10.25"
+    },
+    {
+        "task": "HSL | DICK Detailplanung Abgabe LPH 3",
+        "start": "24.10.25",
+        "finish": "11.12.25"
+    },
+    {
+        "task": "Landschaftsarchitektur | LoHo",
+        "start": "31.07.25",
+        "finish": "02.10.25"
+    },
+    {
+        "task": "LPH 4 Genehmigungsplanung",
+        "start": "04.11.25",
+        "finish": "01.06.26"
+    },
+    {
+        "task": "Bearbeitung Architekt",
+        "start": "04.11.25",
+        "finish": "17.03.26"
+    },
+    {
+        "task": "Tragwerksplanung (Genehmigungsstatus wird zum Bauantrag nachgereicht)",
+        "start": "24.11.25",
+        "finish": "17.03.26"
+    },
+    {
+        "task": "Brandschutz",
+        "start": "17.11.25",
+        "finish": "16.12.25"
+    },
+    {
+        "task": "Prüfzeugnis Bauherr und Freigabe LPH 4",
+        "start": "04.11.25",
+        "finish": "16.12.25"
+    },
+    {
+        "task": "Abgabe Bauantrag",
+        "start": "16.12.25",
+        "finish": "01.06.26"
+    },
+    {
+        "task": "Genehmigungsverfahren",
+        "start": "17.12.25",
+        "finish": "01.06.26"
+    },
+    {
+        "task": "Bearbeitung Bauordnungsamt",
+        "start": "17.12.25",
+        "finish": "01.06.26"
+    },
+    {
+        "task": "Erteilung Baugenehmigung",
+        "start": "29.05.26",
+        "finish": "29.05.26"
+    },
+    {
+        "task": "Leitdetailplanung",
+        "start": "19.12.25",
+        "finish": "08.04.26"
+    },
+    {
+        "task": "Leitdetailplanung - Skizzen",
+        "start": "19.12.25",
+        "finish": "12.02.26"
+    },
+    {
+        "task": "Leitdetailplanung - Ausarbeitung",
+        "start": "13.02.26",
+        "finish": "08.04.26"
+    },
+    {
+        "task": "Vorbereitung der Vergabe",
+        "start": "13.01.26",
+        "finish": "22.06.26"
+    },
+    {
+        "task": "Mitwirkung bei der Vergabe",
+        "start": "13.01.26",
+        "finish": "20.03.26"
+    },
+    {
+        "task": "Vorbereitung GU + LPH GU für Ausführung",
+        "start": "02.03.26",
+        "finish": "22.06.26"
+    },
+    {
+        "task": "Ausführung",
+        "start": "10.03.26",
+        "finish": "19.10.26"
+    },
+    {
+        "task": "HA Bauzeit gem. V S.0 GESAMTTERMINPLAN vom 02/2025",
+        "start": "10.03.26",
+        "finish": "19.10.26"
+    },
+    {
+        "task": "Baubeginn verschoben",
+        "start": "10.03.26",
+        "finish": "19.10.26"
+    },
+    {
+        "task": "HS Bauzeit gem. V S.0 GESAMTTERMINPLAN vom 02/2025",
+        "start": "10.03.26",
+        "finish": "21.09.26"
+    },
+    {
+        "task": "Baubeginn ursprünglich",
+        "start": "10.03.26",
+        "finish": "21.09.26"
+    },
+    {
+        "task": "Baubeginn verschoben",
+        "start": "10.03.26",
+        "finish": "21.09.26"
+    }
+]

@@ -147,6 +147,39 @@ def create_message_for_full_floorplan_extraction(path):
     ]
     return messages
 
+###################### Room extraction for voronoi ################################
+def call_mistral_for_room_extraction_voronoi(image):
+    base64_image = encode_image(image)
+    message = create_message_for_room_extraction_voronoi(base64_image)
+    chat_response = client.chat.complete(
+        model = model,
+        messages = message,
+        response_format = {
+            "type": "json_object",
+        }
+    )
+
+    return chat_response.choices[0].message.content
+
+def create_message_for_room_extraction_voronoi(base64_image):
+    text = create_room_extraction_voronoi_prompt()
+    messages = [
+    {
+        "role": "user",
+        "content": [
+            {
+                "type": "text",
+                "text": text
+            },
+            {
+                "type": "image_url",
+                "image_url": f"data:image/png;base64,{base64_image}"
+            }
+        ]
+    }
+]
+    return messages
+
 ###################### ENCODE IMPORT FILES ########################################
 def encode_image(image_path):
     """Encode the image to base64."""
@@ -745,4 +778,26 @@ Instructions:
 Extract the information now.
 """
     return prompt
+
+
+def create_room_extraction_voronoi_prompt():
+    prompt = """Analyze this architectural floorplan snippet and identify all room names that are visible in the image.
+
+Instructions:
+- Extract ONLY the room names that are explicitly labeled in the floorplan
+- Copy each room name EXACTLY as it appears in the image, preserving:
+  - Exact spelling and capitalization
+  - Spaces, hyphens, and punctuation
+  - Abbreviations (e.g., "WC" not "Water Closet")
+- If a room type appears multiple times with the same label, include them as often as present in the list
+- Do not infer or add room names that are not explicitly labeled
+- Return the result as a valid JSON array of strings
+
+Output format:
+["Room Name 1", "Room Name 2", "Room Name 3"]
+
+Example output:
+["Bedroom", "WC", "Living Room", "Kitchen"]"""
+    return prompt
+
 
