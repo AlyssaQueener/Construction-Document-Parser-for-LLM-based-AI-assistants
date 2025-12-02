@@ -4,7 +4,15 @@ import pandas as pd
 import src.gantt2data.mistral as mistral
 import pymupdf as pymupdf
 import pdfplumber
+import pandas as pd
+from PIL import Image
+import matplotlib.pyplot as plt
+import matplotlib.patches as patches
+from matplotlib.patches import Rectangle
+import numpy as np
 import src.gantt2data.helper as helper
+from collections import Counter
+import os
 
 
 class Task_visual(BaseModel):
@@ -12,22 +20,35 @@ class Task_visual(BaseModel):
     start: str | None = None
     finish: str | None = None
 
+def extract_activities_for_full_ai(df):
+    try:
+        first_six_columns = df.iloc[:, :6]   # all rows, first 6 columns
+        return first_six_columns
+    except Exception as e:
+        print("Activities couldn't be extracted from data frame:", e)
+        return None
+
+
 def extract_activities(df):
         activities = []
         
+        try:
         # Get the first column (assuming it contains activities)
-        first_column = df.iloc[:, 0]
+            first_column = df.iloc[:, 0]
 
         
         
-        for value in first_column:
-            if value is not None and value != 'None':
-                # Clean the activity name
-                activity = str(value)
-                activities.append(activity)
+            for value in first_column:
+                if value is not None and value != 'None':
+                    # Clean the activity name
+                    activity = str(value)
+                    activities.append(activity)
         
-        activities = activities
-        return activities
+            activities = activities
+            return activities
+        except:
+            print("Activities couldn't be extracted from data frame")
+            return None
     
 def extract_timeline_rows(df):
         ## TO DO validation checker-> the granularity counter should equal the amount of columns-1 (one column for where activities are listed) -> if that isn't achieved yet i might should loop thourgh more rows or AI 
@@ -137,7 +158,7 @@ def is_horizontally_aligned(timestamp, rectangle, tolerance=5):
     # Check if timestamp is within or overlaps with rectangle horizontally
     return (rect_left - tolerance <= timestamp_center_x <= rect_right + tolerance)
 
-def match_bars_with_timeline(gantt_chart_bars, timeline_with_localization):
+def match_bars_with_timeline(gantt_chart_bars, timeline_with_localization, ai_extraction):
     '''
     Calculates if the bar of a activity (matching_rectangles) match with timestemps, returns a dict in which all matching timestemps a mapped to the name of a activity
     '''
@@ -149,11 +170,18 @@ def match_bars_with_timeline(gantt_chart_bars, timeline_with_localization):
         for timestamp in timeline_with_localization:
             for rectangle in matching_rectangles:
                 if is_horizontally_aligned(timestamp, rectangle):
-                    relevant_timestamp_info = {
-                        'timestamp': timestamp['timestamp_value'],
-                        'column_index': timestamp['column_index'],
-                        'additional_info': timestamp['additional_info']
-                    }
+                    if ai_extraction == False:
+                        relevant_timestamp_info = {
+                            'timestamp': timestamp['timestamp_value'],
+                            'column_index': timestamp['column_index'],
+                            'additional_info': timestamp['additional_info']
+                        }
+                    if ai_extraction == True:
+                        relevant_timestamp_info = {
+                            'timestamp': timestamp['timestamp_value'],
+                            'column_index': timestamp['index'],
+                            'additional_info': timestamp['additional_info']
+                        }
                     matching_timestamps.append(relevant_timestamp_info)
         
         activity_timestamps[activity] = matching_timestamps
@@ -217,7 +245,54 @@ def find_applicable_timestamp(target_col_idx, row_timestamps):
     
     return row_timestamps.get(applicable_col_idx) if applicable_col_idx is not None else None
 
-
+def visualize_with_matplotlib(pdf_path, gantt_chart_bars, activities_with_loc):
+    """
+    Convert PDF page to image and overlay bounding boxes using matplotlib
+    """
+    # Convert PDF to image
+    doc = pymupdf.open(pdf_path)
+    page = doc[0]
+    pix = page.get_pixmap(matrix=pymupdf.Matrix(2, 2))  # 2x scaling for better quality
+    img_data = pix.tobytes("png")
+    
+    # Convert to PIL image then to numpy array
+    from io import BytesIO
+    img = Image.open(BytesIO(img_data))
+    img_array = np.array(img)
+    
+    # Create matplotlib figure
+    fig, ax = plt.subplots(1, 1, figsize=(15, 10))
+    ax.imshow(img_array)
+    
+    # Define colors for different activities
+    colors = plt.cm.Set3(np.linspace(0, 1, len(gantt_chart_bars)))
+    
+    # Draw bounding boxes for activities (in green)
+    for activity in activities_with_loc:
+        rect = Rectangle((activity['x0']*2, activity['top']*2), 
+                        (activity['x1'] - activity['x0'])*2, 
+                        (activity['bottom'] - activity['top'])*2,
+                        linewidth=2, edgecolor='green', facecolor='none', alpha=0.7)
+        ax.add_patch(rect)
+        ax.text(activity['x0']*2, activity['top']*2-10, activity['text'], 
+                fontsize=8, color='green', weight='bold')
+    
+    # Draw bounding boxes for bars (different color for each activity)
+    for i, (activity_name, rectangles) in enumerate(gantt_chart_bars.items()):
+        color = colors[i]
+        for rect_data in rectangles:
+            rect = Rectangle((rect_data['x0']*2, rect_data['top']*2), 
+                            (rect_data['x1'] - rect_data['x0'])*2, 
+                            (rect_data['bottom'] - rect_data['top'])*2,
+                            linewidth=2, edgecolor=color, facecolor=color, alpha=0.3)
+            ax.add_patch(rect)
+    
+    ax.set_title('Gantt Chart with Bounding Boxes\n(Green: Activities, Colors: Bars)', fontsize=14)
+    ax.axis('off')
+    plt.tight_layout()
+    plt.show()
+    
+    doc.close()
 
 def determine_start_end_of_activity(activity_timestamps):
     '''
@@ -235,8 +310,8 @@ def determine_start_end_of_activity(activity_timestamps):
             # Find timestamp with minimum column_index
             min_timestamp = min(timestamps, key=lambda x: x['column_index'])
             max_timestamp = max(timestamps, key=lambda x: x['column_index'])
-            start_date = str(min_timestamp['timestamp'])
-            end_date = str(max_timestamp['timestamp'])
+            start_date = str(min_timestamp['timestamp'] + " " + min_timestamp['additional_info'])
+            end_date = str(max_timestamp['timestamp']+ " " + max_timestamp['additional_info'])
             activity_with_date = {
                 "task" : activity,
                 "start" : start_date,
@@ -246,12 +321,81 @@ def determine_start_end_of_activity(activity_timestamps):
 
     return activities_with_dates
 
+def check_bar_recognition(gantt_chart_bars):
+    print("GANTT CHART BARS:")
+    total_bars = len(gantt_chart_bars)
+    print(total_bars)
+    bar_lengths = []
+    for bar in gantt_chart_bars.values():
+        print("length of matching rectangles")
+        print(len(bar))
+        bar_lengths.append(len(bar))
+    counter = Counter(bar_lengths)
+    print(counter)
+    most_common_length, most_common_count = counter.most_common(1)[0]
+    if most_common_count/total_bars > 0.8:
+        print(most_common_count/total_bars)
+        print("bar recognition failed")
+        return False
+    return True
 
+def identify_bars_with_colours(gantt_chart_bars):
+    colors = extract_present_colours(gantt_chart_bars)
+    filter_colors = analyze_colors(colors)
+    ## 1. assumption-> most common color is background color (further possible check -> is it white /gray)
+    color_filtered_gantt_chart_bars = filter_gantt_chart_bars(gantt_chart_bars, filter_colors)
+    return color_filtered_gantt_chart_bars
+
+def filter_gantt_chart_bars(gantt_chart_bars, filter_colors):
+    color_filtered_gantt_chart_bars = {}
+    for name_activity, rectangles in gantt_chart_bars.items():
+        filtered_rects = []
+        for rect in rectangles:
+            if rect['non_stroking_color'] not in filter_colors:
+                filtered_rects.append(rect)
+        color_filtered_gantt_chart_bars[name_activity]= filtered_rects
+    return color_filtered_gantt_chart_bars
+
+
+
+def analyze_colors(colors):
+    all_colors = []
+    for activity_colors in colors.values():
+        all_colors.extend(activity_colors)
+    
+    color_counter = Counter(all_colors)
+    total_rectangles = len(all_colors)
+    
+    print(f"Color frequency analysis:")
+    for color, count in color_counter.most_common():
+        percentage = (count / total_rectangles) * 100
+
+    most_common_colors = color_counter.most_common(3)
+    filter_colors = []
+    for color in most_common_colors:
+        if is_very_bright(color[0]):
+            filter_color = color[0]
+            filter_colors.append(filter_color)
+    #print(color_analysis)
+    return filter_colors
+
+def is_very_bright(color):
+    if color[0]> 0.8 and color[1] > 0.8 and color[2] > 0.8:
+        return True
+    else:
+        return False
+
+def extract_present_colours(gantt_chart_bars):
+    colours_of_bars = {}
+    for name_activity, rectangles in gantt_chart_bars.items():
+        colours = []
+        for rect in rectangles:
+            colours.append(rect['non_stroking_color'])
+        colours_of_bars[name_activity]= colours
+    return colours_of_bars
 
 def parse_gant_chart_visual(path):
-    is_succesful = False
     tolerance = 2
-    method = "deterministic"
     with pdfplumber.open(path) as pdf:
         page = pdf.pages[0]
         image_path = helper.convert_pdf2img(path)
@@ -263,30 +407,124 @@ def parse_gant_chart_visual(path):
         df = df.dropna(axis='columns', how='all')
         activities = extract_activities(df)
         row_count = len(df.index)
-        if len(activities)< row_count - 5:
+        if activities == None:
             activities = json.loads(mistral.call_mistral_activities(image_path))
-            method = "hybrid"
+        elif len(activities)< row_count - 5:
+            activities = json.loads(mistral.call_mistral_activities(image_path))
         time_line_rows= extract_timeline_rows(df)
         timeline = create_single_timeline(time_line_rows)
         column_count = len(df.columns)
-        if len(timeline) < column_count -5:
-            timeline = json.loads(mistral.call_mistral_timeline(image_path))
-            method = "hybrid"
+        ai_extraction = False
+        if len(timeline) < column_count-5 or len(timeline) < 4:
+             timeline = json.loads(mistral.call_mistral_timeline(image_path,"no timeline", None))
+             ai_extraction = True
         time_line_with_localization, unfound_timestamps = localize_timestamps(timeline, page)
-        if unfound_timestamps > len(timeline) - tolerance:
-            timeline = json.loads(mistral.call_mistral_timeline(image_path))
+        if unfound_timestamps > len(timeline) - tolerance and ai_extraction== False:
+            timeline = json.loads(mistral.call_mistral_timeline(image_path, "badly extracted", None))
             time_line_with_localization, unfound_timestamps = localize_timestamps(timeline, page)
-            method = "hybrid"
         activities_with_loc, unfound_activites = localize_activities(activities, page)
         if unfound_activites > len(activities)-tolerance:
             activities = json.loads(mistral.call_mistral_activities(image_path))
             activities_with_loc, unfound_activites = localize_activities(activities, page)
-            method = "hybrid"
         gantt_chart_bars = find_bars(boxes, activities_with_loc,2)
-        activity_timestamps = match_bars_with_timeline(gantt_chart_bars,time_line_with_localization)
-        activites_with_dates = determine_start_end_of_activity(activity_timestamps)
-        if activites_with_dates:
-            is_succesful = True
-        json_string = json.dumps(activites_with_dates, indent=4)
-        return activites_with_dates, method, is_succesful
+        success = check_bar_recognition(gantt_chart_bars)
+        if not success:
+            gantt_chart_bars = identify_bars_with_colours(gantt_chart_bars)
+        activity_timestamps = match_bars_with_timeline(gantt_chart_bars,time_line_with_localization, ai_extraction)
+        activities_with_dates = determine_start_end_of_activity(activity_timestamps)
+        return activities_with_dates
 
+
+def parse_full_ai(path):
+     with pdfplumber.open(path) as pdf:
+        page = pdf.pages[0]
+        image_path = helper.convert_pdf2img(path)
+        check_for_timeline = json.loads(mistral.call_mistral_timeline(image_path, "check for timeline", None))
+        if check_for_timeline['timeline_present'] == True:
+            option = "w timeline"
+        tables = page.extract_table()
+        df = pd.DataFrame(tables[1:], columns=tables[0])
+        df = df.replace('', None)
+        df = df.dropna(how='all')
+        df = df.dropna(axis='columns', how='all')
+        activities = extract_activities_for_full_ai(df)
+        print(activities)
+        timeline = extract_timeline_rows(df)
+        print(timeline)
+        if len(activities) != 0:
+            result=  mistral.call_mistral_timeline(image_path, "full ai w activities", activities)
+        elif to_be_chunked(image_path):
+            result= parse_from_chunks(path,option)
+        else:
+            result =  mistral.call_mistral_timeline(image_path, "full ai", None)
+        try:
+            if os.path.exists(image_path):
+                os.remove(image_path)
+                print(f"Deleted: {image_path}")
+        except Exception as e:
+            print(f"Warning: Could not delete {image_path}: {e}")
+        return result
+
+
+def extract_gantt_chart_from_chunks(chunked_chart):
+    """
+    Extract activities from image chunks and clean up files afterward.
+    Args:
+        chunked_plan: List of file paths to image chunks
+    Returns:
+        List of room names extracted from each chunk
+    """
+    parsed_chart = []
+    
+    try:
+        for image_path in chunked_chart:
+            chart_json = mistral.call_mistral_timeline(image_path, "chunks", None)
+            try:
+                chart_part = json.loads(chart_json)
+                parsed_chart.extend(chart_part)
+            except json.JSONDecodeError as e:
+                print(f"Warning: Could not parse JSON from {image_path}: {e}")
+                print(f"Raw response: {chart_json}")
+                continue
+    finally:
+        # Clean up: delete all temporary image files
+        for image_path in chunked_chart:
+            try:
+                if os.path.exists(image_path):
+                    os.remove(image_path)
+                    print(f"Deleted: {image_path}")
+            except Exception as e:
+                print(f"Warning: Could not delete {image_path}: {e}")
+    
+    return parsed_chart
+     
+def parse_from_chunks(path,option):
+    if option == "w timeline":
+        chart_chunks = helper.pdf_to_split_images_with_timeline(path,0)
+    else:
+        chart_chunks = helper.pdf_to_split_images(path,0)
+    parsed_chart = extract_gantt_chart_from_chunks(chart_chunks)
+    return parsed_chart
+    
+def to_be_chunked(image_path):
+    from PIL import Image
+    max_dimension=1700
+    max_area_pixels=2_890_000
+    try:
+        with Image.open(image_path) as img:
+            width, height = img.size
+            total_pixels = width * height
+            
+        if width > max_dimension:
+            return True
+            
+        if height > max_dimension:
+            return True
+            
+            # Check total pixel area
+        if total_pixels > max_area_pixels:
+            return True
+        return False
+    except:
+        print("could not measure image")
+        return False
