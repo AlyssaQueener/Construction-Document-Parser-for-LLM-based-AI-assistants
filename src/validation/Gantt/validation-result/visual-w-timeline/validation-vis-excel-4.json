@@ -1,0 +1,81 @@
+{
+    "completeness": 8.33,
+    "accuracy": 8.89,
+    "overall_score": 8.61,
+    "field_evaluations": [
+        {
+            "ground_truth_id": 0,
+            "parser_id": 0,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 0.3
+            },
+            "notes": "Finish date has significant discrepancy (day component missing)"
+        },
+        {
+            "ground_truth_id": 1,
+            "parser_id": 1,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 0.8,
+                "finish": 0.3
+            },
+            "notes": "Start date has minor formatting difference (day name changed). Finish date has significant discrepancy (day component missing)"
+        },
+        {
+            "ground_truth_id": 2,
+            "parser_id": 2,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 0.3
+            },
+            "notes": "Finish date has significant discrepancy (day component missing)"
+        },
+        {
+            "ground_truth_id": 3,
+            "parser_id": 3,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 0.3
+            },
+            "notes": "Finish date has significant discrepancy (day component missing)"
+        },
+        {
+            "ground_truth_id": 4,
+            "parser_id": 4,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": ""
+        },
+        {
+            "ground_truth_id": 5,
+            "parser_id": 5,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": ""
+        }
+    ],
+    "summary": {
+        "total_ground_truth_activities": 6,
+        "total_matched_activities": 6,
+        "total_fields_evaluated": 18,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "common_fields": ["task", "start", "finish"]
+    }
+}

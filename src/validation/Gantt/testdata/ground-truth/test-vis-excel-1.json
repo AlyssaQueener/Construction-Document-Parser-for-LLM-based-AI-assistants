@@ -1,0 +1,47 @@
+[
+    {
+        "task": "Preperation",
+        "start": "30 dec 2025",
+        "finish": "31 dec 2026"
+    },
+    {
+        "task": "Meeting",
+        "start": "31 dec 2025",
+        "finish": "1 jan 2026"
+    },
+    {
+        "task": "Meeting 2",
+        "start": "31 dec 2025",
+        "finish": "3 jan 2026"
+    },
+    {
+        "task": "Meeting 3",
+        "start": "5 jan 2026",
+        "finish": "8 jan 2026"
+    },
+    {
+        "task": "Task 1",
+        "start": "3 jan 2026",
+        "finish": "5 jan 2026"
+    },
+    {
+        "task": "Task 2",
+        "start": "1 jan 2026",
+        "finish": "2 jan 2026"
+    },
+    {
+        "task": "Task 4",
+        "start": "9 jan 2026",
+        "finish": "12 jan 2026"
+    },
+    {
+        "task": "Task 5",
+        "start": "13 jan 2026",
+        "finish": "13 jan 2026"
+    },
+    {
+        "task": "Task 6",
+        "start": "11 jan 2026",
+        "finish": "14 jan 2026"
+    }
+]

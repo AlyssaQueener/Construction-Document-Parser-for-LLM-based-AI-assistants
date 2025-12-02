@@ -1,25 +1,27 @@
 import src.gantt2data.ganttParser as parser
 import src.validation.Gantt.validator as validator
 
-
-path = "src/validation/Gantt/testdata/result-test-tab.json"
-path_1 = "src/validation/Gantt/testdata/result-test-tab-1.json"
-path_2 = "src/validation/Gantt/testdata/result-test-tab-2.json"
-
-path_v = "src/validation/Gantt/testdata/result-test-vis.json"
-path_v_1 = "src/validation/Gantt/testdata/result-test-vis-3.json"
-#### here i sended beginning of data frame with image
-path_v_1_1 = "src/validation/Gantt/testdata/result-test-vis-3-1.json"
-### chunked image
-path_v_1_chunk = "src/validation/Gantt/testdata/result-test-vis-3-with-chunking.json"
-path_v_1_chunk_smaller = "src/validation/Gantt/testdata/result-test-vis-3-smaller-chunking.json"
-
-validation_path = "src/validation/Gantt/testdata/test-tabular.json"
-validation_path_1 = "src/validation/Gantt/testdata/test-tabular-1.json"
-validation_path_2 = "src/validation/Gantt/testdata/test-tabular-2.json"
-
-validation_v ="src/validation/Gantt/testdata/test-visual.json"
-validation_v_1 ="src/validation/Gantt/testdata/test-visual-3.json"
+#Ground truth:
+path = 'src/validation/Gantt/testdata/ground-truth/test-vis-excel-1.json'
+path1 = 'src/validation/Gantt/testdata/ground-truth/test-vis-excel-2.json'
+path2 = 'src/validation/Gantt/testdata/ground-truth/test-vis-excel-3.json'
+path3 = 'src/validation/Gantt/testdata/ground-truth/test-vis-excel-4.json'
 
 
-print(validator.validate(validation_v_1, path_v_1_chunk_smaller))
+# Parsing Results
+result_path = 'src/validation/Gantt/testdata/parsing-results/result-vis-excel-1.json'
+result_path1 = 'src/validation/Gantt/testdata/parsing-results/result-vis-excel-2.json'
+result_path2 = 'src/validation/Gantt/testdata/parsing-results/result-vis-excel-3.json'
+result_path3 = 'src/validation/Gantt/testdata/parsing-results/result-vis-excel-4.json'
+
+print("Validation Result of vis-excel-1")
+print(validator.validate_visual(path,result_path))
+
+print("Validation Result of vis-excel-2")
+print(validator.validate_visual(path1,result_path1))
+
+print("Validation Result of vis-excel-3")
+print(validator.validate_visual(path2,result_path2))
+
+print("Validation Result of vis-excel-4")
+print(validator.validate_visual(path3,result_path3))
