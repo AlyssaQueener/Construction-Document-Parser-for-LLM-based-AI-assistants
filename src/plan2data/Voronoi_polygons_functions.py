@@ -468,8 +468,8 @@ if __name__ == "__main__":
     pdf_path = "src/validation/Floorplan/titleblock/testdata/floorplan-test-2.pdf"  # Replace with your PDF path
     neighbors_json = neighboring_rooms_voronoi(pdf_path)
     print(neighbors_json)
-    
-    def neighboring_rooms_voronoi_with_chunking(pdf_path):
+
+def neighboring_rooms_voronoi_with_chunking(pdf_path):
     """
     Extract neighboring rooms from a floorplan PDF using Voronoi diagram.
     
