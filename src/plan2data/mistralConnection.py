@@ -242,7 +242,7 @@ def create_message_connected(base64_image, text):
     Returns:
         list: Messages array für Mistral API
     """
-    system_prompt, user_prompt = create_connected_rooms_extraction_prompt(base64_image, text)
+    system_prompt, user_prompt = create_connected_rooms_extraction_prompt(text)
       
     messages = [
         {
@@ -931,7 +931,10 @@ def create_room_name_extraction_prompt(text_content):
     return prompt
 
     
-def create_connected_rooms_extraction_prompt(base64_image, text_content):
+
+    
+    
+def create_connected_rooms_extraction_prompt(text_content):
     """
     Erstellt einen Prompt für Mistral zur Extraktion von verbundenen Räumen
     aus einem Grundriss-Bild und benachbarten Räumen als Text.
@@ -941,7 +944,7 @@ def create_connected_rooms_extraction_prompt(base64_image, text_content):
         text_content: JSON-String mit neighboring rooms Information
     
     Returns:
-        dict: Prompt-Struktur für Mistral API
+        tuple: (system_prompt, user_prompt)
     """
     
     system_prompt = """Du bist ein Experte für die Analyse von Architekturplänen und Grundrissen. 
@@ -962,34 +965,31 @@ WICHTIGE REGELN:
 4. Berücksichtige die räumliche Anordnung und die angegebenen benachbarten Räume
 
 AUSGABEFORMAT:
-Gib die Ergebnisse als JSON-Array zurück. Jedes Element soll folgende Struktur haben:
+Gib das Ergebnis als einzelnes JSON-Objekt zurück mit folgender Struktur:
 
 {{
-  "room1": "Raumname oder Raumnummer",
-  "room2": "Raumname oder Raumnummer",
-  "connection_type": "door" | "open_passage" | "doorway",
-  "confidence": 0.0-1.0
+  "connectedRooms": {{
+    "ROOM_NAME_1": ["CONNECTED_ROOM_1", "CONNECTED_ROOM_2"],
+    "ROOM_NAME_2": ["CONNECTED_ROOM_1"]
+  }},
+  "confidence": 0.95
 }}
 
 Beispiel:
-[
-  {{
-    "room1": "Wohnzimmer",
-    "room2": "Küche",
-    "connection_type": "open_passage",
-    "confidence": 0.95
+{{
+  "connectedRooms": {{
+    "ABSTELL ZIMMER": ["DIELE"],
+    "BAD": ["DIELE"],
+    "DIELE": ["ABSTELL ZIMMER", "BAD", "GÄSTEZIMMER", "HWR", "KÜCHE", "WOHN/ESSZIMMER"],
+    "GÄSTEZIMMER": ["DIELE"],
+    "HWR": ["DIELE"],
+    "KÜCHE": ["DIELE", "WOHN/ESSZIMMER"],
+    "TERRASSE": ["KÜCHE", "WOHN/ESSZIMMER"],
+    "WOHN/ESSZIMMER": ["DIELE", "KÜCHE"]
   }},
-  {{
-    "room1": "Flur",
-    "room2": "Schlafzimmer",
-    "connection_type": "door",
-    "confidence": 0.90
-  }}
-]
-{base64_image}
-Analysiere nun den Grundriss und gib NUR das JSON-Array zurück, ohne zusätzlichen Text."""
+  "confidence": 0.9
+}}
 
-    # Prompt-Struktur für Mistral API
-    
+Analysiere nun den Grundriss und gib NUR das JSON-Objekt zurück, ohne zusätzlichen Text oder Markdown-Formatierung."""
     
     return system_prompt, user_prompt

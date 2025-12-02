@@ -7,7 +7,31 @@ import matplotlib.pyplot as plt
 import numpy as np
 from collections import defaultdict
 from mistralConnection import *
+from titleBlockInfo import *
+import base64
+import pymupdf
 from helper import *
+
+def convert_pdf_to_base64(pdf_path: str, page: int = 0):
+    """Convert specific PDF page to base64 encoded image string"""
+    # Open the document
+    pdfIn = pymupdf.open(pdf_path)
+    
+    # Select the page
+    page_obj = pdfIn[page]
+    
+    # Convert to image
+    pix = page_obj.get_pixmap(dpi=300)
+    
+    # Save to bytes
+    img_bytes = pix.pil_tobytes(format="PNG")
+    
+    # Encode to base64
+    base64_image = base64.b64encode(img_bytes).decode('utf-8')
+    
+    pdfIn.close()
+    
+    return base64_image
 
 
 def is_number_like(text):
@@ -586,7 +610,7 @@ def neighboring_rooms_voronoi(pdf_path):
     flipped_centerpoints = flip_y_coordinates(centerpoints, page_height)
     flipped_centerpoints = make_names_unique(flipped_centerpoints)
     neighbors, vor = extract_bounded_voronoi_neighbors_detailed(flipped_centerpoints, flipped_rect)
-    visualize_voronoi_cells(vor, flipped_centerpoints, neighbors)   
+    #visualize_voronoi_cells(vor, flipped_centerpoints, neighbors)   
     doc.close()
     
     # Print as JSON and return
@@ -594,30 +618,30 @@ def neighboring_rooms_voronoi(pdf_path):
     return output_json
 
 
-def extract_connected_rooms_voronoi(pdf_path):
+def extract_full_floorplan(pdf_path):
     """
     Extract connected rooms from a floorplan PDF using Voronoi diagram and Mistral AI.
     
     Args:
         pdf_path: Path to the PDF file to process
     Returns:
-        dict: Dictionary mapping room names to their list of connected rooms
+        str: JSON string with titleblock, neighboring rooms, and connected rooms
     """
     try:
         # 1. Get neighboring rooms from Voronoi analysis
-        output_json = neighboring_rooms_voronoi(pdf_path)
+        neighbors_vor = neighboring_rooms_voronoi(pdf_path)
         
-        # 2. Convert to JSON string if it's a dict
-        if isinstance(output_json, dict):
-            text_content = json.dumps(output_json, indent=2)
-        else:
-            text_content = output_json
+        # 2. Convert to dict if it's a JSON string
+        if isinstance(neighbors_vor, str):
+            neighbors_vor = json.loads(neighbors_vor)
         
         # 3. Convert PDF to base64 image
-        base64_image = convert_pdf2img(pdf_path)
+        base64_image = convert_pdf_to_base64(pdf_path)
+        image = convert_pdf2img(pdf_path)
+        titleblock = get_title_block_info(image)
         
         # 4. Call Mistral to identify actual connections
-        connected_rooms_response = call_mistral_connected_rooms(base64_image, text_content)
+        connected_rooms_response = call_mistral_connected_rooms(base64_image, json.dumps(neighbors_vor))
         
         # 5. Parse response if it's a string
         if isinstance(connected_rooms_response, str):
@@ -625,12 +649,24 @@ def extract_connected_rooms_voronoi(pdf_path):
         else:
             connected_rooms = connected_rooms_response
         
-        return connected_rooms
+        # 6. Combine all outputs (als dict, nicht string!)
+        full_floorplan = {
+            "titleblock": titleblock,
+            "neighboring_rooms": neighbors_vor,  # Typo korrigiert: "neighbouring romms"
+            "connected_rooms": connected_rooms
+        }
+        
+        # 7. Schön formatiert ausgeben
+        formatted_output = json.dumps(full_floorplan, indent=2, ensure_ascii=False)
+        print("\n📋 Full Floorplan Data:")
+        print(formatted_output)
+        
+        return formatted_output
         
     except Exception as e:
-        print(f"Error processing {pdf_path}: {e}")
-        return {}
-
+        print(f"❌ Error processing {pdf_path}: {e}")
+        return "{}"
+    
 if __name__ == "__main__":
     #pdf_path = "src/validation/Floorplan/titleblock/testdata/floorplan-test-2.pdf" 
     pdf_path = "examples/FloorplansAndSectionViews/Simple Floorplan/01_Simple.pdf" 
@@ -638,5 +674,5 @@ if __name__ == "__main__":
     #pdf_path ="src/validation/Floorplan/titleblock/testdata/floorplan-test-1.pdf"
     #neighbors_json = neighboring_rooms_voronoi(pdf_path)
     #print(neighbors_json)
-    connected_rooms = extract_connected_rooms_voronoi(pdf_path)
+    connected_rooms = extract_full_floorplan(pdf_path)
     print(connected_rooms)
