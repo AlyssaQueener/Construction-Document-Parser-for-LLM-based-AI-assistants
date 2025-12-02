@@ -2,9 +2,6 @@ import json
 import src.plan2data.extractionLogictitleBlock as title_block
 import src.plan2data.mistralConnection as mistral 
 import src.plan2data.helper as helper
-import extractionLogictitleBlock as title_block
-import mistralConnection as mistral
-import helper as helper
 
 ### workflow to identify title block in floorplan and extract the keyfeatures (Keyfeatures are shown in terminal)
 def get_title_block_info(path):
