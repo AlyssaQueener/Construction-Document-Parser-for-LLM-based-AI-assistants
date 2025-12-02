@@ -180,6 +180,43 @@ def create_message_for_room_extraction_voronoi(base64_image):
 ]
     return messages
 
+###################### VORONOI ROOM NAMES EXTRACTIO #####################################
+def call_mistral_roomnames(text):
+    """Extract room names from text and return as Python list"""
+    message = create_message_roomnames(text)
+    chat_response = client.chat.complete(
+        model=model,
+        messages=message,
+        response_format={
+            "type": "json_object",
+        }
+    )
+    
+    # Parse JSON response to Python dict
+    response_json = json.loads(chat_response.choices[0].message.content)
+    
+    # Extract the list
+    room_names = response_json.get("room_names", [])
+    
+    return room_names  # Returns Python list directly
+
+def create_message_roomnames(text):
+    prompt = create_room_name_extraction_prompt(text)
+      
+    messages = [
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": prompt
+                }
+            ]
+        }
+    ]
+    return messages
+
+
 ###################### ENCODE IMPORT FILES ########################################
 def encode_image(image_path):
     """Encode the image to base64."""
@@ -800,4 +837,45 @@ Example output:
 ["Bedroom", "WC", "Living Room", "Kitchen"]"""
     return prompt
 
+def create_room_name_extraction_prompt(text_content):
+    prompt = f"""Du bist ein Experte für deutsche Architekturpläne und Grundrisse. Deine Aufgabe ist es, aus einer Liste von Textelementen nur die Raumbezeichnungen zu identifizieren und zurückzugeben.
+
+    **Eingabe:**
+    Eine Liste von Textstrings, die aus einem Grundriss extrahiert wurden.
+
+    **Aufgabe:**
+    Extrahiere NUR die Texte, die Raumbezeichnungen sind. Gib sie als Python-Liste von Strings zurück.
+    Wichtig !!!! 
+        bitte kombiniere die Raumnamen nicht selbst sonsdern gib sie so zurück wie sie im extrahierten Text vorkommen.
+        also z.b "WOHN/", "ESSZIMMER" und nicht "Wohnzimmer" und "Esszimmer"
+        oder "grünes" , "Zimmer" und nicht "Grünes Zimmer"
+
+    **Was sind Raumbezeichnungen?**
+    - Räume wie: Wohnzimmer, Schlafzimmer, Küche, Bad, WC, Flur, Diele, Abstellraum
+    - Funktionsbereiche wie: Eingang, Balkon, Terrasse, Garage, Keller
+    - Abkürzungen wie: SZ, WZ, AR, HWR, TFL
+    - Mit Nummern versehene Räume wie: Zimmer 1, Raum 2.1, Büro 3
+
+    **Was sind KEINE Raumbezeichnungen?**
+    - Maßangaben (z.B. "2.50", "120 cm")
+    - Höhenangaben (z.B. "h=2.40")
+    - Flächenangaben (z.B. "15 m²", "qm")
+    - Achsbezeichnungen (z.B. "A", "B", "1", "2")
+    - Maßstabsangaben (z.B. "1:100")
+    - Bauspezifische Begriffe (z.B. "Wand", "Tür", "Fenster")
+    - Berreiche wie Brandabschnitt (z.B Brandabschnitt Wohnung 1)
+    - Plankopf-Informationen (Projektnamen, Adressen, Plannummern)
+    - Allgemeine Beschriftungen (z.B. "Grundriss", "Schnitt A-A")
+    - Einzelne Buchstaben oder Zahlen ohne Kontext
+    - Technische Angaben (z.B. "DN 100", "Ø 50")
+
+    **Textdatei-Inhalt:**
+    {text_content}
+
+    **Antwortformat:**
+    {{
+        "room_names": ["Wohnzimmer", "Küche", "Bad", ...]
+    }}
+    """
+    return prompt
 
