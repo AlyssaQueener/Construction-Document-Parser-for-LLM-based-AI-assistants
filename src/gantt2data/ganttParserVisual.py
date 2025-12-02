@@ -432,8 +432,7 @@ def parse_gant_chart_visual(path):
             gantt_chart_bars = identify_bars_with_colours(gantt_chart_bars)
         activity_timestamps = match_bars_with_timeline(gantt_chart_bars,time_line_with_localization, ai_extraction)
         activities_with_dates = determine_start_end_of_activity(activity_timestamps)
-        json_string = json.dumps(activities_with_dates, indent=4)
-        return(json_string)
+        return activities_with_dates
 
 
 def parse_full_ai(path):

@@ -1,0 +1,125 @@
+{
+    "completeness": 10.0,
+    "accuracy": 10.0,
+    "overall_score": 10.0,
+    "field_evaluations": [
+        {
+            "ground_truth_id": 0,
+            "parser_id": 0,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": "All fields match exactly."
+        },
+        {
+            "ground_truth_id": 1,
+            "parser_id": 1,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": "All fields match exactly."
+        },
+        {
+            "ground_truth_id": 2,
+            "parser_id": 2,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": "All fields match exactly."
+        },
+        {
+            "ground_truth_id": 3,
+            "parser_id": 3,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": "All fields match exactly."
+        },
+        {
+            "ground_truth_id": 4,
+            "parser_id": 4,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": "All fields match exactly."
+        },
+        {
+            "ground_truth_id": 5,
+            "parser_id": 5,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": "All fields match exactly."
+        },
+        {
+            "ground_truth_id": 6,
+            "parser_id": 6,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": "All fields match exactly."
+        },
+        {
+            "ground_truth_id": 7,
+            "parser_id": 7,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": "All fields match exactly."
+        },
+        {
+            "ground_truth_id": 8,
+            "parser_id": 8,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": "All fields match exactly."
+        },
+        {
+            "ground_truth_id": 9,
+            "parser_id": 9,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": "All fields match exactly."
+        }
+    ],
+    "summary": {
+        "total_ground_truth_activities": 10,
+        "total_matched_activities": 10,
+        "total_fields_evaluated": 30,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "common_fields": ["task", "start", "finish"]
+    }
+}

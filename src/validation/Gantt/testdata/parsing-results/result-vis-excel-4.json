@@ -1,0 +1,32 @@
+[
+    {
+        "task": "Validation Dataset",
+        "start": "23 Thursday October",
+        "finish": "2 Sunday"
+    },
+    {
+        "task": "Validation Json",
+        "start": "23 Thursday October",
+        "finish": "2 Sunday"
+    },
+    {
+        "task": "Validation Methodology",
+        "start": "23 Thursday October",
+        "finish": "2 Sunday"
+    },
+    {
+        "task": "Finalize all parsers",
+        "start": "31 Friday October",
+        "finish": "1 Saturday"
+    },
+    {
+        "task": "Report and Poster",
+        "start": "24 Friday October",
+        "finish": "26 Sunday October"
+    },
+    {
+        "task": "Presentation Practice",
+        "start": "27 Monday October",
+        "finish": "29 Wednesday October"
+    }
+]
