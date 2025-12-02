@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from collections import defaultdict
 from mistralConnection import *
+from helper import *
 
 
 def is_number_like(text):
@@ -180,6 +181,19 @@ def is_valid_room_name(text, room_names_ai):
     Returns:
         bool: True if considered a valid room name, False otherwise.
     """
+    expanded_names = []
+    for name in room_names_ai:
+        # Add the original name
+        expanded_names.append(name)
+        # Add split components if there are spaces
+        # Add split components if there are spaces
+        if ' ' in name:
+            components = name.split()
+            for comp in components:
+                # Add the component as-is
+                expanded_names.append(comp)
+               
+    
     if not text or not isinstance(text, str):
         return False
     
@@ -193,11 +207,9 @@ def is_valid_room_name(text, room_names_ai):
     if text.upper() == 'WC':
         return True
     
-    
-    
     # 1. Check: Ist der Text in der AI-Liste?
-    if room_names_ai:
-        included = {name.lower().strip() for name in room_names_ai}
+    if expanded_names:
+        included = {name.lower().strip() for name in expanded_names}
         if text.lower() in included:
             return True
     # Mindestlänge: 3 Zeichen (außer WC)
@@ -242,9 +254,9 @@ def is_valid_room_name(text, room_names_ai):
     #     if not re.match(r'^[ZR]\d', text, re.IGNORECASE):
     #         return False
     
-    # # 5. Wenn AI eine Liste zurückgegeben hat, nur diese akzeptieren
-    # (Strenge Filterung)
-    if room_names_ai:
+    # 5. Wenn AI eine Liste zurückgegeben hat, nur diese akzeptieren
+    #(Strenge Filterung)
+    if expanded_names:
         return False  # Nicht in AI-Liste, also ablehnen
     
     # 6. Fallback: Wenn AI keine Liste hat, verwende Heuristiken
@@ -393,8 +405,6 @@ def visualize_voronoi_cells(vor, centerpoints, neighbors, save_path=None):
 
 
 
-
-
 def extract_bounded_voronoi_neighbors_detailed(centerpoints, bounds):
     """
     Finds Voronoi neighbors for labeled centerpoints; details ridge acceptance; supports floorplan boundary.
@@ -465,7 +475,7 @@ def make_names_unique(centerpoints):
     """
     name_counts = {}
     unique_centerpoints = []
-    
+    centerpoints = sorted(centerpoints, key=lambda cp: cp[0])  # Sort by x (cx)
     for cp in centerpoints:
         cx, cy, name = cp[0], cp[1], cp[2]
         
@@ -480,6 +490,55 @@ def make_names_unique(centerpoints):
         unique_centerpoints.append([cx, cy, unique_name])
     
     return unique_centerpoints
+def add_indices_to_neighbors(neighbors, centerpoints):
+    """
+    Adds positional indices to neighbor relationships for duplicate room names.
+    
+    Args:
+        neighbors (dict): room name to list of neighbor names
+        centerpoints (list of list): [cx, cy, name] for all rooms
+        
+    Returns:
+        dict: Enhanced neighbor data with indices for duplicate names
+    """
+    # Sort centerpoints left to right
+    sorted_cp = sorted(enumerate(centerpoints), key=lambda x: x[1][0])  # Sort by x-coordinate
+    
+    # Map original indices to their left-to-right position for each room name
+    name_to_indices = defaultdict(list)
+    for lr_idx, (orig_idx, cp) in enumerate(sorted_cp):
+        name = cp[2]
+        name_to_indices[name].append({
+            'original_index': orig_idx,
+            'left_right_index': len(name_to_indices[name]) + 1,
+            'coordinates': [cp[0], cp[1]]
+        })
+    
+    # Build enhanced output
+    enhanced_neighbors = {}
+    for name, neighs in neighbors.items():
+        # Get all instances of this room name
+        instances = name_to_indices[name]
+        
+        if len(instances) == 1:
+            # Single instance - no index needed
+            enhanced_neighbors[name] = {
+                'neighbors': neighs,
+                'coordinates': instances[0]['coordinates']
+            }
+        else:
+            # Multiple instances - add indexed entries
+            for inst in instances:
+                indexed_name = f"{name}_#{inst['left_right_index']}"
+                enhanced_neighbors[indexed_name] = {
+                    'original_name': name,
+                    'position_index': inst['left_right_index'],
+                    'coordinates': inst['coordinates'],
+                    'neighbors': neighs  # You might need to update this based on which specific instance
+                }
+    
+    return enhanced_neighbors
+
 
 def neighboring_rooms_voronoi(pdf_path):
     """
@@ -497,7 +556,7 @@ def neighboring_rooms_voronoi(pdf_path):
     
     # Clip rectangle to exclude plan information
     width, height = page.rect.width, page.rect.height
-    clip_rect = fitz.Rect(0, 0, width * 0.9, height * 0.8)
+    clip_rect = fitz.Rect(0, 0, width * 0.7, height * 0.8)
     flipped_rect = (
         clip_rect.x0,
         height - clip_rect.y1,
@@ -535,9 +594,49 @@ def neighboring_rooms_voronoi(pdf_path):
     return output_json
 
 
-if __name__ == "__main__":
-    pdf_path = "src/validation/Floorplan/titleblock/testdata/floorplan-test-2.pdf" 
-    #pdf_path = "examples/FloorplansAndSectionViews/Simple Floorplan/01_Simple.pdf" # Replace with your PDF path
-    neighbors_json = neighboring_rooms_voronoi(pdf_path)
-    print(neighbors_json)
+def extract_connected_rooms_voronoi(pdf_path):
+    """
+    Extract connected rooms from a floorplan PDF using Voronoi diagram and Mistral AI.
     
+    Args:
+        pdf_path: Path to the PDF file to process
+    Returns:
+        dict: Dictionary mapping room names to their list of connected rooms
+    """
+    try:
+        # 1. Get neighboring rooms from Voronoi analysis
+        output_json = neighboring_rooms_voronoi(pdf_path)
+        
+        # 2. Convert to JSON string if it's a dict
+        if isinstance(output_json, dict):
+            text_content = json.dumps(output_json, indent=2)
+        else:
+            text_content = output_json
+        
+        # 3. Convert PDF to base64 image
+        base64_image = convert_pdf2img(pdf_path)
+        
+        # 4. Call Mistral to identify actual connections
+        connected_rooms_response = call_mistral_connected_rooms(base64_image, text_content)
+        
+        # 5. Parse response if it's a string
+        if isinstance(connected_rooms_response, str):
+            connected_rooms = json.loads(connected_rooms_response)
+        else:
+            connected_rooms = connected_rooms_response
+        
+        return connected_rooms
+        
+    except Exception as e:
+        print(f"Error processing {pdf_path}: {e}")
+        return {}
+
+if __name__ == "__main__":
+    #pdf_path = "src/validation/Floorplan/titleblock/testdata/floorplan-test-2.pdf" 
+    pdf_path = "examples/FloorplansAndSectionViews/Simple Floorplan/01_Simple.pdf" 
+    #pdf_path = "examples/FloorplansAndSectionViews/Simple Floorplan/02_Simple.pdf"
+    #pdf_path ="src/validation/Floorplan/titleblock/testdata/floorplan-test-1.pdf"
+    #neighbors_json = neighboring_rooms_voronoi(pdf_path)
+    #print(neighbors_json)
+    connected_rooms = extract_connected_rooms_voronoi(pdf_path)
+    print(connected_rooms)

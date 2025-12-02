@@ -1,6 +1,7 @@
-
+import json
 from mistralai import Mistral
 import base64
+import ast
 
 ## Retrieve the API key from environment variables
 #api_key = os.environ["MISTRAL_API_KEY"]
@@ -103,7 +104,7 @@ def create_message_for_room_adjacency_extraction(path):
     ]
     return messages
 
-################################## Full Floorplan Metadata ####################
+################################## Full Floorplan Metadata combined ####################
 def call_mistral_for_floorplan_extraction_from_image(path):
     """Extract both titleblock and room adjacency information from floor plan image"""
     message = create_message_for_full_floorplan_extraction(path)
@@ -179,6 +180,92 @@ def create_message_for_room_extraction_voronoi(base64_image):
     }
 ]
     return messages
+
+###################### VORONOI ROOM NAMES EXTRACTION #####################################
+def call_mistral_roomnames(text):
+    """Extract room names from text and return as Python list"""
+    message = create_message_roomnames(text)
+    chat_response = client.chat.complete(
+        model=model,
+        messages=message,
+        response_format={
+            "type": "json_object",
+        }
+    )
+    # Parse JSON response to Python dict
+    response_json = json.loads(chat_response.choices[0].message.content)
+    
+    # Extract the list
+    room_names = response_json.get("room_names", [])
+    
+    return room_names  # Returns Python list directly
+
+def create_message_roomnames(text):
+    prompt = create_room_name_extraction_prompt(text)
+      
+    messages = [
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": prompt
+                }
+            ]
+        }
+    ]
+    return messages
+
+###################### VORONOI CONNECTED ROOMS EXTRACTION #####################################
+def call_mistral_connected_rooms(base64_image,text):
+    """Extract room connedted and returns a json object"""
+    message = create_message_connected(base64_image,text)
+    chat_response = client.chat.complete(
+        model=model,
+        messages=message,
+        response_format={
+            "type": "json_object",
+        }
+    )
+    
+        
+    return chat_response.choices[0].message.content  
+
+def create_message_connected(base64_image, text):
+    """
+    Erstellt die vollständige Message-Struktur für Mistral API.
+    
+    Args:
+        base64_image: Base64-kodiertes Bild des Grundrisses
+        text: JSON-String mit neighboring rooms Information
+    
+    Returns:
+        list: Messages array für Mistral API
+    """
+    system_prompt, user_prompt = create_connected_rooms_extraction_prompt(base64_image, text)
+      
+    messages = [
+        {
+            "role": "system",
+            "content": system_prompt
+        },
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": user_prompt
+                },
+                {
+                    "type": "image_url",
+                    "image_url": f"data:image/jpeg;base64,{base64_image}"
+                }
+            ]
+        }
+    ]
+    
+    return messages
+
 
 ###################### ENCODE IMPORT FILES ########################################
 def encode_image(image_path):
@@ -800,4 +887,109 @@ Example output:
 ["Bedroom", "WC", "Living Room", "Kitchen"]"""
     return prompt
 
+def create_room_name_extraction_prompt(text_content):
+    prompt = f"""Du bist ein Experte für deutsche Architekturpläne und Grundrisse. Deine Aufgabe ist es, aus einer Liste von Textelementen nur die Raumbezeichnungen zu identifizieren und zurückzugeben.
 
+    **Eingabe:**
+    Eine Liste von Textstrings, die aus einem Grundriss extrahiert wurden.
+
+    **Aufgabe:**
+    Extrahiere NUR die Texte, die Raumbezeichnungen sind. Gib sie als Python-Liste von Strings zurück.
+    Wichtig !!!! 
+        bitte kombiniere die Raumnamen nicht selbst sonsdern gib sie so zurück wie sie im extrahierten Text vorkommen.
+        also z.b "WOHN/", "ESSZIMMER" und nicht "Wohnzimmer" und "Esszimmer"
+        oder "grünes" , "Zimmer" und nicht "Grünes Zimmer"
+        oder 'ABSTELL',  'ZIMMER' und nicht als 'Abstell zimmer' 
+
+    **Was sind Raumbezeichnungen?**
+    - Räume wie: Wohnzimmer, Schlafzimmer, Küche, Bad, WC, Flur, Diele, Abstellraum
+    - Funktionsbereiche wie: Eingang, Balkon, Terrasse, Garage, Keller
+    - Abkürzungen wie: SZ, WZ, AR, HWR, TFL
+    - Mit Nummern versehene Räume wie: Zimmer 1, Raum 2.1, Büro 3
+
+    **Was sind KEINE Raumbezeichnungen?**
+    - Maßangaben (z.B. "2.50", "120 cm")
+    - Höhenangaben (z.B. "h=2.40")
+    - Flächenangaben (z.B. "15 m²", "qm")
+    - Achsbezeichnungen (z.B. "A", "B", "1", "2")
+    - Maßstabsangaben (z.B. "1:100")
+    - Bauspezifische Begriffe (z.B. "Wand", "Tür", "Fenster")
+    - Berreiche wie Brandabschnitt (z.B Brandabschnitt Wohnung 1)
+    - Plankopf-Informationen (Projektnamen, Adressen, Plannummern)
+    - Allgemeine Beschriftungen (z.B. "Grundriss", "Schnitt A-A")
+    - Einzelne Buchstaben oder Zahlen ohne Kontext
+    - Technische Angaben (z.B. "DN 100", "Ø 50")
+
+    **Textdatei-Inhalt:**
+    {text_content}
+
+     **Antwortformat:**
+    {{
+        "room_names": ["Wohnzimmer", "Küche", "Bad", ...]
+    }}
+    """
+    return prompt
+
+    
+def create_connected_rooms_extraction_prompt(base64_image, text_content):
+    """
+    Erstellt einen Prompt für Mistral zur Extraktion von verbundenen Räumen
+    aus einem Grundriss-Bild und benachbarten Räumen als Text.
+    
+    Args:
+        base64_image: Base64-kodiertes Bild des Grundrisses
+        text_content: JSON-String mit neighboring rooms Information
+    
+    Returns:
+        dict: Prompt-Struktur für Mistral API
+    """
+    
+    system_prompt = """Du bist ein Experte für die Analyse von Architekturplänen und Grundrissen. 
+Deine Aufgabe ist es, aus einem Grundriss-Bild und einer Liste von benachbarten Räumen zu bestimmen, 
+welche Räume tatsächlich durch Türen, Durchgänge oder Öffnungen miteinander verbunden sind."""
+
+    user_prompt = f"""Analysiere den bereitgestellten Grundriss und die folgende Information über benachbarte Räume:
+
+{text_content}
+
+AUFGABE:
+Bestimme auf Basis des Grundriss-Bildes, welche Räume tatsächlich durch Türen, Durchgänge oder Öffnungen physisch miteinander verbunden sind.
+
+WICHTIGE REGELN:
+1. Nur Räume, die eine direkte Verbindung (Tür, Durchgang, offene Verbindung) haben, sollen als "connected" markiert werden
+2. Räume, die nur durch eine Wand getrennt sind (ohne Tür/Durchgang), sind NICHT verbunden
+3. Achte auf Türsymbole, Durchgangsmarkierungen und offene Bereiche im Grundriss
+4. Berücksichtige die räumliche Anordnung und die angegebenen benachbarten Räume
+
+AUSGABEFORMAT:
+Gib die Ergebnisse als JSON-Array zurück. Jedes Element soll folgende Struktur haben:
+
+{{
+  "room1": "Raumname oder Raumnummer",
+  "room2": "Raumname oder Raumnummer",
+  "connection_type": "door" | "open_passage" | "doorway",
+  "confidence": 0.0-1.0
+}}
+
+Beispiel:
+[
+  {{
+    "room1": "Wohnzimmer",
+    "room2": "Küche",
+    "connection_type": "open_passage",
+    "confidence": 0.95
+  }},
+  {{
+    "room1": "Flur",
+    "room2": "Schlafzimmer",
+    "connection_type": "door",
+    "confidence": 0.90
+  }}
+]
+{base64_image}
+Analysiere nun den Grundriss und gib NUR das JSON-Array zurück, ohne zusätzlichen Text."""
+
+    # Prompt-Struktur für Mistral API
+    
+    
+    return system_prompt, user_prompt

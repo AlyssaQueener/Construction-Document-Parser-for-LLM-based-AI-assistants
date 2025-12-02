@@ -670,27 +670,14 @@ def create_score_chart(files_data, parser_type):
         stats = calculate_stats(json_data, parser_type)
         short_name = file_name[:20] + '...' if len(file_name) > 20 else file_name
         
-        if parser_type == 'financial':
+        if parser_type in ['titleblock','financial','gantt']:
             data.append({
                 'File': short_name,
                 'Overall Score': stats['overall_score'],
                 'Completeness': stats['completeness'],
                 'Accuracy': stats['accuracy']
             })
-        elif parser_type == 'gantt':
-            data.append({
-                'File': short_name,
-                'Overall Score': stats['overall_score'],
-                'Completeness': stats['completeness'],
-                'Accuracy': stats['accuracy']
-            })
-        elif parser_type == 'titleblock':
-            data.append({
-                'File': short_name,
-                'Overall Score': stats['overall_score'],
-                'Completeness': stats['completeness'],
-                'Accuracy': stats['accuracy']
-            })
+       
         else:
             data.append({
                 'File': short_name,
@@ -703,28 +690,7 @@ def create_score_chart(files_data, parser_type):
     
     fig = go.Figure()
     
-    if parser_type in ['financial', 'gantt']:
-        fig.add_trace(go.Bar(
-            name='Overall Score',
-            x=df['File'],
-            y=df['Overall Score'],
-            marker_color='#3b82f6'
-        ))
-        
-        fig.add_trace(go.Bar(
-            name='Completeness',
-            x=df['File'],
-            y=df['Completeness'],
-            marker_color='#10b981'
-        ))
-        
-        fig.add_trace(go.Bar(
-            name='Accuracy',
-            x=df['File'],
-            y=df['Accuracy'],
-            marker_color='#f59e0b'
-        ))
-    if parser_type in ['titleblock']:
+    if parser_type in ['financial', 'gantt', 'titleblock']:
         fig.add_trace(go.Bar(
             name='Overall Score',
             x=df['File'],
