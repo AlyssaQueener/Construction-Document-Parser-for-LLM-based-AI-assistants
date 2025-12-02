@@ -389,7 +389,7 @@ Measures field-level extraction quality across all matched activities.
 ## 3. Overall Score (0-10)
 Weighted combination emphasizing accuracy.
 
-**Formula**: (Completeness × 0.4) + (Accuracy × 0.6)
+**Formula**: (Completeness × 0.5) + (Accuracy × 0.5)
 
 **Rationale**: Accurate extraction is more valuable than just detecting activities.
 

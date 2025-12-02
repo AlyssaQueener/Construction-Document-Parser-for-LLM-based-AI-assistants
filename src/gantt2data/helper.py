@@ -35,3 +35,57 @@ def convert_pdf2img(input_file: str, pages: Tuple = None):
     print("\n".join("{}:{}".format(i, j) for i, j in summary.items()))
     print("###################################################################")
     return output_file
+
+
+######## Chunking ############
+
+def pdf_to_split_images(path, page_number):
+    from PIL import Image
+    import io
+    """
+    Convert a pymupdf page to high-res image and split into 4 pieces.
+    Args:
+        path: path to PDF file
+        page_number: page number
+    Returns:
+        List of 4 file paths to saved PNG images
+    """
+    doc = pymupdf.open(path)
+    page = doc[page_number]
+    
+    # Render page to pixmap (image)
+    pix = page.get_pixmap(dpi=300)
+    
+    # Convert to PIL Image
+    img_data = pix.tobytes("png")
+    img = Image.open(io.BytesIO(img_data))
+    
+    # Get dimensions
+    width, height = img.size
+    quarter_of_height = (1/4)*height
+    sec_quarter_of_height = (1/2)*height
+    third_quarter_of_height = (3/4)*height
+    overlap = int(0.1 * height)
+    # Split into 3 pieces
+    chunks = [
+        img.crop((0, 0, width, quarter_of_height+overlap)),          #upper third
+        img.crop((0, quarter_of_height-overlap, width, sec_quarter_of_height+overlap)),       # middle third
+        img.crop((0, sec_quarter_of_height-overlap, width, third_quarter_of_height+overlap)),
+        img.crop((0, third_quarter_of_height-overlap, width, height))  # bottom third
+    ]
+   
+    
+    # Save chunks to temporary files
+    output_files = []
+    base_name = os.path.splitext(os.path.basename(path))[0]
+    
+    for idx, chunk in enumerate(chunks):
+        # Create temp file or save to specific directory
+        output_file = f"{base_name}_page{page_number + 1}_chunk{idx + 1}.png"
+        chunk.save(output_file)
+        output_files.append(output_file)
+    
+    doc.close()
+    return output_files
+
+

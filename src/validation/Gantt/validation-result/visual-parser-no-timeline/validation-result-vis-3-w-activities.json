@@ -1,0 +1,598 @@
+{
+    "completeness": 9.26,
+    "accuracy": 8.47,
+    "overall_score": 8.87,
+    "field_evaluations": [
+      {
+        "ground_truth_id": 0,
+        "parser_id": 0,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.8,
+          "start": 1.0,
+          "finish": 1.0
+        },
+        "notes": "Task shows minor variation: 'B-H4 + H-H4, B-H5 + H-H5' vs '1) B-HH+H-HH / B-HS + H-HS' - core meaning preserved with numbering/formatting differences"
+      },
+      {
+        "ground_truth_id": 1,
+        "parser_id": 1,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.8,
+          "start": 1.0,
+          "finish": 1.0
+        },
+        "notes": "Task variation: 'LPH 2- Vorplanung' vs '1.1) LPH 1-3 Vorplanung' - semantic match with numbering differences"
+      },
+      {
+        "ground_truth_id": 2,
+        "parser_id": 2,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.8,
+          "start": 1.0,
+          "finish": 1.0
+        },
+        "notes": "Task with numbering prefix: 'Vorplanung' vs '1.1.1) Vorplanung' - identical core content"
+      },
+      {
+        "ground_truth_id": 3,
+        "parser_id": 3,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 1.0,
+          "start": 1.0,
+          "finish": 1.0
+        },
+        "notes": "Perfect match with numbering prefix added"
+      },
+      {
+        "ground_truth_id": 4,
+        "parser_id": 4,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.8,
+          "start": 1.0,
+          "finish": 0.8
+        },
+        "notes": "Task minor variation: 'LPH 3 - Entwurfsplanung' vs '1.2) LPH 3 Entwurfsplanung'. Finish date: '11.12.25' vs '04.12.25' - one week difference"
+      },
+      {
+        "ground_truth_id": 5,
+        "parser_id": 5,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.8,
+          "start": 1.0,
+          "finish": 1.0
+        },
+        "notes": "Task with numbering: 'Bearbeitung Architekt' matches with prefix added"
+      },
+      {
+        "ground_truth_id": 6,
+        "parser_id": 6,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.5,
+          "start": 1.0,
+          "finish": 1.0
+        },
+        "notes": "Task: 'Entwurfsplanung' vs '1.2.1.1) Vorentwurf' - related but different terms (Vorentwurf = preliminary draft vs Entwurfsplanung = design planning)"
+      },
+      {
+        "ground_truth_id": 7,
+        "parser_id": 7,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 1.0,
+          "start": 1.0,
+          "finish": 0.5
+        },
+        "notes": "Finish date: '29.10.25' vs '04.11.25' - 6 days difference"
+      },
+      {
+        "ground_truth_id": 8,
+        "parser_id": 8,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.8,
+          "start": 0.3,
+          "finish": 0.5
+        },
+        "notes": "Task: 'Prüfzeitraum' vs 'Prüfzeugnis' - similar but different meanings. Start: '29.10.25' vs '09.10.25' - 20 days off. Finish: '04.11.25' vs '01.12.25' - 27 days off"
+      },
+      {
+        "ground_truth_id": 9,
+        "parser_id": 9,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.8,
+          "start": 0.3,
+          "finish": 0.8
+        },
+        "notes": "Start date significantly different: '09.10.25' vs '28.10.25' - 19 days off. Finish: '09.10.25' vs '28.10.25' matches but both off from ground truth"
+      },
+      {
+        "ground_truth_id": 10,
+        "parser_id": 10,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.8,
+          "start": 1.0,
+          "finish": 1.0
+        },
+        "notes": "Task: 'Abgabe Kostenberechnung final' vs 'Abgabe Kostenberechnung' - minor difference"
+      },
+      {
+        "ground_truth_id": 11,
+        "parser_id": 11,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.5,
+          "start": 0.3,
+          "finish": 0.3
+        },
+        "notes": "Task: 'Prüfzeitraum Bauherr und Freigabe Kosten LPH 3' vs 'Abgabe Kostenberechnung Fachplaner' - different activities. Dates also misaligned"
+      },
+      {
+        "ground_truth_id": 12,
+        "parser_id": null,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.0,
+          "start": 0.0,
+          "finish": 0.0
+        },
+        "notes": "Activity 'Abstimmug Bauteilaufbauten' not matched in parser output"
+      },
+      {
+        "ground_truth_id": 13,
+        "parser_id": null,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.0,
+          "start": 0.0,
+          "finish": 0.0
+        },
+        "notes": "Activity 'Konzeption Serielle Sanierung' not matched in parser output"
+      },
+      {
+        "ground_truth_id": 14,
+        "parser_id": null,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.0,
+          "start": 0.0,
+          "finish": 0.0
+        },
+        "notes": "Activity 'Konzeption Fachplaner integriert' not matched in parser output"
+      },
+      {
+        "ground_truth_id": 15,
+        "parser_id": 22,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.8,
+          "start": 1.0,
+          "finish": 1.0
+        },
+        "notes": "Task matches with numbering prefix added"
+      },
+      {
+        "ground_truth_id": 16,
+        "parser_id": 23,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.8,
+          "start": 1.0,
+          "finish": 1.0
+        },
+        "notes": "Task: 'Angabe Tragwerksplanung Waschbeton' vs 'Abgabe Tragwerksplanung Waschbeton' - minor word difference (Angabe vs Abgabe)"
+      },
+      {
+        "ground_truth_id": 17,
+        "parser_id": 24,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 1.0,
+          "start": 1.0,
+          "finish": 1.0
+        },
+        "notes": "Perfect match with numbering prefix"
+      },
+      {
+        "ground_truth_id": 18,
+        "parser_id": 25,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 1.0,
+          "start": 1.0,
+          "finish": 1.0
+        },
+        "notes": "Perfect match with numbering prefix"
+      },
+      {
+        "ground_truth_id": 19,
+        "parser_id": null,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.0,
+          "start": 0.0,
+          "finish": 0.0
+        },
+        "notes": "Activity 'Bearbeitung Fachplaner' not matched distinctly (may be merged with other activities)"
+      },
+      {
+        "ground_truth_id": 20,
+        "parser_id": 11,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.8,
+          "start": 1.0,
+          "finish": 1.0
+        },
+        "notes": "Task matches with numbering prefix"
+      },
+      {
+        "ground_truth_id": 21,
+        "parser_id": 12,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.8,
+          "start": 1.0,
+          "finish": 1.0
+        },
+        "notes": "Task matches with numbering and formatting differences"
+      },
+      {
+        "ground_truth_id": 22,
+        "parser_id": 13,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.8,
+          "start": 0.5,
+          "finish": 1.0
+        },
+        "notes": "Start date: '18.06.25' vs '14.07.25' - 26 days difference"
+      },
+      {
+        "ground_truth_id": 23,
+        "parser_id": 14,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.8,
+          "start": 1.0,
+          "finish": 1.0
+        },
+        "notes": "Task: 'Brandsschutz Bauart' vs 'Brandschutz | Bauart' - formatting difference only"
+      },
+      {
+        "ground_truth_id": 24,
+        "parser_id": 15,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.8,
+          "start": 1.0,
+          "finish": 1.0
+        },
+        "notes": "Task matches with formatting differences"
+      },
+      {
+        "ground_truth_id": 25,
+        "parser_id": 16,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 1.0,
+          "start": 1.0,
+          "finish": 1.0
+        },
+        "notes": "Perfect match with numbering prefix"
+      },
+      {
+        "ground_truth_id": 26,
+        "parser_id": 17,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.8,
+          "start": 1.0,
+          "finish": 1.0
+        },
+        "notes": "Task: 'HSL Bestand Linsmeier' vs 'HSL (Bestand) | Linsmeier' - formatting difference"
+      },
+      {
+        "ground_truth_id": 27,
+        "parser_id": 18,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.8,
+          "start": 1.0,
+          "finish": 1.0
+        },
+        "notes": "Task matches with formatting differences"
+      },
+      {
+        "ground_truth_id": 28,
+        "parser_id": 19,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.8,
+          "start": 1.0,
+          "finish": 1.0
+        },
+        "notes": "Task: 'HSL DICK Detailplanung Abgabe LPH 03' vs 'Detailplanung Abgabe LPH 3' - partial match"
+      },
+      {
+        "ground_truth_id": 29,
+        "parser_id": 20,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.8,
+          "start": 1.0,
+          "finish": 1.0
+        },
+        "notes": "Task matches with formatting differences"
+      },
+      {
+        "ground_truth_id": 30,
+        "parser_id": 26,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.8,
+          "start": 1.0,
+          "finish": 1.0
+        },
+        "notes": "Task: 'LPH 4 - Genehmigungsplanung' vs 'LPH 4 Genehmigungsplanung' - formatting difference"
+      },
+      {
+        "ground_truth_id": 31,
+        "parser_id": 27,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.8,
+          "start": 1.0,
+          "finish": 0.3
+        },
+        "notes": "Finish date: '08.12.25' vs '01.06.26' - significant difference (176 days)"
+      },
+      {
+        "ground_truth_id": 32,
+        "parser_id": 28,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.8,
+          "start": 1.0,
+          "finish": 1.0
+        },
+        "notes": "Task: minor wording difference 'Genehmigungsstatik' vs 'Genehmigungszeichnung'"
+      },
+      {
+        "ground_truth_id": 33,
+        "parser_id": 29,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 1.0,
+          "start": 1.0,
+          "finish": 1.0
+        },
+        "notes": "Perfect match with numbering prefix"
+      },
+      {
+        "ground_truth_id": 34,
+        "parser_id": 30,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.8,
+          "start": 0.0,
+          "finish": 1.0
+        },
+        "notes": "Task: 'Prüfzeitraum' vs 'Prüfzeugnis' - similar but different. Start: '04.12.25' vs '04.11.25' - one month difference"
+      },
+      {
+        "ground_truth_id": 35,
+        "parser_id": 31,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 1.0,
+          "start": 1.0,
+          "finish": 1.0
+        },
+        "notes": "Perfect match with numbering prefix"
+      },
+      {
+        "ground_truth_id": 36,
+        "parser_id": 32,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.8,
+          "start": 1.0,
+          "finish": 1.0
+        },
+        "notes": "Task: 'Genehmigungsverfahren Behörde (geschätzt)' vs 'Genehmigungsverfahren' - shortened"
+      },
+      {
+        "ground_truth_id": 37,
+        "parser_id": 33,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.8,
+          "start": 1.0,
+          "finish": 1.0
+        },
+        "notes": "Task: 'Bearbeitung Bauordnungsamt' vs 'Bearbeitung Bauantrag' - similar but different"
+      },
+      {
+        "ground_truth_id": 38,
+        "parser_id": 34,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 1.0,
+          "start": 1.0,
+          "finish": 1.0
+        },
+        "notes": "Perfect match with numbering prefix"
+      },
+      {
+        "ground_truth_id": 39,
+        "parser_id": 35,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.5,
+          "start": 1.0,
+          "finish": 1.0
+        },
+        "notes": "Task: 'Leitdetailplanung' vs 'Leistungsplanung' - different terms (Leitdetail vs Leistung)"
+      },
+      {
+        "ground_truth_id": 40,
+        "parser_id": 36,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.5,
+          "start": 1.0,
+          "finish": 1.0
+        },
+        "notes": "Task: 'Leitdetailplanung - Skizzen' vs 'Leistungsplanung - Skizzen' - different base term"
+      },
+      {
+        "ground_truth_id": 41,
+        "parser_id": 37,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.5,
+          "start": 1.0,
+          "finish": 1.0
+        },
+        "notes": "Task: 'Leitdetailplanung - Ausarbeitung' vs 'Leistungsplanung - Ausarbeitung' - different base term"
+      },
+      {
+        "ground_truth_id": 42,
+        "parser_id": 38,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 1.0,
+          "start": 1.0,
+          "finish": 1.0
+        },
+        "notes": "Perfect match with numbering prefix"
+      },
+      {
+        "ground_truth_id": 43,
+        "parser_id": 39,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 1.0,
+          "start": 1.0,
+          "finish": 0.5
+        },
+        "notes": "Finish date: '20.03.26' vs '09.03.26' - 11 days difference"
+      },
+      {
+        "ground_truth_id": 44,
+        "parser_id": 40,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 1.0,
+          "start": 1.0,
+          "finish": 0.3
+        },
+        "notes": "Finish date: '09.06.26' vs '20.03.26' - 81 days difference"
+      },
+      {
+        "ground_truth_id": 45,
+        "parser_id": 41,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.8,
+          "start": 1.0,
+          "finish": 1.0
+        },
+        "notes": "Task matches with minor formatting differences"
+      },
+      {
+        "ground_truth_id": 46,
+        "parser_id": 42,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 1.0,
+          "start": 1.0,
+          "finish": 1.0
+        },
+        "notes": "Perfect match with numbering prefix"
+      },
+      {
+        "ground_truth_id": 47,
+        "parser_id": 43,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.8,
+          "start": 0.3,
+          "finish": 1.0
+        },
+        "notes": "Task: 'H4 Bauzeit' vs 'HH Baubeginn' - related but different terminology. Start date: '29.06.26' vs '10.03.26' - 111 days difference"
+      },
+      {
+        "ground_truth_id": 48,
+        "parser_id": 44,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.8,
+          "start": 1.0,
+          "finish": 1.0
+        },
+        "notes": "Task: 'Baubeginn verschoben (H4)' vs 'Baubeginn verschoben' - minor difference"
+      },
+      {
+        "ground_truth_id": 49,
+        "parser_id": 45,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.8,
+          "start": 0.3,
+          "finish": 0.3
+        },
+        "notes": "Task similar. Dates: '29.06.26' vs '10.03.26' - significant difference (111 days)"
+      },
+      {
+        "ground_truth_id": 50,
+        "parser_id": 46,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.8,
+          "start": 1.0,
+          "finish": 1.0
+        },
+        "notes": "Task: 'H5 Bauzeit' vs 'HS Baubeginn' - related terminology with abbreviation differences"
+      },
+      {
+        "ground_truth_id": 51,
+        "parser_id": 47,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.8,
+          "start": 1.0,
+          "finish": 1.0
+        },
+        "notes": "Task matches with minor differences"
+      },
+      {
+        "ground_truth_id": 52,
+        "parser_id": 48,
+        "fields_evaluated": ["task", "start", "finish"],
+        "field_scores": {
+          "task": 0.8,
+          "start": 1.0,
+          "finish": 1.0
+        },
+        "notes": "Task matches with minor differences"
+      }
+    ],
+    "summary": {
+      "total_ground_truth_activities": 54,
+      "total_matched_activities": 50,
+      "total_fields_evaluated": 150,
+      "false_positives": 0,
+      "false_negatives": 4,
+      "common_fields": ["task", "start", "finish"]
+    }
+  }
