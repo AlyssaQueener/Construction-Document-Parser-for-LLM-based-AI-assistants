@@ -1,0 +1,90 @@
+{
+  "titleBlock": {
+    "projectInfo": {
+      "projectId": null,
+      "projectName": "Single Mobile Home, 3 Bedrooms",
+      "location": null,
+      "author": "Elivis Alcequiez",
+      "stakeholders": {
+        "client": null,
+        "architect": null,
+        "engineers": null
+      },
+      "timeline": {
+        "yearOfCompletion": null,
+        "approvalDate": null
+      }
+    },
+    "planMetadata": {
+      "planType": "Floor Plan",
+      "planFormat": null,
+      "scale": "Not to scale",
+      "projectionMethod": null
+    },
+    "confidence": 0.2
+  },
+  "roomAdjacency":{
+    "Bedroom_3": [
+      "Closet",
+      "Kitchen",
+      "Laundry",
+      "WC_2"
+    ],
+    "Kitchen": [
+      "Bedroom_3",
+      "Dining",
+      "Entrance",
+      "Laundry"
+    ],
+    "WC_2": [
+      "Bedroom_3",
+      "Closet"
+    ],
+    "Laundry": [
+      "Bedroom_3",
+      "Closet",
+      "Dining",
+      "Kitchen",
+      "Living"
+    ],
+    "Closet": [
+      "Bedroom_3",
+      "Laundry",
+      "WC_2"
+    ],
+    "Bedroom": [
+      "Bedroom_2",
+      "Entrance",
+      "Living",
+      "WC"
+    ],
+    "WC": [
+      "Bedroom",
+      "Bedroom_2",
+      "Entrance"
+    ],
+    "Entrance": [
+      "Bedroom",
+      "Dining",
+      "Kitchen",
+      "Living",
+      "WC"
+    ],
+    "Living": [
+      "Bedroom",
+      "Dining",
+      "Entrance",
+      "Laundry"
+    ],
+    "Bedroom_2": [
+      "Bedroom",
+      "WC"
+    ],
+    "Dining": [
+      "Entrance",
+      "Kitchen",
+      "Laundry",
+      "Living"
+    ]
+  }
+}
