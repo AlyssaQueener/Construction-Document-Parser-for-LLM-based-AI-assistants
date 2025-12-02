@@ -4,7 +4,8 @@ from typing import Tuple
 import pymupdf  
 import json
 from PIL import Image
-import src.plan2data.mistralConnection as mistral
+
+import mistralConnection as mistral
 
 
 def extract_images_from_pdf(path_pdf, output_format, output_dir):
