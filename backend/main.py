@@ -279,7 +279,11 @@ async def create_upload_file_floorplans(file: UploadFile, content_type: ContentT
             result, method, is_succesful, confidence = full.get_neighbouring_rooms_with_ai(processing_file_path)
             
         elif content_type == "full-plan-ai":
-            result, method, is_succesful, confidence = vor.extract_full_floorplan(processing_file_path)
+            result = vor.extract_full_floorplan(processing_file_path)
+            method = "deterministic"
+            is_succesful = True
+            confidence = None
+            
             
         # Create response
         response = Response(

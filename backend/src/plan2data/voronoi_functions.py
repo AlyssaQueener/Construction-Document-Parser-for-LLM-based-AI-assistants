@@ -7,10 +7,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 from collections import defaultdict
 from mistralConnection import *
-from titleBlockInfo import *
 import base64
 import pymupdf
 from helper import *
+import src.plan2data.titleBlockInfo as tb
+
 
 def convert_pdf_to_base64(pdf_path: str, page: int = 0):
     """Convert specific PDF page to base64 encoded image string"""
@@ -638,7 +639,7 @@ def extract_full_floorplan(pdf_path):
         # 3. Convert PDF to base64 image
         base64_image = convert_pdf_to_base64(pdf_path)
         
-        #titleblock = get_title_block_info(pdf_path)
+        #titleblock, method, is_succesful, confidence = tb.get_title_block_info(pdf_path)
         
         # 4. Call Mistral to identify actual connections
         connected_rooms_response = call_mistral_connected_rooms(base64_image, json.dumps(neighbors_vor))
