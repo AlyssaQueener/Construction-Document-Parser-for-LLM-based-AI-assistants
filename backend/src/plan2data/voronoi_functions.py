@@ -3,13 +3,11 @@ import fitz
 import json
 import re 
 from scipy.spatial import Voronoi, voronoi_plot_2d
-import matplotlib.pyplot as plt
 import numpy as np
 from collections import defaultdict
 from mistralConnection import *
 import base64
 import pymupdf
-from helper import *
 import src.plan2data.titleBlockInfo as tb
 
 
@@ -398,35 +396,6 @@ def flip_y_coordinates(centerpoints, page_height):
         flipped_centerpoints.append([cx, cy_flipped, name])
     return flipped_centerpoints
 
-def visualize_voronoi_cells(vor, centerpoints, neighbors, save_path=None):
-    """
-    Visualizes Voronoi diagram using centerpoints and optionally saves as an image.
-
-    Args:
-        vor (scipy.spatial.Voronoi): Voronoi object.
-        centerpoints (list of list): [cx, cy, name] labels.
-        neighbors (dict): room name to neighbor room names.
-        save_path (str, optional): If provided, image is saved to this file path.
-
-    Returns:
-        None
-    """
-    fig, ax = plt.subplots(1, 1, figsize=(12, 10))
-    voronoi_plot_2d(vor, ax=ax, show_vertices=False, line_colors='blue', line_width=2)
-    for i, cp in enumerate(centerpoints):
-        ax.plot(cp[0], cp[1], 'ro', markersize=8)
-        ax.text(cp[0], cp[1], cp[2], fontsize=10, ha='center', va='bottom', bbox=dict(boxstyle="round,pad=0.3", facecolor="yellow", alpha=0.7))
-    ax.set_title('Voronoi Diagram - Room Adjacencies', fontsize=14)
-    ax.set_xlabel('X Coordinate')
-    ax.set_ylabel('Y Coordinate')
-    ax.grid(True, alpha=0.3)
-    total_connections = sum(len(neighs) for neighs in neighbors.values()) // 2
-    ax.text(0.02, 0.98, f'Total room connections: {total_connections}',
-            transform=ax.transAxes, fontsize=12, verticalalignment='top',
-            bbox=dict(boxstyle="round,pad=0.3", facecolor="lightblue", alpha=0.7))
-    if save_path:
-        plt.savefig(save_path, dpi=300, bbox_inches='tight')
-    plt.show()
 
 
 
@@ -611,7 +580,6 @@ def neighboring_rooms_voronoi(pdf_path):
     flipped_centerpoints = flip_y_coordinates(centerpoints, page_height)
     flipped_centerpoints = make_names_unique(flipped_centerpoints)
     neighbors, vor = extract_bounded_voronoi_neighbors_detailed(flipped_centerpoints, flipped_rect)
-    #visualize_voronoi_cells(vor, flipped_centerpoints, neighbors)   
     doc.close()
     
     # Print as JSON and return

@@ -280,7 +280,7 @@ async def create_upload_file_floorplans(file: UploadFile, content_type: ContentT
             
         elif content_type == "full-plan-ai":
             result = vor.extract_full_floorplan(processing_file_path)
-            method = "deterministic"
+            method = "hybrid"
             is_succesful = True
             confidence = None
             
