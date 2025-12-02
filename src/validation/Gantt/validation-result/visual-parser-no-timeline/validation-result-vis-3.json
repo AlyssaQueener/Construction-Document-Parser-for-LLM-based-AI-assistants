@@ -1,7 +1,7 @@
 {
     "completeness": 6.67,
     "accuracy": 7.5,
-    "overall_score": 7.2,
+    "overall_score": 7.09,
     "field_evaluations": [
         {
             "ground_truth_id": 1,

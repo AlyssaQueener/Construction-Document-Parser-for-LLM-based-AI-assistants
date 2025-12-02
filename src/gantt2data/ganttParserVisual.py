@@ -12,6 +12,7 @@ from matplotlib.patches import Rectangle
 import numpy as np
 import src.gantt2data.helper as helper
 from collections import Counter
+import os
 
 
 class Task_visual(BaseModel):
@@ -446,7 +447,76 @@ def parse_full_ai(path):
         df = df.dropna(axis='columns', how='all')
         activities = extract_activities_for_full_ai(df)
         if len(activities) != 0:
-            return mistral.call_mistral_timeline(image_path, "full ai w activities", activities)
-        return mistral.call_mistral_timeline(image_path, "full ai", None)
-     
+            result=  mistral.call_mistral_timeline(image_path, "full ai w activities", activities)
+        elif to_be_chunked(image_path):
+            result= parse_from_chunks(path)
+        else:
+            result =  mistral.call_mistral_timeline(image_path, "full ai", None)
+        try:
+            if os.path.exists(image_path):
+                os.remove(image_path)
+                print(f"Deleted: {image_path}")
+        except Exception as e:
+            print(f"Warning: Could not delete {image_path}: {e}")
+        return result
+
+
+def extract_gantt_chart_from_chunks(chunked_chart):
+    """
+    Extract activities from image chunks and clean up files afterward.
+    Args:
+        chunked_plan: List of file paths to image chunks
+    Returns:
+        List of room names extracted from each chunk
+    """
+    parsed_chart = []
     
+    try:
+        for image_path in chunked_chart:
+            chart_json = mistral.call_mistral_timeline(image_path, "chunks", None)
+            try:
+                chart_part = json.loads(chart_json)
+                parsed_chart.extend(chart_part)
+            except json.JSONDecodeError as e:
+                print(f"Warning: Could not parse JSON from {image_path}: {e}")
+                print(f"Raw response: {chart_json}")
+                continue
+    finally:
+        # Clean up: delete all temporary image files
+        for image_path in chunked_chart:
+            try:
+                if os.path.exists(image_path):
+                    os.remove(image_path)
+                    print(f"Deleted: {image_path}")
+            except Exception as e:
+                print(f"Warning: Could not delete {image_path}: {e}")
+    
+    return parsed_chart
+     
+def parse_from_chunks(path):
+    chart_chunks = helper.pdf_to_split_images(path,0)
+    parsed_chart = extract_gantt_chart_from_chunks(chart_chunks)
+    return parsed_chart
+    
+def to_be_chunked(image_path):
+    from PIL import Image
+    max_dimension=1500
+    max_area_pixels=2_000_000
+    try:
+        with Image.open(image_path) as img:
+            width, height = img.size
+            total_pixels = width * height
+            
+        if width > max_dimension:
+            return True
+            
+        if height > max_dimension:
+            return True
+            
+            # Check total pixel area
+        if total_pixels > max_area_pixels:
+            return True
+        return False
+    except:
+        print("could not measure image")
+        return False

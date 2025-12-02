@@ -1,8 +1,13 @@
 [
     {
-        "task": "1.1) LPH 1-3 Vorplanung",
+        "task": "1) B-HH+H-HH / B-HS + H-HS",
         "start": "15.05.25",
         "finish": "01.06.26"
+    },
+    {
+        "task": "1.1) LPH 1-3 Vorplanung",
+        "start": "15.05.25",
+        "finish": "30.09.25"
     },
     {
         "task": "1.1.1) Vorplanung",
@@ -11,7 +16,7 @@
     },
     {
         "task": "1.1.2) Vorstellung Lph. 02",
-        "start": "12.06.25",
+        "start": "30.09.25",
         "finish": "30.09.25"
     },
     {
@@ -22,17 +27,17 @@
     {
         "task": "1.2.1) Bearbeitung Architekt",
         "start": "12.06.25",
-        "finish": "04.12.25"
+        "finish": "28.11.25"
     },
     {
-        "task": "1.2.1.1) Bearbeitung Architekt",
+        "task": "1.2.1.1) Vorentwurf",
         "start": "12.06.25",
-        "finish": "28.11.25"
+        "finish": "11.12.25"
     },
     {
         "task": "1.2.1.2) Vorstellung Lph. 3",
         "start": "29.10.25",
-        "finish": "04.12.25"
+        "finish": "04.11.25"
     },
     {
         "task": "1.2.1.3) Prüfzeugnis Bauherr und Freigabe LPH 3",
@@ -42,7 +47,7 @@
     {
         "task": "1.2.1.4) Kostenberechnung nach Freigabe LPH 3",
         "start": "28.10.25",
-        "finish": "28.11.25"
+        "finish": "28.10.25"
     },
     {
         "task": "1.2.1.5) Abgabe Kostenberechnung",
@@ -51,7 +56,7 @@
     },
     {
         "task": "1.2.2) Abgabe Kostenberechnung Fachplaner",
-        "start": "18.06.25",
+        "start": "26.11.25",
         "finish": "26.11.25"
     },
     {
@@ -60,7 +65,7 @@
         "finish": "02.10.25"
     },
     {
-        "task": "1.2.2.2) Bauphysik | PM",
+        "task": "1.2.2.2) Bauphysik | PM1",
         "start": "14.07.25",
         "finish": "02.10.25"
     },
@@ -70,38 +75,33 @@
         "finish": "02.10.25"
     },
     {
-        "task": "1.2.2.4) Brandschutz | Bauart",
+        "task": "1.2.2.4) HSL | IPV",
         "start": "14.07.25",
         "finish": "02.10.25"
     },
     {
-        "task": "1.2.2.5) HSL | IPV",
-        "start": "14.07.25",
-        "finish": "02.10.25"
-    },
-    {
-        "task": "1.2.2.6) HSL | IPV Berechnungen Abgabe LPH 3",
+        "task": "1.2.2.5) HSL | IPV Berechnungen Abgabe LPH 3",
         "start": "23.10.25",
         "finish": "11.12.25"
     },
     {
-        "task": "1.2.2.7) HSL (Bestand) | Linsmeier",
+        "task": "1.2.2.6) HSL (Bestand) | Linsmeier",
         "start": "14.07.25",
         "finish": "02.10.25"
     },
     {
-        "task": "1.2.2.8) ELT | DICK",
+        "task": "1.2.2.7) ELT | DICK",
         "start": "14.07.25",
         "finish": "02.10.25"
     },
     {
-        "task": "1.2.2.9) HSL | DICK Detailplanung Abgabe LPH 3",
-        "start": "23.10.25",
+        "task": "1.2.2.8) Detailplanung Abgabe LPH 3",
+        "start": "24.10.25",
         "finish": "11.12.25"
     },
     {
-        "task": "1.2.2.10) Landschaftsarchitektur | LoHo",
-        "start": "11.07.25",
+        "task": "1.2.2.9) Landschaftsarchitektur | LoHo",
+        "start": "31.07.25",
         "finish": "02.10.25"
     },
     {
@@ -125,11 +125,6 @@
         "finish": "25.11.25"
     },
     {
-        "task": "1.2.2.1) Abgabe Kosten Fachplaner",
-        "start": "26.11.25",
-        "finish": "26.11.25"
-    },
-    {
         "task": "1.3) LPH 4 Genehmigungsplanung",
         "start": "04.11.25",
         "finish": "01.06.26"
@@ -140,7 +135,7 @@
         "finish": "01.06.26"
     },
     {
-        "task": "1.3.2) Tragwerksplanung (Genehmigungsstatik wird zum Bauantrag nachgereicht)",
+        "task": "1.3.2) Tragwerksplanung (Genehmigungszeichnung wird zum Bauantrag nachgereicht)",
         "start": "24.11.25",
         "finish": "17.03.26"
     },
@@ -186,7 +181,7 @@
     },
     {
         "task": "1.4.2) Leistungsplanung - Ausarbeitung",
-        "start": "13.01.26",
+        "start": "13.02.26",
         "finish": "08.04.26"
     },
     {
@@ -201,7 +196,7 @@
     },
     {
         "task": "2.2) Mitwirkung bei der Vergabe",
-        "start": "09.03.26",
+        "start": "03.03.26",
         "finish": "20.03.26"
     },
     {
@@ -215,7 +210,7 @@
         "finish": "19.10.26"
     },
     {
-        "task": "3.1) H4 Bauzeit gem. V S.0 GESAMTTERMINPLAN vom 02/2025",
+        "task": "3.1) HH Baubeginn gem. V 5.0 GESAMTTERMINPLAN vom 02/2025",
         "start": "10.03.26",
         "finish": "19.10.26"
     },
@@ -226,11 +221,11 @@
     },
     {
         "task": "3.1.2) Baubeginn ursprünglich",
-        "start": "29.06.26",
-        "finish": "29.06.26"
+        "start": "10.03.26",
+        "finish": "10.03.26"
     },
     {
-        "task": "3.2) HS Bauzeit gem. V S.0 GESAMTTERMINPLAN vom 02/2025",
+        "task": "3.2) HS Baubeginn gem. V 5.0 GESAMTTERMINPLAN vom 02/2025",
         "start": "10.03.26",
         "finish": "21.09.26"
     },
