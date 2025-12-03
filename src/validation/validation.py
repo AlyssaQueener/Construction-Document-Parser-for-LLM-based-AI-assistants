@@ -1406,7 +1406,7 @@ for tab, key, label, parser_type in tabs_config:
                     elif parser_type == 'titleblock':
                         styled_df = df.style.applymap(
                             highlight_scores,
-                            subset=['Overall Score', 'Completeness', 'Accuracy']
+                            subset=['Overall Score', 'Completeness', 'Accuracy', 'Project Info Score', 'Plan Metadata Score']
                         )
                     elif parser_type == 'gantt':
                         styled_df = df.style.applymap(
@@ -1417,6 +1417,16 @@ for tab, key, label, parser_type in tabs_config:
                         styled_df = df.style.applymap(
                             highlight_scores,
                             subset=['Overall Score', 'TB Completeness','TB Accuracy', 'TB Score', 'Room Detection','Adjacency F1','Room Score']
+                        )
+                    elif parser_type == 'drawing_neighboring_deterministic':
+                        styled_df = df.style.applymap(
+                            highlight_scores,
+                            subset=['Overall Score', 'Room Detection', 'Adjacency F1', 'Precision', 'Recall']
+                        )
+                    elif parser_type == 'drawing':
+                        styled_df = df.style.applymap(
+                            highlight_scores,
+                            subset=['Overall Score', 'Room Detection', 'Adjacency F1', 'Precision', 'Recall']
                         )
                     else:
                         styled_df = df.style.applymap(

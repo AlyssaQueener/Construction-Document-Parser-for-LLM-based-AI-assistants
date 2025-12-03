@@ -298,8 +298,8 @@ def llm_as_a_judge_nr(path_to_ground_truth: str, path_to_parser_result: str, out
 
 
 if __name__ == "__main__":
-    groundtruth = "src/validation/Floorplan/neighboring rooms/testdata_ai/Cluttered_03_ai copy.json"
-    parserresult = "src/validation/Floorplan/neighboring rooms/testdata_ai/Cluttered_03_ai.json"
+    groundtruth = "src/validation/Floorplan/neighboring rooms/testdata_ai/Cluttered_02_ai copy.json"
+    parserresult = "src/validation/Floorplan/neighboring rooms/testdata_ai/Cluttered_02_ai.json"
     output_path = "src/validation/Floorplan/neighboring rooms/LLM as a judge output ai/Cluttered 02_neighbors_ai_llm.json"
     #output_path = groundtruth.replace('val.json', 'llm_as_judge.json')
     evaluation_result = llm_as_a_judge_nr(groundtruth, parserresult, output_path)
