@@ -895,15 +895,11 @@ def create_room_name_extraction_prompt(text_content):
 
     **Aufgabe:**
     Extrahiere NUR die Texte, die Raumbezeichnungen sind. Gib sie als Python-Liste von Strings zurück.
-    Wichtig !!!! 
-        bitte kombiniere die Raumnamen nicht selbst sonsdern gib sie so zurück wie sie im extrahierten Text vorkommen.
-        also z.b "WOHN/", "ESSZIMMER" und nicht "Wohnzimmer" und "Esszimmer"
-        oder "grünes" , "Zimmer" und nicht "Grünes Zimmer"
-        oder 'ABSTELL',  'ZIMMER' und nicht als 'Abstell zimmer' 
+    
 
     **Was sind Raumbezeichnungen?**
-    - Räume wie: Wohnzimmer, Schlafzimmer, Küche, Bad, WC, Flur, Diele, Abstellraum
-    - Funktionsbereiche wie: Eingang, Balkon, Terrasse, Garage, Keller
+    - Räume wie: Wohnzimmer, Schlafzimmer, Küche, Bad, WC, Flur, Diele, Abstellraum, Foyer, HWR, Gästezimmer, Arbeitszimmer, Kinderzimmer, Büro, Windfang
+    - Funktionsbereiche wie: Eingang, Balkon, Terrasse, Garage, Keller, Schlafen, Arbeiten, Diele, Essen, Kochen 
     - Abkürzungen wie: SZ, WZ, AR, HWR, TFL
     - Mit Nummern versehene Räume wie: Zimmer 1, Raum 2.1, Büro 3
 

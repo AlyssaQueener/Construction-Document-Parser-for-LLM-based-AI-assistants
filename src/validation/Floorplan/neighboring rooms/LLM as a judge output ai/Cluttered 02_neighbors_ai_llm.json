@@ -1,0 +1,117 @@
+{
+  "room_analysis": {
+    "Gast": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "Diele"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "G-WC": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "Diele"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "Diele": {
+      "name_match_score": 1.0,
+      "precision": 0.8,
+      "recall": 0.8,
+      "f1": 0.8,
+      "true_positives": [
+        "Gast",
+        "G-WC",
+        "Küche",
+        "Wohnen/Essen"
+      ],
+      "false_positives": [
+        "Terrasse"
+      ],
+      "false_negatives": [
+        "Diele_2",
+        "G-WC_2"
+      ],
+      "note": "Hallucinated connection to Terrasse"
+    },
+    "Küche": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "Diele",
+        "Wohnen/Essen"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "Wohnen/Essen": {
+      "name_match_score": 0.6,
+      "precision": 0.67,
+      "recall": 0.67,
+      "f1": 0.67,
+      "true_positives": [
+        "Diele",
+        "Küche"
+      ],
+      "false_positives": [
+        "Terrasse"
+      ],
+      "false_negatives": [
+        "Wohnen /Essen_2",
+        "Terrasse_2"
+      ],
+      "note": "Hallucinated connection to Terrasse"
+    },
+    "Terrasse": {
+      "name_match_score": 1.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [
+        "Terrasse_2",
+        "Wohnen /Essen"
+      ],
+      "note": "Missed all neighbors"
+    }
+  },
+  "summary": {
+    "total_rooms_ground_truth": 12,
+    "total_rooms_parser": 6,
+    "rooms_correctly_detected": 5,
+    "hallucinated_rooms": [],
+    "missing_rooms": [
+      "Gast_2",
+      "G-WC_2",
+      "Diele_2",
+      "Küche_2",
+      "Wohnen/Essen_2",
+      "Terrasse_2"
+    ],
+    "asymmetric_adjacencies": []
+  },
+  "room_detection_score": 4.17,
+  "adjacency_precision": 7.33,
+  "adjacency_recall": 7.33,
+  "adjacency_f1_score": 7.33,
+  "overall_score": 6.67,
+  "key_issues": [
+    "Missed rooms in parser output",
+    "Hallucinated adjacency to Terrasse",
+    "Missed neighbors for Terrasse"
+  ]
+}

@@ -1,20 +1,18 @@
 {
+  "neighboringRooms": {
+
   "Terrasse_2": [
     "Terrasse",
-    "Wohnen /Essen",
-    "Wohnen /Essen_2"
+     "Wohnen /Essen_2"
   ],
   "Terrasse": [
-    "Küche",
     "Terrasse_2",
     "Wohnen /Essen"
   ],
   "Wohnen /Essen": [
     "Diele",
-    "Diele_2",
     "Küche",
     "Terrasse",
-    "Terrasse_2",
     "Wohnen /Essen_2"
   ],
   "Wohnen /Essen_2": [
@@ -26,7 +24,6 @@
   "Küche": [
     "Diele",
     "Gast",
-    "Terrasse",
     "Wohnen /Essen"
   ],
   "Küche_2": [
@@ -36,16 +33,14 @@
   ],
   "Diele_2": [
     "Diele",
-    "G-WC",
     "G-WC_2",
     "Gast_2",
     "Küche_2",
-    "Wohnen /Essen",
     "Wohnen /Essen_2"
   ],
   "Gast_2": [
     "Diele_2",
-    "G-WC_2",
+    
     "Küche_2"
   ],
   "Diele": [
@@ -57,18 +52,62 @@
   ],
   "G-WC": [
     "Diele",
-    "Diele_2",
-    "G-WC_2",
-    "Gast"
-  ],
+    "G-WC_2"
+    ],
   "Gast": [
     "Diele",
-    "G-WC",
     "Küche"
   ],
   "G-WC_2": [
     "Diele_2",
-    "G-WC",
-    "Gast_2"
+    "G-WC"
   ]
+},
+  "connectedRooms": {
+    "Gast": [
+      "Diele"
+    ],
+    "G-WC": [
+      "Diele"
+    ],
+    "Diele": [
+      "Gast",
+      "G-WC",
+      "Küche",
+      "Wohnen/Essen"
+    ],
+    "Küche": [
+      "Diele",
+      "Wohnen/Essen"
+    ],
+    "Wohnen/Essen": [
+      "Diele",
+      "Küche"
+    ],
+    "Terrasse": [],
+    
+    "Gast_2": [
+      "Diele"
+    ],
+    "G-WC_2": [
+      "Diele"
+    ],
+    "Diele_2": [
+      "Gast",
+      "G-WC",
+      "Küche",
+      "Wohnen/Essen"
+    ],
+    "Küche_2": [
+      "Diele",
+      "Wohnen/Essen"
+    ],
+    "Wohnen/Essen_2": [
+      "Diele",
+      "Küche"
+    ],
+    "Terrasse_2": []
+
+  },
+  "confidence": 0.9
 }

@@ -26,11 +26,18 @@
     "UG-Treppe_2"
   ],
   "WC D/IV_2": [
+    "Gewerbe",
     "WC H",
     "WC H_2"
   ],
+  "Gewerbe": [
+    "Gedeckte Eingangshalle",
+    "WC D/IV",
+    "WC D/IV_2",
+    "WC H_2"
+  ],
   "WC H_2": [
-    "Gewerbe Süd",
+    "Gewerbe",
     "Lager",
     "UG-Treppe",
     "WC D/IV",
@@ -51,13 +58,13 @@
   "Gedeckte Eingangshalle": [
     "Eingangshalle",
     "Empfang",
-    "Gewerbe Süd",
+    "Gewerbe",
     "WC D/IV"
   ],
   "WC D/IV": [
     "Eingangshalle",
     "Gedeckte Eingangshalle",
-    "Gewerbe Süd",
+    "Gewerbe",
     "UG-Treppe",
     "WC H_2"
   ],
@@ -65,11 +72,6 @@
     "Besprechung_3",
     "Eingangshalle",
     "Lager",
-    "WC D/IV",
-    "WC H_2"
-  ],
-  "Gewerbe Süd": [
-    "Gedeckte Eingangshalle",
     "WC D/IV",
     "WC H_2"
   ],

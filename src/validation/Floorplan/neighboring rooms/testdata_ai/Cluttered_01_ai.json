@@ -1,0 +1,117 @@
+{
+  "neighboringRooms": {
+    "01 Besprechung": [
+      "02 Besprechung",
+      "03 Besprechung",
+      "04 Empfang",
+      "07 Lager",
+      "08 Eingangshalle"
+    ],
+    "02 Besprechung": [
+      "01 Besprechung",
+      "03 Besprechung",
+      "04 Empfang",
+      "08 Eingangshalle"
+    ],
+    "03 Besprechung": [
+      "01 Besprechung",
+      "02 Besprechung",
+      "04 Empfang",
+      "08 Eingangshalle"
+    ],
+    "04 Empfang": [
+      "01 Besprechung",
+      "02 Besprechung",
+      "03 Besprechung",
+      "08 Eingangshalle",
+      "13 Gedeckte Eingangshalle"
+    ],
+    "06 Gewerbe Süd": [
+      "08 Eingangshalle",
+      "13 Gedeckte Eingangshalle"
+    ],
+    "07 Lager": [
+      "01 Besprechung",
+      "08 Eingangshalle",
+      "20 UG-Treppe",
+      "23 WC H (Einzel-WC)"
+    ],
+    "08 Eingangshalle": [
+      "01 Besprechung",
+      "02 Besprechung",
+      "03 Besprechung",
+      "04 Empfang",
+      "06 Gewerbe Süd",
+      "07 Lager",
+      "13 Gedeckte Eingangshalle",
+      "20 UG-Treppe",
+      "22 WC D/IV (Einzel-WC)",
+      "23 WC H (Einzel-WC)"
+    ],
+    "13 Gedeckte Eingangshalle": [
+      "04 Empfang",
+      "06 Gewerbe Süd",
+      "08 Eingangshalle"
+    ],
+    "20 UG-Treppe": [
+      "07 Lager",
+      "08 Eingangshalle",
+      "23 WC H (Einzel-WC)"
+    ],
+    "22 WC D/IV (Einzel-WC)": [
+      "08 Eingangshalle"
+    ],
+    "23 WC H (Einzel-WC)": [
+      "07 Lager",
+      "08 Eingangshalle",
+      "20 UG-Treppe"
+    ]
+  },
+  "connectedRooms": {
+    "01 Besprechung": [
+      "08 Eingangshalle"
+    ],
+    "02 Besprechung": [
+      "08 Eingangshalle"
+    ],
+    "03 Besprechung": [
+      "08 Eingangshalle"
+    ],
+    "04 Empfang": [
+      "08 Eingangshalle",
+      "13 Gedeckte Eingangshalle"
+    ],
+    "06 Gewerbe Süd": [
+      "08 Eingangshalle"
+    ],
+    "07 Lager": [
+      "08 Eingangshalle"
+    ],
+    "08 Eingangshalle": [
+      "01 Besprechung",
+      "02 Besprechung",
+      "03 Besprechung",
+      "04 Empfang",
+      "06 Gewerbe Süd",
+      "07 Lager",
+      "13 Gedeckte Eingangshalle",
+      "20 UG-Treppe",
+      "22 WC D/IV (Einzel-WC)",
+      "23 WC H (Einzel-WC)"
+    ],
+    "13 Gedeckte Eingangshalle": [
+      "04 Empfang",
+      "08 Eingangshalle"
+    ],
+    "20 UG-Treppe": [
+      "08 Eingangshalle"
+    ],
+    "22 WC D/IV (Einzel-WC)": [
+      "08 Eingangshalle"
+    ],
+    "23 WC H (Einzel-WC)": [
+      "08 Eingangshalle"
+    ]
+  },
+  "confidence": 0.8
+}

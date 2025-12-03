@@ -1,0 +1,54 @@
+{
+  "neighboringRooms": {
+    "Gast": [
+      "G-WC",
+      "Diele"
+    ],
+    "G-WC": [
+      "Gast",
+      "Diele"
+    ],
+    "Diele": [
+      "Gast",
+      "G-WC",
+      "Küche",
+      "Wohnen/Essen"
+    ],
+    "Küche": [
+      "Diele",
+      "Wohnen/Essen"
+    ],
+    "Wohnen/Essen": [
+      "Diele",
+      "Küche",
+      "Terrasse"
+    ],
+    "Terrasse": [
+      "Wohnen/Essen"
+    ]
+  },
+  "connectedRooms": {
+    "Gast": [
+      "Diele"
+    ],
+    "G-WC": [
+      "Diele"
+    ],
+    "Diele": [
+      "Gast",
+      "G-WC",
+      "Küche",
+      "Wohnen/Essen"
+    ],
+    "Küche": [
+      "Diele",
+      "Wohnen/Essen"
+    ],
+    "Wohnen/Essen": [
+      "Diele",
+      "Küche"
+    ],
+    "Terrasse": []
+  },
+  "confidence": 0.9
+}

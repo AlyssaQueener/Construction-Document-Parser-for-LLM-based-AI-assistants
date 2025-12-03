@@ -1,0 +1,71 @@
+{
+  "neighboringRooms": {
+    "KÜCHE": [
+      "WOHN/ESSZIMMER",
+      "FLUR"
+    ],
+    "WOHN/ESSZIMMER": [
+      "KÜCHE",
+      "SCHLAFZIMMER 1",
+      "SCHLAFZIMMER 2",
+      "BAD",
+      "FLUR"
+    ],
+    "SCHLAFZIMMER 1": [
+      "WOHN/ESSZIMMER",
+      "BAD"
+    ],
+    "SCHLAFZIMMER 2": [
+      "WOHN/ESSZIMMER",
+      "BAD"
+    ],
+    "BAD": [
+      "WOHN/ESSZIMMER",
+      "SCHLAFZIMMER 1",
+      "SCHLAFZIMMER 2"
+    ],
+    "FLUR": [
+      "KÜCHE",
+      "WOHN/ESSZIMMER",
+      "ABSTELLRAUM"
+    ],
+    "ABSTELLRAUM": [
+      "FLUR"
+    ]
+  },
+  "connectedRooms": {
+    "KÜCHE": [
+      "WOHN/ESSZIMMER",
+      "FLUR"
+    ],
+    "WOHN/ESSZIMMER": [
+      "KÜCHE",
+      "SCHLAFZIMMER 1",
+      "SCHLAFZIMMER 2",
+      "BAD",
+      "FLUR"
+    ],
+    "SCHLAFZIMMER 1": [
+      "WOHN/ESSZIMMER",
+      "BAD"
+    ],
+    "SCHLAFZIMMER 2": [
+      "WOHN/ESSZIMMER",
+      "BAD"
+    ],
+    "BAD": [
+      "WOHN/ESSZIMMER",
+      "SCHLAFZIMMER 1",
+      "SCHLAFZIMMER 2"
+    ],
+    "FLUR": [
+      "KÜCHE",
+      "WOHN/ESSZIMMER",
+      "ABSTELLRAUM"
+    ],
+    "ABSTELLRAUM": [
+      "FLUR"
+    ]
+  },
+  "confidence": 0.8
+}

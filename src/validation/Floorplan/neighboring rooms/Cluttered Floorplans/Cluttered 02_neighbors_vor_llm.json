@@ -1,0 +1,368 @@
+{
+  "room_analysis": {
+    "WC H": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "WC Behind.",
+        "WC D",
+        "grünes Zimmer"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "WC Behind.": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "Treppenhaus",
+        "WC D",
+        "WC H",
+        "Zimmer"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "grünes Zimmer": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "Empfang/ Foyer",
+        "Foyer",
+        "Pflegebad",
+        "Pflegeoase",
+        "Stützpunkt",
+        "WC D",
+        "WC H"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "WC D": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "Empfang/ Foyer",
+        "WC Behind.",
+        "WC H",
+        "Zimmer",
+        "grünes Zimmer"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "Unrein": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "Lager z.b.V.",
+        "Pflegebad",
+        "Stützpunkt",
+        "Wäsche"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "Stützpunkt": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "Pflegebad",
+        "Pflegeoase",
+        "Pflegeoase_2",
+        "Unrein",
+        "Wäsche",
+        "grünes Zimmer"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "Pflegebad": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "ELT",
+        "Lager z.b.V.",
+        "Pflegebad_2",
+        "Stützpunkt",
+        "Unrein",
+        "Zimmer 1.1",
+        "grünes Zimmer"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "Wäsche": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "Lager z.b.V.",
+        "Pflegeoase_2",
+        "Stützpunkt",
+        "Unrein"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "Lager z.b.V.": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "ELT",
+        "Pflegebad",
+        "Pflegeoase_2",
+        "Pflegeoase_3",
+        "Unrein",
+        "Wäsche"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "Treppenhaus": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "Foyer",
+        "Pflegeoase_2",
+        "WC Behind.",
+        "Zimmer"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "Zimmer": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "Empfang/ Foyer",
+        "Foyer",
+        "Treppenhaus",
+        "WC Behind.",
+        "WC D"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "Pflegebad_2": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "Besucher",
+        "ELT",
+        "Lagerfläche",
+        "Pflegebad",
+        "Zimmer 1.1"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "Zimmer 1.1": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "Lagerfläche",
+        "Pflegebad",
+        "Pflegebad_2"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "Lagerfläche": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "Besucher",
+        "Lager",
+        "Pflegebad_2",
+        "Pflegeoase_3",
+        "Zimmer 1.1"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "Besucher": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "ELT",
+        "Lagerfläche",
+        "Pflegebad_2",
+        "Pflegeoase_3"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "ELT": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "Besucher",
+        "Lager z.b.V.",
+        "Pflegebad",
+        "Pflegebad_2",
+        "Pflegeoase_3"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "Lager": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "Lagerfläche",
+        "Pflegeoase_3"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "Pflegeoase_3": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "Besucher",
+        "ELT",
+        "Lager",
+        "Lager z.b.V.",
+        "Lagerfläche"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "Empfang/ Foyer": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "Foyer",
+        "WC D",
+        "Zimmer",
+        "grünes Zimmer"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "Foyer": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "Empfang/ Foyer",
+        "Pflegeoase",
+        "Pflegeoase_2",
+        "Treppenhaus",
+        "Zimmer",
+        "grünes Zimmer"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "Pflegeoase": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "Foyer",
+        "Pflegeoase_2",
+        "Stützpunkt",
+        "grünes Zimmer"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "Pflegeoase_2": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "Foyer",
+        "Lager z.b.V.",
+        "Pflegeoase",
+        "Stützpunkt",
+        "Treppenhaus",
+        "Wäsche"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    }
+  },
+  "summary": {
+    "total_rooms_ground_truth": 25,
+    "total_rooms_parser": 24,
+    "rooms_correctly_detected": 24,
+    "hallucinated_rooms": [],
+    "missing_rooms": [
+      "Pflegebad_3"
+    ],
+    "asymmetric_adjacencies": []
+  },
+  "room_detection_score": 9.6,
+  "adjacency_precision": 10.0,
+  "adjacency_recall": 10.0,
+  "adjacency_f1_score": 10.0,
+  "overall_score": 9.82,
+  "key_issues": [
+    "Missing room: Pflegebad_3"
+  ]
+}

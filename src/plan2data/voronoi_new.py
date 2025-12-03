@@ -218,7 +218,9 @@ def is_valid_room_name(text, room_names_ai=None):
             'nr', 'nr.', 'no', 'no.', 'pos', 'pos.',
             # Plan-Begriffe
             'plan', 'detail', 'schnitt', 'ansicht', 'grundriss', 'fläche', 
-            'maßstab', 'massstab', 'zimmertüren', 'türen',
+            'maßstab', 'massstab', 'zimmertüren', 'türen', 'raumnummer', 'heizung','fußboden',
+            'fußbodenheizung', 'lüftung','fenster', 'tür', 'türen', 'wand', 'wände',
+            'installation', 'installationen', 'dämmung', 'dämmstoffe',
             # Maßstäbe
             '1:50', '1:100', '1:200', '1:500',
             # Technische Abkürzungen
@@ -245,9 +247,9 @@ def is_valid_room_name(text, room_names_ai=None):
         if text.upper() == 'WC':
             return True
         
-        # Minimum length: 3 characters (except WC)
-        if len(text) < 3:
-            return False
+        # # Minimum length: 3 characters (except WC)
+        # if len(text) < 3:
+        #     return False
         
         # CRITICAL: Check exclusion list FIRST
         if text.lower() in excluded:
@@ -265,6 +267,7 @@ def is_valid_room_name(text, room_names_ai=None):
             if not re.match(r'^[ZR]\d', text, re.IGNORECASE):
                 return False
         
+        expanded_names = []
         # If AI provided a list, normalize and filter it
         if room_names_ai:
             # Normalize AI names: strip, lowercase, exclude blacklisted
@@ -274,26 +277,37 @@ def is_valid_room_name(text, room_names_ai=None):
                 if name.strip().lower() not in excluded
             }
             
+            for name in valid_ai_names:
+                # Add the original name
+                expanded_names.append(name)
+                # Add split components if there are spaces
+                if ' ' in name:
+                    components = name.split()
+                    for comp in components:
+                        # Add the component as-is
+                        expanded_names.append(comp)
             # If text is in the filtered AI list, accept it
-            if text.lower() in valid_ai_names:
+            if text.lower() in expanded_names:
                 return True
-            # else:
-            #     # Strict mode: reject if not in AI list
-            #     return False
+            else:
+                # Strict mode: reject if not in AI list
+                return False
         
         # check for matches AI might have missed based on keywords
-        print(f" gefilteret roomnames: {valid_ai_names}")
+        print(f" gefilteret roomnames: {expanded_names}")
+        # fall back if no AI list provided: keyword matching
         room_keywords = [
             'zimmer', 'raum', 'bad', 'wc', 'küche', 'keller', 'diele', 'flur',
             'wohn', 'schlaf', 'kind', 'gäste', 'arbeit', 'arbeits', 'büro', 'ess',
             'abstell', 'hauswirtschaft', 'hwr', 'technik', 'heizung',
             'garage', 'carport', 'terrasse', 'balkon', 'loggia',
-            'eingang', 'windfang', 'vorraum', 'ankleide', 'schrank',
+            'eingang', 'windfang', 'vorraum', 'ankleide', 'schrank'
         ]
         text_lower = text.lower()
         if any(keyword in text_lower for keyword in room_keywords):
-            print(f"✓ Matched keyword in: {text}")
             return True
+        #print(f"✓ Matched keyword in: {text}")
+
         
         
        
@@ -580,7 +594,7 @@ def neighboring_rooms_voronoi(pdf_path):
     
     # Clip rectangle to exclude plan information
     width, height = page.rect.width, page.rect.height
-    clip_rect = fitz.Rect(0, 0, width, height)
+    clip_rect = fitz.Rect(0, 0, width*0.8, height)
     flipped_rect = (
         clip_rect.x0,
         height - clip_rect.y1,
@@ -669,7 +683,7 @@ def extract_full_floorplan(pdf_path):
     
 if __name__ == "__main__":
     #pdf_path = "src/validation/Floorplan/titleblock/testdata/floorplan-test-2.pdf" 
-    pdf_path = "src/validation/Floorplan/neighboring rooms/Cluttered Floorplans/Cluttered 02.pdf" 
+    pdf_path = "src/validation/Floorplan/neighboring rooms/Cluttered Floorplans/Cluttered 03.pdf" 
     #pdf_path = "examples/FloorplansAndSectionViews/Simple Floorplan/02_Simple.pdf"
     #pdf_path ="src/validation/Floorplan/titleblock/testdata/floorplan-test-1.pdf"
     json_output_path = pdf_path.replace('.pdf', '_neighbors_vor.json')
