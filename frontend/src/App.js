@@ -15,19 +15,38 @@ function App() {
   const [aiAnswer, setAiAnswer] = useState('');
   const [aiLoading, setAiLoading] = useState(false);
 
-// Wake up the backend server on component mount
+  // Wake up both backend servers on component mount
 useEffect(() => {
-  const wakeUpServer = async () => {
-    try {
-      await axios.get('https://construction-document-parser.onrender.com', {
-        timeout: 30000
-      });
-    } catch (err) {
-      console.log('Server wake-up call made:', err.message);
-    }
+  const wakeUpServers = async () => {
+    const servers = [
+      {
+        name: 'Main Backend',
+        url: 'https://construction-document-parser.onrender.com'
+      },
+      {
+        name: 'OCR Service',
+        url: 'https://ocr-construction.onrender.com'
+      }
+    ];
+
+    // Wake up servers in parallel
+    const wakeUpPromises = servers.map(async (server) => {
+      try {
+        console.log(`Waking up ${server.name}...`);
+        await axios.get(server.url, {
+          timeout: 30000
+        });
+        console.log(`${server.name} is awake`);
+      } catch (err) {
+        console.log(`${server.name} wake-up call made:`, err.message);
+      }
+    });
+
+    await Promise.all(wakeUpPromises);
+    console.log('All servers wake-up calls completed');
   };
-  
-  wakeUpServer();
+
+  wakeUpServers();
 }, []);
 
   const handleFileChange = (e) => {
