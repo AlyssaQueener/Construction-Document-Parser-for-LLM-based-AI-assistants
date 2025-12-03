@@ -90,15 +90,15 @@ useEffect(() => {
   const ganttInfo = {
     visual: {
       title: "Visual-Deterministic",
-      desc: "Extracts tasks and timelines by interpreting the visual bar layout of the Gantt chart."
+      desc: "Extracts tasks and timelines by interpreting the visual bar layout of the Gantt chart in an rule based approach. Works only if the chart contains a timeline on the top"
     },
     tabular: {
-      title: "Tabular-Deterministic",
-      desc: "Extracts schedule data from structured date tables within the chart."
+      title: "Tabular-Hybrid",
+      desc: "Extracts timeline data from structured date tables within the chart. Works only if the chart contains a clear table structure containing the tasks as well as their start and end dates"
     },
     full_ai: {
       title: "Visual-Ai",
-      desc: "Extracts tasks and timelines by interpreting the visual bar layout of the Gantt chart."
+      desc: "Extracts tasks and timelines from the visual bar layout of the Gantt chart, using Ai based interpretation. Allows to parse unclearer chart formats"
     },
     
   };
@@ -296,8 +296,9 @@ useEffect(() => {
                     onChange={(e) => setChartFormat(e.target.value)}
                     className="text-lg"
                   >
-                    <option value="visual">Visual (inferred from bars)</option>
-                    <option value="tabular">Tabular (explicit dates)</option>
+                    <option value="visual">Visual-Hybrid</option>
+                    <option value="full ai">Visual-Ai</option>
+                    <option value="tabular">Tabular-Hybrid</option>
                   </Select>
                 </div>
                 <div className="p-2 border border-gray-300 rounded-lg bg-white mt-3 text-sm">
