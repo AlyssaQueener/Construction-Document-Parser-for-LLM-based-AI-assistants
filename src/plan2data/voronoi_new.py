@@ -9,7 +9,7 @@ from collections import defaultdict
 from mistralConnection import *
 from titleBlockInfo import *
 import base64
-import pymupdf
+
 from helper import *
 
 def convert_pdf_to_base64(pdf_path: str, page: int = 0):
@@ -615,7 +615,7 @@ def neighboring_rooms_voronoi(pdf_path):
     
     # Print as JSON and return
     output_json = json.dumps(neighbors, indent=2, ensure_ascii=False)
-    return output_json
+    return neighbors
 
 
 def extract_full_floorplan(pdf_path):
@@ -638,7 +638,7 @@ def extract_full_floorplan(pdf_path):
         # 3. Convert PDF to base64 image
         base64_image = convert_pdf_to_base64(pdf_path)
         image = convert_pdf2img(pdf_path)
-        titleblock = get_title_block_info(image)
+        #titleblock = get_title_block_info(image)
         
         # 4. Call Mistral to identify actual connections
         connected_rooms_response = call_mistral_connected_rooms(base64_image, json.dumps(neighbors_vor))
@@ -651,7 +651,7 @@ def extract_full_floorplan(pdf_path):
         
         # 6. Combine all outputs (als dict, nicht string!)
         full_floorplan = {
-            "titleblock": titleblock,
+            #"titleblock": titleblock,
             "neighboring_rooms": neighbors_vor,  # Typo korrigiert: "neighbouring romms"
             "connected_rooms": connected_rooms
         }
@@ -669,10 +669,17 @@ def extract_full_floorplan(pdf_path):
     
 if __name__ == "__main__":
     #pdf_path = "src/validation/Floorplan/titleblock/testdata/floorplan-test-2.pdf" 
-    pdf_path = "examples/FloorplansAndSectionViews/Simple Floorplan/01_Simple.pdf" 
+    pdf_path = "src/validation/Floorplan/neighboring rooms/Cluttered Floorplans/Cluttered 02.pdf" 
     #pdf_path = "examples/FloorplansAndSectionViews/Simple Floorplan/02_Simple.pdf"
     #pdf_path ="src/validation/Floorplan/titleblock/testdata/floorplan-test-1.pdf"
-    #neighbors_json = neighboring_rooms_voronoi(pdf_path)
-    #print(neighbors_json)
+    json_output_path = pdf_path.replace('.pdf', '_connected_vor.json')
+
     connected_rooms = extract_full_floorplan(pdf_path)
     print(connected_rooms)
+    # neighbors_json = neighboring_rooms_voronoi(pdf_path)
+    # print(neighbors_json)
+    with open(json_output_path, 'w', encoding='utf-8') as f:
+        json.dump(connected_rooms, f, ensure_ascii=False, indent=2)
+
+    #connected_rooms = extract_full_floorplan(pdf_path)
+    #print(connected_rooms)
