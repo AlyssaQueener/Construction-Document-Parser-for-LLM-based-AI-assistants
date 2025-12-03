@@ -1,0 +1,24 @@
+{
+    "projectInfo": {
+        "projectId": "5.1.00",
+        "projectName": null,
+        "location": null,
+        "author": "ip",
+        "stakeholders": {
+            "client": "Badischer Landesverein für Innere Mission Körperschaft des öffentlichen Rechts",
+            "architect": "PLANFABRIK SPS DIPLOMINGENIEURE FREIE ARCHITEKTEN BDA",
+            "engineers": null
+        },
+        "timeline": {
+            "yearOfCompletion": null,
+            "approvalDate": null
+        }
+    },
+    "planMetadata": {
+        "planType": "Grundriss Erdgeschoss",
+        "planFormat": "A0",
+        "scale": "1:50",
+        "projectionMethod": null
+    },
+    "confidence": 0.8
+}
