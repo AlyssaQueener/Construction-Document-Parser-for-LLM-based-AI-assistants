@@ -89,13 +89,18 @@ useEffect(() => {
   };
   const ganttInfo = {
     visual: {
-      title: "Visual",
+      title: "Visual-Deterministic",
       desc: "Extracts tasks and timelines by interpreting the visual bar layout of the Gantt chart."
     },
     tabular: {
-      title: "Tabular",
+      title: "Tabular-Deterministic",
       desc: "Extracts schedule data from structured date tables within the chart."
-    }
+    },
+    full_ai: {
+      title: "Visual-Ai",
+      desc: "Extracts tasks and timelines by interpreting the visual bar layout of the Gantt chart."
+    },
+    
   };
 
   // AI Chatbot Function
