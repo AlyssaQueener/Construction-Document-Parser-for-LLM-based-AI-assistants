@@ -1,0 +1,218 @@
+{
+  "Zimmer 1.1 EG.9": [
+    "Lagerfläche EG.10a",
+    "Pflegebad",
+    "Pflegebad EG.8"
+  ],
+  "Lagerfläche EG.10a": [
+    "Besucher EG.F3",
+    "Lager",
+    "Pflegebad",
+    "Pflegeoase_3",
+    "Zimmer 1.1 EG.9"
+  ],
+  "Pflegebad": [
+    "Besucher EG.F3",
+    "ELT EG EG.20",
+    "Lagerfläche EG.10a",
+    "Pflegebad EG.8",
+    "Zimmer 1.1 EG.9"
+  ],
+  "Pflegebad EG.8": [
+    "ELT EG EG.20",
+    "Lager z.b.V. EG EG.19",
+    "Pflegebad",
+    "Pflegeoase, 6 Betten",
+    "Unrein EG EG.18",
+    "Zimmer 1.1 EG.9"
+  ],
+  "WC H EG.5": [
+    "Empfang/Büro EG.2",
+    "WC Behind. EG.3",
+    "WC D EG.4",
+    "grünes Zimmer EG.6"
+  ],
+  "grünes Zimmer EG.6": [
+    "EG.7",
+    "Foyer EG.F1",
+    "Pflegeoase, 6 Betten",
+    "Teeküche",
+    "WC D EG.4",
+    "WC H EG.5"
+  ],
+  "WC D EG.4": [
+    "EG Zimmer",
+    "Foyer EG.F1",
+    "WC Behind. EG.3",
+    "WC H EG.5",
+    "grünes Zimmer EG.6"
+  ],
+  "WC Behind. EG.3": [
+    "EG Zimmer",
+    "Empfang/Büro EG.2",
+    "Treppenhaus EG.TH1",
+    "WC D EG.4",
+    "WC H EG.5"
+  ],
+  "Empfang/Büro EG.2": [
+    "Treppenhaus EG.TH1",
+    "WC Behind. EG.3",
+    "WC H EG.5",
+    "Windfang EG.1"
+  ],
+  "Windfang EG.1": [
+    "Empfang/Büro EG.2",
+    "Therapie",
+    "Treppenhaus EG.TH1"
+  ],
+  "Treppenhaus EG.TH1": [
+    "EG Zimmer",
+    "Empfang/Büro EG.2",
+    "Foyer EG.F2",
+    "Therapie",
+    "WC Behind. EG.3",
+    "Windfang EG.1"
+  ],
+  "Heimleitung": [
+    "Besprechung",
+    "Lager z.b.V. EG EG.19",
+    "Pflegedienstleitung",
+    "Wäsche (Rein) EG EG.17"
+  ],
+  "Pflegedienstleitung": [
+    "Heimleitung",
+    "Pflegeoase_2",
+    "Therapie",
+    "Wäsche (Rein) EG EG.17"
+  ],
+  "Wäsche (Rein) EG EG.17": [
+    "EG.7",
+    "Heimleitung",
+    "Lager z.b.V. EG EG.19",
+    "Pflegedienstleitung",
+    "Pflegeoase_2",
+    "Stützpunkt EG EG.16",
+    "Unrein EG EG.18"
+  ],
+  "Lager z.b.V. EG EG.19": [
+    "Besprechung",
+    "ELT EG EG.20",
+    "Heimleitung",
+    "Pflegebad EG.8",
+    "Unrein EG EG.18",
+    "Wäsche (Rein) EG EG.17"
+  ],
+  "Besprechung": [
+    "ELT EG EG.20",
+    "Heimleitung",
+    "Lager",
+    "Lager z.b.V. EG EG.19",
+    "Pflegeoase_3"
+  ],
+  "Lager": [
+    "Besprechung",
+    "Lagerfläche EG.10a",
+    "Pflegeoase_3"
+  ],
+  "Pflegeoase_3": [
+    "Besprechung",
+    "Besucher EG.F3",
+    "ELT EG EG.20",
+    "Lager",
+    "Lagerfläche EG.10a"
+  ],
+  "Therapie": [
+    "Foyer EG.F2",
+    "Pflegedienstleitung",
+    "Pflegeoase",
+    "Pflegeoase_2",
+    "Treppenhaus EG.TH1",
+    "Windfang EG.1"
+  ],
+  "Besucher EG.F3": [
+    "ELT EG EG.20",
+    "Lagerfläche EG.10a",
+    "Pflegebad",
+    "Pflegeoase_3"
+  ],
+  "Teeküche": [
+    "EG Zimmer",
+    "EG.7",
+    "Foyer EG.F1",
+    "Foyer EG.F2",
+    "Pflegeoase",
+    "grünes Zimmer EG.6"
+  ],
+  "EG.7": [
+    "Pflegeoase",
+    "Pflegeoase, 6 Betten",
+    "Stützpunkt EG EG.16",
+    "Teeküche",
+    "Unrein EG EG.18",
+    "Wäsche (Rein) EG EG.17",
+    "grünes Zimmer EG.6"
+  ],
+  "Foyer EG.F1": [
+    "EG Zimmer",
+    "Teeküche",
+    "WC D EG.4",
+    "grünes Zimmer EG.6"
+  ],
+  "Pflegeoase, 6 Betten": [
+    "EG.7",
+    "Pflegebad EG.8",
+    "Unrein EG EG.18",
+    "grünes Zimmer EG.6"
+  ],
+  "Pflegeoase_2": [
+    "Pflegedienstleitung",
+    "Pflegeoase",
+    "Stützpunkt EG EG.16",
+    "Therapie",
+    "Wäsche (Rein) EG EG.17"
+  ],
+  "Pflegeoase": [
+    "EG.7",
+    "Foyer EG.F2",
+    "Pflegeoase_2",
+    "Stützpunkt EG EG.16",
+    "Teeküche",
+    "Therapie"
+  ],
+  "Stützpunkt EG EG.16": [
+    "EG.7",
+    "Pflegeoase",
+    "Pflegeoase_2",
+    "Wäsche (Rein) EG EG.17"
+  ],
+  "Foyer EG.F2": [
+    "EG Zimmer",
+    "Pflegeoase",
+    "Teeküche",
+    "Therapie",
+    "Treppenhaus EG.TH1"
+  ],
+  "ELT EG EG.20": [
+    "Besprechung",
+    "Besucher EG.F3",
+    "Lager z.b.V. EG EG.19",
+    "Pflegebad",
+    "Pflegebad EG.8",
+    "Pflegeoase_3"
+  ],
+  "Unrein EG EG.18": [
+    "EG.7",
+    "Lager z.b.V. EG EG.19",
+    "Pflegebad EG.8",
+    "Pflegeoase, 6 Betten",
+    "Wäsche (Rein) EG EG.17"
+  ],
+  "EG Zimmer": [
+    "Foyer EG.F1",
+    "Foyer EG.F2",
+    "Teeküche",
+    "Treppenhaus EG.TH1",
+    "WC Behind. EG.3",
+    "WC D EG.4"
+  ]
+}

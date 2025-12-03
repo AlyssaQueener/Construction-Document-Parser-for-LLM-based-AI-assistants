@@ -188,125 +188,125 @@ def ai_roomnames_from_pdf(pdf_path):
     room_names_ai = call_mistral_roomnames(text)
     
     print(f"🤖 AI Antwort: {room_names_ai}")
+    
     print(f"📊 Anzahl gefundener Räume: {len(room_names_ai)}")
     
     return room_names_ai
 
 
 
-def is_valid_room_name(text, room_names_ai):
-    """
-    Determines if the provided text qualifies as a valid room name.
-    
-    Args:
-        text (str): The text candidate for a room name.
-        room_names_ai (list): List of room names identified by AI.
+def is_valid_room_name(text, room_names_ai=None):
+        """
+        Validates if text is a room name, filtering out technical terms and excluded keywords.
         
-    Returns:
-        bool: True if considered a valid room name, False otherwise.
-    """
-    expanded_names = []
-    for name in room_names_ai:
-        # Add the original name
-        expanded_names.append(name)
-        # Add split components if there are spaces
-        # Add split components if there are spaces
-        if ' ' in name:
-            components = name.split()
-            for comp in components:
-                # Add the component as-is
-                expanded_names.append(comp)
-               
-    
-    if not text or not isinstance(text, str):
-        return False
-    
-    text = text.strip()
-    
-    # Leere Strings ablehnen
-    if not text:
-        return False
-    
-    # Spezialfall: WC ist immer gültig
-    if text.upper() == 'WC':
-        return True
-    
-    # 1. Check: Ist der Text in der AI-Liste?
-    if expanded_names:
-        included = {name.lower().strip() for name in expanded_names}
-        if text.lower() in included:
+        Args:
+            text: The text to validate
+            room_names_ai: Optional list of room names from AI
+        
+        Returns:
+            bool: True if valid room name, False otherwise
+        """
+        excluded = {
+            # Einheiten und Maße
+            'ca', 'ca.', 'cm', 'm²', 'm2', 'qm', 'mm', 'dm',
+            # Geschosse
+            'og', 'eg', 'ug', 'dg', 'kg', '1.og', '2.og', 'brh',
+            # Hinweise und Zusatzinformationen
+            'nts', 'abb.', 'abb', 'allg', 'allg.', 'bes.', 'bes', 'bez.', 'bez', 
+            'bezg', 'brh', 'stg',  # Fixed: added commas
+            # Nummern und Referenzen
+            'nr', 'nr.', 'no', 'no.', 'pos', 'pos.',
+            # Plan-Begriffe
+            'plan', 'detail', 'schnitt', 'ansicht', 'grundriss', 'fläche', 
+            'maßstab', 'massstab', 'zimmertüren', 'türen',
+            # Maßstäbe
+            '1:50', '1:100', '1:200', '1:500',
+            # Technische Abkürzungen
+            'dn', 'nw', 'dia', 'durchm.',
+            # Administrative Begriffe
+            'datum', 'gepr', 'gez', 'bearb', 'index',
+            # Himmelsrichtungen
+            'nord', 'süd', 'ost', 'west', 'n', 's', 'o', 'w',
+            # Achsbezeichnungen
+            'achse', 'raster',
+        }
+        
+        # Basic validation
+        if not text or not isinstance(text, str):
+            return False
+        
+        text = text.strip()
+        
+        # Empty strings rejected
+        if not text:
+            return False
+        
+        # Special case: WC is always valid
+        if text.upper() == 'WC':
             return True
-    # Mindestlänge: 3 Zeichen (außer WC)
-    if len(text) < 3:
-        return False
-    # 2. Explizite Ausschlussliste (erweitert)
-    excluded = {
-        # Einheiten und Maße
-        'ca', 'ca.', 'cm', 'm²', 'm2', 'qm', 'mm', 'dm', 
-        # Geschosse
-        'og', 'eg', 'ug', 'dg', 'kg', '1.og', '2.og', 'brh'
-        #Hinweise und Zusatzinformationen
-        'nts','abb.', 'abb','allg', 'allg.', 'bes.', 'bes', 'bez.', 'bez', 'bezg', 'Bez', 'Bez.'
-        # Nummern und Referenzen
-        'nr', 'nr.', 'no', 'no.', 'pos', 'pos.',
-        # Plan-Begriffe
-        'plan', 'detail', 'schnitt', 'ansicht', 'grundriss','fläche', 'maßstab','massstab', 'zimmertüren', 'türen'
-        # Maßstäbe
-        '1:50', '1:100', '1:200', '1:500',
-        # Technische Abkürzungen
-        'dn', 'nw', 'dia', 'durchm.', 
-        # Administrative Begriffe
-        'datum', 'gepr', 'gez', 'bearb', 'index',
-        # Himmelsrichtungen
-        'nord', 'süd', 'ost', 'west', 'n', 's', 'o', 'w',
-        # Achsbezeichnungen (Zahlen werden woanders gefiltert)
-        'achse', 'raster',
-    }
-    
-    if text.lower() in excluded:
-        return False
-    
-    # 3. Zahlen-Pattern ablehnen (reine Zahlen oder Koordinaten)
-    # Erlaubt: "Raum 1.01", "Zimmer 2"
-    # Ablehnt: "1.50", "12.5", "2.40"
-    # if re.match(r'^[\d.,]+', text):
-    #     return False
-    
-    # # 4. Technische Codes ablehnen (z.B. "DN 100", "Ø 50")
-    # if re.match(r'^[A-Z]{1,3}\s*\d+', text, re.IGNORECASE):
-    #     # Ausnahme: Zimmernummern wie "Z1", "R2.1" sind OK
-    #     if not re.match(r'^[ZR]\d', text, re.IGNORECASE):
-    #         return False
-    
-    # 5. Wenn AI eine Liste zurückgegeben hat, nur diese akzeptieren
-    #(Strenge Filterung)
-    if expanded_names:
-        return False  # Nicht in AI-Liste, also ablehnen
-    
-    # 6. Fallback: Wenn AI keine Liste hat, verwende Heuristiken
-    # Typische Raum-Keywords
-    room_keywords = [
-        'zimmer', 'raum', 'bad', 'wc', 'küche', 'keller', 'diele', 'flur',
-        'wohn', 'schlaf', 'kind', 'gäste', 'arbeits', 'büro', 'ess',
-        'abstell', 'hauswirtschaft', 'hwr', 'technik', 'heizung',
-        'garage', 'carport', 'terrasse', 'balkon', 'loggia',
-        'eingang', 'windfang', 'vorraum', 'ankleide', 'schrank',
-    ]
-    
-    text_lower = text.lower()
-    return any(keyword in text_lower for keyword in room_keywords)
-    
+        
+        # Minimum length: 3 characters (except WC)
+        if len(text) < 3:
+            return False
+        
+        # CRITICAL: Check exclusion list FIRST
+        if text.lower() in excluded:
+            return False
+        
+        # Numbers pattern rejection (pure numbers or coordinates)
+        # Rejects: "1.50", "12.5", "2.40"
+        # Allows: "Raum 1.01", "Zimmer 2"
+        if re.match(r'^[\d.,]+$', text):  # Added $ to match entire string
+            return False
+        
+        # Technical codes rejection (e.g. "DN 100", "Ø 50")
+        if re.match(r'^[A-Z]{1,3}\s*\d+', text, re.IGNORECASE):
+            # Exception: Room numbers like "Z1", "R2.1" are OK
+            if not re.match(r'^[ZR]\d', text, re.IGNORECASE):
+                return False
+        
+        # If AI provided a list, normalize and filter it
+        if room_names_ai:
+            # Normalize AI names: strip, lowercase, exclude blacklisted
+            valid_ai_names = {
+                name.strip().lower() 
+                for name in room_names_ai 
+                if name.strip().lower() not in excluded
+            }
+            
+            # If text is in the filtered AI list, accept it
+            if text.lower() in valid_ai_names:
+                return True
+            # else:
+            #     # Strict mode: reject if not in AI list
+            #     return False
+        
+        # check for matches AI might have missed based on keywords
+        print(f" gefilteret roomnames: {valid_ai_names}")
+        room_keywords = [
+            'zimmer', 'raum', 'bad', 'wc', 'küche', 'keller', 'diele', 'flur',
+            'wohn', 'schlaf', 'kind', 'gäste', 'arbeit', 'arbeits', 'büro', 'ess',
+            'abstell', 'hauswirtschaft', 'hwr', 'technik', 'heizung',
+            'garage', 'carport', 'terrasse', 'balkon', 'loggia',
+            'eingang', 'windfang', 'vorraum', 'ankleide', 'schrank',
+        ]
+        text_lower = text.lower()
+        if any(keyword in text_lower for keyword in room_keywords):
+            print(f"✓ Matched keyword in: {text}")
+            return True
+        
+        
+       
+        
 
 def are_close(e1, e2, y_thresh=10, x_thresh=40):
     """
     Checks if two word-bounding boxes are spatially close.
-
     Args:
         e1 (list or tuple of float): [x0, y0, x1, y1, ...] coordinates for the first box.
         e2 (list or tuple of float): [x0, y0, x1, y1, ...] coordinates for the second box.
         y_thresh (float, optional): Max allowed y difference to consider as close. Default: 10.
         x_thresh (float, optional): Max allowed x difference. Default: 40.
-
     Returns:
         bool: True if e1 and e2 are spatially close; otherwise False.
     """
@@ -580,7 +580,7 @@ def neighboring_rooms_voronoi(pdf_path):
     
     # Clip rectangle to exclude plan information
     width, height = page.rect.width, page.rect.height
-    clip_rect = fitz.Rect(0, 0, width * 0.7, height * 0.8)
+    clip_rect = fitz.Rect(0, 0, width, height)
     flipped_rect = (
         clip_rect.x0,
         height - clip_rect.y1,
@@ -610,7 +610,7 @@ def neighboring_rooms_voronoi(pdf_path):
     flipped_centerpoints = flip_y_coordinates(centerpoints, page_height)
     flipped_centerpoints = make_names_unique(flipped_centerpoints)
     neighbors, vor = extract_bounded_voronoi_neighbors_detailed(flipped_centerpoints, flipped_rect)
-    #visualize_voronoi_cells(vor, flipped_centerpoints, neighbors)   
+    visualize_voronoi_cells(vor, flipped_centerpoints, neighbors)   
     doc.close()
     
     # Print as JSON and return
@@ -672,14 +672,14 @@ if __name__ == "__main__":
     pdf_path = "src/validation/Floorplan/neighboring rooms/Cluttered Floorplans/Cluttered 02.pdf" 
     #pdf_path = "examples/FloorplansAndSectionViews/Simple Floorplan/02_Simple.pdf"
     #pdf_path ="src/validation/Floorplan/titleblock/testdata/floorplan-test-1.pdf"
-    json_output_path = pdf_path.replace('.pdf', '_full_floorplan_vor.json')
+    json_output_path = pdf_path.replace('.pdf', '_neighbors_vor.json')
 
-    connected_rooms = extract_full_floorplan(pdf_path)
-    print(connected_rooms)
-    # neighbors_json = neighboring_rooms_voronoi(pdf_path)
-    # print(neighbors_json)
+    #connected_rooms = extract_full_floorplan(pdf_path)
+    #print(connected_rooms)
+    neighbors_json = neighboring_rooms_voronoi(pdf_path)
+    print(neighbors_json)
     with open(json_output_path, 'w', encoding='utf-8') as f:
-        json.dump(connected_rooms, f, ensure_ascii=False, indent=2)
+        json.dump(neighbors_json, f, ensure_ascii=False, indent=2)
 
     #connected_rooms = extract_full_floorplan(pdf_path)
     #print(connected_rooms)

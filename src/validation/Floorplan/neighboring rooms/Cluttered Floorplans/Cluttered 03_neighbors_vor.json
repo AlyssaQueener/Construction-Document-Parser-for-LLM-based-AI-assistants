@@ -1,0 +1,58 @@
+{
+  "Terrasse": [
+    "Küche",
+    "Terrasse_2",
+    "Wohnen /Essen"
+  ],
+  "Küche": [
+    "Diele",
+    "Terrasse",
+    "Wohnen /Essen"
+  ],
+  "Wohnen /Essen": [
+    "Diele",
+    "Diele_2",
+    "Küche",
+    "Terrasse",
+    "Terrasse_2",
+    "Wohnen /Essen_2"
+  ],
+  "Terrasse_2": [
+    "Terrasse",
+    "Wohnen /Essen",
+    "Wohnen /Essen_2"
+  ],
+  "G-WC_2": [
+    "Diele_2",
+    "G-WC"
+  ],
+  "G-WC": [
+    "Diele",
+    "Diele_2",
+    "G-WC_2"
+  ],
+  "Diele_2": [
+    "Diele",
+    "G-WC",
+    "G-WC_2",
+    "Küche_2",
+    "Wohnen /Essen",
+    "Wohnen /Essen_2"
+  ],
+  "Wohnen /Essen_2": [
+    "Diele_2",
+    "Küche_2",
+    "Terrasse_2",
+    "Wohnen /Essen"
+  ],
+  "Küche_2": [
+    "Diele_2",
+    "Wohnen /Essen_2"
+  ],
+  "Diele": [
+    "Diele_2",
+    "G-WC",
+    "Küche",
+    "Wohnen /Essen"
+  ]
+}

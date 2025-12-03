@@ -915,6 +915,27 @@ def create_room_name_extraction_prompt(text_content):
     - Maßstabsangaben (z.B. "1:100")
     - Bauspezifische Begriffe (z.B. "Wand", "Tür", "Fenster")
     - Berreiche wie Brandabschnitt (z.B Brandabschnitt Wohnung 1)
+    - abkürzungen wie 'BRH', 'STG', 'BRH', 'BRH', 'BRH'
+    - Einheiten und Maße
+        'ca', 'ca.', 'cm', 'm²', 'm2', 'qm', 'mm', 'dm', 
+    - Geschosse
+        'og', 'eg', 'ug', 'dg', 'kg', '1.og', '2.og', 'brh'
+    - Hinweise und Zusatzinformationen
+        'nts','abb.', 'abb','allg', 'allg.', 'bes.', 'bes', 'bez.', 'bez', 'bezg', 'Bez', 'Bez.'
+    - Nummern und Referenzen
+        'nr', 'nr.', 'no', 'no.', 'pos', 'pos.',
+    - Plan-Begriffe
+        'plan', 'detail', 'schnitt', 'ansicht', 'grundriss','fläche', 'maßstab','massstab', 'zimmertüren', 'türen'
+    - Maßstäbe
+        '1:50', '1:100', '1:200', '1:500',
+    - Technische Abkürzungen
+        'dn', 'nw', 'dia', 'durchm.', 
+    - Administrative Begriffe
+        'datum', 'gepr', 'gez', 'bearb', 'index',
+    - Himmelsrichtungen
+        'nord', 'süd', 'ost', 'west', 'n', 's', 'o', 'w',
+    - Achsbezeichnungen (Zahlen werden woanders gefiltert)
+        'achse', 'raster',
     - Plankopf-Informationen (Projektnamen, Adressen, Plannummern)
     - Allgemeine Beschriftungen (z.B. "Grundriss", "Schnitt A-A")
     - Einzelne Buchstaben oder Zahlen ohne Kontext

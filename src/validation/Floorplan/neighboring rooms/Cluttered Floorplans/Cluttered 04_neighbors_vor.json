@@ -1,0 +1,50 @@
+{
+  "HWR/Technik": [
+    "Arbeiten",
+    "Diele",
+    "WC"
+  ],
+  "WC": [
+    "Diele",
+    "HWR/Technik",
+    "Vorrat",
+    "Wohnen"
+  ],
+  "Arbeiten": [
+    "Diele",
+    "HWR/Technik",
+    "Terrasse",
+    "Vorrat"
+  ],
+  "Diele": [
+    "Arbeiten",
+    "HWR/Technik",
+    "Vorrat",
+    "WC"
+  ],
+  "Vorrat": [
+    "Arbeiten",
+    "Diele",
+    "Essen",
+    "Terrasse",
+    "WC",
+    "Wohnen"
+  ],
+  "Terrasse": [
+    "Arbeiten",
+    "Essen",
+    "Vorrat",
+    "Wohnen"
+  ],
+  "Essen": [
+    "Terrasse",
+    "Vorrat",
+    "Wohnen"
+  ],
+  "Wohnen": [
+    "Essen",
+    "Terrasse",
+    "Vorrat",
+    "WC"
+  ]
+}
