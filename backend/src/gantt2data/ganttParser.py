@@ -35,12 +35,14 @@ def preprocess_df_and_check_column_names(df):
         is_empty = True
         return None, is_empty
     all_numeric = all(isinstance(col, (int, float)) for col in df.columns)
-    is_sequential = list(df.columns) == list(range(len(df.columns)))
     print("COLUMNNAMES")
     print(list(df.columns))
     old_column_names = list(df.columns)
-    if all_numeric and is_sequential:
+    if all_numeric:
          df = rename_columns(df, old_column_names)
+         # Add after rename_columns call
+         print(df.head())
+         print("DF columns:", df.columns.tolist())
     return df, is_empty
 
 def match(column_name):
@@ -53,7 +55,7 @@ def match(column_name):
     }
     
     # Convert column name to lowercase for case-insensitive matching
-    column_lower = column_name.lower().strip()
+    column_lower = str(column_name).lower().strip()
     
     # Check each pattern
     for property_name, pattern in patterns.items():
@@ -76,6 +78,7 @@ def match_column_names_with_task_properties(df):
             found_matches += 1  # Fixed: was =+ instead of +=
     print("Column order:", column_order)
     print("DataFrame columns:", df.columns.tolist())
+    print("Found Matches "+ str(found_matches))
     return column_order, found_matches
 
 def create_tasks(column_order, df):
@@ -125,8 +128,9 @@ def parse_gantt_chart(path, chart_format):
         tables = camelot.read_pdf(path)
         df = tables[0].df
         processed_df, is_empty = preprocess_df_and_check_column_names(df)
+        print(processed_df)
         if is_empty:
-            return {"Table Recognition": "failed"}
+            return {"Table Recognition": "failed"}, method, False
         column_order, found_matches = match_column_names_with_task_properties(processed_df)
         if found_matches < 3:
             with pdfplumber.open(path) as pdf:
@@ -142,6 +146,7 @@ def parse_gantt_chart(path, chart_format):
         json_string, method_visual, is_succesful_visual = visual.parse_gant_chart_visual(path)
         return json_string, method_visual, is_succesful_visual
     else:
-        json_string, method_visul, is_succesful = visual.parse_full_ai(path)
+        method = "ai"
+        json_string, method, is_succesful = visual.parse_full_ai(path)
 
 
