@@ -672,7 +672,7 @@ if __name__ == "__main__":
     pdf_path = "src/validation/Floorplan/neighboring rooms/Cluttered Floorplans/Cluttered 02.pdf" 
     #pdf_path = "examples/FloorplansAndSectionViews/Simple Floorplan/02_Simple.pdf"
     #pdf_path ="src/validation/Floorplan/titleblock/testdata/floorplan-test-1.pdf"
-    json_output_path = pdf_path.replace('.pdf', '_connected_vor.json')
+    json_output_path = pdf_path.replace('.pdf', '_full_floorplan_vor.json')
 
     connected_rooms = extract_full_floorplan(pdf_path)
     print(connected_rooms)

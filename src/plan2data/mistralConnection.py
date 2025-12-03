@@ -968,7 +968,7 @@ AUSGABEFORMAT:
 Gib das Ergebnis als einzelnes JSON-Objekt zurück mit folgender Struktur:
 
 {{
-  "connectedRooms": {{
+  {{
     "ROOM_NAME_1": ["CONNECTED_ROOM_1", "CONNECTED_ROOM_2"],
     "ROOM_NAME_2": ["CONNECTED_ROOM_1"]
   }},
@@ -977,7 +977,7 @@ Gib das Ergebnis als einzelnes JSON-Objekt zurück mit folgender Struktur:
 
 Beispiel:
 {{
-  "connectedRooms": {{
+   {{
     "ABSTELL ZIMMER": ["DIELE"],
     "BAD": ["DIELE"],
     "DIELE": ["ABSTELL ZIMMER", "BAD", "GÄSTEZIMMER", "HWR", "KÜCHE", "WOHN/ESSZIMMER"],
