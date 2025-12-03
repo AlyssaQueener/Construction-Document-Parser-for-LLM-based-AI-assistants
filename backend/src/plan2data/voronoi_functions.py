@@ -1,11 +1,10 @@
-import os
 import fitz
 import json
 import re 
-from scipy.spatial import Voronoi, voronoi_plot_2d
+from scipy.spatial import Voronoi
 import numpy as np
 from collections import defaultdict
-from mistralConnection import *
+import src.plan2data.mistralConnection as mistral
 import base64
 import pymupdf
 import src.plan2data.titleBlockInfo as tb
@@ -89,11 +88,8 @@ def has_more_than_one_char(s):
     if s.upper() == 'WC':
         return True
     return len(s) > 2
-import fitz  # PyMuPDF
-import ezdxf
 
 
-import fitz  # PyMuPDF
 
 
 
@@ -184,7 +180,7 @@ def ai_roomnames_from_pdf(pdf_path):
     print()
     
     # An AI senden
-    room_names_ai = call_mistral_roomnames(text)
+    room_names_ai = mistral.call_mistral_roomnames(text)
     
     print(f"🤖 AI Antwort: {room_names_ai}")
     print(f"📊 Anzahl gefundener Räume: {len(room_names_ai)}")
@@ -583,7 +579,6 @@ def neighboring_rooms_voronoi(pdf_path):
     doc.close()
     
     # Print as JSON and return
-    output_json = json.dumps(neighbors, indent=2, ensure_ascii=False)
     return neighbors
 
 
@@ -610,7 +605,7 @@ def extract_full_floorplan(pdf_path):
         #titleblock, method, is_succesful, confidence = tb.get_title_block_info(pdf_path)
         
         # 4. Call Mistral to identify actual connections
-        connected_rooms_response = call_mistral_connected_rooms(base64_image, json.dumps(neighbors_vor))
+        connected_rooms_response = mistral.call_mistral_connected_rooms(base64_image, json.dumps(neighbors_vor))
         
         # 5. Parse response if it's a string
         if isinstance(connected_rooms_response, str):
