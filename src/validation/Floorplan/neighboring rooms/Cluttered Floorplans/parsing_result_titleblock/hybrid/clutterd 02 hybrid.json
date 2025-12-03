@@ -1,0 +1,24 @@
+{
+    "projectInfo": {
+        "projectId": null,
+        "projectName": null,
+        "location": "76133 Karlsruhe",
+        "author": "Ip",
+        "stakeholders": {
+            "client": "Badischer Landesverein fiir Innere Mission",
+            "architect": "PLANFABRIK",
+            "engineers": ["IB Klenert", "IB IBEAS", "Statikplane IB Schuler"]
+        },
+        "timeline": {
+            "yearOfCompletion": null,
+            "approvalDate": null
+        }
+    },
+    "planMetadata": {
+        "planType": "Grundriss",
+        "planFormat": "AO",
+        "scale": "1:50",
+        "projectionMethod": null
+    },
+    "confidence": 0.6
+}

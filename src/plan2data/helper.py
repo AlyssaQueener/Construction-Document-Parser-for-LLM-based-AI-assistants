@@ -5,7 +5,7 @@ import pymupdf
 import json
 from PIL import Image
 
-import mistralConnection as mistral
+import src.plan2data.mistralConnection as mistral
 
 
 def extract_images_from_pdf(path_pdf, output_format, output_dir):
@@ -160,11 +160,11 @@ def page_to_split_images(page):
     
     # Save chunks to temporary files
     output_files = []
-    base_name = os.path.splitext(os.path.basename(path))[0]
+    base_name = os.path.splitext(os.path.basename(page))[0]
     
     for idx, chunk in enumerate(chunks):
         # Create temp file or save to specific directory
-        output_file = f"{base_name}_page{page_number + 1}_chunk{idx + 1}.png"
+        output_file = f"{base_name}_page{page + 1}_chunk{idx + 1}.png"
         chunk.save(output_file)
         output_files.append(output_file)
     

@@ -346,7 +346,8 @@ def call_mistral_evaluation(ground_truth, parser_result):
     response = chat_response.choices[0].message.content
     return response
 
-def llm_as_a_judge_titleblock(path_to_ground_truth, parsing_result):
+def llm_as_a_judge_titleblock(path_to_ground_truth, path_parsing_result):
     ground_truth = read_json(path_to_ground_truth)
+    parsing_result = read_json(path_parsing_result)
     evaluation_result = call_mistral_evaluation(ground_truth,parsing_result)
     return evaluation_result

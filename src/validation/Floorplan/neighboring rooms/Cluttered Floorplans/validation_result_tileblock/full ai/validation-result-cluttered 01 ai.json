@@ -1,0 +1,68 @@
+{
+    "field_analysis": {
+        "projectInfo": {
+            "projectId": {
+                "match_score": 0.0,
+                "note": "Completely incorrect"
+            },
+            "projectName": {
+                "match_score": 1.0,
+                "note": "Exact match"
+            },
+            "location": {
+                "match_score": 0.0,
+                "note": "Missing value"
+            },
+            "author": {
+                "match_score": 0.0,
+                "note": "Hallucinated value"
+            },
+            "stakeholders": {
+                "client": {
+                    "match_score": 0.0,
+                    "note": "Missing value"
+                },
+                "architect": {
+                    "match_score": 0.8,
+                    "note": "Minor formatting difference"
+                },
+                "engineers": {
+                    "match_score": 0.0,
+                    "note": "Missing value"
+                }
+            },
+            "timeline": {
+                "yearOfCompletion": {
+                    "match_score": 1.0,
+                    "note": "Exact match"
+                },
+                "approvalDate": {
+                    "match_score": 1.0,
+                    "note": "Exact match"
+                }
+            }
+        },
+        "planMetadata": {
+            "planType": {
+                "match_score": 1.0,
+                "note": "Exact match"
+            },
+            "planFormat": {
+                "match_score": 0.0,
+                "note": "Completely incorrect"
+            },
+            "scale": {
+                "match_score": 1.0,
+                "note": "Exact match"
+            },
+            "projectionMethod": {
+                "match_score": 1.0,
+                "note": "Exact match"
+            }
+        }
+    },
+    "completeness": 5.0,
+    "accuracy": 5.2,
+    "overall_score": 5.08,
+    "confidence_calibration": "overconfident"
+}

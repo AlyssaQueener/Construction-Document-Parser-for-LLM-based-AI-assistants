@@ -1,0 +1,24 @@
+{
+    "projectInfo": {
+        "projectId": null,
+        "projectName": null,
+        "location": null,
+        "author": "IB Kleiner und IB IBEAS und Statikpläne IB Schüler",
+        "stakeholders": {
+            "client": null,
+            "architect": null,
+            "engineers": null
+        },
+        "timeline": {
+            "yearOfCompletion": null,
+            "approvalDate": null
+        }
+    },
+    "planMetadata": {
+        "planType": "Ausführungsplanung",
+        "planFormat": "A1",
+        "scale": "1:100",
+        "projectionMethod": null
+    },
+    "confidence": 0.4
+}
