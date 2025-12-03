@@ -48,6 +48,7 @@ class ContentType(str, Enum):
 class ChartFormat(str, Enum):
     visual = "visual"
     tabular = "tabular"
+    full_ai= "full ai"
 
 
 description = """
@@ -364,9 +365,10 @@ Answer:"""
     except Exception as e:
         print(f"Error in ask_ai: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+        gc.collect()
     
 
-gc.collect()
+
 
 
 # #https://fastapi.tiangolo.com/async/#in-a-hurry maybe have a look at this to improve performance

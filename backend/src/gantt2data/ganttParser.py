@@ -138,8 +138,10 @@ def parse_gantt_chart(path, chart_format):
         if tasks:
             is_succesful=True
         return tasks, method, is_succesful
-    else:
+    elif chart_format == "visual":
         json_string, method_visual, is_succesful_visual = visual.parse_gant_chart_visual(path)
         return json_string, method_visual, is_succesful_visual
+    else:
+        json_string, method_visul, is_succesful = visual.parse_full_ai(path)
 
 

@@ -396,46 +396,60 @@ def extract_present_colours(gantt_chart_bars):
 
 def parse_gant_chart_visual(path):
     tolerance = 2
-    with pdfplumber.open(path) as pdf:
-        page = pdf.pages[0]
-        image_path = helper.convert_pdf2img(path)
-        tables = page.extract_table()
-        boxes = page.rects
-        df = pd.DataFrame(tables[1:], columns=tables[0])
-        df = df.replace('', None)
-        df = df.dropna(how='all')
-        df = df.dropna(axis='columns', how='all')
-        activities = extract_activities(df)
-        row_count = len(df.index)
-        if activities == None:
-            activities = json.loads(mistral.call_mistral_activities(image_path))
-        elif len(activities)< row_count - 5:
-            activities = json.loads(mistral.call_mistral_activities(image_path))
-        time_line_rows= extract_timeline_rows(df)
-        timeline = create_single_timeline(time_line_rows)
-        column_count = len(df.columns)
-        ai_extraction = False
-        if len(timeline) < column_count-5 or len(timeline) < 4:
-             timeline = json.loads(mistral.call_mistral_timeline(image_path,"no timeline", None))
-             ai_extraction = True
-        time_line_with_localization, unfound_timestamps = localize_timestamps(timeline, page)
-        if unfound_timestamps > len(timeline) - tolerance and ai_extraction== False:
-            timeline = json.loads(mistral.call_mistral_timeline(image_path, "badly extracted", None))
+    method = "deterministic"
+    try:
+        with pdfplumber.open(path) as pdf:
+            page = pdf.pages[0]
+            image_path = helper.convert_pdf2img(path)
+            tables = page.extract_table()
+            boxes = page.rects
+            df = pd.DataFrame(tables[1:], columns=tables[0])
+            df = df.replace('', None)
+            df = df.dropna(how='all')
+            df = df.dropna(axis='columns', how='all')
+            activities = extract_activities(df)
+            row_count = len(df.index)
+            if activities == None:
+                activities = json.loads(mistral.call_mistral_activities(image_path))
+                method = "hybrid"
+            elif len(activities)< row_count - 5:
+                activities = json.loads(mistral.call_mistral_activities(image_path))
+                method = "hybrid"
+            time_line_rows= extract_timeline_rows(df)
+            timeline = create_single_timeline(time_line_rows)
+            column_count = len(df.columns)
+            ai_extraction = False
+            if len(timeline) < column_count-5 or len(timeline) < 4:
+                timeline = json.loads(mistral.call_mistral_timeline(image_path,"no timeline", None))
+                ai_extraction = True
+                method = "hybrid"
             time_line_with_localization, unfound_timestamps = localize_timestamps(timeline, page)
-        activities_with_loc, unfound_activites = localize_activities(activities, page)
-        if unfound_activites > len(activities)-tolerance:
-            activities = json.loads(mistral.call_mistral_activities(image_path))
+            if unfound_timestamps > len(timeline) - tolerance and ai_extraction== False:
+                timeline = json.loads(mistral.call_mistral_timeline(image_path, "badly extracted", None))
+                method = "hybrid"
+                time_line_with_localization, unfound_timestamps = localize_timestamps(timeline, page)
             activities_with_loc, unfound_activites = localize_activities(activities, page)
-        gantt_chart_bars = find_bars(boxes, activities_with_loc,2)
-        success = check_bar_recognition(gantt_chart_bars)
-        if not success:
-            gantt_chart_bars = identify_bars_with_colours(gantt_chart_bars)
-        activity_timestamps = match_bars_with_timeline(gantt_chart_bars,time_line_with_localization, ai_extraction)
-        activities_with_dates = determine_start_end_of_activity(activity_timestamps)
-        return activities_with_dates
+            if unfound_activites > len(activities)-tolerance:
+                activities = json.loads(mistral.call_mistral_activities(image_path))
+                activities_with_loc, unfound_activites = localize_activities(activities, page)
+                method = "hybrid"
+            gantt_chart_bars = find_bars(boxes, activities_with_loc,2)
+            success = check_bar_recognition(gantt_chart_bars)
+            if not success:
+                gantt_chart_bars = identify_bars_with_colours(gantt_chart_bars)
+            activity_timestamps = match_bars_with_timeline(gantt_chart_bars,time_line_with_localization, ai_extraction)
+            activities_with_dates = determine_start_end_of_activity(activity_timestamps)
+            
+            return activities_with_dates, method, True
+    except Exception as e:
+        print(e)
+        return None, None, False
+        
+        
 
 
 def parse_full_ai(path):
+     method = "ai"
      with pdfplumber.open(path) as pdf:
         page = pdf.pages[0]
         image_path = helper.convert_pdf2img(path)
@@ -452,18 +466,18 @@ def parse_full_ai(path):
         timeline = extract_timeline_rows(df)
         print(timeline)
         if len(activities) != 0:
-            result=  mistral.call_mistral_timeline(image_path, "full ai w activities", activities)
+            result=  json.loads(mistral.call_mistral_timeline(image_path, "full ai w activities", activities))
         elif to_be_chunked(image_path):
-            result= parse_from_chunks(path,option)
+            result= json.loads(parse_from_chunks(path,option))
         else:
-            result =  mistral.call_mistral_timeline(image_path, "full ai", None)
+            result =  json.loads(mistral.call_mistral_timeline(image_path, "full ai", None))
         try:
             if os.path.exists(image_path):
                 os.remove(image_path)
                 print(f"Deleted: {image_path}")
         except Exception as e:
             print(f"Warning: Could not delete {image_path}: {e}")
-        return result
+        return result, method, True
 
 
 def extract_gantt_chart_from_chunks(chunked_chart):
