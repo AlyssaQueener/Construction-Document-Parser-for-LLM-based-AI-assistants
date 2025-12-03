@@ -43,6 +43,8 @@ def extract_title_block_info(image_path):
         
         print(f"OCR extracted text (length: {len(text_title_block)})")
         mistral_response_content = mistral.call_mistral_for_content_extraction(text_title_block)
+        print("Mistral Response:")
+        print(mistral_response_content)
         return mistral_response_content
         
     except Exception as e:
