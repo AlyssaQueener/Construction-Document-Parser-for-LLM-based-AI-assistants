@@ -19,8 +19,6 @@ def financial_boq(path):
 
 
 if __name__ == "__main__":
-    
-    
     path = 'examples/FinancialDocuments/BOQ2.pdf'
     flav = 'stream'
     page_num = 'all'
