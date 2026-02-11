@@ -1,0 +1,67 @@
+flowchart TD
+    START["**parse_gant_chart_visual**(path)"] --> A["Open PDF with pdfplumber\nConvert PDF → image\nExtract table & rectangles"]
+
+    A --> B["**extract_activities**(df)\nGet activity names from 1st column"]
+    B --> B1{Activities found\n& count sufficient?}
+    B1 -- No --> B2["**Fallback: Mistral AI**\nmistral.call_mistral_activities()"]
+    B1 -- Yes --> C
+
+    B2 --> C["**extract_timeline_rows**(df)\nScan first 3 rows for time labels"]
+    C --> D["**create_single_timeline**()\nMerge rows into unified timeline\nusing most granular row as base"]
+    D --> D1{Timeline sufficient?\n≥ column_count - 5\nand ≥ 4 entries}
+    D1 -- No --> D2["**Fallback: Mistral AI**\nmistral.call_mistral_timeline()\nai_extraction = True"]
+    D1 -- Yes --> E
+
+    D2 --> E["**localize_timestamps**(timeline, page)\nSearch PDF page for timestamp text\n→ get bounding boxes"]
+    E --> E1{Too many timestamps\nunfound?}
+    E1 -- Yes --> E2["**Retry: Mistral AI**\nRe-extract timeline\nRe-localize"]
+    E1 -- No --> F
+
+    E2 --> F["**localize_activities**(activities, page)\nSearch PDF page for activity text\n→ get bounding boxes"]
+    F --> F1{Too many activities\nunfound?}
+    F1 -- Yes --> F2["**Retry: Mistral AI**\nRe-extract activities\nRe-localize"]
+    F1 -- No --> G
+
+    F2 --> G["**find_bars**(rectangles, activities)\nMatch PDF rectangles to activities\nvia vertical alignment + right-of check"]
+
+    G --> H["**check_bar_recognition**()\nValidate bar distribution"]
+    H --> H1{>80% same count?\nLikely grid lines detected}
+    H1 -- Yes --> H2["**identify_bars_with_colours**()\nFilter out bright background rects\nKeep only colored Gantt bars"]
+    H1 -- No --> I
+
+    H2 --> I["**match_bars_with_timeline**()\nCorrelate bars with timestamps\nvia horizontal alignment"]
+
+    I --> J["**determine_start_end_of_activity**()\nMin column_index → start date\nMax column_index → end date"]
+
+    J --> Z["Return list of\n{task, start, finish}"]
+
+    %% Full AI path
+    START2["**parse_full_ai**(path)"] --> FA1["Open PDF, convert to image\nCheck for timeline via Mistral"]
+    FA1 --> FA2["Extract table data\nGet activities & timeline from DF"]
+    FA2 --> FA3{Activities\nfound?}
+    FA3 -- Yes --> FA4["Mistral: full AI\nw/ activity context"]
+    FA3 -- No --> FA5{Image too\nlarge?}
+    FA5 -- Yes --> FA6["**parse_from_chunks**()\nSplit image → chunks\nParse each chunk via Mistral\nAggregate results"]
+    FA5 -- No --> FA7["Mistral: full AI\nno context"]
+    FA4 --> FA8["Cleanup temp images\nReturn result"]
+    FA6 --> FA8
+    FA7 --> FA8
+
+    style START fill:#4A90D9,color:#fff,stroke:#2C5F8A
+    style START2 fill:#4A90D9,color:#fff,stroke:#2C5F8A
+    style Z fill:#7ED321,color:#fff,stroke:#5A9A17
+    style FA8 fill:#7ED321,color:#fff,stroke:#5A9A17
+    style B1 fill:#F5A623,color:#fff,stroke:#C17D15
+    style D1 fill:#F5A623,color:#fff,stroke:#C17D15
+    style E1 fill:#F5A623,color:#fff,stroke:#C17D15
+    style F1 fill:#F5A623,color:#fff,stroke:#C17D15
+    style H1 fill:#F5A623,color:#fff,stroke:#C17D15
+    style FA3 fill:#F5A623,color:#fff,stroke:#C17D15
+    style FA5 fill:#F5A623,color:#fff,stroke:#C17D15
+    style B2 fill:#9B59B6,color:#fff,stroke:#6C3483
+    style D2 fill:#9B59B6,color:#fff,stroke:#6C3483
+    style E2 fill:#9B59B6,color:#fff,stroke:#6C3483
+    style F2 fill:#9B59B6,color:#fff,stroke:#6C3483
+    style FA4 fill:#9B59B6,color:#fff,stroke:#6C3483
+    style FA6 fill:#9B59B6,color:#fff,stroke:#6C3483
+    style FA7 fill:#9B59B6,color:#fff,stroke:#6C3483
