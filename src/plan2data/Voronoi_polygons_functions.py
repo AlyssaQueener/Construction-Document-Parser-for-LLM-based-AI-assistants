@@ -1,10 +1,19 @@
+import sys
+from pathlib import Path
+
+# Füge das Hauptverzeichnis zum Python-Pfad hinzu
+project_root = Path(__file__).resolve().parent.parent.parent
+sys.path.insert(0, str(project_root))
+
+# Jetzt funktionieren die Imports:
+import src.plan2data.helper as helper
 import os
 import fitz
 import json
 import re 
 from scipy.spatial import Voronoi, voronoi_plot_2d
 import matplotlib.pyplot as plt
-import numpy as nps
+import numpy as np
 from collections import defaultdict
 import src.plan2data.helper as helper
 

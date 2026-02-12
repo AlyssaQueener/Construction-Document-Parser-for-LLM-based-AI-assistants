@@ -5,13 +5,13 @@ if __name__=="__main__":
     script_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.dirname(os.path.dirname(script_dir))
     os.chdir(project_root)
-    #pdf_path = "examples/FloorplansAndSectionViews/bemasster-grundriss-plankopf.pdf"
+    pdf_path = "examples/FloorplansAndSectionViews/bemasster-grundriss-plankopf.pdf"
     #pdf_path= "examples/FloorplansAndSectionViews/BasicTestPlan.pdf"
     #pdf_path = "examples/FloorplansAndSectionViews/GrundrissEG_2022_web.pdf"
     #pdf_path = "examples/FloorplansAndSectionViews/2d-grundriss-wohnflaeche.pdf"
     #pdf_path = "examples/FloorplansAndSectionViews/GrundrissEG_2022_web.pdf"
     #pdf_path = "examples/FloorplansAndSectionViews/modern-stilt-house.pdf"
-    pdf_path = "src/validation/Floorplan/titleblock/testdata/floorplan-test-1.pdf"
+    #pdf_path = "src/validation/Floorplan/titleblock/testdata/floorplan-test-1.pdf"
 
     #pdf_path = "examples/FloorplansAndSectionViews/Simple Floorplan/04_Simple.pdf"
     neighboring_rooms_voronoi(pdf_path)
