@@ -1,47 +1,30 @@
 flowchart TD
-    A["**parse_gantt_chart**(path, chart_format)"] --> B{chart_format == 'tabular'?}
+    A["parse_gantt_chart(path)"] --> C["table extraction with camelot"]
 
-    B -- Yes --> C["**camelot.read_pdf**(path)\nExtract table from PDF"]
-    B -- No --> V["**visual.parse_gantt_chart_visual**(path)\nVisual/image-based parsing"]
-    V --> Z["Return JSON string"]
+    C --> D[/data frame/]
+    D --> E["preprocess_df(df)"]
 
-    C --> D["**preprocess_df_and_check_column_names**(df)"]
+    E --> E3{DataFrame empty?}
 
-    D --> D1["**clean_empty_strings**(df)\nReplace '' with None"]
-    D1 --> D2["Drop all-NaN rows & columns"]
-    D2 --> E{DataFrame empty?}
+    E3 -->|Yes| F["Return {Table Recognition: failed}"]
+    E3 -->|No| E4["match_column_names_with_task_properties(df)- using Regex"]
 
-    E -- Yes --> F["Return\n{'Table Recognition': 'failed'}"]
 
-    E -- No --> G{Columns are\nauto-generated\nsequential integers?}
-    G -- Yes --> H["**rename_columns**(df)\nPromote first row to headers"]
-    G -- No --> I["Keep existing column names"]
+    E4 --> G1[/column_order, found_matches/]
+    G1 --> H{found_matches < 3?}
 
-    H --> J["**match_column_names_with_task_properties**(df)"]
-    I --> J
+    H -->|Yes| I["Fallback: Call Mistral for AI Column Extraction"]
+    H -->|No| J["Use regex-based column_order"]
 
-    J --> J1["For each column:\n**match**(column_name)\nRegex against known patterns\n(EN + DE)"]
-    J1 --> J2["Build column_order mapping\nCount found_matches"]
+    I --> K["create_tasks(column_order, df)"]
+    J --> K
+   
+    K --> Z["Return tasks"]
 
-    J2 --> K{found_matches < 3?}
-
-    K -- Yes --> L["**Fallback: Mistral AI**\npdfplumber extracts text\n→ mistral.call_mistral_for_columns()\n→ AI-based column identification"]
-    K -- No --> M["Use regex-based\ncolumn_order"]
-
-    L --> N["**create_tasks**(column_order, df)"]
-    M --> N
-
-    N --> N1["For each row in DataFrame:\nMap columns → Task fields\nusing column_order"]
-    N1 --> N2["Validate & create\n**Task** Pydantic objects"]
-    N2 --> O["Serialize tasks list\nto JSON string"]
-    O --> Z
-
-    style A fill:#4A90D9,color:#fff,stroke:#2C5F8A
-    style B fill:#F5A623,color:#fff,stroke:#C17D15
-    style E fill:#F5A623,color:#fff,stroke:#C17D15
-    style G fill:#F5A623,color:#fff,stroke:#C17D15
-    style K fill:#F5A623,color:#fff,stroke:#C17D15
-    style F fill:#D0021B,color:#fff,stroke:#9B0114
-    style Z fill:#7ED321,color:#fff,stroke:#5A9A17
-    style L fill:#9B59B6,color:#fff,stroke:#6C3483
-    style V fill:#9B59B6,color:#fff,stroke:#6C3483
+    style A fill:#4A90D9,stroke:#2C5F8A,color:#fff
+    style E3 fill:#E74C3C,stroke:#C0392B,color:#fff
+    style H fill:#F5A623,stroke:#C47D0E,color:#fff
+    style F fill:#E74C3C,stroke:#C0392B,color:#fff
+    style Z fill:#27AE60,stroke:#1E8449,color:#fff
+    style D fill:#8E44AD,stroke:#6C3483,color:#fff
+    style G1 fill:#8E44AD,stroke:#6C3483,color:#fff

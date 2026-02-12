@@ -168,15 +168,15 @@ def create_tasks(column_order, df):
             continue
     return tasks
 
+#### MAIN FUNCTION '####
 def parse_gantt_chart(path: str, chart_format: str): 
     """
-    Main entry point for parsing a Gantt chart PDF. For tabular charts, it extracts
-    tables via Camelot, maps columns to Task properties (falling back to Mistral AI
-    for column identification if regex matching finds fewer than 3 matches), and returns
-    structured JSON. For non-tabular (visual) charts, delegates to the visual parser.
+    Parse gantt chart (pdf format) depending on chart layout (tabular/visual).
+    Tabular: chart contains table containing activities and their respective data (start,end,id, etc.), bars only for visualization
+    Visual: chart contains list of activtities, timeline and bars, bars are used to inferre start and end for each activtity 
     
     :param path: File path to the Gantt chart PDF.
-    :param chart_format: Either "tabular" (table-based) or other (visual/image-based).
+    :param chart_format: "tabular" or "visual"
     :return: JSON string of Task objects, or an error dict if table recognition failed.
     """
     if chart_format== "tabular":
