@@ -1,0 +1,37 @@
+flowchart LR
+    subgraph Input
+        A[BOQ PDF<br/>Document]
+    end
+    
+    subgraph Extraction
+        B[Camelot<br/>read_pdf]
+        C[Table Object]
+    end
+    
+    subgraph Preprocessing
+        D[cam_stream_merge<br/>Merge Lines]
+        E[JSON List]
+        F[json.dumps<br/>Stringify]
+    end
+    
+    subgraph AI_Processing
+        G[create_preprocessed_prompt<br/>Build Instructions]
+        H[Gemini API<br/>call_gemini_return_json]
+    end
+    
+    subgraph Output
+        I[Structured JSON<br/>Sections & Items]
+    end
+    
+    A -->|path| B
+    B -->|tables| C
+    C --> D
+    D -->|"list[dict]"| E
+    E --> F
+    F -->|processed_str| G
+    G -->|prompt| H
+    H -->|response_json| I
+    
+    style A fill:#bbdefb
+    style I fill:#c8e6c9
+    style H fill:#fff59d

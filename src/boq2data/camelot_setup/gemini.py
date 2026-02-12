@@ -2,7 +2,7 @@ import os
 import google.generativeai as genai
 import json
 
-
+api_key = "AIzaSyD22tv_jw44Cnqp3J_9J-_1s85e5epop9s"
 def make_gemini_easy_call(prompt_text="Hello, Gemini! How are you today?"):
     """
     Makes a simple call to the Google Gemini API using the GOOGLE_API_KEY
@@ -10,7 +10,7 @@ def make_gemini_easy_call(prompt_text="Hello, Gemini! How are you today?"):
     """
     try:
         # 1. Retrieve and configure API key from environment variable
-        api_key = "AIzaSyD22tv_jw44Cnqp3J_9J-_1s85e5epop9s"
+        api_key = api_key
         #os.environ["GOOGLE_API_KEY"]
         genai.configure(api_key=api_key)
         print("API Key configured from environment variable.")
@@ -171,7 +171,7 @@ ONLY return the structured JSON in the described format.
 
 def call_gemini_return_json(prompt):
     #api_key = os.environ["GOOGLE_API_KEY"]
-    api_key = "AIzaSyD22tv_jw44Cnqp3J_9J-_1s85e5epop9s"
+    api_key = api_key
     genai.configure(api_key=api_key)
     generation_config = {
         "temperature": 0.0,  # Set temperature to 0 for deterministic output
