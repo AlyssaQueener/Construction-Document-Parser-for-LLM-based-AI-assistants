@@ -1,37 +1,40 @@
 flowchart TD
     subgraph Input
-        A[BOQ PDF<br/>Document]
+        A[BOQ PDF Document]
     end
     
     subgraph Extraction
-        B[Camelot<br/>read_pdf]
+        B[Camelot read_pdf<br/>flavor: stream]
         C[Table Object]
+        B --> C
     end
     
     subgraph Preprocessing
-        D[cam_stream_merge<br/>Merge Lines]
-        E[JSON List]
-        F[json.dumps<br/>Stringify]
+        D[cam_stream_merge<br/>Flatten Tables]
+        E[Merge Broken Lines<br/>Continuation Logic]
+        F[detect_column_headers<br/>Identify or Apply Headers]
+        G[Map Numeric Keys<br/>to Column Names]
+        H[Formatted JSON List]
+        D --> E --> F --> G --> H
     end
     
     subgraph AI_Processing
-        G[create_preprocessed_prompt<br/>Build Instructions]
-        H[Gemini API<br/>call_gemini_return_json]
+        I[json.dumps<br/>Stringify]
+        J[create_preprocessed_prompt<br/>Build Instructions]
+        K[Gemini API<br/>call_gemini_return_json]
+        I --> J --> K
     end
     
     subgraph Output
-        I[Structured JSON<br/>Sections & Items]
+        L[Structured JSON<br/>Sections & Items]
     end
     
-    A -->|path| B
-    B -->|tables| C
-    C --> D
-    D -->|"list[dict]"| E
-    E --> F
-    F -->|processed_str| G
-    G -->|prompt| H
-    H -->|response_json| I
+    Input ==> Extraction
+    Extraction ==> Preprocessing
+    Preprocessing ==> AI_Processing
+    AI_Processing ==> Output
     
     style A fill:#bbdefb
-    style I fill:#c8e6c9
-    style H fill:#fff59d
+    style F fill:#fff59d
+    style K fill:#fff59d
+    style L fill:#c8e6c9
