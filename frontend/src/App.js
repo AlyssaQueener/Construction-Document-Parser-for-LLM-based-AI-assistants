@@ -316,7 +316,7 @@ useEffect(() => {
                     className="text-lg"
                   >
                     <option value="visual">Visual-Hybrid</option>
-                    <option value="full ai">Visual-Ai</option>
+                    <option value="full_ai">Visual-Ai</option>
                     <option value="tabular">Tabular-Hybrid</option>
                   </Select>
                 </div>
