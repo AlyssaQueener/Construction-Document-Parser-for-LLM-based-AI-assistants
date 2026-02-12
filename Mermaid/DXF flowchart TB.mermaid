@@ -1,0 +1,70 @@
+flowchart TB
+    subgraph Input [" INPUT "]
+        A[PDF Floor Plan]
+    end
+    
+    subgraph Extraction [" PDF EXTRACTION "]
+        B[PyMuPDF<br/>Open & Parse]
+        C[Extract Vector<br/>Primitives]
+        D[Extract Text<br/>Annotations]
+    end
+    
+    subgraph Primitives [" PDF PRIMITIVE TYPES "]
+        E1[Lines 'l']
+        E2[Rectangles 're']
+        E3[Curves 'c']
+        E4[Ellipses 'el']
+        E5[Filled 'f']
+        E6[Quads 'qu']
+    end
+    
+    subgraph Transform [" COORDINATE TRANSFORM "]
+        F[Y-Axis Flip<br/>Y_dxf = height - Y_pdf]
+    end
+    
+    subgraph DXF_Layers [" DXF LAYERS "]
+        G1[PDFLines]
+        G2[PDFRects]
+        G3[PDFCurves]
+        G4[PDFFilledshapes]
+        G5[PDFQuads]
+        G6[PDFText]
+    end
+    
+    subgraph Output [" OUTPUT "]
+        H[DXF File<br/>Organized by Layer]
+    end
+    
+    subgraph Goal [" ORIGINAL GOAL "]
+        I1[Merge Close Lines]
+        I2[Detect Walls]
+    end
+    
+    subgraph Result [" ACTUAL RESULT "]
+        J1[✓ Working Layer Converter]
+        J2[❌ Wall Detection Failed<br/>Too much clutter]
+    end
+    
+    A --> B
+    B --> C
+    B --> D
+    C --> Primitives
+    
+    E1 --> F --> G1
+    E2 --> F --> G2
+    E3 --> F --> G3
+    E4 --> F --> G3
+    E5 --> F --> G4
+    E6 --> F --> G5
+    D --> F --> G6
+    
+    DXF_Layers --> H
+    H --> J1
+    H -.intended.-> I1 -.intended.-> I2 -.failed.-> J2
+    
+    style A fill:#bbdefb
+    style H fill:#c8e6c9
+    style I1 fill:#fff59d
+    style I2 fill:#fff59d
+    style J1 fill:#c8e6c9
+    style J2 fill:#ffcdd2
