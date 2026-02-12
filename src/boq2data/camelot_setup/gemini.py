@@ -9,9 +9,6 @@ def make_gemini_easy_call(prompt_text="Hello, Gemini! How are you today?"):
     environment variable.
     """
     try:
-        # 1. Retrieve and configure API key from environment variable
-        api_key = api_key
-        #os.environ["GOOGLE_API_KEY"]
         genai.configure(api_key=api_key)
         print("API Key configured from environment variable.")
 
@@ -45,7 +42,26 @@ def create_preprocessed_prompt(extracted_text):
     """
     Constructs a detailed prompt for Gemini to extract structured,
     section-grouped information from a Bill of Quantities (BoQ).
-    Includes subtotals and organizes items under section headers.
+    
+    This function generates a comprehensive prompt that instructs the Gemini API
+    to parse BOQ documents (in English or German) and extract structured data
+    including section hierarchies, line items, and subtotals in a specific JSON format.
+    
+    Args:
+        extracted_text (str): Raw text extracted from a BOQ PDF (typically from Camelot)
+    
+    Returns:
+        str: Formatted prompt string for the Gemini API containing:
+             - Extraction instructions
+             - JSON schema definitions
+             - Example structures for nested and flat sections
+             - Field definitions and validation rules
+    
+    Note:
+        - Supports both English and German BOQ documents
+        - Handles nested subsections with arbitrary depth
+        - Includes subtotals as the last item in each section when present
+        - All monetary values should preserve original precision
     """
     prompt = f"""
 You are an expert system for extracting structured data from English or German Bills of Quantities (BoQs).
@@ -170,27 +186,53 @@ ONLY return the structured JSON in the described format.
 
 
 def call_gemini_return_json(prompt):
-    #api_key = os.environ["GOOGLE_API_KEY"]
-    api_key = api_key
+    """
+    Call Google's Gemini API with a prompt and return the response as parsed JSON.
+    
+    This function sends a prompt to the Gemini 2.5 Flash model with deterministic
+    settings (temperature=0) and attempts to parse the response as JSON. It handles
+    the common case where Gemini wraps JSON responses in markdown code blocks.
+    
+    Args:
+        prompt (str): The input prompt to send to the Gemini API
+    
+    Returns:
+        dict: Parsed JSON response from Gemini, or error dictionary if parsing fails
+              Error format: {"error": "...", "raw_response": "..."}
+    
+    Note:
+        - Temperature is set to 0.0 for deterministic/consistent outputs
+        - Automatically strips markdown code block formatting (```json...```)
+        - Requires GEMINI_API_KEY to be set in environment or defined globally
+    """
+    # Configure API with authentication key
+    api_key = api_key  # TODO: Should reference actual API key variable
     genai.configure(api_key=api_key)
+    
+    # Configure generation parameters for deterministic output
     generation_config = {
         "temperature": 0.0,  # Set temperature to 0 for deterministic output
-        # You can add other parameters here if needed, e.g., "top_p", "top_k", "max_output_tokens"
+        # Additional parameters can be added here: "top_p", "top_k", "max_output_tokens"
     }
-    model = genai.GenerativeModel('gemini-2.5-flash',generation_config=generation_config)
-     # Define the generation configuration
-
+    
+    # Initialize the Gemini model with configuration
+    model = genai.GenerativeModel('gemini-2.5-flash', generation_config=generation_config)
+    
+    # Generate content from the model
     response = model.generate_content(prompt)
-    raw_text_content = response.text # so that the ouput is just the 
-        
-     # Now apply string methods to the raw_text_content
+    raw_text_content = response.text  # Extract raw text from response
+    
+    # Clean the response by removing markdown JSON code block formatting
     cleaned_response = raw_text_content.strip().removeprefix('```json\n').removesuffix('\n```')
     
     try:
-        # Attempt to parse the response as JSON
+        # Attempt to parse the cleaned response as JSON
         import json
         return json.loads(cleaned_response)
     except json.JSONDecodeError:
-        return {"error": "Response is not valid JSON", "raw_response": cleaned_response.text}
-
+        # Return error information if JSON parsing fails
+        return {
+            "error": "Response is not valid JSON", 
+            "raw_response": cleaned_response  # Note: .text removed as cleaned_response is already a string
+        }
 
