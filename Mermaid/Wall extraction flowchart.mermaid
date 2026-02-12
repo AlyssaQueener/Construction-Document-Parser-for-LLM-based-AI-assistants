@@ -1,0 +1,97 @@
+flowchart TD
+    subgraph Input
+        A[Floor Plan Image<br/>PNG/PDF]
+    end
+    
+    subgraph Text_Extraction
+        B[Load Grayscale Image<br/>cv.imread GRAYSCALE]
+        C[Tesseract OCR<br/>image_to_data]
+        D{Text Found?}
+        E[Extract Text Data<br/>bbox, confidence, text]
+        F[Remove Text Regions<br/>Draw white rectangles]
+        
+        B --> C
+        C --> D
+        D -->|Yes| E --> F
+        D -->|No| F
+    end
+    
+    subgraph Preprocessing
+        G[Gaussian Blur<br/>5x5 kernel]
+        H[Adaptive Threshold<br/>BINARY_INV]
+        I[Binary Image<br/>Walls=White, BG=Black]
+        
+        G --> H --> I
+    end
+    
+    subgraph Component_Analysis
+        J[Connected Components<br/>cv.connectedComponentsWithStats]
+        K{Analyze Each<br/>Component}
+        L{Is Wall?<br/>Area > 500<br/>Aspect > 3.0 or < 0.33}
+        M{Is Furniture?<br/>Area 10-8000<br/>Aspect 0.5-2.0}
+        N[Keep Component]
+        O[Discard Component]
+        P[Filtered Binary<br/>Walls Only]
+        
+        J --> K
+        K --> L
+        L -->|Yes| M
+        L -->|No| O
+        M -->|No| N
+        M -->|Yes| O
+        N --> P
+        O --> P
+    end
+    
+    subgraph Edge_Enhancement
+        Q[Morphological Opening<br/>3x3 cleanup]
+        R[Canny Edge Detection<br/>thresholds 50, 150]
+        S[Dilation<br/>3x3, 3 iterations]
+        T[Morphological Closing<br/>31x31 connect walls]
+        
+        Q --> R --> S --> T
+    end
+    
+    subgraph ROI_Extraction
+        U[Create ROI Mask<br/>Central 70%x50%]
+        V[Apply Mask<br/>bitwise_and]
+        W[Walls within ROI]
+        
+        U --> V --> W
+    end
+    
+    subgraph Contour_Detection
+        X[Find Contours<br/>cv.findContours RETR_TREE]
+        Y[Draw Contours<br/>Filled on white canvas]
+        Z[Visualization Output]
+        
+        X --> Y --> Z
+    end
+    
+    subgraph Output
+        AA[Results Dictionary<br/>text_data, walls_roi,<br/>contours, visualization]
+    end
+    
+    subgraph Challenges
+        AB[❌ Failed Due To:<br/>- Cluttered floor plans<br/>- Merging objects<br/>- Overlapping symbols<br/>- Morphological artifacts]
+    end
+    
+    A ==> Text_Extraction
+    Text_Extraction ==> Preprocessing
+    Preprocessing ==> Component_Analysis
+    Component_Analysis ==> Edge_Enhancement
+    Edge_Enhancement ==> ROI_Extraction
+    ROI_Extraction ==> Contour_Detection
+    Contour_Detection ==> Output
+    Output -.-> Challenges
+    
+    style A fill:#bbdefb
+    style E fill:#fff59d
+    style I fill:#c8e6c9
+    style P fill:#c8e6c9
+    style W fill:#c8e6c9
+    style AA fill:#c8e6c9
+    style AB fill:#ffcdd2
+    style K fill:#fff9c4
+    style L fill:#fff9c4
+    style M fill:#fff9c4
