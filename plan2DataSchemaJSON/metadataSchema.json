@@ -21,6 +21,8 @@
             }
           }
         },
+
+    
         "timeline": {
           "type": "object",
           "properties": {
@@ -95,5 +97,17 @@
         }
       }
     }
-  }
+  },
+                            "stamps": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "organization_name": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": ["organization_name"]
+                                }
+                            }
 }

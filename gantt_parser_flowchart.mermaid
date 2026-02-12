@@ -1,0 +1,30 @@
+flowchart TD
+    A["parse_gantt_chart(path)"] --> C["table extraction with camelot"]
+
+    C --> D[/data frame/]
+    D --> E["preprocess_df(df)"]
+
+    E --> E3{DataFrame empty?}
+
+    E3 -->|Yes| F["Return {Table Recognition: failed}"]
+    E3 -->|No| E4["match_column_names_with_task_properties(df)- using Regex"]
+
+
+    E4 --> G1[/column_order, found_matches/]
+    G1 --> H{found_matches < 3?}
+
+    H -->|Yes| I["Fallback: Call Mistral for AI Column Extraction"]
+    H -->|No| J["Use regex-based column_order"]
+
+    I --> K["create_tasks(column_order, df)"]
+    J --> K
+   
+    K --> Z["Return tasks"]
+
+    style A fill:#4A90D9,stroke:#2C5F8A,color:#fff
+    style E3 fill:#E74C3C,stroke:#C0392B,color:#fff
+    style H fill:#F5A623,stroke:#C47D0E,color:#fff
+    style F fill:#E74C3C,stroke:#C0392B,color:#fff
+    style Z fill:#27AE60,stroke:#1E8449,color:#fff
+    style D fill:#8E44AD,stroke:#6C3483,color:#fff
+    style G1 fill:#8E44AD,stroke:#6C3483,color:#fff

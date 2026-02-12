@@ -16,6 +16,13 @@ class Task(BaseModel):
     duration: str | None = None
 
 def rename_columns(df, old_column_names):
+    """
+    Promotes the first row of a DataFrame to become the column headers.
+    
+    :param df: DataFrame whose first row contains the actual column names.
+    :param old_column_names: Current (auto-generated) column names to be replaced.
+    :return: DataFrame with renamed columns and the former header row removed.
+    """
     new_column_names = df.iloc[0].tolist()  
     column_mapping = dict(zip(old_column_names, new_column_names))
     df = df.rename(columns=column_mapping)
@@ -23,9 +30,25 @@ def rename_columns(df, old_column_names):
     return df
 
 def clean_empty_strings(df):
+    """
+    Replaces all empty strings in a DataFrame with None values.
+    
+    :param df: Input DataFrame potentially containing empty strings.
+    :return: DataFrame with empty strings replaced by None.
+    """
     return df.replace('', None)
 
 def preprocess_df_and_check_column_names(df):
+    """
+    Cleans raw DataFrame containing gantt chart data by removing empty rows/columns and fixing column names.
+    If DataFrame is empty, the camelot table extraction failed and thereby further parsing.
+    
+    For not empty data frames: if the columns are auto-generated sequential integers, the first
+    data row is promoted to column headers.
+    
+    :param df: Raw DataFrame extracted from a PDF table.
+    :return: Tuple of (processed DataFrame or None, bool indicating if the DataFrame was empty).
+    """
     is_empty = False
     df = clean_empty_strings(df)
     df = df.dropna(how='all')
@@ -36,16 +59,27 @@ def preprocess_df_and_check_column_names(df):
         return None, is_empty
     all_numeric = all(isinstance(col, (int, float)) for col in df.columns)
     is_sequential = list(df.columns) == list(range(len(df.columns)))
-    print("COLUMNNAMES")
+    print("column names:")
     print(list(df.columns))
-    old_column_names = list(df.columns)
     if all_numeric and is_sequential:
-         df = rename_columns(df, old_column_names)
+        old_column_names = list(df.columns)
+        print("Printing type of a data frame and a row of columns:")
+        print(type(df))
+        print(type(old_column_names))
+        print("end")
+        df = rename_columns(df, old_column_names)
     return df, is_empty
 
 import re
 
 def match(column_name):
+    """
+    Matches a single column name against known Gantt chart field patterns (supporting
+    English and German terms) and returns the corresponding standardized property name.
+    
+    :param column_name: The column header string to match.
+    :return: matched property or 'no match found'.
+    """
     patterns = {
         'id': r'^(id|nr\.?|nummer)$',
         'task': r'^(task|task name|activity|activity name|vorgang|vorgangsname|aktivität|aufgabe)$',
@@ -57,7 +91,6 @@ def match(column_name):
     column_lower = column_name.lower().strip()
 
     for property_name, pattern in patterns.items():
-        #if re.match(pattern, column_lower):
         if re.fullmatch(pattern, column_lower):
             return property_name
 
@@ -65,6 +98,14 @@ def match(column_name):
 
 
 def match_column_names_with_task_properties(df):
+    """
+    Iterates over all DataFrame columns and attempts to map each one to a standardized
+    Task property using regex matching.
+    
+    :param df: DataFrame with column headers to be mapped.
+    :return: Tuple of (column_order list with mapping dicts or None per position,
+             number of successfully matched columns).
+    """
     column_names = df.columns.tolist()
     column_order = [None] * len(column_names)
     found_matches = 0
@@ -73,7 +114,7 @@ def match_column_names_with_task_properties(df):
         if title != "no match found":
             column_order[i] = {
                 "generalized_title": title,
-                "column_name": name  # This should be the actual column name in Gant Chart
+                "column_name": name
             }
             found_matches += 1  
     print("Column order:", column_order)
@@ -81,6 +122,14 @@ def match_column_names_with_task_properties(df):
     return column_order, found_matches
 
 def create_tasks(column_order, df):
+    """
+    Converts DataFrame rows into a list of Task objects using the column name to property
+    mapping.
+    
+    :param column_order: List of mapping dicts (or None) aligning DataFrame columns to Task fields.
+    :param df: Processed DataFrame containing the Gantt chart data.
+    :return: List of Task (Pydantic model) instances.
+    """
     tasks = []
     print("DataFrame shape:", df.shape)
     print("DataFrame columns:", df.columns.tolist())
@@ -90,11 +139,10 @@ def create_tasks(column_order, df):
         task_data = {}
         
         for col_info in column_order:
-            if col_info is not None:  # Skip unmapped columns
+            if col_info is not None:
                 generalized_title = col_info["generalized_title"]
                 column_name = col_info["column_name"]
                 
-                # Debug: Check if column exists
                 if column_name not in df.columns:
                     print(f"Warning: Column '{column_name}' not found in DataFrame")
                     print(f"Available columns: {df.columns.tolist()}")
@@ -120,7 +168,17 @@ def create_tasks(column_order, df):
             continue
     return tasks
 
-def parse_gantt_chart(path, chart_format): 
+#### MAIN FUNCTION '####
+def parse_gantt_chart(path: str, chart_format: str): 
+    """
+    Parse gantt chart (pdf format) depending on chart layout (tabular/visual).
+    Tabular: chart contains table containing activities and their respective data (start,end,id, etc.), bars only for visualization
+    Visual: chart contains list of activtities, timeline and bars, bars are used to inferre start and end for each activtity 
+    
+    :param path: File path to the Gantt chart PDF.
+    :param chart_format: "tabular" or "visual"
+    :return: JSON string of Task objects, or an error dict if table recognition failed.
+    """
     if chart_format== "tabular":
         tables = camelot.read_pdf(path)
         df = tables[0].df
@@ -140,9 +198,3 @@ def parse_gantt_chart(path, chart_format):
     else:
         json_string = visual.parse_gant_chart_visual(path)
         return json_string
-    
-
-    
-        
-
-

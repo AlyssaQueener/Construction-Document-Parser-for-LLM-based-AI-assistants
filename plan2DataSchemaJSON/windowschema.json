@@ -1,0 +1,37 @@
+                           {
+                                                    "type": "object",
+                                                    "description": "window",
+                                                    "properties": {
+                                                        "object_type": {
+                                                            "type": "string",
+                                                            "enum": ["window"]
+                                                        },
+                                                        "start_point": {
+                                                            "type": "array",
+                                                            "description": "The x and y coordinates of the start point of the window in millimeters",
+                                                            "items": {
+                                                                "type": "number"
+                                                            },
+                                                            "minItems": 2,
+                                                            "maxItems": 2
+                                                        },
+                                                        "end_point": {
+                                                            "type": "array",
+                                                            "description": "The x and y coordinates of the end point of the window in millimeters",
+                                                            "items": {
+                                                                "type": "number"
+                                                            },
+                                                            "minItems": 2,
+                                                            "maxItems": 2
+                                                        },
+                                                        "bottom_height": {
+                                                            "type": "number",
+                                                            "description": "The bottom height of the window in millimeters"
+                                                        },
+                                                        "top_height": {
+                                                            "type": "number",
+                                                            "description": "The top height of the window in millimeters"
+                                                        }
+                                                    },
+                                                    "required": ["object_type"]
+                                                }
