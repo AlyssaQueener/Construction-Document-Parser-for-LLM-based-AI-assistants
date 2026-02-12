@@ -20,21 +20,6 @@ class Task_visual(BaseModel):
     start: str | None = None
     finish: str | None = None
 
-def extract_activities_for_full_ai(df):
-    """
-    Extracts the first six columns of a DataFrame for use in the full-AI parsing pipeline.
-    This subset typically contains activity metadata (name, IDs, dates, etc.) needed by the AI model.
-
-    :param df: DataFrame extracted from the Gantt chart PDF table.
-    :return: DataFrame with only the first 6 columns, or None if extraction fails.
-    """
-    try:
-        first_six_columns = df.iloc[:, :6]
-        return first_six_columns
-    except Exception as e:
-        print("Activities couldn't be extracted from data frame:", e)
-        return None
-
 
 def extract_activities(df):
     """
@@ -399,7 +384,8 @@ def determine_start_end_of_activity(activity_timestamps):
                 "start" : start_date,
                 "finish": end_date
             }
-            activities_with_dates.append(activity_with_date)
+            task = Task_visual(**activity_with_date)
+            activities_with_dates.append(task)
 
     return activities_with_dates
 
@@ -521,7 +507,108 @@ def extract_present_colours(gantt_chart_bars):
         colours_of_bars[name_activity]= colours
     return colours_of_bars
 
-def parse_gant_chart_visual(path):
+
+### full ai parsing ####
+
+### extract activities for context ###
+
+def extract_activities_for_full_ai(df):
+    """
+    Extracts the first six columns of a DataFrame for use in the full-AI parsing pipeline.
+    This subset typically contains activity metadata (name, IDs, dates, etc.) needed by the AI model.
+
+    :param df: DataFrame extracted from the Gantt chart PDF table.
+    :return: DataFrame with only the first 6 columns, or None if extraction fails.
+    """
+    try:
+        first_six_columns = df.iloc[:, :6]
+        return first_six_columns
+    except Exception as e:
+        print("Activities couldn't be extracted from data frame:", e)
+        return None
+    
+
+#### chunking ####
+def extract_gantt_chart_from_chunks(chunked_chart):
+    """
+    Processes a list of image chunks through Mistral AI, parses each chunk's JSON
+    response, and aggregates the results into a single list. Cleans up all temporary
+    chunk image files afterward (even on failure).
+
+    :param chunked_chart: List of file paths to image chunk files.
+    :return: Combined list of parsed activity dicts from all chunks.
+    """
+    parsed_chart = []
+    
+    try:
+        for image_path in chunked_chart:
+            chart_json = mistral.call_mistral_timeline(image_path, "chunks", None)
+            try:
+                chart_part = json.loads(chart_json)
+                parsed_chart.extend(chart_part)
+            except json.JSONDecodeError as e:
+                print(f"Warning: Could not parse JSON from {image_path}: {e}")
+                print(f"Raw response: {chart_json}")
+                continue
+    finally:
+        for image_path in chunked_chart:
+            try:
+                if os.path.exists(image_path):
+                    os.remove(image_path)
+                    print(f"Deleted: {image_path}")
+            except Exception as e:
+                print(f"Warning: Could not delete {image_path}: {e}")
+    
+    return parsed_chart
+     
+def parse_from_chunks(path, option):
+    """
+    Splits a Gantt chart PDF into smaller image chunks and parses each chunk
+    separately via AI. Handles both timeline-preserving and regular splitting modes.
+
+    :param path: File path to the Gantt chart PDF.
+    :param option: "w timeline" to preserve timeline header in each chunk, or other for basic splitting.
+    :return: Combined list of parsed activity dicts from all chunks.
+    """
+    if option == "w timeline":
+        chart_chunks = helper.pdf_to_split_images_with_timeline(path,0)
+    else:
+        chart_chunks = helper.pdf_to_split_images(path,0)
+    parsed_chart = extract_gantt_chart_from_chunks(chart_chunks)
+    return parsed_chart
+    
+def to_be_chunked(image_path):
+    """
+    Determines if an image exceeds size thresholds and needs to be split into
+    smaller chunks for AI processing. Checks against maximum dimension (1700px)
+    and maximum total pixel area (2,890,000 px).
+
+    :param image_path: File path to the image to evaluate.
+    :return: True if the image exceeds any size threshold, False otherwise.
+    """
+    from PIL import Image
+    max_dimension=1700
+    max_area_pixels=2_890_000
+    try:
+        with Image.open(image_path) as img:
+            width, height = img.size
+            total_pixels = width * height
+            
+        if width > max_dimension:
+            return True
+            
+        if height > max_dimension:
+            return True
+            
+        if total_pixels > max_area_pixels:
+            return True
+        return False
+    except:
+        print("could not measure image")
+        return False
+
+### main functions ###
+def parse_gant_chart_visual(path: str)-> list:
     """
     Main entry point for visually parsing a Gantt chart PDF. Orchestrates the full
     pipeline: extract table data, identify activities and timeline, locate them on
@@ -530,7 +617,7 @@ def parse_gant_chart_visual(path):
     is insufficient (too few activities, timestamps, or failed bar recognition).
 
     :param path: File path to the Gantt chart PDF.
-    :return: List of dicts with 'task', 'start', 'finish' for each parsed activity.
+    :return: List of tasks.
     """
     tolerance = 2
     with pdfplumber.open(path) as pdf:
@@ -612,80 +699,3 @@ def parse_full_ai(path):
         return result
 
 
-def extract_gantt_chart_from_chunks(chunked_chart):
-    """
-    Processes a list of image chunks through Mistral AI, parses each chunk's JSON
-    response, and aggregates the results into a single list. Cleans up all temporary
-    chunk image files afterward (even on failure).
-
-    :param chunked_chart: List of file paths to image chunk files.
-    :return: Combined list of parsed activity dicts from all chunks.
-    """
-    parsed_chart = []
-    
-    try:
-        for image_path in chunked_chart:
-            chart_json = mistral.call_mistral_timeline(image_path, "chunks", None)
-            try:
-                chart_part = json.loads(chart_json)
-                parsed_chart.extend(chart_part)
-            except json.JSONDecodeError as e:
-                print(f"Warning: Could not parse JSON from {image_path}: {e}")
-                print(f"Raw response: {chart_json}")
-                continue
-    finally:
-        for image_path in chunked_chart:
-            try:
-                if os.path.exists(image_path):
-                    os.remove(image_path)
-                    print(f"Deleted: {image_path}")
-            except Exception as e:
-                print(f"Warning: Could not delete {image_path}: {e}")
-    
-    return parsed_chart
-     
-def parse_from_chunks(path, option):
-    """
-    Splits a Gantt chart PDF into smaller image chunks and parses each chunk
-    separately via AI. Handles both timeline-preserving and regular splitting modes.
-
-    :param path: File path to the Gantt chart PDF.
-    :param option: "w timeline" to preserve timeline header in each chunk, or other for basic splitting.
-    :return: Combined list of parsed activity dicts from all chunks.
-    """
-    if option == "w timeline":
-        chart_chunks = helper.pdf_to_split_images_with_timeline(path,0)
-    else:
-        chart_chunks = helper.pdf_to_split_images(path,0)
-    parsed_chart = extract_gantt_chart_from_chunks(chart_chunks)
-    return parsed_chart
-    
-def to_be_chunked(image_path):
-    """
-    Determines if an image exceeds size thresholds and needs to be split into
-    smaller chunks for AI processing. Checks against maximum dimension (1700px)
-    and maximum total pixel area (2,890,000 px).
-
-    :param image_path: File path to the image to evaluate.
-    :return: True if the image exceeds any size threshold, False otherwise.
-    """
-    from PIL import Image
-    max_dimension=1700
-    max_area_pixels=2_890_000
-    try:
-        with Image.open(image_path) as img:
-            width, height = img.size
-            total_pixels = width * height
-            
-        if width > max_dimension:
-            return True
-            
-        if height > max_dimension:
-            return True
-            
-        if total_pixels > max_area_pixels:
-            return True
-        return False
-    except:
-        print("could not measure image")
-        return False
