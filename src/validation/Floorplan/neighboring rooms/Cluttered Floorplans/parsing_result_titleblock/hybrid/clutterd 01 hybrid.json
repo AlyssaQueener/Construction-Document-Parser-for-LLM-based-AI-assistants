@@ -1,0 +1,24 @@
+{
+    "projectInfo": {
+        "projectId": "12404",
+        "projectName": "Ersatzneubau",
+        "location": "Stampfenbachstrasse 30, 8006 Zurich",
+        "author": "smo/sca",
+        "stakeholders": {
+            "client": "Kanton Zurich",
+            "architect": "VOELKI PARTNER AG ARCHITEKTEN",
+            "engineers": null
+        },
+        "timeline": {
+            "yearOfCompletion": null,
+            "approvalDate": "2011-10-18"
+        }
+    },
+    "planMetadata": {
+        "planType": "Grundriss Erdgeschoss",
+        "planFormat": "84/60",
+        "scale": "1:50",
+        "projectionMethod": null
+    },
+    "confidence": 0.7
+}

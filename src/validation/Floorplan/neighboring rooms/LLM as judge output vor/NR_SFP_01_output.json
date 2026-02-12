@@ -1,0 +1,143 @@
+{
+  "room_analysis": {
+    "TERRASSE": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "K\rcCHE",
+        "WOHN/ ESSZIMMER"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "K\rcCHE": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "ABSTELL ZIMMER",
+        "TERRASSE",
+        "WOHN/ ESSZIMMER"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "WOHN/ ESSZIMMER": {
+      "name_match_score": 1.0,
+      "precision": 0.8,
+      "recall": 0.8,
+      "f1": 0.8,
+      "true_positives": [
+        "DIELE",
+        "HWR",
+        "K\rcCHE",
+        "TERRASSE"
+      ],
+      "false_positives": [
+        "ABSTELL ZIMMER"
+      ],
+      "false_negatives": [],
+      "note": "Hallucinated connection to ABSTELL ZIMMER"
+    },
+    "ABSTELL ZIMMER": {
+      "name_match_score": 1.0,
+      "precision": 0.75,
+      "recall": 1.0,
+      "f1": 0.86,
+      "true_positives": [
+        "DIELE",
+        "G\f4STEZIMMER",
+        "K\rcCHE"
+      ],
+      "false_positives": [
+        "WOHN/ ESSZIMMER"
+      ],
+      "false_negatives": [],
+      "note": "Hallucinated connection to WOHN/ ESSZIMMER"
+    },
+    "DIELE": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "ABSTELL ZIMMER",
+        "BAD",
+        "G\f4STEZIMMER",
+        "HWR",
+        "WOHN/ ESSZIMMER"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "HWR": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "BAD",
+        "DIELE",
+        "WOHN/ ESSZIMMER"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "G\f4STEZIMMER": {
+      "name_match_score": 1.0,
+      "precision": 0.67,
+      "recall": 1.0,
+      "f1": 0.8,
+      "true_positives": [
+        "ABSTELL ZIMMER",
+        "DIELE"
+      ],
+      "false_positives": [
+        "BAD"
+      ],
+      "false_negatives": [],
+      "note": "Hallucinated connection to BAD"
+    },
+    "BAD": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 0.67,
+      "f1": 0.8,
+      "true_positives": [
+        "DIELE",
+        "HWR"
+      ],
+      "false_positives": [],
+      "false_negatives": [
+        "G\f4STEZIMMER"
+      ],
+      "note": "Missed adjacency to G\f4STEZIMMER"
+    }
+  },
+  "summary": {
+    "total_rooms_ground_truth": 8,
+    "total_rooms_parser": 8,
+    "rooms_correctly_detected": 8,
+    "hallucinated_rooms": [],
+    "missing_rooms": [],
+    "asymmetric_adjacencies": []
+  },
+  "room_detection_score": 10.0,
+  "adjacency_precision": 9.3,
+  "adjacency_recall": 9.3,
+  "adjacency_f1_score": 9.3,
+  "overall_score": 9.5,
+  "key_issues": [
+    "Hallucinated connection to ABSTELL ZIMMER",
+    "Hallucinated connection to WOHN/ ESSZIMMER",
+    "Hallucinated connection to BAD",
+    "Missed adjacency to G\f4STEZIMMER"
+  ]
+}

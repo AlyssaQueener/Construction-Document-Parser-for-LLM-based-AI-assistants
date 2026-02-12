@@ -1,0 +1,23 @@
+{
+    "projectInfo": {
+        "projectId": "12404",
+        "projectName": "Bürogebäude ST30 / Zentralverwaltung",
+        "location": "Stampfenbachstrasse 30, 8006 Zürich",
+        "author": "smo/sca",
+        "stakeholders": {
+            "client": "Kanton Zürich Baudirektion Hochbauamt",
+            "architect": "VOELKI PARTNER AG ARCHITEKTEN",
+            "engineers": null
+        },
+        "timeline": {
+            "yearOfCompletion": null,
+            "approvalDate": null
+        }
+    },
+    "planMetadata": {
+        "planType": "Grundriss Erdgeschoss",
+        "planFormat": "84/60",
+        "scale": "1:50",
+        "projectionMethod": null
+    }
+}

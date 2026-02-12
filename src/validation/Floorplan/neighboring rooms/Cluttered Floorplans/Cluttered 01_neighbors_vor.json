@@ -1,0 +1,90 @@
+{
+  "Besprechung": [
+    "Besprechung_2",
+    "Besprechung_3",
+    "Eingangshalle"
+  ],
+  "Besprechung_2": [
+    "Besprechung",
+    "Eingangshalle",
+    "Empfang"
+  ],
+  "Eingangshalle": [
+    "Besprechung",
+    "Besprechung_2",
+    "Besprechung_3",
+    "Empfang",
+    "Gedeckte Eingangshalle",
+    "UG-Treppe",
+    "WC D/IV"
+  ],
+  "Besprechung_3": [
+    "Besprechung",
+    "Eingangshalle",
+    "Lager",
+    "UG-Treppe",
+    "UG-Treppe_2"
+  ],
+  "WC D/IV_2": [
+    "Gewerbe",
+    "WC H",
+    "WC H_2"
+  ],
+  "Gewerbe": [
+    "Gedeckte Eingangshalle",
+    "WC D/IV",
+    "WC D/IV_2",
+    "WC H_2"
+  ],
+  "WC H_2": [
+    "Gewerbe",
+    "Lager",
+    "UG-Treppe",
+    "WC D/IV",
+    "WC D/IV_2",
+    "WC H"
+  ],
+  "WC H": [
+    "Lager",
+    "UG-Treppe_2",
+    "WC D/IV_2",
+    "WC H_2"
+  ],
+  "Empfang": [
+    "Besprechung_2",
+    "Eingangshalle",
+    "Gedeckte Eingangshalle"
+  ],
+  "Gedeckte Eingangshalle": [
+    "Eingangshalle",
+    "Empfang",
+    "Gewerbe",
+    "WC D/IV"
+  ],
+  "WC D/IV": [
+    "Eingangshalle",
+    "Gedeckte Eingangshalle",
+    "Gewerbe",
+    "UG-Treppe",
+    "WC H_2"
+  ],
+  "UG-Treppe": [
+    "Besprechung_3",
+    "Eingangshalle",
+    "Lager",
+    "WC D/IV",
+    "WC H_2"
+  ],
+  "Lager": [
+    "Besprechung_3",
+    "UG-Treppe",
+    "UG-Treppe_2",
+    "WC H",
+    "WC H_2"
+  ],
+  "UG-Treppe_2": [
+    "Besprechung_3",
+    "Lager",
+    "WC H"
+  ]
+}

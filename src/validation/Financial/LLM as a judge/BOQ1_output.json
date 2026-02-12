@@ -1,0 +1,1308 @@
+{
+  "section_analysis": [
+    {
+      "section_title": "I PRELIMINARY WORKS",
+      "item_analysis": [
+        {
+          "internal_number": 0,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 1,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 2,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        }
+      ]
+    },
+    {
+      "section_title": "II MASONRY &STRUCTURE IN R.C.C",
+      "item_analysis": [
+        {
+          "internal_number": 3,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 4,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 5,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 6,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 7,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 8,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 9,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 10,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        }
+      ]
+    },
+    {
+      "section_title": "III DOORS AND WINDOWS",
+      "item_analysis": [
+        {
+          "internal_number": 11,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 12,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 13,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 14,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        }
+      ]
+    },
+    {
+      "section_title": "IV PLASTERING OF WALLS",
+      "item_analysis": [
+        {
+          "internal_number": 15,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 16,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 17,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 18,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 19,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 20,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        }
+      ]
+    },
+    {
+      "section_title": "V ELECTRICAL INSTALLATION",
+      "item_analysis": [
+        {
+          "internal_number": 21,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 22,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 23,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 24,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 25,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 26,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 27,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 28,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 29,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 30,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 31,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 32,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        }
+      ]
+    },
+    {
+      "section_title": "VI SANITARY INSTALLATION",
+      "item_analysis": [
+        {
+          "internal_number": 33,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 34,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 35,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 36,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 37,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 38,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 39,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 40,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 41,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 42,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 43,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 44,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 45,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 46,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        }
+      ]
+    },
+    {
+      "section_title": "VII ROOF AND CEILING",
+      "item_analysis": [
+        {
+          "internal_number": 47,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 48,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 49,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 50,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 51,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 52,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        }
+      ]
+    },
+    {
+      "section_title": "VIII SITE WORKS",
+      "item_analysis": [
+        {
+          "internal_number": 53,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 54,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 55,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 56,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 57,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 58,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        },
+        {
+          "internal_number": 59,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "Exact match",
+            "item_description": "Exact match",
+            "unit": "Exact match",
+            "quantity": "Exact match",
+            "rate": "Exact match",
+            "amount": "Exact match",
+            "currency": "Exact match"
+          }
+        }
+      ]
+    }
+  ],
+  "completeness": 10.0,
+  "accuracy": 10.0,
+  "overall_score": 10.0,
+  "confidence_calibration": "well-calibrated"
+}

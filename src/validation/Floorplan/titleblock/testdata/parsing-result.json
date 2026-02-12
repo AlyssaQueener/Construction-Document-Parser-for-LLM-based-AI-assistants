@@ -1,0 +1,54 @@
+[ {
+    "First result": "Hybrid",
+    "second result": "pure ai"
+
+},
+  {
+    "projectInfo": {
+      "projectId": "210101-MNMNMN",
+      "projectName": null,
+      "location": "20095 Musterhausen",
+      "author": "Butlerium GmbH",
+      "stakeholders": {
+        "client": "Max Muster",
+        "architect": null,
+        "engineers": null
+      },
+      "timeline": {
+        "yearOfCompletion": null,
+        "approvalDate": null
+      }
+    },
+    "planMetadata": {
+      "planType": "Ergeschoss",
+      "planFormat": "A1",
+      "scale": "1:100",
+      "projectionMethod": null
+    },
+    "confidence": 0.6
+  },
+  {
+    "projectInfo":{
+       "projectId":"210101-MNMMNMN",
+       "projectName":"Muster Beispiel 1",
+       "location":"20095 Musterhausen",
+       "author":"Butlerium GmbH",
+       "stakeholders":{
+          "client":"Max Muster",
+          "architect":"Butlerium GmbH",
+          "engineers":"None"
+       },
+       "timeline":{
+          "yearOfCompletion":"None",
+          "approvalDate":"None"
+       }
+    },
+    "planMetadata":{
+       "planType":"Grundriss",
+       "planFormat":"DIN A3",
+       "scale":"1:100",
+       "projectionMethod":"None"
+    },
+    "confidence":0.8
+ }
+]

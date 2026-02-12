@@ -1,0 +1,29 @@
+{
+    "field_analysis": {
+        "projectInfo": {
+            "projectId": {"match_score": 0.5, "note": "Partial match"},
+            "projectName": {"match_score": 0.8, "note": "Minor spelling difference"},
+            "location": {"match_score": 0.5, "note": "City name differs"},
+            "author": {"match_score": 1.0, "note": "Exact match"},
+            "stakeholders": {
+                "client": {"match_score": 1.0, "note": "Correctly identified as none"},
+                "architect": {"match_score": 1.0, "note": "Correctly identified as none"},
+                "engineers": {"match_score": 1.0, "note": "Correctly identified as none"}
+            },
+            "timeline": {
+                "yearOfCompletion": {"match_score": 0.0, "note": "Missing data"},
+                "approvalDate": {"match_score": 0.0, "note": "Hallucinated value"}
+            }
+        },
+        "planMetadata": {
+            "planType": {"match_score": 1.0, "note": "Exact match"},
+            "planFormat": {"match_score": 1.0, "note": "Exact match"},
+            "scale": {"match_score": 1.0, "note": "Exact match"},
+            "projectionMethod": {"match_score": 1.0, "note": "Correctly identified as none"}
+        }
+    },
+    "completeness": 7.7,
+    "accuracy": 6.15,
+    "overall_score": 6.6,
+    "confidence_calibration": "overconfident"
+}

@@ -1,0 +1,24 @@
+{
+    "projectInfo": {
+        "projectId": "15-G-06b",
+        "projectName": "Neubau Doppelhause",
+        "location": "Rosetta-Vogt-Straße, 55294 Bockenheim",
+        "author": "K. Schulz",
+        "stakeholders": {
+            "client": null,
+            "architect": null,
+            "engineers": null
+        },
+        "timeline": {
+            "yearOfCompletion": null,
+            "approvalDate": "2015-06-09"
+        }
+    },
+    "planMetadata": {
+        "planType": "Grundriss Erdgeschoss",
+        "planFormat": "A3",
+        "scale": "1:100",
+        "projectionMethod": null
+    },
+    "confidence": 0.7
+}

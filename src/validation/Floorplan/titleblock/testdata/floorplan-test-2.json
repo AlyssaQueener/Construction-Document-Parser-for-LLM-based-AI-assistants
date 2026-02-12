@@ -1,0 +1,23 @@
+{
+    "projectInfo":{
+       "projectId":"None",
+       "projectName":"None",
+       "location":"None",
+       "author":"ip",
+       "stakeholders":{
+          "client":"Badischer Landesverein für Innere Mission",
+          "architect":"Planfabrik SPS Diplomingenieure Freie Architekten BDA",
+          "engineers":"Planfabrik SPS Diplomingenieure Freie Architekten BDA"
+       },
+       "timeline":{
+          "yearOfCompletion":"None",
+          "approvalDate":"None"
+       }
+    },
+    "planMetadata":{
+       "planType":"Grundriss Erdgeschoss",
+       "planFormat":"A0",
+       "scale":"1:50",
+       "projectionMethod":"None"
+    }
+}

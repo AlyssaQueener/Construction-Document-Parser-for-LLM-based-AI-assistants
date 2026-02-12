@@ -1,0 +1,222 @@
+{
+  "room_analysis": {
+    "Terrasse_2": {
+      "name_match_score": 1.0,
+      "precision": 0.6667,
+      "recall": 0.6667,
+      "f1": 0.6667,
+      "true_positives": [
+        "Terrasse",
+        "Wohnen /Essen_2"
+      ],
+      "false_positives": [
+        "Wohnen /Essen"
+      ],
+      "false_negatives": [],
+      "note": "Hallucinated connection to Wohnen /Essen"
+    },
+    "Terrasse": {
+      "name_match_score": 1.0,
+      "precision": 0.6667,
+      "recall": 0.6667,
+      "f1": 0.6667,
+      "true_positives": [
+        "Terrasse_2",
+        "Wohnen /Essen"
+      ],
+      "false_positives": [
+        "Küche"
+      ],
+      "false_negatives": [],
+      "note": "Hallucinated connection to Küche"
+    },
+    "Wohnen /Essen": {
+      "name_match_score": 1.0,
+      "precision": 0.6,
+      "recall": 0.6,
+      "f1": 0.6,
+      "true_positives": [
+        "Diele",
+        "Küche",
+        "Wohnen /Essen_2"
+      ],
+      "false_positives": [
+        "Diele_2",
+        "Terrasse_2"
+      ],
+      "false_negatives": [
+        "Terrasse"
+      ],
+      "note": "Missed connection to Terrasse, hallucinated connections to Diele_2 and Terrasse_2"
+    },
+    "Wohnen /Essen_2": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "Diele_2",
+        "Küche_2",
+        "Terrasse_2",
+        "Wohnen /Essen"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "Küche": {
+      "name_match_score": 1.0,
+      "precision": 0.75,
+      "recall": 0.75,
+      "f1": 0.75,
+      "true_positives": [
+        "Diele",
+        "Gast",
+        "Wohnen /Essen"
+      ],
+      "false_positives": [
+        "Terrasse"
+      ],
+      "false_negatives": [],
+      "note": "Hallucinated connection to Terrasse"
+    },
+    "Küche_2": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "Diele_2",
+        "Gast_2",
+        "Wohnen /Essen_2"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "Diele_2": {
+      "name_match_score": 1.0,
+      "precision": 0.5714,
+      "recall": 0.7143,
+      "f1": 0.6364,
+      "true_positives": [
+        "Diele",
+        "Gast_2",
+        "Küche_2",
+        "Wohnen /Essen_2"
+      ],
+      "false_positives": [
+        "G-WC",
+        "G-WC_2",
+        "Wohnen /Essen"
+      ],
+      "false_negatives": [],
+      "note": "Hallucinated connections to G-WC, G-WC_2, and Wohnen /Essen"
+    },
+    "Gast_2": {
+      "name_match_score": 1.0,
+      "precision": 0.6667,
+      "recall": 0.6667,
+      "f1": 0.6667,
+      "true_positives": [
+        "Diele_2",
+        "Küche_2"
+      ],
+      "false_positives": [
+        "G-WC_2"
+      ],
+      "false_negatives": [],
+      "note": "Hallucinated connection to G-WC_2"
+    },
+    "Diele": {
+      "name_match_score": 1.0,
+      "precision": 0.8333,
+      "recall": 0.8333,
+      "f1": 0.8333,
+      "true_positives": [
+        "Diele_2",
+        "Gast",
+        "Küche",
+        "Wohnen /Essen"
+      ],
+      "false_positives": [
+        "G-WC"
+      ],
+      "false_negatives": [],
+      "note": "Hallucinated connection to G-WC"
+    },
+    "G-WC": {
+      "name_match_score": 1.0,
+      "precision": 0.5,
+      "recall": 0.5,
+      "f1": 0.5,
+      "true_positives": [
+        "Diele"
+      ],
+      "false_positives": [
+        "Diele_2",
+        "Gast"
+      ],
+      "false_negatives": [
+        "G-WC_2"
+      ],
+      "note": "Missed connection to G-WC_2, hallucinated connections to Diele_2 and Gast"
+    },
+    "Gast": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "Diele",
+        "Küche"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "G-WC_2": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "Diele_2",
+        "Gast_2"
+      ],
+      "false_positives": [
+        "G-WC"
+      ],
+      "false_negatives": [],
+      "note": "Hallucinated connection to G-WC"
+    }
+  },
+  "summary": {
+    "total_rooms_ground_truth": 12,
+    "total_rooms_parser": 12,
+    "rooms_correctly_detected": 12,
+    "hallucinated_rooms": [],
+    "missing_rooms": [],
+    "asymmetric_adjacencies": [
+      "Terrasse_2-Wohnen /Essen",
+      "Terrasse-Küche",
+      "Wohnen /Essen-Diele_2",
+      "Wohnen /Essen-Terrasse_2",
+      "Küche-Terrasse",
+      "Diele_2-G-WC",
+      "Diele_2-G-WC_2",
+      "G-WC-Diele_2",
+      "G-WC-Gast",
+      "G-WC_2-G-WC"
+    ]
+  },
+  "room_detection_score": 10.0,
+  "adjacency_precision": 7.8333,
+  "adjacency_recall": 7.8333,
+  "adjacency_f1_score": 7.8333,
+  "overall_score": 8.425,
+  "key_issues": [
+    "Multiple hallucinated adjacencies",
+    "Several asymmetric adjacencies"
+  ]
+}

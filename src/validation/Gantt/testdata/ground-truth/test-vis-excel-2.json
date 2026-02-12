@@ -1,0 +1,52 @@
+[
+    {
+        "task": "Project Approval",
+        "start": "02.02.25 ",
+        "finish": "02.02.25 "
+    },
+    {
+        "task": "Planning",
+        "start": "02.02.25 ",
+        "finish": "05.02.25 "
+    },
+    {
+        "task": "Space",
+        "start": "03.02.25 ",
+        "finish": "05.02.25 "
+    },
+    {
+        "task": "Capital",
+        "start": "02.02.25 ",
+        "finish": "03.02.25 "
+    },
+    {
+        "task": "Budget",
+        "start": "05.02.25 ",
+        "finish": "07.02.25 "
+    },
+    {
+        "task": "Design",
+        "start": "03.02.25 ",
+        "finish": "05.02.25 "
+    },
+    {
+        "task": "Review",
+        "start": "08.02.25 ",
+        "finish": "08.02.25 "
+    },
+    {
+        "task": "Bidding",
+        "start": "05.02.25 ",
+        "finish": "06.02.25 "
+    },
+    {
+        "task": "Staging",
+        "start": "09.02.25 ",
+        "finish": "09.02.25 "
+    },
+    {
+        "task": "Ceiling",
+        "start": "10.02.25 ",
+        "finish": "11.02.25 "
+    }
+]

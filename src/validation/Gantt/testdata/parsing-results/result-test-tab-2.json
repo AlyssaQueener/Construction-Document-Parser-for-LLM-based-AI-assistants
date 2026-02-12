@@ -1,0 +1,177 @@
+[
+    {
+      "id": 1,
+      "task": "Research possible resources",
+      "start": "2018-07-27",
+      "finish": "2018-08-06",
+      "duration": "9 d"
+    },
+    {
+      "id": 2,
+      "task": "Evaluate costs",
+      "start": "2018-08-07",
+      "finish": "2018-08-14",
+      "duration": "7 d"
+    },
+    {
+      "id": 3,
+      "task": "Pre-Construction",
+      "start": "2018-08-15",
+      "finish": "2018-10-18",
+      "duration": "56 d"
+    },
+    {
+      "id": 4,
+      "task": "Get bids",
+      "start": "2018-08-15",
+      "finish": "2018-09-12",
+      "duration": "25 d"
+    },
+    {
+      "id": 5,
+      "task": "Contract Agreement",
+      "start": "2018-09-13",
+      "finish": "2018-09-20",
+      "duration": "7 d"
+    },
+    {
+      "id": 6,
+      "task": "Site examination",
+      "start": "2018-09-21",
+      "finish": "2018-10-05",
+      "duration": "13 d"
+    },
+    {
+      "id": 7,
+      "task": "Idenfity risks",
+      "start": "2018-10-08",
+      "finish": "2018-10-17",
+      "duration": "9 d"
+    },
+    {
+      "id": 8,
+      "task": "Approve construction draft",
+      "start": "2018-10-18",
+      "finish": "2018-10-18",
+      "duration": "1 d"
+    },
+    {
+      "id": 9,
+      "task": "Procurement",
+      "start": "2018-10-19",
+      "finish": "2018-12-17",
+      "duration": "50.5 d"
+    },
+    {
+      "id": 10,
+      "task": "Market analysis",
+      "start": "2018-10-19",
+      "finish": "2018-10-25",
+      "duration": "6 d"
+    },
+    {
+      "id": 11,
+      "task": "Budget analysis",
+      "start": "2018-10-19",
+      "finish": "2018-10-25",
+      "duration": "6 d"
+    },
+    {
+      "id": 12,
+      "task": "Search suppliers",
+      "start": "2018-10-26",
+      "finish": "2018-11-08",
+      "duration": "12 d"
+    },
+    {
+      "id": 13,
+      "task": "Negotiations",
+      "start": "2018-11-09",
+      "finish": "2018-11-15",
+      "duration": "6 d"
+    },
+    {
+      "id": 14,
+      "task": "Follow-ups",
+      "start": "2018-11-16",
+      "finish": "2018-12-14",
+      "duration": "24.5 d"
+    },
+    {
+      "id": 15,
+      "task": "Approve construction report",
+      "start": "2018-12-14",
+      "finish": "2018-12-17",
+      "duration": "2 d"
+    },
+    {
+      "id": 16,
+      "task": "Construction",
+      "start": "2018-12-17",
+      "finish": "2019-04-01",
+      "duration": "90 d"
+    },
+    {
+      "id": 17,
+      "task": "Decide general regulations",
+      "start": "2018-12-17",
+      "finish": "2018-12-24",
+      "duration": "6 d"
+    },
+    {
+      "id": 18,
+      "task": "Set up storage facilities",
+      "start": "2018-12-17",
+      "finish": "2018-12-31",
+      "duration": "12 d"
+    },
+    {
+      "id": 19,
+      "task": "Set up safety programs",
+      "start": "2018-12-17",
+      "finish": "2018-12-24",
+      "duration": "6 d"
+    },
+    {
+      "id": 20,
+      "task": "Building",
+      "start": "2018-12-31",
+      "finish": "2019-04-01",
+      "duration": "78 d"
+    },
+    {
+      "id": 21,
+      "task": "Commission",
+      "start": "2019-04-01",
+      "finish": "2019-04-19",
+      "duration": "16.5 d"
+    },
+    {
+      "id": 22,
+      "task": "Test equipment and system",
+      "start": "2019-04-01",
+      "finish": "2019-04-19",
+      "duration": "16 d"
+    },
+    {
+      "id": 23,
+      "task": "Staff tranning for maintenance",
+      "start": "2019-04-01",
+      "finish": "2019-04-18",
+      "duration": "16 d"
+    },
+    {
+      "id": 24,
+      "task": "Owner Occupancy",
+      "start": "2019-04-19",
+      "finish": "2019-05-31",
+      "duration": "36 d"
+    },
+    {
+      "id": 25,
+      "task": "Project Closeout",
+      "start": "2019-05-31",
+      "finish": "2019-06-03",
+      "duration": "2 d"
+    }
+  ]

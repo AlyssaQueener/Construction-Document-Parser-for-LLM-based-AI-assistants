@@ -1,0 +1,198 @@
+[
+    {
+      "id": 1,
+      "task": "Project Approvals",
+      "start": "2018-09-27",
+      "finish": "2018-10-04",
+      "duration": "6 d"
+    },
+    {
+      "id": 2,
+      "task": "Planning and Formulation",
+      "start": "2018-10-05",
+      "finish": "2018-10-16",
+      "duration": "8 d"
+    },
+    {
+      "id": 3,
+      "task": "Space Planning",
+      "start": "2018-10-05",
+      "finish": "2018-10-12",
+      "duration": "6 d"
+    },
+    {
+      "id": 4,
+      "task": "Facilities Programming",
+      "start": "2018-10-08",
+      "finish": "2018-10-15",
+      "duration": "6 d"
+    },
+    {
+      "id": 5,
+      "task": "Capital Planning",
+      "start": "2018-10-09",
+      "finish": "2018-10-16",
+      "duration": "6 d"
+    },
+    {
+      "id": 6,
+      "task": "Capital Budgeting",
+      "start": "2018-10-09",
+      "finish": "2018-10-16",
+      "duration": "6 d"
+    },
+    {
+      "id": 7,
+      "task": "Preliminary Design",
+      "start": "2018-10-17",
+      "finish": "2018-11-13",
+      "duration": "20 d"
+    },
+    {
+      "id": 8,
+      "task": "Design Planning",
+      "start": "2018-10-17",
+      "finish": "2018-10-24",
+      "duration": "6 d"
+    },
+    {
+      "id": 9,
+      "task": "Reviewed by Stakeholders",
+      "start": "2018-10-25",
+      "finish": "2018-11-01",
+      "duration": "6 d"
+    },
+    {
+      "id": 10,
+      "task": "Works out Major Design Elements",
+      "start": "2018-11-02",
+      "finish": "2018-11-09",
+      "duration": "6 d"
+    },
+    {
+      "id": 11,
+      "task": "Finish of Planning and Design",
+      "start": "2018-11-13",
+      "finish": "2018-11-13",
+      "duration": "1 d"
+    },
+    {
+      "id": 12,
+      "task": "Bidding",
+      "start": "2018-11-19",
+      "finish": "2018-12-04",
+      "duration": "11 d"
+    },
+    {
+      "id": 13,
+      "task": "Construction Process",
+      "start": "2018-12-07",
+      "finish": "2019-06-17",
+      "duration": "136 d"
+    },
+    {
+      "id": 14,
+      "task": "Marking the Layout",
+      "start": "2018-12-07",
+      "finish": "2018-12-24",
+      "duration": "11 d"
+    },
+    {
+      "id": 15,
+      "task": "Exacavation of Footings",
+      "start": "2018-12-24",
+      "finish": "2019-01-08",
+      "duration": "11 d"
+    },
+    {
+      "id": 16,
+      "task": "Reinforcement",
+      "start": "2019-01-08",
+      "finish": "2019-02-01",
+      "duration": "18 d"
+    },
+    {
+      "id": 17,
+      "task": "Back Filling & Compaction",
+      "start": "2019-02-06",
+      "finish": "2019-02-18",
+      "duration": "8 d"
+    },
+    {
+      "id": 18,
+      "task": "Staging",
+      "start": "2019-02-20",
+      "finish": "2019-03-06",
+      "duration": "11 d"
+    },
+    {
+      "id": 19,
+      "task": "Electrical Works",
+      "start": "2019-03-07",
+      "finish": "2019-03-22",
+      "duration": "11 d"
+    },
+    {
+      "id": 20,
+      "task": "Window Fixing",
+      "start": "2019-03-22",
+      "finish": "2019-04-04",
+      "duration": "9 d"
+    },
+    {
+      "id": 21,
+      "task": "Marble Flooring",
+      "start": "2019-04-04",
+      "finish": "2019-04-12",
+      "duration": "6 d"
+    },
+    {
+      "id": 22,
+      "task": "Plumbing Pipe Installation",
+      "start": "2019-04-12",
+      "finish": "2019-04-29",
+      "duration": "11 d"
+    },
+    {
+      "id": 23,
+      "task": "Ceiling Installation",
+      "start": "2019-04-29",
+      "finish": "2019-05-10",
+      "duration": "9 d"
+    },
+    {
+      "id": 24,
+      "task": "Reception Room Installation",
+      "start": "2019-05-10",
+      "finish": "2019-05-22",
+      "duration": "8 d"
+    },
+    {
+      "id": 25,
+      "task": "Muniment Room Installation",
+      "start": "2019-05-22",
+      "finish": "2019-05-30",
+      "duration": "6 d"
+    },
+    {
+      "id": 26,
+      "task": "Garden Works",
+      "start": "2019-05-31",
+      "finish": "2019-06-17",
+      "duration": "11 d"
+    },
+    {
+      "id": 27,
+      "task": "Construction Closeout",
+      "start": "2019-06-18",
+      "finish": "2019-06-19",
+      "duration": "1 d"
+    },
+    {
+      "id": 28,
+      "task": "Occupancy",
+      "start": "2019-06-27",
+      "finish": "2019-07-03",
+      "duration": "5 d"
+    }
+  ]

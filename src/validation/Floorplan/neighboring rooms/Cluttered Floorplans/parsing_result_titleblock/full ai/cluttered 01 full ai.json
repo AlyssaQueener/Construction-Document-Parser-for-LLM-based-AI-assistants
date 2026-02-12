@@ -1,0 +1,24 @@
+{
+    "projectInfo": {
+        "projectId": "ST30",
+        "projectName": "Bürogebäude ST30 / Zentralverwaltung",
+        "location": null,
+        "author": "gez.:",
+        "stakeholders": {
+            "client": null,
+            "architect": "VOLKWITZ PARTNER ARCHITEKTEN",
+            "engineers": null
+        },
+        "timeline": {
+            "yearOfCompletion": null,
+            "approvalDate": null
+        }
+    },
+    "planMetadata": {
+        "planType": "Grundriss Erdgeschoss",
+        "planFormat": "A0",
+        "scale": "1:50",
+        "projectionMethod": null
+    },
+    "confidence": 0.6
+}

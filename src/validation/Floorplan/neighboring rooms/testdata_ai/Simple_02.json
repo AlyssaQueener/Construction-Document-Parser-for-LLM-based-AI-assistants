@@ -1,0 +1,52 @@
+{
+  "neighboringRooms": {
+    "BAD": [
+      "BALKON",
+      "FLUR",
+      "WOHNEN"
+    ],
+    "BALKON": [
+      "BAD",
+      "WOHNEN"
+    ],
+    "FLUR": [
+      "BAD",
+      "KÜCHE",
+      "SCHLAFEN",
+      "WOHNEN"
+    ],
+    "KÜCHE": [
+      "BALKON",
+      "FLUR"
+    ],
+    "SCHLAFEN": [
+      "FLUR"
+    ],
+    "WOHNEN": [
+      "BAD",
+      "BALKON",
+      "FLUR"
+    ]
+  },
+  "connectedRooms": {
+    "BAD": [
+      "FLUR"
+    ],
+    "FLUR": [
+      "BAD",
+      "KÜCHE",
+      "SCHLAFEN",
+      "WOHNEN"
+    ],
+    "KÜCHE": [
+      "FLUR"
+    ],
+    "SCHLAFEN": [
+      "FLUR"
+    ],
+    "WOHNEN": [
+      "FLUR"
+    ]
+  },
+  "confidence": 0.9
+}

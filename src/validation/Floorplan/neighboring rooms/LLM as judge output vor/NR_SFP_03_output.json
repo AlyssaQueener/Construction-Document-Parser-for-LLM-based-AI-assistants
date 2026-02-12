@@ -1,0 +1,101 @@
+{
+  "room_analysis": {
+    "living room": {
+      "name_match_score": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "Bedroom",
+        "bedroom",
+        "bedroom_2",
+        "kitchen"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "kitchen": {
+      "name_match_score": 1.0,
+      "precision": 0.667,
+      "recall": 0.667,
+      "f1": 0.667,
+      "true_positives": [
+        "Bedroom",
+        "living room"
+      ],
+      "false_positives": [
+        "bedroom"
+      ],
+      "false_negatives": [
+        "kitchen"
+      ],
+      "note": "Missed kitchen adjacency"
+    },
+    "bedroom": {
+      "name_match_score": 0.8,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_positives": [
+        "bedroom_2",
+        "living room"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "note": "All neighbors correctly identified"
+    },
+    "bedroom_2": {
+      "name_match_score": 1.0,
+      "precision": 0.667,
+      "recall": 0.667,
+      "f1": 0.667,
+      "true_positives": [
+        "bedroom",
+        "living room"
+      ],
+      "false_positives": [
+        "Bedroom"
+      ],
+      "false_negatives": [
+        "bedroom_2"
+      ],
+      "note": "Missed bedroom_2 adjacency"
+    },
+    "Bedroom": {
+      "name_match_score": 0.8,
+      "precision": 0.667,
+      "recall": 0.667,
+      "f1": 0.667,
+      "true_positives": [
+        "kitchen",
+        "living room"
+      ],
+      "false_positives": [
+        "bedroom_2"
+      ],
+      "false_negatives": [
+        "Bedroom"
+      ],
+      "note": "Missed Bedroom adjacency"
+    }
+  },
+  "summary": {
+    "total_rooms_ground_truth": 5,
+    "total_rooms_parser": 5,
+    "rooms_correctly_detected": 5,
+    "hallucinated_rooms": [],
+    "missing_rooms": [],
+    "asymmetric_adjacencies": []
+  },
+  "room_detection_score": 10.0,
+  "adjacency_precision": 8.33,
+  "adjacency_recall": 8.33,
+  "adjacency_f1_score": 8.33,
+  "overall_score": 8.67,
+  "key_issues": [
+    "Missed kitchen adjacency",
+    "Missed bedroom_2 adjacency",
+    "Missed Bedroom adjacency"
+  ]
+}

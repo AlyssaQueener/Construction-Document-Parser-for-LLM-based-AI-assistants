@@ -1,0 +1,562 @@
+{
+    "completeness": 7.27,
+    "accuracy": 6.85,
+    "overall_score": 7.06,
+    "field_evaluations": [
+        {
+            "ground_truth_id": "GT_0",
+            "parser_id": null,
+            "fields_evaluated": [],
+            "field_scores": {},
+            "notes": "No match found - activity 'B-H4 + H-H4, B-H5 + H-H5' not extracted by parser"
+        },
+        {
+            "ground_truth_id": "GT_1",
+            "parser_id": "P_0",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 0.5,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": "Task partial match: 'Vorplanung' vs 'LPH 2- Vorplanung' (missing LPH 2 prefix)"
+        },
+        {
+            "ground_truth_id": "GT_2",
+            "parser_id": "P_0",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 0.5
+            },
+            "notes": "Finish date mismatch: '07.07.25' vs '30.09.25' (different date)"
+        },
+        {
+            "ground_truth_id": "GT_3",
+            "parser_id": "P_1",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 0.5,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": "Task partial match: 'Verstellung' vs 'Vorstellung' (typo in parser output)"
+        },
+        {
+            "ground_truth_id": "GT_4",
+            "parser_id": "P_2",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 0.5,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": "Task partial match: 'Entwurfsplanung' vs 'LPH 3 - Entwurfsplanung' (missing LPH 3 prefix)"
+        },
+        {
+            "ground_truth_id": "GT_5",
+            "parser_id": "P_3",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": "Exact match"
+        },
+        {
+            "ground_truth_id": "GT_6",
+            "parser_id": "P_2",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 0.3
+            },
+            "notes": "Finish date mismatch: '28.11.25' vs '11.12.25' (13 days difference)"
+        },
+        {
+            "ground_truth_id": "GT_7",
+            "parser_id": "P_4",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 0.5,
+                "start": 0.3,
+                "finish": 1.0
+            },
+            "notes": "Task typo: 'Verstellung' vs 'Vorstellung'; Start date mismatch: '12.06.25' vs '29.10.25'"
+        },
+        {
+            "ground_truth_id": "GT_8",
+            "parser_id": "P_5",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": "Exact match"
+        },
+        {
+            "ground_truth_id": "GT_9",
+            "parser_id": "P_6",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 0.0
+            },
+            "notes": "Finish date completely wrong: '09.10.25' vs '01.12.25' (53 days difference)"
+        },
+        {
+            "ground_truth_id": "GT_10",
+            "parser_id": "P_7",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": "Exact match"
+        },
+        {
+            "ground_truth_id": "GT_11",
+            "parser_id": null,
+            "fields_evaluated": [],
+            "field_scores": {},
+            "notes": "No match found - activity 'Prüfzeitraum Bauherr und Freigabe Kosten LPH 3' not extracted"
+        },
+        {
+            "ground_truth_id": "GT_12",
+            "parser_id": null,
+            "fields_evaluated": [],
+            "field_scores": {},
+            "notes": "No match found - activity 'Abstimmug Bauteilaufbauten' not extracted (may be confused with P_8)"
+        },
+        {
+            "ground_truth_id": "GT_13",
+            "parser_id": "P_8",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 0.3,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": "Task low match: 'Abstimmung Bauzeitplan' vs 'Konzeption Serielle Sanierung' (different concepts)"
+        },
+        {
+            "ground_truth_id": "GT_14",
+            "parser_id": "P_10",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": "Exact match"
+        },
+        {
+            "ground_truth_id": "GT_15",
+            "parser_id": "P_11",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 0.0,
+                "finish": 1.0
+            },
+            "notes": "Start date: parser has 'None' while GT has '26.08.25'"
+        },
+        {
+            "ground_truth_id": "GT_16",
+            "parser_id": "P_12",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 0.5,
+                "start": 0.0,
+                "finish": 1.0
+            },
+            "notes": "Task partial: 'Tragwerksplanung Waschbeton' vs 'Angabe Tragwerksplanung Waschbeton'; Start: None vs '19.11.25'"
+        },
+        {
+            "ground_truth_id": "GT_17",
+            "parser_id": "P_13",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 0.0,
+                "finish": 1.0
+            },
+            "notes": "Start date mismatch: '18.06.25' vs '21.11.25' (5 months difference)"
+        },
+        {
+            "ground_truth_id": "GT_18",
+            "parser_id": "P_14",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 0.0,
+                "finish": 1.0
+            },
+            "notes": "Start date mismatch: '18.06.25' vs '25.11.25' (5 months difference)"
+        },
+        {
+            "ground_truth_id": "GT_19",
+            "parser_id": "P_15",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 0.3
+            },
+            "notes": "Finish date off: '11.12.2025' vs '26.11.25' (15 days difference)"
+        },
+        {
+            "ground_truth_id": "GT_20",
+            "parser_id": null,
+            "fields_evaluated": [],
+            "field_scores": {},
+            "notes": "No match found - activity 'Abgabe Kosten Fachplaner' not extracted"
+        },
+        {
+            "ground_truth_id": "GT_21",
+            "parser_id": "P_16",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 0.8,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": "Task high match: minor formatting difference with pipe separator"
+        },
+        {
+            "ground_truth_id": "GT_22",
+            "parser_id": "P_17",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 0.8,
+                "start": 0.3,
+                "finish": 1.0
+            },
+            "notes": "Task high match with pipe; Start date mismatch: '18.06.25' vs '14.07.25'"
+        },
+        {
+            "ground_truth_id": "GT_23",
+            "parser_id": "P_18",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 0.8,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": "Task high match: 'Brandschutz | Bauant' vs 'Brandsschutz Bauart' (minor typo/abbreviation)"
+        },
+        {
+            "ground_truth_id": "GT_24",
+            "parser_id": "P_19",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 0.8,
+                "start": 1.0,
+                "finish": 0.3
+            },
+            "notes": "Task high match with pipe; Finish: '02.10.25' vs '23.10.25' (21 days difference)"
+        },
+        {
+            "ground_truth_id": "GT_25",
+            "parser_id": "P_20",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 0.5,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": "Task partial: 'Berechnungen Abgabe LPH 3' vs 'HSL IPV Berechnungen Abgabe LPH 03' (missing HSL IPV prefix)"
+        },
+        {
+            "ground_truth_id": "GT_26",
+            "parser_id": "P_21",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 0.8,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": "Task high match: 'HSL (Bestand) | Lünsmeier' vs 'HSL Bestand Linsmeier' (formatting difference)"
+        },
+        {
+            "ground_truth_id": "GT_27",
+            "parser_id": "P_22",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 0.8,
+                "start": 1.0,
+                "finish": 0.3
+            },
+            "notes": "Task high match with pipe; Finish: '02.10.25' vs '24.10.25' (22 days difference)"
+        },
+        {
+            "ground_truth_id": "GT_28",
+            "parser_id": "P_23",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 0.5,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": "Task partial: 'Detaillierung Abgabe LPH 3' vs 'HSL DICK Detailplanung Abgabe LPH 03' (missing HSL DICK prefix)"
+        },
+        {
+            "ground_truth_id": "GT_29",
+            "parser_id": "P_24",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 0.8,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": "Task high match: minor formatting difference with pipe separator"
+        },
+        {
+            "ground_truth_id": "GT_30",
+            "parser_id": null,
+            "fields_evaluated": [],
+            "field_scores": {},
+            "notes": "No match found - 'LPH 4 - Genehmigungsplanung' not extracted as standalone activity"
+        },
+        {
+            "ground_truth_id": "GT_31",
+            "parser_id": "P_25",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 0.0
+            },
+            "notes": "Finish date wrong: '08.12.25' vs '01.06.26' (5+ months difference)"
+        },
+        {
+            "ground_truth_id": "GT_32",
+            "parser_id": "P_26",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": "Exact match"
+        },
+        {
+            "ground_truth_id": "GT_33",
+            "parser_id": "P_27",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": "Exact match"
+        },
+        {
+            "ground_truth_id": "GT_34",
+            "parser_id": "P_29",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 0.5,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": "Task partial: 'Prüfraum Bauherr und Frage LPH 4' vs 'Prüfzeitraum Bauherr und Freigabe LPH 4' (typos)"
+        },
+        {
+            "ground_truth_id": "GT_35",
+            "parser_id": "P_30",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 0.0
+            },
+            "notes": "Finish date wrong: '16.12.25' vs '01.06.26' (5+ months difference)"
+        },
+        {
+            "ground_truth_id": "GT_36",
+            "parser_id": "P_32",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 0.5,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": "Task partial: 'Bearbeitung Bauantrag' vs 'Genehmigungsverfahren Behörde (geschätzt)' (different perspective)"
+        },
+        {
+            "ground_truth_id": "GT_37",
+            "parser_id": "P_31",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 0.5,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": "Task partial: similar timeframe but different description"
+        },
+        {
+            "ground_truth_id": "GT_38",
+            "parser_id": "P_35",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 0.5,
+                "start": 0.0,
+                "finish": 0.3
+            },
+            "notes": "Task partial: 'Baugenehmigung' vs 'Erteilung Baugenehmigung'; Dates: None/None vs 29.05.26/29.05.26"
+        },
+        {
+            "ground_truth_id": "GT_39",
+            "parser_id": null,
+            "fields_evaluated": [],
+            "field_scores": {},
+            "notes": "No match found - 'Leitdetailplanung' parent activity not extracted"
+        },
+        {
+            "ground_truth_id": "GT_40",
+            "parser_id": "P_36",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": "Exact match"
+        },
+        {
+            "ground_truth_id": "GT_41",
+            "parser_id": "P_37",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 0.3,
+                "finish": 1.0
+            },
+            "notes": "Start date mismatch: '13.02.26' vs '19.12.25' (about 1 month difference)"
+        },
+        {
+            "ground_truth_id": "GT_42",
+            "parser_id": null,
+            "fields_evaluated": [],
+            "field_scores": {},
+            "notes": "No match found - 'Vergabe + Ausführungsplanung GU' parent activity not extracted"
+        },
+        {
+            "ground_truth_id": "GT_43",
+            "parser_id": "P_38",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": "Exact match"
+        },
+        {
+            "ground_truth_id": "GT_44",
+            "parser_id": "P_39",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 0.3,
+                "finish": 1.0
+            },
+            "notes": "Start date mismatch: '03.03.26' vs '13.01.26' (about 1.5 months difference)"
+        },
+        {
+            "ground_truth_id": "GT_45",
+            "parser_id": "P_40",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": "Exact match"
+        },
+        {
+            "ground_truth_id": "GT_46",
+            "parser_id": "P_41",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 0.5,
+                "start": 1.0,
+                "finish": 0.3
+            },
+            "notes": "Task partial: 'Ausführung' vs longer description; Finish: '19.10.26' vs '29.06.26'"
+        },
+        {
+            "ground_truth_id": "GT_47",
+            "parser_id": null,
+            "fields_evaluated": [],
+            "field_scores": {},
+            "notes": "No match found - specific H4 activity not extracted"
+        },
+        {
+            "ground_truth_id": "GT_48",
+            "parser_id": "P_42",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 0.8,
+                "start": 0.0,
+                "finish": 1.0
+            },
+            "notes": "Task high match (H4); Start date mismatch: '19.10.26' vs '29.06.26'"
+        },
+        {
+            "ground_truth_id": "GT_49",
+            "parser_id": "P_42",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 0.8,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": "Task high match; maps to same parser activity as GT_48"
+        },
+        {
+            "ground_truth_id": "GT_50",
+            "parser_id": null,
+            "fields_evaluated": [],
+            "field_scores": {},
+            "notes": "No match found - specific H5 activity not extracted"
+        },
+        {
+            "ground_truth_id": "GT_51",
+            "parser_id": "P_43",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 0.8,
+                "start": 0.0,
+                "finish": 1.0
+            },
+            "notes": "Task high match (H5); Start date mismatch: '21.09.26' vs '10.03.26'"
+        },
+        {
+            "ground_truth_id": "GT_52",
+            "parser_id": "P_43",
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 0.8,
+                "start": 1.0,
+                "finish": 0.0
+            },
+            "notes": "Task high match; Finish: '10.03.26' vs '21.09.26'; maps to same parser activity as GT_51"
+        }
+    ],
+    "summary": {
+        "total_ground_truth_activities": 53,
+        "total_matched_activities": 40,
+        "total_fields_evaluated": 120,
+        "false_positives": 4,
+        "false_negatives": 13,
+        "common_fields": ["task", "start", "finish"]
+    }
+}

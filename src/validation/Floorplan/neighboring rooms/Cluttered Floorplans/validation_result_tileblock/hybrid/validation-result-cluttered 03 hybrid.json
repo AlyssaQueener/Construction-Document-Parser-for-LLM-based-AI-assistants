@@ -1,0 +1,68 @@
+{
+    "field_analysis": {
+        "projectInfo": {
+            "projectId": {
+                "match_score": 0.5,
+                "note": "Partial match, missing suffix"
+            },
+            "projectName": {
+                "match_score": 1.0,
+                "note": "Exact match"
+            },
+            "location": {
+                "match_score": 0.8,
+                "note": "Minor formatting difference"
+            },
+            "author": {
+                "match_score": 1.0,
+                "note": "Exact match"
+            },
+            "stakeholders": {
+                "client": {
+                    "match_score": 1.0,
+                    "note": "Correctly identified none"
+                },
+                "architect": {
+                    "match_score": 1.0,
+                    "note": "Correctly identified none"
+                },
+                "engineers": {
+                    "match_score": 1.0,
+                    "note": "Correctly identified none"
+                }
+            },
+            "timeline": {
+                "yearOfCompletion": {
+                    "match_score": 0.0,
+                    "note": "False positive"
+                },
+                "approvalDate": {
+                    "match_score": 0.0,
+                    "note": "False positive"
+                }
+            }
+        },
+        "planMetadata": {
+            "planType": {
+                "match_score": 1.0,
+                "note": "Exact match"
+            },
+            "planFormat": {
+                "match_score": 1.0,
+                "note": "Exact match"
+            },
+            "scale": {
+                "match_score": 1.0,
+                "note": "Exact match"
+            },
+            "projectionMethod": {
+                "match_score": 1.0,
+                "note": "Correctly identified none"
+            }
+        }
+    },
+    "completeness": 8.0,
+    "accuracy": 7.5,
+    "overall_score": 7.5,
+    "confidence_calibration": "underconfident"
+}

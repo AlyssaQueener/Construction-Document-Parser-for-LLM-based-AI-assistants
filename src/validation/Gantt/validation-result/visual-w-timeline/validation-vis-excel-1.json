@@ -1,0 +1,114 @@
+{
+    "completeness": 7.78,
+    "accuracy": 7.04,
+    "overall_score": 7.41,
+    "field_evaluations": [
+        {
+            "ground_truth_id": 0,
+            "parser_id": 0,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 0.3
+            },
+            "notes": "Finish date significantly different"
+        },
+        {
+            "ground_truth_id": 1,
+            "parser_id": 1,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 0.3
+            },
+            "notes": "Finish date significantly different"
+        },
+        {
+            "ground_truth_id": 2,
+            "parser_id": null,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 0.0,
+                "start": 0.0,
+                "finish": 0.0
+            },
+            "notes": "Activity not matched"
+        },
+        {
+            "ground_truth_id": 3,
+            "parser_id": 2,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 0.3,
+                "finish": 1.0
+            },
+            "notes": "Start date significantly different"
+        },
+        {
+            "ground_truth_id": 4,
+            "parser_id": 3,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 0.5,
+                "finish": 0.5
+            },
+            "notes": "Start and finish dates partially different"
+        },
+        {
+            "ground_truth_id": 5,
+            "parser_id": 4,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 0.3
+            },
+            "notes": "Finish date significantly different"
+        },
+        {
+            "ground_truth_id": 6,
+            "parser_id": 5,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": "All fields match exactly"
+        },
+        {
+            "ground_truth_id": 7,
+            "parser_id": 6,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": "All fields match exactly"
+        },
+        {
+            "ground_truth_id": 8,
+            "parser_id": 7,
+            "fields_evaluated": ["task", "start", "finish"],
+            "field_scores": {
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0
+            },
+            "notes": "All fields match exactly"
+        }
+    ],
+    "summary": {
+        "total_ground_truth_activities": 9,
+        "total_matched_activities": 7,
+        "total_fields_evaluated": 24,
+        "false_positives": 0,
+        "false_negatives": 2,
+        "common_fields": ["task", "start", "finish"]
+    }
+}

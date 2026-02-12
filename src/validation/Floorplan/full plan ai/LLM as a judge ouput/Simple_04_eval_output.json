@@ -1,0 +1,232 @@
+{
+  "title_block_analysis": {
+    "field_analysis": {
+      "projectInfo": {
+        "projectId": {
+          "match_score": 0.0,
+          "note": "Missing"
+        },
+        "projectName": {
+          "match_score": 0.0,
+          "note": "Missing"
+        },
+        "location": {
+          "match_score": 0.0,
+          "note": "Missing"
+        },
+        "author": {
+          "match_score": 0.3,
+          "note": "Major abbreviation"
+        },
+        "stakeholders": {
+          "client": {
+            "match_score": 0.0,
+            "note": "Missing"
+          },
+          "architect": {
+            "match_score": 0.0,
+            "note": "Missing"
+          },
+          "engineers": {
+            "match_score": 0.0,
+            "note": "Missing"
+          }
+        },
+        "timeline": {
+          "yearOfCompletion": {
+            "match_score": 0.0,
+            "note": "Missing"
+          },
+          "approvalDate": {
+            "match_score": 0.0,
+            "note": "Missing"
+          }
+        }
+      },
+      "planMetadata": {
+        "planType": {
+          "match_score": 1.0,
+          "note": "Exact match"
+        },
+        "planFormat": {
+          "match_score": 0.0,
+          "note": "Missing"
+        },
+        "scale": {
+          "match_score": 1.0,
+          "note": "Exact match"
+        },
+        "projectionMethod": {
+          "match_score": 0.0,
+          "note": "Missing"
+        }
+      }
+    },
+    "completeness": 2.3,
+    "accuracy": 1.5,
+    "title_block_score": 1.8,
+    "confidence_calibration": "well-calibrated"
+  },
+  "room_adjacency_analysis": {
+    "room_analysis": {
+      "Bedroom": {
+        "name_match_score": 1.0,
+        "precision": 0.67,
+        "recall": 0.5,
+        "f1": 0.57,
+        "true_positives": [
+          "WC"
+        ],
+        "false_positives": [
+          "Closet",
+          "Laundry"
+        ],
+        "false_negatives": [
+          "Bedroom_2",
+          "Entrance",
+          "Living"
+        ],
+        "note": "Hallucinated neighbors"
+      },
+      "Laundry": {
+        "name_match_score": 1.0,
+        "precision": 1.0,
+        "recall": 0.5,
+        "f1": 0.67,
+        "true_positives": [
+          "Dining"
+        ],
+        "false_positives": [],
+        "false_negatives": [
+          "Bedroom_3",
+          "Closet",
+          "Kitchen"
+        ],
+        "note": "Missed neighbors"
+      },
+      "Dining": {
+        "name_match_score": 1.0,
+        "precision": 1.0,
+        "recall": 0.75,
+        "f1": 0.86,
+        "true_positives": [
+          "Laundry",
+          "Living",
+          "Kitchen"
+        ],
+        "false_positives": [],
+        "false_negatives": [
+          "Entrance"
+        ],
+        "note": "Missed neighbor"
+      },
+      "Living": {
+        "name_match_score": 1.0,
+        "precision": 1.0,
+        "recall": 0.67,
+        "f1": 0.8,
+        "true_positives": [
+          "Dining",
+          "Kitchen"
+        ],
+        "false_positives": [],
+        "false_negatives": [
+          "Bedroom",
+          "Entrance",
+          "Laundry"
+        ],
+        "note": "Missed neighbors"
+      },
+      "Kitchen": {
+        "name_match_score": 1.0,
+        "precision": 1.0,
+        "recall": 0.75,
+        "f1": 0.86,
+        "true_positives": [
+          "Dining",
+          "Living",
+          "Entrance"
+        ],
+        "false_positives": [],
+        "false_negatives": [
+          "Bedroom_3",
+          "Laundry"
+        ],
+        "note": "Missed neighbors"
+      },
+      "Entrance": {
+        "name_match_score": 1.0,
+        "precision": 1.0,
+        "recall": 0.33,
+        "f1": 0.5,
+        "true_positives": [
+          "Kitchen"
+        ],
+        "false_positives": [],
+        "false_negatives": [
+          "Bedroom",
+          "Dining",
+          "WC"
+        ],
+        "note": "Missed neighbors"
+      },
+      "WC": {
+        "name_match_score": 1.0,
+        "precision": 0.5,
+        "recall": 0.67,
+        "f1": 0.57,
+        "true_positives": [
+          "Bedroom"
+        ],
+        "false_positives": [
+          "Closet"
+        ],
+        "false_negatives": [
+          "Bedroom_2",
+          "Entrance"
+        ],
+        "note": "Hallucinated neighbor"
+      },
+      "Closet": {
+        "name_match_score": 1.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "true_positives": [],
+        "false_positives": [
+          "Bedroom"
+        ],
+        "false_negatives": [
+          "Bedroom_3",
+          "Laundry",
+          "WC_2"
+        ],
+        "note": "All neighbors incorrect"
+      }
+    },
+    "summary": {
+      "total_rooms_ground_truth": 10,
+      "total_rooms_parser": 8,
+      "rooms_correctly_detected": 8,
+      "hallucinated_rooms": [],
+      "missing_rooms": [
+        "Bedroom_2",
+        "Bedroom_3",
+        "WC_2"
+      ],
+      "asymmetric_adjacencies": []
+    },
+    "room_detection_score": 8.0,
+    "adjacency_precision": 7.5,
+    "adjacency_recall": 6.0,
+    "adjacency_f1_score": 6.5,
+    "room_adjacency_score": 7.4
+  },
+  "overall_score": 5.3,
+  "key_issues": [
+    "Title block: Missing most fields",
+    "Room adjacency: Hallucinated neighbors in several rooms",
+    "Room adjacency: Missed neighbors in several rooms",
+    "Room adjacency: Closet has all neighbors incorrect"
+  ]
+}

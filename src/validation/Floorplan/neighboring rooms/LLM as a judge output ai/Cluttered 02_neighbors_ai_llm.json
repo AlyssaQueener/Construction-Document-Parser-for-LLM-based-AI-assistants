@@ -1,0 +1,51 @@
+{
+  "room_analysis": {},
+  "summary": {
+    "total_rooms_ground_truth": 25,
+    "total_rooms_parser": 6,
+    "rooms_correctly_detected": 0,
+    "hallucinated_rooms": [
+      "K\rcCHE",
+      "WOHN/ESSZIMMER",
+      "SCHLAFZIMMER 1",
+      "SCHLAFZIMMER 2",
+      "BAD",
+      "FLUR",
+      "ABSTELLRAUM"
+    ],
+    "missing_rooms": [
+      "WC H",
+      "WC Behind.",
+      "gr\u0000fcnes Zimmer",
+      "WC D",
+      "Unrein",
+      "St\u0000tzpunkt",
+      "Pflegebad",
+      "W\u0000sche",
+      "Lager z.b.V.",
+      "Treppenhaus",
+      "Zimmer",
+      "Pflegebad_2",
+      "Zimmer 1.1",
+      "Lagerfl\u0000che",
+      "Besucher",
+      "ELT",
+      "Lager",
+      "Pflegeoase_3",
+      "Empfang/ Foyer",
+      "Foyer",
+      "Pflegeoase",
+      "Pflegeoase_2"
+    ],
+    "asymmetric_adjacencies": []
+  },
+  "room_detection_score": 0.0,
+  "adjacency_precision": 0.0,
+  "adjacency_recall": 0.0,
+  "adjacency_f1_score": 0.0,
+  "overall_score": 0.0,
+  "key_issues": [
+    "No rooms detected",
+    "All rooms hallucinated"
+  ]
+}

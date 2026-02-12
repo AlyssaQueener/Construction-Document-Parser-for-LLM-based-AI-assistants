@@ -1,0 +1,28 @@
+{
+    "projectInfo":{
+       "projectId":"None",
+       "projectName":"None",
+       "location":"None",
+       "author":"Ip",
+       "stakeholders":{
+          "client":"Badischer Landesverein fiir Innere Mission",
+          "architect":"Planfabrik",
+          "engineers":[
+             "IB Klenert",
+             "IB IBEAS",
+             "Statikplane IB Schuler"
+          ]
+       },
+       "timeline":{
+          "yearOfCompletion":"None",
+          "approvalDate":"None"
+       }
+    },
+    "planMetadata":{
+       "planType":"Grundriss",
+       "planFormat":"A0",
+       "scale":"1:50",
+       "projectionMethod":"None"
+    },
+    "confidence":0.6
+ }

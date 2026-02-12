@@ -1,0 +1,454 @@
+{
+  "section_analysis": [
+    {
+      "section_title": "05: EXCAVATING AND FILLING",
+      "item_analysis": [
+        {
+          "internal_number": 0,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "",
+            "item_description": "",
+            "unit": "",
+            "quantity": "",
+            "rate": "",
+            "amount": "",
+            "currency": ""
+          }
+        },
+        {
+          "internal_number": 1,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "",
+            "item_description": "",
+            "unit": "",
+            "quantity": "",
+            "rate": "",
+            "amount": "",
+            "currency": ""
+          }
+        },
+        {
+          "internal_number": 2,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "",
+            "item_description": "",
+            "unit": "",
+            "quantity": "",
+            "rate": "",
+            "amount": "",
+            "currency": ""
+          }
+        },
+        {
+          "internal_number": 3,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 0.5,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "",
+            "item_description": "Partial match, missing initial part of description",
+            "unit": "",
+            "quantity": "",
+            "rate": "",
+            "amount": "",
+            "currency": ""
+          }
+        },
+        {
+          "internal_number": 4,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "",
+            "item_description": "",
+            "unit": "",
+            "quantity": "",
+            "rate": "",
+            "amount": "",
+            "currency": ""
+          }
+        },
+        {
+          "internal_number": 5,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "",
+            "item_description": "",
+            "unit": "",
+            "quantity": "",
+            "rate": "",
+            "amount": "",
+            "currency": ""
+          }
+        },
+        {
+          "internal_number": 6,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 0.5,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "",
+            "item_description": "Partial match, missing initial part of description",
+            "unit": "",
+            "quantity": "",
+            "rate": "",
+            "amount": "",
+            "currency": ""
+          }
+        },
+        {
+          "internal_number": 7,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 0.0,
+            "unit": 1.0,
+            "quantity": 0.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "",
+            "item_description": "Incorrect description",
+            "unit": "",
+            "quantity": "Missing quantity",
+            "rate": "",
+            "amount": "",
+            "currency": ""
+          }
+        },
+        {
+          "internal_number": 8,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 0.0,
+            "unit": 1.0,
+            "quantity": 0.5,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "",
+            "item_description": "Incorrect description",
+            "unit": "",
+            "quantity": "Incorrect quantity",
+            "rate": "",
+            "amount": "",
+            "currency": ""
+          }
+        },
+        {
+          "internal_number": 9,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 0.5,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "",
+            "item_description": "Partial match, missing initial part of description",
+            "unit": "",
+            "quantity": "",
+            "rate": "",
+            "amount": "",
+            "currency": ""
+          }
+        },
+        {
+          "internal_number": 10,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 0.5,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "",
+            "item_description": "Partial match, missing initial part of description",
+            "unit": "",
+            "quantity": "",
+            "rate": "",
+            "amount": "",
+            "currency": ""
+          }
+        },
+        {
+          "internal_number": 11,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 0.5,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "",
+            "item_description": "Partial match, missing initial part of description",
+            "unit": "",
+            "quantity": "",
+            "rate": "",
+            "amount": "",
+            "currency": ""
+          }
+        },
+        {
+          "internal_number": 12,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 0.5,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "",
+            "item_description": "Partial match, missing initial part of description",
+            "unit": "",
+            "quantity": "",
+            "rate": "",
+            "amount": "",
+            "currency": ""
+          }
+        },
+        {
+          "internal_number": 13,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 0.5,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "",
+            "item_description": "Partial match, missing initial part of description",
+            "unit": "",
+            "quantity": "",
+            "rate": "",
+            "amount": "",
+            "currency": ""
+          }
+        },
+        {
+          "internal_number": 14,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 0.5,
+            "unit": 1.0,
+            "quantity": 0.8,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "",
+            "item_description": "Partial match, missing initial part of description",
+            "unit": "",
+            "quantity": "Minor formatting difference",
+            "rate": "",
+            "amount": "",
+            "currency": ""
+          }
+        },
+        {
+          "internal_number": 15,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 0.5,
+            "unit": 1.0,
+            "quantity": 0.8,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "",
+            "item_description": "Partial match, missing initial part of description",
+            "unit": "",
+            "quantity": "Minor formatting difference",
+            "rate": "",
+            "amount": "",
+            "currency": ""
+          }
+        },
+        {
+          "internal_number": 16,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 1.0,
+            "unit": 1.0,
+            "quantity": 0.8,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "",
+            "item_description": "",
+            "unit": "",
+            "quantity": "Minor formatting difference",
+            "rate": "",
+            "amount": "",
+            "currency": ""
+          }
+        },
+        {
+          "internal_number": 17,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 0.3,
+            "unit": 1.0,
+            "quantity": 0.8,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "",
+            "item_description": "Minimal overlap",
+            "unit": "",
+            "quantity": "Minor formatting difference",
+            "rate": "",
+            "amount": "",
+            "currency": ""
+          }
+        },
+        {
+          "internal_number": 18,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 0.5,
+            "unit": 1.0,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "",
+            "item_description": "Partial match, missing initial part of description",
+            "unit": "",
+            "quantity": "",
+            "rate": "",
+            "amount": "",
+            "currency": ""
+          }
+        },
+        {
+          "internal_number": 18,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 0.5,
+            "unit": 0.8,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "",
+            "item_description": "Partial match, missing initial part of description",
+            "unit": "Minor formatting difference",
+            "quantity": "",
+            "rate": "",
+            "amount": "",
+            "currency": ""
+          }
+        },
+        {
+          "internal_number": 19,
+          "match_scores": {
+            "item_number": 1.0,
+            "item_description": 0.0,
+            "unit": 0.8,
+            "quantity": 1.0,
+            "rate": 1.0,
+            "amount": 1.0,
+            "currency": 1.0
+          },
+          "notes": {
+            "item_number": "",
+            "item_description": "Incorrect description",
+            "unit": "Minor formatting difference",
+            "quantity": "",
+            "rate": "",
+            "amount": "",
+            "currency": ""
+          }
+        }
+      ]
+    }
+  ],
+  "completeness": 8.0,
+  "accuracy": 7.8,
+  "overall_score": 7.84,
+  "confidence_calibration": "well-calibrated"
+}

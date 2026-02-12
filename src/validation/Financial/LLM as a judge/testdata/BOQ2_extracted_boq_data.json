@@ -1,0 +1,225 @@
+[
+  {
+    "Section Title": "05: EXCAVATING AND FILLING",
+    "Items": [],
+    "Subsections": [
+      {
+        "Section Title": "05.10 SITE CLEARANCE/PREPARATION",
+        "Items": [
+          {
+            "Internal Number": 0,
+            "Item Number": "1",
+            "Item Description": "Removing trees girth 0.60 - 1.50: filling voids with selected material arising from excavation",
+            "Unit": "nr",
+            "Quantity": "3",
+            "Rate": null,
+            "Amount": null,
+            "Currency": null
+          },
+          {
+            "Internal Number": 1,
+            "Item Number": "2",
+            "Item Description": "Removing tree stumps girth 0.60 - 1.50: filling voids with selected material arising from excavation",
+            "Unit": "nr",
+            "Quantity": "3",
+            "Rate": null,
+            "Amount": null,
+            "Currency": null
+          }
+        ]
+      },
+      {
+        "Section Title": "05.20 EXCAVATIONS",
+        "Items": [
+          {
+            "Internal Number": 2,
+            "Item Number": "3",
+            "Item Description": "To reduce levels maximum depth not exceeding 1.00m",
+            "Unit": "m³",
+            "Quantity": "863",
+            "Rate": null,
+            "Amount": null,
+            "Currency": null
+          },
+          {
+            "Internal Number": 3,
+            "Item Number": "4",
+            "Item Description": "maximum depth not exceeding 1.00m for formation level including blinds and insulation",
+            "Unit": "m³",
+            "Quantity": "825",
+            "Rate": null,
+            "Amount": null,
+            "Currency": null
+          },
+          {
+            "Internal Number": 4,
+            "Item Number": "5",
+            "Item Description": "Basements and the like: commencing level from reduce level: 59.320m maximum depth not exceeding 2.00m",
+            "Unit": "m³",
+            "Quantity": "1,100",
+            "Rate": null,
+            "Amount": null,
+            "Currency": null
+          },
+          {
+            "Internal Number": 5,
+            "Item Number": "6",
+            "Item Description": "For pile caps and ground beams between piles not exceeding 2.00m : commencing from reduce level: 59.32m",
+            "Unit": "m³",
+            "Quantity": "655",
+            "Rate": null,
+            "Amount": null,
+            "Currency": null
+          },
+          {
+            "Internal Number": 6,
+            "Item Number": "7",
+            "Item Description": "not exceeding 2.00m : commencing from reduce level: 61.1m",
+            "Unit": "m³",
+            "Quantity": "274",
+            "Rate": null,
+            "Amount": null,
+            "Currency": null
+          },
+          {
+            "Internal Number": 7,
+            "Item Number": "8",
+            "Item Description": "level:57.82m 57 Page 1 of 38 not exceeding 2.00m : commencing from reduce",
+            "Unit": "m³",
+            "Quantity": null,
+            "Rate": null,
+            "Amount": null,
+            "Currency": null
+          },
+          {
+            "Internal Number": 8,
+            "Item Number": "9",
+            "Item Description": "level:58.27m Foundation excavation: commencing from reduce level: 60.61m",
+            "Unit": "m³",
+            "Quantity": "166",
+            "Rate": null,
+            "Amount": null,
+            "Currency": null
+          },
+          {
+            "Internal Number": 9,
+            "Item Number": "10",
+            "Item Description": "maximum depth not exceeding 1.00m Extra over excavation irrespective of depth for excavating (Approximate Quantity)",
+            "Unit": "m³",
+            "Quantity": "155",
+            "Rate": null,
+            "Amount": null,
+            "Currency": null
+          },
+          {
+            "Internal Number": 10,
+            "Item Number": "11",
+            "Item Description": "next existing drainage service",
+            "Unit": "m",
+            "Quantity": "180",
+            "Rate": null,
+            "Amount": null,
+            "Currency": null
+          },
+          {
+            "Internal Number": 11,
+            "Item Number": "12",
+            "Item Description": "around existing services crossing excavation Extra over excavation irrespective of depth for excavating: breaking out existing materials (Approximate Quantity)",
+            "Unit": "nr",
+            "Quantity": "50",
+            "Rate": null,
+            "Amount": null,
+            "Currency": null
+          },
+          {
+            "Internal Number": 12,
+            "Item Number": "13",
+            "Item Description": "concrete",
+            "Unit": "m³",
+            "Quantity": "636",
+            "Rate": null,
+            "Amount": null,
+            "Currency": null
+          },
+          {
+            "Internal Number": 13,
+            "Item Number": "14",
+            "Item Description": "coated macadam or asphalt: 250 thick Working space allowance to excavations: including additional earthwork support, disposal and backfilling",
+            "Unit": "m²",
+            "Quantity": "7,450",
+            "Rate": null,
+            "Amount": null,
+            "Currency": null
+          },
+          {
+            "Internal Number": 14,
+            "Item Number": "15",
+            "Item Description": "pits Earthwork support to faces of excavation",
+            "Unit": "m²",
+            "Quantity": "2,035",
+            "Rate": null,
+            "Amount": null,
+            "Currency": null
+          },
+          {
+            "Internal Number": 15,
+            "Item Number": "16",
+            "Item Description": "maximum depth not exceeding 2.00 m",
+            "Unit": "m²",
+            "Quantity": "1,945",
+            "Rate": null,
+            "Amount": null,
+            "Currency": null
+          },
+          {
+            "Internal Number": 16,
+            "Item Number": "17",
+            "Item Description": "maximum depth not exceeding 4.00 m DESIGN, SUPPLY AND INSTALL SHEET PILING OR TEMPORARY SUPPORTS: DRIVEN VERTICALLY INCLUDING BREAKING THROUGH OBSTRUCTIONS, DISPOSAL OF EXCAVATED MATERIAL ETC Contractors design supports",
+            "Unit": "m²",
+            "Quantity": "224",
+            "Rate": null,
+            "Amount": null,
+            "Currency": null
+          },
+          {
+            "Internal Number": 17,
+            "Item Number": "18",
+            "Item Description": "to contractors proposal",
+            "Unit": "m",
+            "Quantity": "42",
+            "Rate": null,
+            "Amount": null,
+            "Currency": null
+          }
+        ],
+        "Subsections": [
+          {
+            "Section Title": "05.30 DISPOSAL",
+            "Items": [
+              {
+                "Internal Number": 18,
+                "Item Number": "19",
+                "Item Description": "generally Ground water",
+                "Unit": "Item",
+                "Quantity": null,
+                "Rate": null,
+                "Amount": null,
+                "Currency": null
+              },
+              {
+                "Internal Number": 19,
+                "Item Number": "20",
+                "Item Description": "generally Page 2 of 38",
+                "Unit": "Item",
+                "Quantity": null,
+                "Rate": null,
+                "Amount": null,
+                "Currency": null
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,104 @@
+{
+  "Shower": [
+    "Kitchen",
+    "Laundry",
+    "Office"
+  ],
+  "Laundry": [
+    "Closet",
+    "Guest room",
+    "Kitchen",
+    "Office",
+    "Shower"
+  ],
+  "Office": [
+    "Closet",
+    "Down",
+    "Laundry",
+    "Shower"
+  ],
+  "Kitchen": [
+    "Dining",
+    "Guest room",
+    "Laundry",
+    "Main entrance",
+    "Pantry",
+    "Shower"
+  ],
+  "L-shaped terrace": [
+    "Bedroom",
+    "Closet",
+    "Dining",
+    "Guest room",
+    "Jacuzzy",
+    "L-shaped terrace",
+    "Living",
+    "Sliding door"
+  ],
+  "Bedroom": [
+    "Closet",
+    "Down",
+    "Guest room",
+    "L-shaped terrace"
+  ],
+  "Jacuzzy": [
+    "L-shaped terrace",
+    "Living",
+    "Main entrance"
+  ],
+  "Sliding door": [
+    "Dining",
+    "L-shaped terrace",
+    "Living"
+  ],
+  "Living": [
+    "Dining",
+    "Jacuzzy",
+    "L-shaped terrace",
+    "Main entrance",
+    "Pantry",
+    "Sliding door"
+  ],
+  "Main entrance": [
+    "Jacuzzy",
+    "Kitchen",
+    "Living",
+    "Pantry"
+  ],
+  "Dining": [
+    "Guest room",
+    "Kitchen",
+    "L-shaped terrace",
+    "Living",
+    "Pantry",
+    "Sliding door"
+  ],
+  "Pantry": [
+    "Dining",
+    "Kitchen",
+    "Living",
+    "Main entrance"
+  ],
+  "Closet": [
+    "Bedroom",
+    "Closet",
+    "Down",
+    "Guest room",
+    "L-shaped terrace",
+    "Laundry",
+    "Office"
+  ],
+  "Guest room": [
+    "Bedroom",
+    "Closet",
+    "Dining",
+    "Kitchen",
+    "L-shaped terrace",
+    "Laundry"
+  ],
+  "Down": [
+    "Bedroom",
+    "Closet",
+    "Office"
+  ]
+}

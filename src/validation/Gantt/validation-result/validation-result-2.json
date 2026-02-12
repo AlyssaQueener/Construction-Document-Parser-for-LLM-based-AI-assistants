@@ -1,0 +1,314 @@
+{
+    "completeness": 10,
+    "accuracy": 10,
+    "overall_score": 10,
+    "field_evaluations": [
+        {
+            "ground_truth_id": 1,
+            "parser_id": 1,
+            "field_scores": {
+                "id": 1.0,
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0,
+                "duration": 1.0
+            },
+            "notes": ""
+        },
+        {
+            "ground_truth_id": 2,
+            "parser_id": 2,
+            "field_scores": {
+                "id": 1.0,
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0,
+                "duration": 1.0
+            },
+            "notes": ""
+        },
+        {
+            "ground_truth_id": 3,
+            "parser_id": 3,
+            "field_scores": {
+                "id": 1.0,
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0,
+                "duration": 1.0
+            },
+            "notes": ""
+        },
+        {
+            "ground_truth_id": 4,
+            "parser_id": 4,
+            "field_scores": {
+                "id": 1.0,
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0,
+                "duration": 1.0
+            },
+            "notes": ""
+        },
+        {
+            "ground_truth_id": 5,
+            "parser_id": 5,
+            "field_scores": {
+                "id": 1.0,
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0,
+                "duration": 1.0
+            },
+            "notes": ""
+        },
+        {
+            "ground_truth_id": 6,
+            "parser_id": 6,
+            "field_scores": {
+                "id": 1.0,
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0,
+                "duration": 1.0
+            },
+            "notes": ""
+        },
+        {
+            "ground_truth_id": 7,
+            "parser_id": 7,
+            "field_scores": {
+                "id": 1.0,
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0,
+                "duration": 1.0
+            },
+            "notes": ""
+        },
+        {
+            "ground_truth_id": 8,
+            "parser_id": 8,
+            "field_scores": {
+                "id": 1.0,
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0,
+                "duration": 1.0
+            },
+            "notes": ""
+        },
+        {
+            "ground_truth_id": 9,
+            "parser_id": 9,
+            "field_scores": {
+                "id": 1.0,
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0,
+                "duration": 1.0
+            },
+            "notes": ""
+        },
+        {
+            "ground_truth_id": 10,
+            "parser_id": 10,
+            "field_scores": {
+                "id": 1.0,
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0,
+                "duration": 1.0
+            },
+            "notes": ""
+        },
+        {
+            "ground_truth_id": 11,
+            "parser_id": 11,
+            "field_scores": {
+                "id": 1.0,
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0,
+                "duration": 1.0
+            },
+            "notes": ""
+        },
+        {
+            "ground_truth_id": 12,
+            "parser_id": 12,
+            "field_scores": {
+                "id": 1.0,
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0,
+                "duration": 1.0
+            },
+            "notes": ""
+        },
+        {
+            "ground_truth_id": 13,
+            "parser_id": 13,
+            "field_scores": {
+                "id": 1.0,
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0,
+                "duration": 1.0
+            },
+            "notes": ""
+        },
+        {
+            "ground_truth_id": 14,
+            "parser_id": 14,
+            "field_scores": {
+                "id": 1.0,
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0,
+                "duration": 1.0
+            },
+            "notes": ""
+        },
+        {
+            "ground_truth_id": 15,
+            "parser_id": 15,
+            "field_scores": {
+                "id": 1.0,
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0,
+                "duration": 1.0
+            },
+            "notes": ""
+        },
+        {
+            "ground_truth_id": 16,
+            "parser_id": 16,
+            "field_scores": {
+                "id": 1.0,
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0,
+                "duration": 1.0
+            },
+            "notes": ""
+        },
+        {
+            "ground_truth_id": 17,
+            "parser_id": 17,
+            "field_scores": {
+                "id": 1.0,
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0,
+                "duration": 1.0
+            },
+            "notes": ""
+        },
+        {
+            "ground_truth_id": 18,
+            "parser_id": 18,
+            "field_scores": {
+                "id": 1.0,
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0,
+                "duration": 1.0
+            },
+            "notes": ""
+        },
+        {
+            "ground_truth_id": 19,
+            "parser_id": 19,
+            "field_scores": {
+                "id": 1.0,
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0,
+                "duration": 1.0
+            },
+            "notes": ""
+        },
+        {
+            "ground_truth_id": 20,
+            "parser_id": 20,
+            "field_scores": {
+                "id": 1.0,
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0,
+                "duration": 1.0
+            },
+            "notes": ""
+        },
+        {
+            "ground_truth_id": 21,
+            "parser_id": 21,
+            "field_scores": {
+                "id": 1.0,
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0,
+                "duration": 1.0
+            },
+            "notes": ""
+        },
+        {
+            "ground_truth_id": 22,
+            "parser_id": 22,
+            "field_scores": {
+                "id": 1.0,
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0,
+                "duration": 1.0
+            },
+            "notes": ""
+        },
+        {
+            "ground_truth_id": 23,
+            "parser_id": 23,
+            "field_scores": {
+                "id": 1.0,
+                "task": 0.5,
+                "start": 1.0,
+                "finish": 1.0,
+                "duration": 1.0
+            },
+            "notes": "Task field has a typo: 'tranning' vs 'training'"
+        },
+        {
+            "ground_truth_id": 24,
+            "parser_id": 24,
+            "field_scores": {
+                "id": 1.0,
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0,
+                "duration": 1.0
+            },
+            "notes": ""
+        },
+        {
+            "ground_truth_id": 25,
+            "parser_id": 25,
+            "field_scores": {
+                "id": 1.0,
+                "task": 1.0,
+                "start": 1.0,
+                "finish": 1.0,
+                "duration": 1.0
+            },
+            "notes": ""
+        }
+    ],
+    "summary": {
+        "total_ground_truth_activities": 25,
+        "total_matched_activities": 25,
+        "total_fields_evaluated": 125,
+        "false_positives": 0,
+        "false_negatives": 0
+    }
+}

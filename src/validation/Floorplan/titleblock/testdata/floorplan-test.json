@@ -1,0 +1,23 @@
+{
+    "projectInfo":{
+       "projectId":"210101-MNMNMN",
+       "projectName": null,
+       "location":"20095 Musterhausen",
+       "author":"Butlerium GmbH",
+       "stakeholders":{
+          "client":"Max Muster",
+          "architect":"Grundriss Butler Hamburg",
+          "engineers":null
+       },
+       "timeline":{
+          "yearOfCompletion":null,
+          "approvalDate":null
+       }
+    },
+    "planMetadata":{
+       "planType":"Ergeschoss",
+       "planFormat":"DIN A3",
+       "scale":"1:100",
+       "projectionMethod":null
+    }
+}

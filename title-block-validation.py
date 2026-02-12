@@ -1,31 +1,60 @@
 import src.plan2data.titleBlockInfo as parser
-import src.validation.titleblock.llm_as_a_judge as llm_judge
+import src.validation.Floorplan.titleblock.llm_as_a_judge as llm_judge
+import src.plan2data.helper as helper
+
+path1 = "Cluttered 01_page1.png"
+path2 = "Cluttered 02_page1.png"
+path3 = "Cluttered 03_page1.png"
 
 
-image_path = "src/validation/titleblock/testdata/floorplan-test_page1.png"
-image_path_1 = "src/validation/titleblock/testdata/floorplan-test-1_page1.png"
-image_path_2 = "src/validation/titleblock/testdata/floorplan-test-2_page1.png"
 
-validation_path = "src/validation/titleblock/testdata/floorplan-test.json"
-validation_path_1 = "src/validation/titleblock/testdata/floorplan-test-1.json"
-validation_path_2 = "src/validation/titleblock/testdata/floorplan-test-2.json"
 
-result = parser.get_title_block_info(image_path)
-#result_1 = parser.get_title_block_info(image_path_1)
-#result_2 = parser.get_title_block_info(image_path_2)
 
-print("Result of first example")
-print(result)
-print("Result of second example")
-#print(result_1)
-print("Result of third example")
-#print(result_2)
+#print("Cluttered 1")
+#print("Without AI")
+#print(parser.extract_title_block_info(path1))
+#print("With AI")
+#print(parser.extract_title_block_info_with_ai(path1))
 
-print("Validation Results:")
-#print("1. Example:")
-print(llm_judge.llm_as_a_judge_titleblock(validation_path, result))
-#print("2. Example:")
-#print(llm_judge.llm_as_a_judge_titleblock(validation_path_1, result_1))
-#print("3. Example:")
-##print(llm_judge.llm_as_a_judge_titleblock(validation_path_2, result_2))
+#print("Cluttered 2")
+#print("Without AI")
+#print(parser.extract_title_block_info(path2))
+#print("With AI")
+#print(parser.extract_title_block_info_with_ai(path2))
 
+
+#print("Cluttered 3")
+#print("Without AI")
+#print(parser.extract_title_block_info(path3))
+#print("With AI")
+#print(parser.extract_title_block_info_with_ai(path3))
+
+
+########Validation#######
+
+##GroundTruths
+g_path1 = "src/validation/Floorplan/neighboring rooms/Cluttered Floorplans/ground_truth_titleblock/cluttered 01_titleblock.json"
+g_path2 = "src/validation/Floorplan/neighboring rooms/Cluttered Floorplans/ground_truth_titleblock/cluttered 02_titleblock.json"
+g_path3 = "src/validation/Floorplan/neighboring rooms/Cluttered Floorplans/ground_truth_titleblock/cluttered 03_titleblock.json"
+
+###Parsing Results
+###Hybrid
+hybrid_path1 = "src/validation/Floorplan/neighboring rooms/Cluttered Floorplans/parsing_result_titleblock/hybrid/clutterd 01 hybrid.json"
+hybrid_path2 = "src/validation/Floorplan/neighboring rooms/Cluttered Floorplans/parsing_result_titleblock/hybrid/clutterd 02 hybrid.json"
+hybrid_path3 = "src/validation/Floorplan/neighboring rooms/Cluttered Floorplans/parsing_result_titleblock/hybrid/clutterd 03 hybrid.json"
+
+##Full Ai 
+ai_path1 = "src/validation/Floorplan/neighboring rooms/Cluttered Floorplans/parsing_result_titleblock/full ai/cluttered 01 full ai.json"
+ai_path2 = "src/validation/Floorplan/neighboring rooms/Cluttered Floorplans/parsing_result_titleblock/full ai/cluttered 02 full ai.json"
+ai_path3 = "src/validation/Floorplan/neighboring rooms/Cluttered Floorplans/parsing_result_titleblock/full ai/cluttered 03 full ai.json"
+
+
+
+
+#Clutterplan 1
+
+print("Clutterplan ")
+print("Hybrid Parser Validation Result:")
+print(llm_judge.llm_as_a_judge_titleblock(g_path3,hybrid_path3))
+print("Ai Parser Validation Result:")
+print(llm_judge.llm_as_a_judge_titleblock(g_path3,ai_path3))

@@ -1,8 +1,11 @@
 import os
 import io
-from typing import Tuple, List
+from typing import Tuple
 import pymupdf  
 import json
+from PIL import Image
+
+import src.plan2data.mistralConnection as mistral
 
 
 def extract_images_from_pdf(path_pdf, output_format, output_dir):
@@ -80,6 +83,127 @@ def convert_pdf2img(input_file: str, pages: Tuple = None):
     print("###################################################################")
     return output_files
 
+############# room extraction voronoi #################
+def pdf_to_split_images(path, page_number):
+    """
+    Convert a pymupdf page to high-res image and split into 4 pieces.
+    Args:
+        path: path to PDF file
+        page_number: page number
+    Returns:
+        List of 4 file paths to saved PNG images
+    """
+    doc = pymupdf.open(path)
+    page = doc[page_number]
+    
+    # Render page to pixmap (image)
+    pix = page.get_pixmap(dpi=300)
+    
+    # Convert to PIL Image
+    img_data = pix.tobytes("png")
+    img = Image.open(io.BytesIO(img_data))
+    
+    # Get dimensions
+    width, height = img.size
+    mid_w = width // 2
+    mid_h = height // 2
+    
+    # Split into 4 pieces
+    chunks = [
+        img.crop((0, 0, mid_w, mid_h)),           # top_left
+        img.crop((mid_w, 0, width, mid_h)),       # top_right
+        img.crop((0, mid_h, mid_w, height)),      # bottom_left
+        img.crop((mid_w, mid_h, width, height))   # bottom_right
+    ]
+    
+    # Save chunks to temporary files
+    output_files = []
+    base_name = os.path.splitext(os.path.basename(path))[0]
+    
+    for idx, chunk in enumerate(chunks):
+        # Create temp file or save to specific directory
+        output_file = f"{base_name}_page{page_number + 1}_chunk{idx + 1}.png"
+        chunk.save(output_file)
+        output_files.append(output_file)
+    
+    doc.close()
+    return output_files
+
+def page_to_split_images(page):
+    """
+    Convert a pymupdf page to high-res image and split into 4 pieces.
+    Args:
+        path: path to PDF file
+        page_number: page number
+    Returns:
+        List of 4 file paths to saved PNG images
+    """
+    # Render page to pixmap (image)
+    pix = page.get_pixmap(dpi=300)
+    
+    # Convert to PIL Image
+    img_data = pix.tobytes("png")
+    img = Image.open(io.BytesIO(img_data))
+    
+    # Get dimensions
+    width, height = img.size
+    mid_w = width // 2
+    mid_h = height // 2
+    
+    # Split into 4 pieces
+    chunks = [
+        img.crop((0, 0, mid_w, mid_h)),           # top_left
+        img.crop((mid_w, 0, width, mid_h)),       # top_right
+        img.crop((0, mid_h, mid_w, height)),      # bottom_left
+        img.crop((mid_w, mid_h, width, height))   # bottom_right
+    ]
+    
+    # Save chunks to temporary files
+    output_files = []
+    base_name = os.path.splitext(os.path.basename(page))[0]
+    
+    for idx, chunk in enumerate(chunks):
+        # Create temp file or save to specific directory
+        output_file = f"{base_name}_page{page + 1}_chunk{idx + 1}.png"
+        chunk.save(output_file)
+        output_files.append(output_file)
+    
+    return output_files
+
+
+def extract_room_names_from_chunks(chunked_plan):
+    """
+    Extract room names from image chunks and clean up files afterward.
+    Args:
+        chunked_plan: List of file paths to image chunks
+    Returns:
+        List of room names extracted from each chunk
+    """
+    all_room_names = []
+    
+    try:
+        for image_path in chunked_plan:
+            rooms_json = mistral.call_mistral_for_room_extraction_voronoi(image_path)
+            try:
+                rooms_list = json.loads(rooms_json)
+                all_room_names.extend(rooms_list)
+            except json.JSONDecodeError as e:
+                print(f"Warning: Could not parse JSON from {image_path}: {e}")
+                print(f"Raw response: {rooms_json}")
+                continue
+    finally:
+        # Clean up: delete all temporary image files
+        for image_path in chunked_plan:
+            try:
+                if os.path.exists(image_path):
+                    os.remove(image_path)
+                    print(f"Deleted: {image_path}")
+            except Exception as e:
+                print(f"Warning: Could not delete {image_path}: {e}")
+    
+    return all_room_names
+
+###########################################################################
 def check_for_further_ai_usage(ai_response):
     ai_response_as_dict = json.loads(ai_response)
     if ai_response_as_dict["Completness"] == "yes":
@@ -129,3 +253,5 @@ def prepare_for_titleblock_extraction(ai_response):
     
 
     return horizontal_boundary_percentage, vertical_boundary_percentage, greater_then_horizontal, greater_then_vertical
+
+

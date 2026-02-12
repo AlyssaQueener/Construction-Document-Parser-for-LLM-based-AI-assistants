@@ -1,0 +1,96 @@
+{
+  "titleBlock": {
+    "projectInfo": {
+      "projectId": null,
+      "projectName": null,
+      "location": null,
+      "author": "Elivis Rosepider",
+      "stakeholders": {
+        "client": null,
+        "architect": null,
+        "engineers": null
+      },
+      "timeline": {
+        "yearOfCompletion": null,
+        "approvalDate": null
+      }
+    },
+    "planMetadata": {
+      "planType": "Floor Plan",
+      "planFormat": null,
+      "scale": "Not to scale",
+      "projectionMethod": null
+    },
+    "confidence": 0.2
+  },
+  "roomAdjacency": {
+    "neighboringRooms": {
+      "Bedroom": [
+        "WC",
+        "Closet",
+        "Laundry"
+      ],
+      "Laundry": [
+        "Bedroom",
+        "Dining"
+      ],
+      "Dining": [
+        "Laundry",
+        "Living",
+        "Kitchen"
+      ],
+      "Living": [
+        "Dining",
+        "Kitchen"
+      ],
+      "Kitchen": [
+        "Dining",
+        "Living",
+        "Entrance"
+      ],
+      "Entrance": [
+        "Kitchen"
+      ],
+      "WC": [
+        "Bedroom",
+        "Closet"
+      ],
+      "Closet": [
+        "Bedroom",
+        "WC"
+      ]
+    },
+    "connectedRooms": {
+      "Bedroom": [
+        "WC"
+      ],
+      "Laundry": [
+        "Dining"
+      ],
+      "Dining": [
+        "Laundry",
+        "Living",
+        "Kitchen"
+      ],
+      "Living": [
+        "Dining",
+        "Kitchen"
+      ],
+      "Kitchen": [
+        "Dining",
+        "Living",
+        "Entrance"
+      ],
+      "Entrance": [
+        "Kitchen"
+      ],
+      "WC": [
+        "Bedroom"
+      ],
+      "Closet": [
+        "Bedroom"
+      ]
+    },
+    "confidence": 0.9
+  }
+}
