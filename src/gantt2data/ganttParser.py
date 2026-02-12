@@ -186,7 +186,7 @@ def parse_gantt_chart(path: str, chart_format: str) -> list:
         tasks = create_tasks(column_order, processed_df)
         json_string = json.dumps([ob.__dict__ for ob in tasks],indent=4)
         return json_string
-    elif(chart_format == "full ai"):
+    elif(chart_format == "full_ai"):
         tasks = visual.parse_full_ai(path)
     else:
         tasks = visual.parse_gant_chart_visual(path)
