@@ -1,8 +1,10 @@
-import ezdxf.math
+
+from ezdxf.math import Vec2
 import fitz  # PyMuPDF
 import ezdxf #https://ezdxf.readthedocs.io/en/stable/concepts/coordinates.html#wcs
 from collections import defaultdict
 from collections import Counter
+
 
 
 
@@ -510,6 +512,106 @@ def convert_pdf_to_dxf(pdf_path, output_path="converted_output_with_text_and_cur
         }
 
 
+# Configuration: proximity threshold for determining if line endpoints are connected
+# This value depends on your PDF scale and DXF units
+# Smaller values = stricter connection requirements (lines must be very close)
+# Larger values = more lenient (lines further apart will be considered connected)
+PROXIMITY_THRESHOLD = 1.0  # units depend on your PDF scale
+
+
+def is_close(p1, p2, tol=1.0):
+    """
+    Check if two points are within a specified tolerance distance.
+    
+    Used to determine if line endpoints are close enough to be considered
+    connected, accounting for small gaps or slight misalignments in PDF geometry.
+    
+    Args:
+        p1 (tuple or Vec2): First point (x, y)
+        p2 (tuple or Vec2): Second point (x, y)
+        tol (float): Maximum distance for points to be considered "close" (default: 1.0)
+    
+    Returns:
+        bool: True if Euclidean distance between points <= tolerance, False otherwise
+    
+    Example:
+        >>> is_close((0, 0), (0.5, 0.5), tol=1.0)
+        True  # Distance is ~0.71, which is < 1.0
+        >>> is_close((0, 0), (5, 5), tol=1.0)
+        False  # Distance is ~7.07, which is > 1.0
+    
+    Note:
+        Uses ezdxf Vec2 for vector arithmetic and magnitude calculation.
+    """
+    # Convert points to Vec2 objects and calculate Euclidean distance
+    # magnitude = sqrt((x2-x1)² + (y2-y1)²)
+    return (Vec2(p1) - Vec2(p2)).magnitude <= tol
+
+
+def build_line_graph(entities, tol=1.0):
+    """
+    Build a connectivity graph from DXF line entities based on endpoint proximity.
+    
+    Creates a graph structure where line endpoints are nodes and edges exist
+    when endpoints are within tolerance distance. This allows grouping of
+    disconnected line segments that should form continuous walls or boundaries.
+    
+    Args:
+        entities (list): List of DXF entities from modelspace
+        tol (float): Proximity tolerance for connecting endpoints (default: 1.0)
+    
+    Returns:
+        tuple: (lines, connections)
+            - lines (list of tuple): [(start_point, end_point), ...] for each line
+            - connections (defaultdict): {point: [connected_points]} adjacency list
+    
+    Graph structure:
+        connections = {
+            (x1, y1): [(x2, y2), (x3, y3)],  # Point (x1,y1) connects to two other points
+            (x2, y2): [(x1, y1), (x4, y4)],  # Point (x2,y2) connects to two other points
+            ...
+        }
+    
+    Example:
+        >>> lines, graph = build_line_graph(msp, tol=1.0)
+        >>> # graph[(10, 20)] returns all points connected to (10, 20)
+    
+    Use case:
+        After PDF-to-DXF conversion, individual wall segments may be separated
+        by small gaps. This function identifies which line endpoints are close
+        enough to be considered connected, enabling wall boundary reconstruction.
+    
+    Note:
+        - Only processes LINE entities (ignores circles, arcs, text, etc.)
+        - Each line creates two entries in connections (one for each endpoint)
+        - Uses tuple(Vec2) for hashable dictionary keys
+    """
+    # Initialize adjacency list for graph structure
+    connections = defaultdict(list)
+    
+    # Store all line segment data
+    lines = []
+    
+    # Process each entity in the DXF document
+    for e in entities:
+        # Filter: only process LINE entities
+        if e.dxftype() == 'LINE':
+            # Extract start and end points as Vec2 objects
+            start = Vec2(e.dxf.start)
+            end = Vec2(e.dxf.end)
+            
+            # Store line segment
+            lines.append((start, end))
+            
+            # Add bidirectional connections to graph
+            # Connection from start -> end
+            connections[tuple(start)].append(tuple(end))
+            
+            # Connection from end -> start (graph is undirected)
+            connections[tuple(end)].append(tuple(start))
+    
+    return lines, connections
+
 if __name__ == '__main__':
     # Configuration
     pdf_path = "examples/FloorplansAndSectionViews/bemasster-grundriss-plankopf.pdf"
@@ -527,3 +629,5 @@ if __name__ == '__main__':
         print(f"   Pages processed: {result['pages_processed']}")
     else:
         print(f"\n❌ Conversion failed: {result.get('error', 'Unknown error')}")
+
+    

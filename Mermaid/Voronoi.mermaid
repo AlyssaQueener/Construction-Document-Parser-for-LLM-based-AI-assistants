@@ -1,0 +1,62 @@
+---
+config:
+  layout: dagre
+---
+flowchart TD
+ subgraph Input["Input"]
+        A["Floor Plan PDF"]
+  end
+ subgraph AI_Room_Identification["AI_Room_Identification"]
+        B["Extract All Text<br>PyMuPDF extractDICT"]
+        C["Clean Text<br>Filter numbers &amp; units"]
+        D["Send to Mistral AI<br>Identify Room Names"]
+        E["AI Room Names List"]
+  end
+ subgraph Bbox_Processing["Bbox_Processing"]
+        F["Extract Word Bboxes<br>get_textpage clip"]
+        G["Filter Valid Room Names<br>AI list validation"]
+        H["Combine Close Words<br>Multi-word names"]
+        I["Filter Numbers & Short Strings"]
+        J["Calculate Centerpoints<br>bbox center"]
+  end
+ subgraph Coordinate_Transform["Coordinate_Transform"]
+        K["Flip Y-Coordinates<br>Y_flip = height - Y"]
+        L["Make Names Unique<br>Add _1, _2 suffixes"]
+  end
+ subgraph Voronoi_Analysis["Voronoi_Analysis"]
+        M["Create Voronoi Diagram<br>scipy.spatial.Voronoi"]
+        N["Extract Ridge Points<br>Voronoi cell boundaries"]
+        O{"Ridge in<br>Bounds?"}
+        P["Add to Neighbors"]
+        Q["Skip Ridge"]
+        R["Neighboring Rooms Dict"]
+  end
+ subgraph Output["Output"]
+        S["JSON Output<br>room: neighbors list"]
+  end
+    B --> C
+    C --> D
+    D --> E
+    F --> G
+    G --> H
+    H --> I
+    I --> J
+    J --> Coordinate_Transform
+    K --> L
+    L --> Voronoi_Analysis
+    M --> N
+    N --> O
+    O -- Yes --> P
+    P --> R
+    O -- No --> Q
+    Q --> R
+    A --> AI_Room_Identification & Bbox_Processing
+    E --> G
+    Voronoi_Analysis --> Output
+
+    style A fill:#bbdefb
+    style D fill:#fff59d
+    style E fill:#fff59d
+    style G fill:#fff9c4
+    style M fill:#e1bee7
+    style S fill:#c8e6c9
