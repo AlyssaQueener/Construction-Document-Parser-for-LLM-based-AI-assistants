@@ -2,13 +2,24 @@ import json
 from typing import Dict, Any
 from mistralai import Mistral
 
+# Configuration for Mistral AI model
 model = "mistral-small-2503"
 api_key = "mVTgI1ELSkn5Q28v2smHK0O4E02nMaxG"
 client = Mistral(api_key=api_key)
 
 def create_prompt_neighboring_rooms(ground_truth, parser_result):
     """
-    Evaluation prompt for neighboring rooms extraction evaluation, LLM as a judge
+    Creates a comprehensive evaluation prompt for LLM-as-a-judge neighboring rooms assessment.
+    
+    This prompt instructs the LLM to compare parser output against ground truth data
+    and calculate multiple scoring dimensions including room detection, precision, recall, and F1 scores.
+    
+    Args:
+        ground_truth: Dictionary mapping room names to lists of neighboring rooms (ground truth)
+        parser_result: Dictionary mapping room names to lists of neighboring rooms (parser output)
+    
+    Returns:
+        str: Formatted prompt string for the LLM evaluation
     """
     prompt = f"""
 Floorplan Neighboring Rooms Parser Evaluation
@@ -194,21 +205,43 @@ Begin your evaluation now. Return only the JSON output with no additional text.
 
 
 def read_json(path_to_json_file):
-    """Read JSON file and return parsed data."""
+    """
+    Read and parse a JSON file.
+    
+    Args:
+        path_to_json_file: Path to the JSON file to read
+        
+    Returns:
+        dict: Parsed JSON data
+    """
     with open(path_to_json_file, 'r', encoding='utf-8') as json_data:
         df = json.load(json_data)
     return df
 
 
 def call_mistral_evaluation(ground_truth: Dict[str, Any], parser_result: Dict[str, Any]) -> str | None:
-    """Call Mistral API with evaluation prompt."""
+    """
+    Call Mistral API to perform LLM-as-a-judge evaluation.
+    
+    Sends the ground truth and parser result to Mistral AI, which evaluates
+    the parser's performance and returns structured JSON scoring data.
+    
+    Args:
+        ground_truth: Dictionary of correct room adjacencies
+        parser_result: Dictionary of parser-generated room adjacencies
+        
+    Returns:
+        str: JSON string containing evaluation results, or None if evaluation fails
+    """
+    # Create the evaluation prompt
     message = create_prompt_neighboring_rooms(ground_truth, parser_result)
     
-    # Debug: Print prompt length
+    # Debug: Print prompt statistics
     print(f"Prompt length: {len(message)} characters")
     print(f"Estimated tokens: ~{len(message) // 4}")
     
     try:
+        # Call Mistral API with JSON response format enforcement
         chat_response = client.chat.complete(
             model=model,
             messages=[
@@ -218,19 +251,19 @@ def call_mistral_evaluation(ground_truth: Dict[str, Any], parser_result: Dict[st
                 }
             ],
             response_format={
-                "type": "json_object",
+                "type": "json_object",  # Ensures response is valid JSON
             }
         )
         
-        # Handle the response properly
+        # Extract response content from API response
         if chat_response.choices and len(chat_response.choices) > 0:
             content = chat_response.choices[0].message.content
             
-            # Debug: Print raw response
+            # Debug: Print response metadata
             print("\n=== RAW RESPONSE ===")
             print(f"Content type: {type(content)}")
             
-            # content is typically a string when using json_object response format
+            # Handle response content (should be a string in JSON format)
             if isinstance(content, str):
                 response_text = content
             else:
@@ -238,10 +271,11 @@ def call_mistral_evaluation(ground_truth: Dict[str, Any], parser_result: Dict[st
                 print(f"Content: {content}")
                 return None
             
+            # Print preview of response
             print(response_text[:500])  # First 500 chars
             print("...\n")
             
-            # Validate it's proper JSON
+            # Validate that response is proper JSON
             try:
                 parsed = json.loads(response_text)
                 return response_text
@@ -261,14 +295,29 @@ def call_mistral_evaluation(ground_truth: Dict[str, Any], parser_result: Dict[st
 
 
 def llm_as_a_judge_nr(path_to_ground_truth: str, path_to_parser_result: str, output_path: str = None) -> str | None:
-    """Main evaluation function."""
+    """
+    Main evaluation function that orchestrates the LLM-as-a-judge process.
+    
+    Reads ground truth and parser result files, calls Mistral API for evaluation,
+    and optionally saves the results to a JSON file.
+    
+    Args:
+        path_to_ground_truth: Path to ground truth JSON file
+        path_to_parser_result: Path to parser output JSON file
+        output_path: Optional path to save evaluation results
+        
+    Returns:
+        str: JSON string of evaluation results, or None if evaluation fails
+    """
+    # Load ground truth data
     print(f"Reading ground truth from: {path_to_ground_truth}")
     ground_truth = read_json(path_to_ground_truth)
     
+    # Load parser result data
     print(f"Reading parser result from: {path_to_parser_result}")
     parser_result = read_json(path_to_parser_result)
     
-    # Debug: Print data structure info
+    # Debug: Print data structure information
     print(f"\nGround truth structure:")
     print(f"  Type: {type(ground_truth)}")
     if isinstance(ground_truth, dict):
@@ -281,10 +330,11 @@ def llm_as_a_judge_nr(path_to_ground_truth: str, path_to_parser_result: str, out
         print(f"  Number of rooms: {len(parser_result)}")
         print(f"  Sample rooms: {list(parser_result.keys())[:3]}")
     
+    # Call Mistral API for evaluation
     print("\nCalling Mistral API...")
     evaluation_result = call_mistral_evaluation(ground_truth, parser_result)
     
-    # Save result if output path provided
+    # Save evaluation results to file if path provided
     if evaluation_result and output_path:
         try:
             result_dict = json.loads(evaluation_result)
@@ -298,15 +348,18 @@ def llm_as_a_judge_nr(path_to_ground_truth: str, path_to_parser_result: str, out
 
 
 if __name__ == "__main__":
+    # Define file paths for evaluation
     groundtruth = "src/validation/Floorplan/neighboring rooms/testdata_ai/Cluttered_02_ai copy.json"
     parserresult = "src/validation/Floorplan/neighboring rooms/testdata_ai/Cluttered_02_ai.json"
     output_path = "src/validation/Floorplan/neighboring rooms/LLM as a judge output ai/Cluttered 02_neighbors_ai_llm.json"
-    #output_path = groundtruth.replace('val.json', 'llm_as_judge.json')
+    
+    # Run evaluation
     evaluation_result = llm_as_a_judge_nr(groundtruth, parserresult, output_path)
     
+    # Display results
     if evaluation_result:
         print("\n=== FINAL RESULT ===")
-        # Pretty print the JSON
+        # Pretty print the JSON result
         result_dict = json.loads(evaluation_result)
         print(json.dumps(result_dict, indent=2))
     else:

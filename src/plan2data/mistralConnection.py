@@ -2,7 +2,7 @@
 import json
 from mistralai import Mistral
 import base64
-import ast
+import time
 
 # ==================== API CONFIGURATION ====================
 
@@ -11,7 +11,7 @@ import ast
 
 # Mistral API configuration
 model = "mistral-small-2503"  # Model version for API calls
-api_key = "mVTgI1ELSkn5Q28v2smHK0O4E02nMaxG"  # 
+api_key = "5fhN3mCTNSd2MV5dJLcLdhBA90BUoHSv"  # 
 client = Mistral(api_key=api_key)
 
 
@@ -391,19 +391,33 @@ def call_mistral_connected_rooms(base64_image, text):
         Voronoi may show rooms as neighbors if they share a wall, but this function
         identifies only those with doorways/openings.
     """
-    # Create message with image and neighbor data
+    max_retries = 3
+    retry_delay = 5  # Start with 5 seconds
     message = create_message_connected(base64_image, text)
+    for attempt in range(max_retries):
+        try:
+             # Call Mistral Vision API
+            chat_response = client.chat.complete(
+                model=model,
+                messages=message,
+                response_format={
+                    "type": "json_object",
+                }
+            )
     
-    # Call Mistral Vision API
-    chat_response = client.chat.complete(
-        model=model,
-        messages=message,
-        response_format={
-            "type": "json_object",
-        }
-    )
+            return chat_response.choices[0].message.content  
+            
+        except Exception as e:
+            if "429" in str(e) and attempt < max_retries - 1:
+                print(f"⏳ Rate limited. Waiting {retry_delay} seconds... (Attempt {attempt + 1}/{max_retries})")
+                time.sleep(retry_delay)
+                retry_delay *= 2  # Double the delay each time
+            else:
+                raise  # Re-raise if not rate limit or max retries reached
+    # Create message with image and neighbor data
     
-    return chat_response.choices[0].message.content  
+    
+   
 
 
 def create_message_connected(base64_image, text):

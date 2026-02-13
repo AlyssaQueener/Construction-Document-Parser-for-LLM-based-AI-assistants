@@ -923,29 +923,32 @@ def extract_full_floorplan(pdf_path):
     """
     try:
         # 1. Get neighboring rooms from Voronoi analysis
+        print("🔍 Step 1: Getting Voronoi neighbors...")
         neighbors_vor = neighboring_rooms_voronoi(pdf_path)
+        print(f"✅ Got neighbors: {type(neighbors_vor)}")
         
-        # 2. Convert to dict if it's a JSON string
+        print("🔍 Step 2: Converting to dict...")
         if isinstance(neighbors_vor, str):
             neighbors_vor = json.loads(neighbors_vor)
+        print(f"✅ Neighbors dict: {neighbors_vor}")
         
-        # 3. Convert PDF to base64 image for vision API
+        print("🔍 Step 3: Converting PDF to base64...")
         base64_image = convert_pdf_to_base64(pdf_path)
+        print(f"✅ Got base64 image: {len(base64_image)} characters")
         
-        # Optional: Extract title block info
-        # titleblock, method, is_successful, confidence = tb.get_title_block_info(pdf_path)
-        
-        # 4. Call Mistral vision API to identify actual door connections
+        print("🔍 Step 4: Calling Mistral API...")
         connected_rooms_response = mistral.call_mistral_connected_rooms(
             base64_image, 
             json.dumps(neighbors_vor)
         )
+        print(f"✅ Got Mistral response: {type(connected_rooms_response)}")
         
-        # 5. Parse AI response
+        print("🔍 Step 5: Parsing response...")
         if isinstance(connected_rooms_response, str):
             connected_rooms = json.loads(connected_rooms_response)
         else:
             connected_rooms = connected_rooms_response
+        print(f"✅ Connected rooms: {connected_rooms}")
         
         # 6. Combine all outputs into single dictionary
         full_floorplan = {
@@ -958,11 +961,25 @@ def extract_full_floorplan(pdf_path):
         formatted_output = json.dumps(full_floorplan, indent=2, ensure_ascii=False)
         print("\n📋 Full Floorplan Data:")
         print(formatted_output)
-        
-        return formatted_output
-        
+        return full_floorplan
+    
     except Exception as e:
-        print(f"❌ Error processing {pdf_path}: {e}")
+        print(f"❌ Error in AI analysis: {e}")
+        import traceback
+        traceback.print_exc()
+        
+        # Return partial results if Voronoi succeeded but AI failed
+        if 'neighbors_vor' in locals():
+            print("⚠️ Returning partial results (Voronoi only, no AI connections)")
+            partial_result = {
+                "neighboring_rooms": neighbors_vor,
+                "connected_rooms": {},  # Empty - AI call failed
+                "error": "AI vision analysis unavailable due to rate limits",
+                "note": "neighboring_rooms shows spatial proximity (Voronoi only)"
+            }
+            return partial_result
+        
+        # If Voronoi also failed, return empty
         return "{}"
 
 

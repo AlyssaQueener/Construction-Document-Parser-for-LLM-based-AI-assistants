@@ -1,0 +1,31 @@
+graph TD
+    A[Start: PDF Floor Plan Upload] --> B[Step 1: Voronoi Analysis]
+    B --> C{Voronoi Success?}
+    C -->|No| Z[Return Empty Result]
+    C -->|Yes| D[Extract Neighboring Rooms Dict]
+    
+    D --> E[Step 2: Convert PDF to Base64 Image]
+    E --> F[Step 3: Call Mistral Vision API]
+    F --> G{API Call Success?}
+    
+    G -->|Rate Limit 429| H[Retry with Exponential Backoff]
+    H --> I{Max Retries Reached?}
+    I -->|No| F
+    I -->|Yes| J[Return Partial Results]
+    
+    J --> K[Create Response:<br/>neighboring_rooms: Voronoi data<br/>connected_rooms: empty<br/>error: Rate limit message]
+    K --> Y[Return to User]
+    
+    G -->|Success| L[Step 4: Parse AI Response]
+    L --> M[Extract Connected Rooms Data]
+    M --> N[Step 5: Combine Results]
+    
+    N --> O[Create Full Response:<br/>neighboring_rooms: Voronoi<br/>connected_rooms: AI vision]
+    O --> Y
+    
+    style A fill:#e1f5ff
+    style Z fill:#ffebee
+    style Y fill:#e8f5e9
+    style J fill:#fff9c4
+    style H fill:#ffe0b2
+    style F fill:#f3e5f5
