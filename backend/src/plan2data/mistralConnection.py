@@ -176,19 +176,60 @@ def create_message_roomnames(text):
     return messages
 
 ###################### VORONOI CONNECTED ROOMS EXTRACTION #####################################
-def call_mistral_connected_rooms(base64_image,text):
-    """Extract room connedted and returns a json object"""
-    message = create_message_connected(base64_image,text)
-    chat_response = client.chat.complete(
-        model=model,
-        messages=message,
-        response_format={
-            "type": "json_object",
-        }
-    )
+def call_mistral_connected_rooms(base64_image, text):
+    """
+    Determine which neighboring rooms have actual doorway connections.
     
-        
-    return chat_response.choices[0].message.content  
+    Uses Mistral vision to analyze floor plan image and identify which rooms
+    (from Voronoi neighbor candidates) are actually connected by doors/openings.
+    
+    Args:
+        base64_image (str): Base64-encoded floor plan image
+        text (str): JSON string of neighboring rooms from Voronoi analysis
+    
+    Returns:
+        str: JSON string containing:
+             {
+                 "ROOM_NAME": ["CONNECTED_ROOM1", "CONNECTED_ROOM2"],
+                 ...
+             }
+             Plus confidence score
+    
+    Example:
+        >>> neighbors = '{"KÜCHE": ["WOHNZIMMER", "FLUR"], ...}'
+        >>> base64_img = encode_image('floorplan.png')
+        >>> connected = call_mistral_connected_rooms(base64_img, neighbors)
+        >>> data = json.loads(connected)
+        >>> # data shows only rooms with actual doors between them
+    
+    Note:
+        This refines Voronoi geometric neighbors to actual functional connections.
+        Voronoi may show rooms as neighbors if they share a wall, but this function
+        identifies only those with doorways/openings.
+    """
+    max_retries = 3 # To avoid to many attempts at the 
+    retry_delay = 60 # Start with 5 seconds
+    message = create_message_connected(base64_image, text)
+    for attempt in range(max_retries):
+        try:
+             # Call Mistral Vision API
+            chat_response = client.chat.complete(
+                model=model,
+                messages=message,
+                response_format={
+                    "type": "json_object",
+                }
+            )
+    
+            return chat_response.choices[0].message.content  
+            
+        except Exception as e:
+            if "429" in str(e) and attempt < max_retries - 1:
+                print(f"⏳ Rate limited. Waiting {retry_delay} seconds... (Attempt {attempt + 1}/{max_retries})")
+                time.sleep(retry_delay)
+                retry_delay *= 2  # Double the delay each time
+            else:
+                raise  
 
 def create_message_connected(base64_image, text):
     """
