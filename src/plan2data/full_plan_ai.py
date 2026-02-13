@@ -1,7 +1,17 @@
 import json
 import src.plan2data.mistralConnection as mistral 
 
-
+# =============================================================================
+# AI-Based Floor Plan Extraction Module
+# =============================================================================
+# This module provides high-level interfaces for extracting floor plan metadata
+# using Mistral AI's vision capabilities. It supports two extraction modes:
+# 1. Room adjacency only (neighboring rooms detection)
+# 2. Full metadata extraction (title block + room adjacency)
+#
+# All functions return standardized outputs with confidence scores to enable
+# quality validation and downstream processing decisions.
+# =============================================================================
 
 ### Workflow to identify title block in floorplan and extract key features
 ### Key features are displayed in terminal output

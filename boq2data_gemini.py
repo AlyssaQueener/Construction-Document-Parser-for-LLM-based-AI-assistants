@@ -1,7 +1,7 @@
 import src.boq2data.camelot_setup.Camelot_Functions as cam 
 import json
 import camelot
-import src.boq2data.camelot_setup.gemini as gemini 
+import boq2data.camelot_setup.prompts as prompts 
 import os
 
 
@@ -45,10 +45,10 @@ def financial_boq(path):
     processed_str = json.dumps(tables_boq_processed, indent=2, ensure_ascii=False)
     
     # Step 4: Create prompt with extraction instructions and preprocessed data
-    prompt = gemini.create_preprocessed_prompt(processed_str)
+    prompt = prompts.create_preprocessed_prompt(processed_str)
     
     # Step 5: Send to Gemini API and receive structured JSON response
-    response_json = gemini.call_gemini_return_json(prompt)
+    response_json = prompts.call_gemini_return_json(prompt)
     
     return response_json
        
@@ -82,13 +82,13 @@ if __name__ == "__main__":
 #stringify the json again 
     processed_str = json.dumps(tables_boq_processed, indent=2, ensure_ascii=False)
     #Step 1: Generate the prompt using your function
-    prompt = gemini.create_preprocessed_prompt(processed_str)
+    prompt = prompts.create_preprocessed_prompt(processed_str)
     print("---- PROMPT SENT TO GEMINI ----")
     print(prompt)
     print("---- END OF PROMPT ----")
 
    # Step 2: Call Gemini and get the parsed JSON
-    response_json = gemini.call_gemini_return_json(prompt)
+    response_json = prompts.call_gemini_return_json(prompt)
 
     output_folder = "output/Financial"
     output_file = "BOQ2_extracted_boq_data.json"

@@ -1,4 +1,4 @@
-import  google.generativeai as genai
+
         
 def create_preproccesed_prompt(extracted_text):
     
