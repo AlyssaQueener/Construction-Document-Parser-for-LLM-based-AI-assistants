@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construction Document Parser - Tech Stack</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 1200px;
+        }
+        h1 {
+            text-align: center;
+            color: #2d3748;
+            margin-bottom: 50px;
+            font-size: 2.5em;
+        }
+        .architecture {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+        .tier {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        .tier-label {
+            min-width: 150px;
+            font-weight: bold;
+            font-size: 1.3em;
+            color: #4a5568;
+        }
+        .tier-content {
+            flex: 1;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .tech-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.1em;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .tech-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        }
+        .tech-card.python {
+            background: linear-gradient(135deg, #3776ab 0%, #ffd343 100%);
+        }
+        .tech-card.react {
+            background: linear-gradient(135deg, #61dafb 0%, #282c34 100%);
+        }
+        .tech-card.tailwind {
+            background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+        }
+        .tech-card.fastapi {
+            background: linear-gradient(135deg, #009688 0%, #059669 100%);
+        }
+        .tech-card.mistral {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+        }
+        .tech-card.openai {
+            background: linear-gradient(135deg, #10a37f 0%, #1a7f64 100%);
+        }
+        .tech-card.render {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+        }
+        .separator {
+            text-align: center;
+            color: #a0aec0;
+            font-size: 2em;
+            margin: 10px 0;
+        }
+        .parser-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .parser-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-size: 0.95em;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Construction Document Parser<br>Technology Stack</h1>
+        
+        <div class="architecture">
+            <!-- Document Parsers -->
+            <div class="tier">
+                <div class="tier-label">Document<br>Parsers</div>
+                <div class="tier-content">
+                    <div class="parser-group">
+                        <div class="parser-card">Drawing Parser</div>
+                        <div class="parser-card">Financial Parser</div>
+                        <div class="parser-card">Program Parser</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="separator">↓</div>
+
+            <!-- Backend -->
+            <div class="tier">
+                <div class="tier-label">Backend</div>
+                <div class="tier-content">
+                    <div class="tech-card python">Python</div>
+                    <div class="tech-card fastapi">FastAPI</div>
+                    <div class="tech-card">Camelot</div>
+                    <div class="tech-card">PyMuPDF</div>
+                </div>
+            </div>
+
+            <div class="separator">↓</div>
+
+            <!-- AI Integration -->
+            <div class="tier">
+                <div class="tier-label">AI Models</div>
+                <div class="tier-content">
+                    <div class="tech-card mistral">Mistral AI</div>
+                    <div class="tech-card openai">OpenAI GPT-4</div>
+                </div>
+            </div>
+
+            <div class="separator">↓</div>
+
+            <!-- Frontend -->
+            <div class="tier">
+                <div class="tier-label">Frontend</div>
+                <div class="tier-content">
+                    <div class="tech-card react">React</div>
+                    <div class="tech-card">JavaScript</div>
+                    <div class="tech-card react">Flowbite React</div>
+                    <div class="tech-card tailwind">Tailwind CSS</div>
+                </div>
+            </div>
+
+            <div class="separator">↓</div>
+
+            <!-- Deployment -->
+            <div class="tier">
+                <div class="tier-label">Deployment</div>
+                <div class="tier-content">
+                    <div class="tech-card render">Render</div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 50px; text-align: center; color: #718096; font-size: 1.1em;">
+            <strong>Live Application:</strong> construction-doc-parser.onrender.com
+        </div>
+    </div>
+</body>
+</html>
