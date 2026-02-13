@@ -4,7 +4,7 @@ import pandas as pd
 import plotly.graph_objects as go
 import plotly.express as px
 from pathlib import Path
-### 
+### cd
 
 
 def display_comparison_view(ai_files_data, det_files_data):
@@ -1229,7 +1229,6 @@ def display_detailed_analysis(file_name, json_data, parser_type):
 
 def display_comparison_view(ai_files_data, det_files_data):
     """Display AI vs Deterministic comparison for neighboring rooms"""
-    
     col1, col2 = st.columns(2)
     
     with col1:
@@ -1246,7 +1245,10 @@ def display_comparison_view(ai_files_data, det_files_data):
                     'Precision': stats['adjacency_precision'],
                     'Recall': stats['adjacency_recall']
                 })
+            
             df_ai = pd.DataFrame(ai_comparison)
+            # Sort by filename for consistent ordering
+            df_ai = df_ai.sort_values('File').reset_index(drop=True)
             
             def highlight_scores(val):
                 if isinstance(val, (int, float)):
@@ -1257,8 +1259,7 @@ def display_comparison_view(ai_files_data, det_files_data):
                     elif val < 7 and val > 0:
                         return 'background-color: #fee2e2'
                 return ''
-            df['Score'] = pd.to_numeric(df['Score'], errors='coerce')
-
+            
             styled_df = df_ai.style.applymap(
                 highlight_scores,
                 subset=['Overall Score', 'Room Detection', 'Adjacency F1']
@@ -1291,7 +1292,10 @@ def display_comparison_view(ai_files_data, det_files_data):
                     'Precision': stats['adjacency_precision'],
                     'Recall': stats['adjacency_recall']
                 })
+            
             df_det = pd.DataFrame(det_comparison)
+            # Sort by filename for consistent ordering
+            df_det = df_det.sort_values('File').reset_index(drop=True)
             
             def highlight_scores(val):
                 if isinstance(val, (int, float)):
@@ -1473,7 +1477,7 @@ for tab, key, label, parser_type in tabs_config:
                 st.divider()
                 
                 
-                # Special comparison for neighboring rooms
+                # # Special comparison for neighboring rooms
                 if key in ['drawing_neighboring_ai', 'drawing_neighboring_deterministic']:
                     st.subheader("🔄 AI vs Deterministic Comparison")
                     # Get files from both tabs
