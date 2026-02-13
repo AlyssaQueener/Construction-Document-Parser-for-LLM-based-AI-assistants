@@ -3,6 +3,7 @@ import json
 from mistralai import Mistral
 import base64
 import ast
+import time
 
 ## Retrieve the API key from environment variables
 #api_key = os.environ["MISTRAL_API_KEY"]
