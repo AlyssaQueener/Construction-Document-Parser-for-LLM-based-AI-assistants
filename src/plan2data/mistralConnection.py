@@ -11,7 +11,7 @@ import time
 
 # Mistral API configuration
 model = "mistral-small-2503"  # Model version for API calls
-api_key = "5fhN3mCTNSd2MV5dJLcLdhBA90BUoHSv"  # 
+api_key = "5fhN3mCTNSd2MV5dJLcLdhBA90BUoHSv" #mVTgI1ELSkn5Q28v2smHK0O4E02nMaxG"  # 
 client = Mistral(api_key=api_key)
 
 
@@ -391,8 +391,8 @@ def call_mistral_connected_rooms(base64_image, text):
         Voronoi may show rooms as neighbors if they share a wall, but this function
         identifies only those with doorways/openings.
     """
-    max_retries = 3
-    retry_delay = 5  # Start with 5 seconds
+    max_retries = 3 # To avoid to many attempts at the 
+    retry_delay = 60 # Start with 5 seconds
     message = create_message_connected(base64_image, text)
     for attempt in range(max_retries):
         try:
