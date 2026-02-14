@@ -1,0 +1,43 @@
+flowchart TD
+    A["parse_gantt_chart_visual(path, 'full ai')"]
+    A --> B["PDF to Image Conversion"]
+    A --> C["PDF Processing — try table extraction"]
+
+    %% ── Left branch: image analysis ──
+    B --> D["🤖 Mistral: Check timeline presence"]
+    D --> E[/"timeline: True | False"/]
+
+    %% ── Right branch: table analysis ──
+    C --> H[/"DataFrame"/]
+    H --> I["Extract activities"]
+    I --> J{"Activities available?"}
+
+    %% ── Path 1: Activities available ──
+    J -->|"Yes"| K["🤖 Mistral: 'full ai w activities' Guided date extraction with known activity list for context Parameter: 📌 timeline → selects prompt variant"]
+    K --> O[/"Parsed activities with dates"/]
+
+    %% ── Path 2 & 3: No activities → check size ──
+    J -->|"No"| F["Check image size"]
+    F --> G{"to_be_chunked?"}
+
+    %% ── Path 2: Too large → chunk ──
+    G -->|"True"| L["Split PDF into image chunks Parameter: 📌 timeline → selects splitting strategy & prompt variant"]
+    L --> M["🤖 Parse each chunk via Mistral, Aggregate results"]
+    M --> O
+
+    %% ── Path 3: Small enough → single call ──
+    G -->|"False"| N["🤖 Mistral: 'full ai' - Unguided extraction Parameter: 📌 timeline → selects prompt variant"]
+    N --> O
+
+    %% ── Styling ──
+    classDef ai fill:#e8d5f5,stroke:#7c3aed,stroke-width:2px,color:#1e1e1e
+    classDef decision fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#1e1e1e
+    classDef data fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e1e1e
+    classDef process fill:#f1f5f9,stroke:#475569,stroke-width:1px,color:#1e1e1e
+    classDef output fill:#d1fae5,stroke:#059669,stroke-width:2px,color:#1e1e1e
+
+    class D,K,M,N ai
+    class G,J decision
+    class E,H data
+    class A,B,C,F,I,L process
+    class O output

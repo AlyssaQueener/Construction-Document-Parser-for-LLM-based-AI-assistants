@@ -165,9 +165,10 @@ def parse_gantt_chart(path: str, chart_format: str) -> list:
     Parse gantt chart (pdf format) depending on chart layout (tabular/visual).
     Tabular: chart contains table containing activities and their respective data (start,end,id, etc.), bars only for visualization
     Visual: chart contains list of activtities, timeline and bars, bars are used to inferre start and end for each activtity 
+    Full Ai: complex/ large gantt charts with visual layout
     
     :param path: File path to the Gantt chart PDF.
-    :param chart_format: "tabular" or "visual"
+    :param chart_format: "tabular","visual", "full_ai"
     :return: JSON string of Task objects, or an error dict if table recognition failed.
     """
     if chart_format== "tabular":

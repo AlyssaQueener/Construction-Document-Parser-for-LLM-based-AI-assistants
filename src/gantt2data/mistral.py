@@ -1,129 +1,312 @@
+"""
+Mistral API Integration for Gantt Chart Parsing
+
+This module provides functions to interact with the Mistral AI API for extracting
+structured data from Gantt chart images. It supports multiple extraction modes:
+- Timeline extraction (time axis parsing)
+- Activity/task extraction
+- Column identification from raw text
+- Full AI-driven activity + date extraction
+- Chunk-based extraction for large charts
+
+All vision-based functions encode images to base64 and send them alongside
+carefully crafted prompts to Mistral's chat completion endpoint, requesting
+JSON-formatted responses.
+"""
+
 from mistralai import Mistral
 import base64
 
-## Retrieve the API key from environment variables
-#api_key = os.environ["MISTRAL_API_KEY"]
-
-model = "mistral-small-latest"
-api_key = "mVTgI1ELSkn5Q28v2smHK0O4E02nMaxG"
+# ---------------------------------------------------------------------------
+# Mistral client configuration
+# ---------------------------------------------------------------------------
+model = "mistral-small-2506"
+api_key = "I4sokIRRBLZqZW3tSdmMhHBtCgnmwNNc"  # TODO: move to env variable
 client = Mistral(api_key=api_key)
 
-def call_mistral_timeline(path, option, activties):
-    message = create_message_for_timeline_extraction(path, option, activties)
+
+def call_mistral_full_ai_parsing(path: str, option:str, activities:list, timeline:bool)->str:
+    """Send gantt chart image to mistral for full ai parsing
+
+    Args:
+        path (str): File path to gantt chart image
+        option (str): parsing strategy
+        activities (list): List of activities contained in gantt chart
+        timeline (bool): Bool for timeline presence
+
+    Returns:
+        Raw JSON string returned by the Mistral model.
+    """
+    message = create_message_for_full_ai_extraction(path, option, activities, timeline)
     chat_response = client.chat.complete(
-        model = model,
-        messages = message,
-        response_format = {
-            "type": "json_object",
+        model=model,
+        messages=message,
+        response_format={
+            "type": "json_object",  # Force structured JSON output
         }
     )
-
     return chat_response.choices[0].message.content
 
-def create_message_for_timeline_extraction(path, option, activties):
+
+def call_mistral_timeline(path:str, option:str, activties:list)->str:
+    """
+    Send a Gantt chart image to Mistral and extract timeline or activity data
+    depending on the chosen option.
+
+    Args:
+        path (str): File path to the Gantt chart image.
+        option (str): Extraction mode – one of:
+            - "check for timeline": Determine whether a timeline axis exists.
+            - "badly extracted" / "no timeline": Parse the time axis values.
+            - "full ai": Let the model extract both activities and dates.
+            - "full ai w activities": Extract dates for a known activity list.
+            - "chunks": Extract tasks/dates from a cropped chart chunk.
+        activties (list[str] | None): Optional list of known activity names,
+            used only with the "full ai w activities" option.
+
+    Returns:
+        str: Raw JSON string returned by the Mistral model.
+    """
+    message = create_message_for_timeline_extraction(path, option, activties)
+    chat_response = client.chat.complete(
+        model=model,
+        messages=message,
+        response_format={
+            "type": "json_object",  # Force structured JSON output
+        }
+    )
+    return chat_response.choices[0].message.content
+
+def create_message_for_full_ai_extraction(path:str, option:str, activties:list|None, timeline: bool):
+    """
+    Build the multimodal (text + image) message payload for full ai parsing request.
+
+    Selects the appropriate prompt text based on timeline parameter and activties,
+    then pairs it with the base64-encoded chart image.
+
+    Args:
+        path (str): File path to the Gantt chart image.
+        timeline (bool): timeline present (True|False).
+        activties (list[str] | None): Known activities for guided extraction.
+
+    Returns:
+        list[dict]: A single-element list containing the user message with
+            text and image content blocks, ready for the Mistral API.
+    """
     base64_image = encode_image(path)
+
+    # Select the prompt based on the requested extraction strategy
+    if option == "full ai" and timeline:
+        text = create_promt_full_ai()
+    elif option == "full ai" and not timeline:
+        text = create_promt_full_ai_no_timeline()
+    elif option == "full ai w activities":
+        text = create_message_ai_and_provided_activities(activties)
+    elif option == "chunks" and timeline:
+        text = create_message_for_chunks()
+    elif option == "chunks" and not timeline:
+        text = create_message_for_chunks_no_timeline()
+    
+
+    # Assemble multimodal message: text prompt + base64-encoded image
+    messages = [
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": text
+                },
+                {
+                    "type": "image_url",
+                    "image_url": f"data:image/jpeg;base64,{base64_image}"
+                }
+            ]
+        }
+    ]
+    return messages
+
+
+def create_message_for_timeline_extraction(path:str, option:str, activties:list):
+    """
+    Build the multimodal (text + image) message payload for timeline-related
+    extraction requests.
+
+    Selects the appropriate prompt text based on the extraction `option`,
+    then pairs it with the base64-encoded chart image.
+
+    Args:
+        path (str): File path to the Gantt chart image.
+        option (str): Extraction mode (see `call_mistral_timeline`).
+        activties (list[str] | None): Known activities for guided extraction.
+
+    Returns:
+        list[dict]: A single-element list containing the user message with
+            text and image content blocks, ready for the Mistral API.
+    """
+    base64_image = encode_image(path)
+
+    # Select the prompt based on the requested extraction strategy
     if option == "check for timeline":
         text = create_message_for_check_for_timeline()
     if option == "badly extracted":
         text = create_timeline_prompt_new()
     if option == "no timeline":
         text = create_timeline_prompt_new()
-    if option == "full ai":
-        text = create_promt_full_ai()
-    if option == "full ai w activities":
-        text = create_message_ai_and_provided_activities(activties)
-    if option == "chunks":
-        text = create_message_for_chunks()
-    
+
+    # Assemble multimodal message: text prompt + base64-encoded image
     messages = [
-    {
-        "role": "user",
-        "content": [
-            {
-                "type": "text",
-                "text": text
-            },
-            {
-                "type": "image_url",
-                "image_url": f"data:image/jpeg;base64,{base64_image}"
-            }
-        ]
-    }
-]
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": text
+                },
+                {
+                    "type": "image_url",
+                    "image_url": f"data:image/jpeg;base64,{base64_image}"
+                }
+            ]
+        }
+    ]
     return messages
 
-def create_timeline_prompt():
-    prompt = """
-You are an expert in identifying the timeline and timestemps which are used in a gantt chart.
-Timestamps are supposed to be the smallest time unit on the chart, enabling somebody reading the chart to identify start and end date of a task.
-Look at the image and return all the timestemps in following format :
-[ 
-    {
-        'timestamp_value': "this value could be a date, the name of a month or somenthing like Q2, 1, etc.",
-        'column_index': "index of the column in wich timestamp is located",
-        'additional_info': "if there any additional info for the timestemps, e.g. a hierachically higher and more generall timerow add the information here"
-    },
-    {
-        'timestamp_value': "this value could be a date, the name of a month or somenthing like Q2, 1, etc.",
-        'column_index': col_idx,
-        'additional_info': { }
-    }
-]
-Please include the names of the timestamps exactly as they are spelled in the chart.
-Dont do something like {'timestamps': [{'timestamp_value': 'Year 1', 'column_index': 0, 'additional_info': 'Yearly timestamp'}, {'timestamp_value': 'Q1', 'column_index': 1, 'additional_info': 'Quarterly timestamp within Year 1'}, {'timestamp_value': 'Q2', 'column_index': 2, 'additional_info': 'Quarterly timestamp within Year 1'}, {'timestamp_value': 'Q3', 'column_index': 3, 'additional_info': 'Quarterly timestamp within Year 1'},
-But really only return the array of objects otherwise my further application doesn't work.
-The response has to be in exactly the same format as specified above to ensure my further application works. 
-Return the answer in valid JSON.
 
+# ===========================================================================
+# 2. ACTIVITY EXTRACTION
+# ===========================================================================
 
-"""
-    return prompt
+def call_mistral_activities(path:str)->str:
+    """
+    Extract the list of activity/task names visible in a Gantt chart image.
 
+    This function focuses only on identifying *what* activities exist (not
+    their dates or durations). The returned JSON is a flat list of strings.
 
-def call_mistral_activities(path):
+    Args:
+        path (str): File path to the Gantt chart image.
+
+    Returns:
+        str: JSON string containing an array of activity names.
+    """
     message = create_message_for_activity_extraction(path)
     chat_response = client.chat.complete(
-        model = model,
-        messages = message,
-        response_format = {
+        model=model,
+        messages=message,
+        response_format={
             "type": "json_object",
         }
     )
-
     return chat_response.choices[0].message.content
 
-def create_message_for_activity_extraction(path):
+
+def create_message_for_activity_extraction(path:str)->list:
+    """
+    Build the multimodal message for activity-name extraction.
+
+    Args:
+        path (str): File path to the Gantt chart image.
+
+    Returns:
+        list[dict]: Mistral-compatible message list with text + image.
+    """
     base64_image = encode_image(path)
     text = create_activities_prompt()
     messages = [
-    {
-        "role": "user",
-        "content": [
-            {
-                "type": "text",
-                "text": text
-            },
-            {
-                "type": "image_url",
-                "image_url": f"data:image/jpeg;base64,{base64_image}"
-            }
-        ]
-    }
-]
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": text
+                },
+                {
+                    "type": "image_url",
+                    "image_url": f"data:image/jpeg;base64,{base64_image}"
+                }
+            ]
+        }
+    ]
     return messages
 
-def encode_image(image_path):
-    """Encode the image to base64."""
+
+# ===========================================================================
+# 3. COLUMN IDENTIFICATION (text-only, no image)
+# ===========================================================================
+
+def call_mistral_for_colums(text):
+    """
+    Identify standard Gantt chart columns (id, task, start, finish, duration)
+    from raw text extracted via PDF parsing.
+
+    Unlike the other functions this is a *text-only* call – no image is sent.
+    Useful when a table has already been extracted from a PDF but the column
+    semantics are unknown.
+
+    Args:
+        text (str): Raw text content extracted from a Gantt chart PDF.
+
+    Returns:
+        str: JSON string mapping detected columns to generalised titles.
+    """
+    message = create_column_identification_promt(text)
+    messages = [
+        {
+            "role": "user",
+            "content": message,
+        }
+    ]
+    chat_response = client.chat.complete(
+        model=model,
+        messages=messages,
+        response_format={
+            "type": "json_object",
+        }
+    )
+    return chat_response.choices[0].message.content
+
+
+# ===========================================================================
+# 4. IMAGE ENCODING UTILITY
+# ===========================================================================
+
+def encode_image(image_path:str):
+    """
+    Read an image file from disk and return its base64-encoded string.
+
+    Args:
+        image_path (str): Absolute or relative path to the image file.
+
+    Returns:
+        str | None: Base64-encoded UTF-8 string of the image, or None on error.
+    """
     try:
         with open(image_path, "rb") as image_file:
             return base64.b64encode(image_file.read()).decode('utf-8')
     except FileNotFoundError:
         print(f"Error: The file {image_path} was not found.")
         return None
-    except Exception as e:  # Added general exception handling
+    except Exception as e:
         print(f"Error: {e}")
         return None
+
+
+# ===========================================================================
+# 5. PROMPT TEMPLATES
+# ===========================================================================
+# Each function below returns a carefully crafted prompt string for a
+# specific extraction task. They are separated to keep concerns isolated
+# and to allow easy iteration on individual prompts.
+
+
 def create_activities_prompt():
+    """
+    Prompt for extracting the ordered list of activity names from a chart.
+
+    The model is instructed to return a flat JSON array of strings (no wrapper
+    object) so the result can be directly parsed downstream.
+    """
     prompt = """
 You are an expert in identifying the activities/ tasks which are listed in a gantt chart.
 Look at the image and return all the activities stated in the gantt chart. Use the exact order in which the activities are listed, dont omit or hallucinate a activity.
@@ -137,25 +320,21 @@ Return the answer in valid JSON.
 """
     return prompt
 
-def call_mistral_for_colums(text):
-    message = create_column_identification_promt(text)
-    messages = [
-        {
-        "role": "user",
-        "content": message,
-        }
-    ]
-    chat_response = client.chat.complete(
-        model = model,
-        messages = messages,
-        response_format = {
-            "type": "json_object",
-        }
-    )
-    response = chat_response.choices[0].message.content
-    return response
 
-def create_column_identification_promt(text):
+def create_column_identification_promt(text:str):
+    """
+    Prompt for mapping raw PDF-extracted column headers to the five canonical
+    Gantt chart fields: id, task, start, finish, duration.
+
+    The extracted `text` is injected at the end of the prompt so the model
+    can analyse it in context.
+
+    Args:
+        text (str): Raw text content from a Gantt chart PDF.
+
+    Returns:
+        str: Complete prompt with the text appended.
+    """
     promt = f"""
         # Gantt Chart Column Identification Prompt
 
@@ -232,10 +411,22 @@ If no match is found for a column:
 
 Analyze this raw text, identify the column headers, and return ONLY the JSON array mapping as specified above.
     """
-    return promt 
+    return promt
 
 
 def create_timeline_prompt_new():
+    """
+    Prompt for extracting individual time-axis tick values from a chart.
+
+    The model identifies the smallest repeated time unit on the x-axis and
+    returns each tick as an object with:
+      - timestamp_value: the label of the smallest unit
+      - additional_info: concatenated higher-level headers
+      - index: 0-based left-to-right position
+
+    Used when the initial PDF-based timeline extraction failed ("badly
+    extracted") or when no tabular timeline data was found ("no timeline").
+    """
     prompt = """
 You are given an image of a Gantt chart.
 
@@ -279,15 +470,20 @@ Additional rules:
 
 
 def create_promt_full_ai():
+    """
+    Prompt for fully AI-driven extraction of activities *and* their dates.
+
+
+    Returns tasks as JSON objects with keys: task, start, finish.
+    """
     prompt = """# Gantt Chart Activity Extraction Prompt
 
 You are an AI parser specialized in extracting activity information from Gantt charts. Your task is to identify all activities along with their start and end dates from the provided chart image.
 
 ## Task Overview
-Extract each activity with its corresponding start and end dates. The chart may present dates in one of two scenarios:
+Extract each activity with its corresponding start and end dates.
 
-## Scenario 1: Chart with Timeline
-When a timeline is present at the top or bottom of the chart:
+## Steps
 
 1. **Identify the timeline structure**: Examine all time headers in the chart, which may be hierarchical (e.g., years containing months, months containing weeks, weeks containing days)
 
@@ -310,9 +506,54 @@ When a timeline is present at the top or bottom of the chart:
    - Determine the corresponding timestamp at the start position using the format above
    - Determine the corresponding timestamp at the end position using the format above
 
-## Scenario 2: Dates Attached to Bars
-When dates are directly labeled on or near the activity bars:
+## Output Format
+Provide the results as a JSON array with the following structure:
 
+```json
+[
+    {
+        "task": "Activity Name",
+        "start": "Start Date",
+        "finish": "End Date"
+    },
+    {
+        "task": "Activity Name",
+        "start": "Start Date",
+        "finish": "End Date"
+    }
+]
+```
+
+**Important**: 
+- Use the exact keys: `"task"`, `"start"`, `"finish"`
+- Dates should follow the format as they appear in the timeline or labels
+- The output must be valid JSON
+
+## Important Guidelines
+- Extract ALL activities visible in the chart
+- Maintain the exact spelling and capitalization of activity names
+- Ensure timeline timestamps follow the specified format precisely
+- If the chart uses vertical orientation, apply the same principles horizontally
+
+```
+Now, please analyze the provided Gantt chart and extract all activities with their start and end dates."""
+    return prompt
+
+def create_promt_full_ai_no_timeline():
+    """
+    Prompt for fully AI-driven extraction of activities *and* their dates for charts where
+    Dates are labelled directly on/near the bars → copy them verbatim.
+
+    Returns tasks as JSON objects with keys: task, start, finish.
+    """
+    prompt = """# Gantt Chart Activity Extraction Prompt
+
+You are an AI parser specialized in extracting activity information from Gantt charts. Your task is to identify all activities along with their start and end dates from the provided chart image.
+
+## Task Overview
+Extract each activity with its corresponding start and end dates.
+
+Steps:
 1. **Extract direct labels**: Look for date text that is:
    - Written on the bars themselves
    - Connected to bars with lines or arrows
@@ -343,14 +584,6 @@ Provide the results as a JSON array with the following structure:
 - Dates should follow the format as they appear in the timeline or labels
 - The output must be valid JSON
 
-## Important Guidelines
-- Extract ALL activities visible in the chart
-- Maintain the exact spelling and capitalization of activity names
-- For Scenario 1, ensure timeline timestamps follow the specified format precisely
-- If a date is unclear or ambiguous, note this in your output
-- If both scenarios appear to be present, prioritize directly attached dates (Scenario 2)
-- Preserve any special characters or formatting in activity names
-- If the chart uses vertical orientation, apply the same principles horizontally
 
 ```
 Now, please analyze the provided Gantt chart and extract all activities with their start and end dates."""
@@ -358,6 +591,20 @@ Now, please analyze the provided Gantt chart and extract all activities with the
 
 
 def create_message_ai_and_provided_activities(activities):
+    """
+    Prompt for date extraction when the activity list is already known.
+
+    The pre-identified `activities` list is embedded in the prompt so the
+    model can focus on matching bars to dates instead of also having to
+    recognise activity names. If the model spots additional activities not
+    in the list, it should still include them.
+
+    Args:
+        activities (list[str]): Known activity names to look for.
+
+    Returns:
+        str: Complete prompt with the activity list injected.
+    """
     prompt = f"""# Gantt Chart Date Extraction
 
 You are an AI parser extracting start and end dates from Gantt charts.
@@ -404,7 +651,15 @@ Return valid JSON:
 Analyze the chart and extract all dates."""
     return prompt
 
+
 def create_message_for_check_for_timeline():
+    """
+    Prompt to classify a Gantt chart as having a timeline axis or not.
+
+    Returns a simple boolean JSON: {"timeline_present": true/false}.
+    This is typically the first call in the extraction pipeline to decide
+    which downstream strategy to use.
+    """
     prompt = """You are an expert at analyzing Gantt charts. Your task is to identify how dates are represented in the chart.
 
 There are two possible formats:
@@ -425,23 +680,78 @@ Return your answer as JSON in exactly this format:
 }
 
 Use `true` if Format 1 (timeline present), or `false` if Format 2 (dates on bars)."""
-    
+
     return prompt
+
+
 def create_message_for_chunks():
+    """
+    Prompt for extracting tasks and dates from a *cropped chunk* of a
+    larger Gantt chart.
+
+    Used when the chart is too large for a single API call and has been
+    split into overlapping horizontal strips. Each chunk includes the
+    timeline header so the model can still resolve dates.
+    """
     prompt = f"""# Gantt Chart Chunk Date Extraction
 
 You are an AI parser extracting tasks and dates from Gantt chart chunks.
 
 ## Input
-A chunk of a Gantt chart image. If a timeline is present, it will be included in the chunk.
+A chunk of a Gantt chart image, including timeline.
 
 ## Task
 Extract ALL visible activities with their start and end dates. Activities may continue into adjacent chunks.
 
-**For charts WITH a timeline:**
 - Read dates from where each bar begins/ends on the timeline axis
 
-**For charts WITHOUT a timeline:**
+
+## Date Extraction Rules
+1. Copy dates **exactly as shown** (e.g., "01/03/2024", "Mar 18", "Week 3")
+2. Do NOT convert or normalize formats
+3. Start date = left/beginning of bar; End date = right/end of bar
+4. If date is unclear/partial: extract what's visible
+5. If date is missing: use `null`
+6. Maintain activity order as shown in chart
+
+## Output Format
+Return valid JSON:
+```json
+[
+    {{
+        "task": "Activity Name",
+        "start": "Start Date",
+        "finish": "End Date"
+    }}
+]
+```
+
+Use exact keys: `"task"`, `"start"`, `"finish"`
+
+Extract all activities from this chunk."""
+    return prompt
+
+
+
+def create_message_for_chunks_no_timeline():
+    """
+    Prompt for extracting tasks and dates from a *cropped chunk* of a
+    larger Gantt chart.
+
+    Used when the chart is too large for a single API call and has been
+    split into overlapping horizontal strips. Each chunk includes the
+    timeline header so the model can still resolve dates.
+    """
+    prompt = f"""# Gantt Chart Chunk Date Extraction
+
+You are an AI parser extracting tasks and dates from Gantt chart chunks.
+
+## Input
+A chunk of a Gantt chart image.
+
+## Task
+Extract ALL visible activities with their start and end dates. Activities may continue into adjacent chunks.
+
 - Find date labels on or near activity bars (on bar, at edges, connected with lines/arrows, above/below)
 
 ## Date Extraction Rules

@@ -1,66 +1,69 @@
 flowchart TD
-    A["parse_gantt_chart_visual(path, option)"] --> C{"option"}
-    C --> |full ai| C1["Full AI Parsing"]
-    C --> |hybrid| D["Hybrid Visual Parsing"]
+    A["parse_gant_chart_visual(path)"]
+    A --> B["PDF Processing: Table and Rectangle Extraction (pdfplumber)"]
 
-    %% ===== FULL AI BRANCH =====
-    C1 --> F1["convert_pdf2img(path)"]
-    F1 --> F2["call_mistral_timeline(image, 'check for timeline')"]
-    F2 --> F3{"timeline_present?"}
-    F3 --> |yes| F4["option = 'w timeline'"]
-    F3 --> |no| F4b["option unchanged"]
-    F4 --> F5["Extract table from PDF via pdfplumber"]
-    F4b --> F5
-    F5 --> F6["extract_activities_for_full_ai(df)\n(first 6 columns)"]
-    F6 --> F7["extract_timeline_rows(df)"]
-    F7 --> F8{"activities found?"}
-    F8 --> |yes| F9["call_mistral_timeline(image,\n'full ai w activities', activities)"]
-    F8 --> |no| F10{"to_be_chunked(image)?"}
-    F10 --> |yes| F11["parse_from_chunks(path, option)"]
-    F10 --> |no| F12["call_mistral_timeline(image, 'full ai')"]
-    F11 --> F13["Split PDF into image chunks\n(with or without timeline header)"]
-    F13 --> F14["For each chunk:\ncall_mistral_timeline → parse JSON"]
-    F14 --> F15["Aggregate parsed results"]
-    F9 --> FOUT["Clean up temp images\nReturn result"]
-    F12 --> FOUT
-    F15 --> FOUT
+    B --> B3[/"Rectangles"/]
 
-    %% ===== HYBRID VISUAL BRANCH =====
-    D --> D1["convert_pdf2img(path)"]
-    D1 --> D2["Extract table & rectangles\nfrom PDF via pdfplumber"]
-    D2 --> D3["extract_activities(df)\n(first column values)"]
-    D3 --> D4{"activities valid?\n(not None, count ≥ rowCount - 5)"}
-    D4 --> |no| D5["call_mistral_activities(image)\n(AI fallback)"]
-    D4 --> |yes| D6["extract_timeline_rows(df)\n(scan first 3 rows for time labels)"]
-    D5 --> D6
-    D6 --> D7["create_single_timeline(rows)\n(merge granular + coarse rows)"]
-    D7 --> D8{"timeline valid?\n(count ≥ colCount - 5 and ≥ 4)"}
-    D8 --> |no| D9["call_mistral_timeline(image,\n'no timeline')\n→ ai_extraction = True"]
-    D8 --> |yes| D10["ai_extraction = False"]
-    D9 --> D11["localize_timestamps(timeline, page)\n(find bounding boxes on PDF)"]
-    D10 --> D11
-    D11 --> D12{"too many unfound timestamps?\n(unfound > len - tolerance)\nand ai_extraction == False"}
-    D12 --> |yes| D13["call_mistral_timeline(image,\n'badly extracted')\n→ re-localize"]
-    D12 --> |no| D14["localize_activities(activities, page)\n(find bounding boxes on PDF)"]
-    D13 --> D14
-    D14 --> D15{"too many unfound activities?\n(unfound > len - tolerance)"}
-    D15 --> |yes| D16["call_mistral_activities(image)\n→ re-localize"]
-    D15 --> |no| D17["find_bars(rectangles,\nactivities_with_loc, tolerance)\n(match bars by vertical alignment)"]
-    D16 --> D17
-    D17 --> D18["check_bar_recognition()\n(validate bar distribution)"]
-    D18 --> D19{">80% same count?\n(likely grid lines)"}
-    D19 --> |yes| D20["identify_bars_with_colours()\n(filter background colors)"]
-    D19 --> |no| D21["match_bars_with_timeline()\n(horizontal alignment check)"]
-    D20 --> D21
-    D21 --> D22["determine_start_end_of_activity()\n(min/max column index → dates)"]
-    D22 --> DOUT["Return activities_with_dates"]
+    B --> C[/"DataFrame"/]
 
-    %% ===== STYLING =====
-    classDef decision fill:#fff3cd,stroke:#ffc107,color:#000
-    classDef ai fill:#e8daef,stroke:#8e44ad,color:#000
-    classDef process fill:#d4edda,stroke:#28a745,color:#000
-    classDef output fill:#cce5ff,stroke:#007bff,color:#000
+    %% ══════════════════════════════════════
+    %% ACTIVITY EXTRACTION
+    %% ══════════════════════════════════════
+    C --> D["Extract activities from first column"]
+    D --> D1{"Sufficient len(activities)?"}
+    D1 -->|"Yes"| E["Localize activities on page (pdfplumber text search)"]
+    D1 -->|"No"| D2["🤖 Mistral: Extract activities from chart (image)"]
+    D2 --> E
 
-    class C,D4,D8,D12,D15,D19,F3,F8,F10 decision
-    class D5,D9,D13,D16,F2,F9,F12,F14 ai
-    class FOUT,DOUT output
+    E --> E1{"Activities found > 80% ?"}
+    E1 -->|"Yes"| F[/"Activities with bounding boxes"/]
+    E1 -->|"No — retry"| E2["🤖 Mistral: Re-extract activities from chart image"]
+    E2 --> E3["Localize again on page"]
+    E3 --> F
+
+    %% ══════════════════════════════════════
+    %% TIMELINE EXTRACTION
+    %% ══════════════════════════════════════
+    C --> G["Extract timeline rows (first 3 DataFrame rows)"]
+    G --> G1["Merge into single timeline (most granular row + context)"]
+    G1 --> G2{"Sufficient timestamps?"}
+    G2 -->|"Yes"| H["Localize timestamps on page (pdfplumber text search)"]
+    G2 -->|"No"| G3["🤖 Mistral: Extract timeline from chart image"]
+    G3 --> H
+
+    H --> H1{"Most timestamps found on page?"}
+    H1 -->|"Yes"| I[/"Timeline with bounding boxes"/]
+    H1 -->|"No — retry"| H2["🤖 Mistral: Re-extract timeline from chart image"]
+    H2 --> H3["Localize again on page"]
+    H3 --> I
+
+    %% ══════════════════════════════════════
+    %% BAR MATCHING
+    %% ══════════════════════════════════════
+    F --> J["Match rectangles to activities (vertical alignment)"]
+    B3 --> J
+    J --> J1{"Bar recognition-valid?"}
+    J1 -->|"Yes"| K["Activity → Bar mapping"]
+    J1 -->|"No — grid lines detected"| J2["Filter by colour (remove bright backgrounds)"]
+    J2 --> K
+
+    %% ══════════════════════════════════════
+    %% DATE RESOLUTION
+    %% ══════════════════════════════════════
+    K --> L["Match bars with timeline (horizontal alignment)"]
+    I --> L
+    L --> M["Determine start & end per activity (min/max column index)"]
+    M --> O[/"Parsed activities with dates"/]
+
+    %% ── Styling ──
+    classDef ai fill:#e8d5f5,stroke:#7c3aed,stroke-width:2px,color:#1e1e1e
+    classDef decision fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#1e1e1e
+    classDef data fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e1e1e
+    classDef process fill:#f1f5f9,stroke:#475569,stroke-width:1px,color:#1e1e1e
+    classDef output fill:#d1fae5,stroke:#059669,stroke-width:2px,color:#1e1e1e
+
+    class D2,E2,G3,H2 ai
+    class D1,E1,G2,H1,J1 decision
+    class C,F,I,K data
+    class A,B,B1,B2,B3,D,E,E3,G,G1,H,H3,J,J2,L,M process
+    class O output

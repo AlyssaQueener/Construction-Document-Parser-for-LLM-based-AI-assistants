@@ -20,14 +20,14 @@ class Task_visual(BaseModel):
     start: str | None = None
     finish: str | None = None
 
-
-def extract_activities(df):
+    
+def extract_activities(df: pd.DataFrame)-> list| None:
     """
     Extracts activity/task names from the first column of a DataFrame.
     Filters out None and 'None' string values.
 
     :param df: DataFrame extracted from the Gantt chart PDF table.
-    :return: List of activity name strings, or None if extraction fails.
+    :return: List of activity names | None if extraction fails.
     """
     activities = []
     
@@ -251,7 +251,7 @@ def match_bars_with_timeline(gantt_chart_bars, timeline_with_localization, ai_ex
 
 
 
-def create_single_timeline(time_line_rows):
+def create_single_timeline(time_line_rows:list)->list:
     """
     Merges multiple timeline header rows into one unified timeline. Uses the most
     granular row (most timestamps) as the base, then enriches each entry with
@@ -529,20 +529,21 @@ def extract_activities_for_full_ai(df):
     
 
 #### chunking ####
-def extract_gantt_chart_from_chunks(chunked_chart):
+def extract_gantt_chart_from_chunks(chunked_chart, timeline):
     """
     Processes a list of image chunks through Mistral AI, parses each chunk's JSON
     response, and aggregates the results into a single list. Cleans up all temporary
     chunk image files afterward (even on failure).
 
     :param chunked_chart: List of file paths to image chunk files.
+    :param timeline: True: timeline present, False: chart without timeline
     :return: Combined list of parsed activity dicts from all chunks.
     """
     parsed_chart = []
     
     try:
         for image_path in chunked_chart:
-            chart_json = mistral.call_mistral_timeline(image_path, "chunks", None)
+            chart_json = mistral.call_mistral_full_ai_parsing(image_path, "chunks", None, timeline)
             try:
                 chart_part = json.loads(chart_json)
                 parsed_chart.extend(chart_part)
@@ -561,20 +562,20 @@ def extract_gantt_chart_from_chunks(chunked_chart):
     
     return parsed_chart
      
-def parse_from_chunks(path, option):
+def parse_from_chunks(path:str, timeline:bool):
     """
     Splits a Gantt chart PDF into smaller image chunks and parses each chunk
     separately via AI. Handles both timeline-preserving and regular splitting modes.
 
     :param path: File path to the Gantt chart PDF.
-    :param option: "w timeline" to preserve timeline header in each chunk, or other for basic splitting.
+    :param timeline: True to preserve timeline header in each chunk,False for basic splitting.
     :return: Combined list of parsed activity dicts from all chunks.
     """
-    if option == "w timeline":
+    if timeline == True:
         chart_chunks = helper.pdf_to_split_images_with_timeline(path,0)
     else:
         chart_chunks = helper.pdf_to_split_images(path,0)
-    parsed_chart = extract_gantt_chart_from_chunks(chart_chunks)
+    parsed_chart = extract_gantt_chart_from_chunks(chart_chunks, timeline)
     return parsed_chart
     
 def to_be_chunked(image_path):
@@ -610,7 +611,7 @@ def to_be_chunked(image_path):
 ### main functions ###
 def parse_gant_chart_visual(path: str)-> list:
     """
-    Main entry point for visually parsing a Gantt chart PDF. Orchestrates the full
+    Main entry point for visually parsing a Gantt chart PDF in hybrid mode. Orchestrates the full
     pipeline: extract table data, identify activities and timeline, locate them on
     the PDF page, match bars to activities, correlate bars with timestamps, and
     determine start/end dates. Falls back to Mistral AI when extraction quality
@@ -621,6 +622,7 @@ def parse_gant_chart_visual(path: str)-> list:
     """
     tolerance = 2
     with pdfplumber.open(path) as pdf:
+        #Extract pdf data and preprocess df
         page = pdf.pages[0]
         image_path = helper.convert_pdf2img(path)
         tables = page.extract_table()
@@ -629,27 +631,35 @@ def parse_gant_chart_visual(path: str)-> list:
         df = df.replace('', None)
         df = df.dropna(how='all')
         df = df.dropna(axis='columns', how='all')
+        
+        
         activities = extract_activities(df)
         row_count = len(df.index)
-        if activities == None:
+        ## Ai Fallback if activity extraction failed completety or was insuffcient
+        if activities is None or len(activities) < row_count - 5:
             activities = json.loads(mistral.call_mistral_activities(image_path))
-        elif len(activities)< row_count - 5:
+        activities_with_loc, unfound_activites = localize_activities(activities, page)
+        ## Second Ai fallback if localization failed for most activities (semantically bad activity extraction)
+        if unfound_activites > len(activities)-tolerance:
             activities = json.loads(mistral.call_mistral_activities(image_path))
+            activities_with_loc, unfound_activites = localize_activities(activities, page)
+            
         time_line_rows= extract_timeline_rows(df)
         timeline = create_single_timeline(time_line_rows)
         column_count = len(df.columns)
         ai_extraction = False
+        
+        ## Ai fallback if timeline extraction was insufficient
         if len(timeline) < column_count-5 or len(timeline) < 4:
              timeline = json.loads(mistral.call_mistral_timeline(image_path,"no timeline", None))
              ai_extraction = True
         time_line_with_localization, unfound_timestamps = localize_timestamps(timeline, page)
-        if unfound_timestamps > len(timeline) - tolerance and ai_extraction== False:
+        
+        ## Second Ai fallback if localization failed for most timestamps (semantically bad timeline extraction)
+        if unfound_timestamps > len(timeline) - tolerance and not ai_extraction:
             timeline = json.loads(mistral.call_mistral_timeline(image_path, "badly extracted", None))
             time_line_with_localization, unfound_timestamps = localize_timestamps(timeline, page)
-        activities_with_loc, unfound_activites = localize_activities(activities, page)
-        if unfound_activites > len(activities)-tolerance:
-            activities = json.loads(mistral.call_mistral_activities(image_path))
-            activities_with_loc, unfound_activites = localize_activities(activities, page)
+            
         gantt_chart_bars = find_bars(boxes, activities_with_loc,2)
         success = check_bar_recognition(gantt_chart_bars)
         if not success:
@@ -663,8 +673,7 @@ def parse_full_ai(path):
     """
     Fully AI-driven parsing pipeline for complex Gantt charts. Checks for timeline
     presence via Mistral, extracts table data, and delegates to AI for interpretation.
-    If the image is too large, it splits it into chunks for processing. Cleans up
-    temporary image files after processing.
+    If the image is too large, it splits it into chunks for processing. 
 
     :param path: File path to the Gantt chart PDF.
     :return: AI-parsed result (typically JSON string of activities with dates).
@@ -673,8 +682,9 @@ def parse_full_ai(path):
         page = pdf.pages[0]
         image_path = helper.convert_pdf2img(path)
         check_for_timeline = json.loads(mistral.call_mistral_timeline(image_path, "check for timeline", None))
+        timeline = False
         if check_for_timeline['timeline_present'] == True:
-            option = "w timeline"
+            timeline = True
         tables = page.extract_table()
         df = pd.DataFrame(tables[1:], columns=tables[0])
         df = df.replace('', None)
@@ -682,14 +692,12 @@ def parse_full_ai(path):
         df = df.dropna(axis='columns', how='all')
         activities = extract_activities_for_full_ai(df)
         print(activities)
-        timeline = extract_timeline_rows(df)
-        print(timeline)
         if len(activities) != 0:
-            result=  mistral.call_mistral_timeline(image_path, "full ai w activities", activities)
+            result=  mistral.call_mistral_full_ai_parsing(image_path, "full ai w activities", activities, timeline)
         elif to_be_chunked(image_path):
-            result= parse_from_chunks(path,option)
+            result= parse_from_chunks(path,timeline)
         else:
-            result =  mistral.call_mistral_timeline(image_path, "full ai", None)
+            result =  mistral.call_mistral_full_ai_parsing(image_path, "full ai", None, timeline)
         try:
             if os.path.exists(image_path):
                 os.remove(image_path)
