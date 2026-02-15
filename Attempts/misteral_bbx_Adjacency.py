@@ -99,11 +99,9 @@ def save_results_to_file(results, output_file="room_detection_results_a1.json"):
 
 # --- Example Usage ---
 if __name__ == "__main__":
-    # Replace 'floorplan.jpg' with the path to your floor plan image.
+    
     result = call_mistral_for_room_detection("test4.png")
     
-    # Print the JSON result
     print(json.dumps(result, indent=2))
-    
-    # Optionally save to file
+
     save_results_to_file(result)
