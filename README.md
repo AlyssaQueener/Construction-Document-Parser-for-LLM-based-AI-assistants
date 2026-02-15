@@ -1,108 +1,184 @@
-# Construction Document Parser for LLM-based AI assistants
+# Construction Document Parser for LLM-based AI Assistants
 
-A focused toolkit that converts construction documents (floor plans, Gantt charts, BOQs) into structured, LLM-friendly JSON and provides an AI Q&A layer on top of parsed documents.
+> Turn construction documents — floor plans, Gantt charts, Bills of Quantities — into structured, LLM-friendly JSON, then ask questions about them with a built-in AI assistant.
 
-## Key features
-- Drawing parser: extract title block metadata, rooms (deterministic or AI), and full-plan hybrid extraction
-- Gantt parser: extract tasks, dates and dependencies from visual or tabular Gantt charts
-- Financial (BOQ) parser: extract tabular cost data and structure it for downstream use
-- AI Q&A endpoint: ask natural-language questions about parsed documents
-- Simple React frontend for uploads, preview and AI interaction
+## The Problem
 
----
+Construction projects generate vast amounts of digital information — architectural drawings, schedules, contracts, cost breakdowns — yet file structures are typically defined individually by each project participant. The result: inconsistent naming conventions, unstructured folder hierarchies, and heterogeneous data repositories where information is easy to create but hard to find. According to Autodesk (2018), construction professionals spend an average of **5.5 hours per week** just searching for project information. Unification attempts like corporate folder templates are often applied only partially and break down as projects evolve, leading to information loss, version confusion, and costly retrieval errors.
 
-## Quick start (local)
-Prereqs: Python 3.9+ and Node.js (recommended 16+)
+## What This Project Does
 
-1. Clone the repo
+This toolkit addresses the retrieval and structuring side of that problem. It takes the document types that construction teams work with daily — floor plans, Gantt charts, Bills of Quantities — and converts them into structured, queryable JSON using a combination of deterministic extraction, OCR, and LLM-based parsing. A built-in AI Q&A layer then lets users ask natural-language questions about the parsed data, removing the need to manually dig through files.
 
-   git clone <repo-url>
-   cd Construction-Document-Parser-for-LLM-based-AI-assistants
+```
+┌──────────────┐     ┌─────────────────┐     ┌──────────────┐     ┌────────────┐
+│  PDF / Image │ ──▶ │  Parser Module  │ ──▶ │  Structured  │ ──▶ │  AI Q&A /  │
+│  (upload)    │     │  (OCR + AI)     │     │  JSON        │     │  Chat UI   │
+└──────────────┘     └─────────────────┘     └──────────────┘     └────────────┘
+```
 
-2. Backend (FastAPI)
+## Tech Stack
 
-   - Create virtualenv and install dependencies
-     python -m venv .venv
-     .venv\Scripts\activate    # Windows
-     source .venv/bin/activate  # macOS / Linux
-     pip install -r requirements.txt
+**Backend:** Python 3.9+, FastAPI, Mistral AI, OpenAI API, Tesseract OCR, pdf2image, Pillow  
+**Frontend:** React, Node.js 16+  
+**Deployment:** Docker-ready, tested on Render (free tier)
 
-   - Run locally
-     uvicorn main:app --reload --port 8000
+## Key Features
 
-   The API docs will be available at http://127.0.0.1:8000/docs
+**Drawing Parser** — Extract title block metadata, room information (deterministic or AI-driven), and full-plan hybrid extraction from architectural floor plans.
 
-3. Frontend (React)
+**Gantt Parser** — Parse tasks, dates, and dependencies from visual or tabular Gantt charts. Three strategies: rule-based tabular extraction, hybrid visual parsing, and full AI-driven extraction with Mistral AI fallback.
 
-   cd frontend
-   npm install
-   npm start
+**Financial (BOQ) Parser** — Extract and structure tabular cost data from Bills of Quantities for downstream analysis.
 
-   Open http://localhost:3000 and use the UI to upload files and try the parsers.
+**AI Q&A** — Ask natural-language questions about any parsed document through the REST API or the integrated chat interface.
 
----
+**Validation Module** — LLM-as-a-judge validation prompts and test data for evaluating each parser's output quality independently.
 
-## API (examples)
-All file uploads use multipart/form-data and return a standardized JSON response with fields: `input_format`, `is_extraction_succesful`, `confident_value`, `extraction_method`, `result`.
+## Quick Start (Local)
 
-- Parse drawing (title block / rooms / full plan)
+### Prerequisites
 
-  POST /drawing_parser/{content_type}/
-  content_type: `titleblock-hybrid`, `rooms-deterministic`, `rooms-ai`, `full-plan-ai`
-  Example:
-    curl -X POST "http://localhost:8000/drawing_parser/titleblock-hybrid/" -F "file=@floorplan.pdf"
+- Python 3.9+
+- Node.js 16+
+- Tesseract OCR installed and on your `PATH`
 
-- Parse Gantt chart
+### 1. Clone the repo
 
-  POST /gantt_parser/{chart_format}
-  chart_format: `visual`, `tabular`, `full_ai`
-  Example:
-    curl -X POST "http://localhost:8000/gantt_parser/visual" -F "file=@gantt.pdf"
+```bash
+git clone <repo-url>
+cd Construction-Document-Parser-for-LLM-based-AI-assistants
+```
 
-- Parse Bill of Quantities (BOQ)
+### 2. Backend (FastAPI)
 
-  POST /financial_parser/
-  Example:
-    curl -X POST "http://localhost:8000/financial_parser/" -F "file=@boq.pdf"
+```bash
+python -m venv .venv
+source .venv/bin/activate      # macOS / Linux
+# .venv\Scripts\activate       # Windows
 
-- Ask AI about a parsed document
+pip install -r requirements.txt
+uvicorn main:app --reload --port 8000
+```
 
-  POST /ask_ai/
-  Body (application/json): { "question": "...", "document_data": <parsed-result-object> }
+API docs are available at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs).
 
----
+### 3. Frontend (React)
 
-## Development notes
-- The backend is a FastAPI app exposed in `main.py` and returns a consistent `Response` model (see `main.py`).
-- Set OPENAI credentials via env var `OPENAI_API_KEY` when running the backend in production. (Currently the repo contains a hardcoded API key — replace with env var before deploying.)
-- Large PDF/image uploads may take several seconds to parse; Gantt/BOQ parsing expects PDFs.
+```bash
+cd frontend
+npm install
+npm start
+```
 
----
+Open [http://localhost:3000](http://localhost:3000) to upload files and interact with the parsers.
 
-## Project structure (high level)
-- main.py — FastAPI application and endpoints
-- src/ — parser modules (gantt2data, plan2data, boq2data)
-- frontend/ — React UI
+## API Reference
 
----
+All file uploads use `multipart/form-data`. Every endpoint returns a standardized JSON response:
 
-## Contributing
-- Open an issue to discuss larger changes before starting work.
-- Fork, create a feature branch, add tests where appropriate, then open a PR.
+```json
+{
+  "input_format": "pdf",
+  "is_extraction_successful": true,
+  "confidence_value": 0.92,
+  "extraction_method": "hybrid",
+  "result": { ... }
+}
+```
 
----
+### Drawing Parser
 
-## Authors / Contact
-- Alyssa, Bahar, Rebekka (see project frontend footer for links)
+```
+POST /drawing_parser/{content_type}/
+```
 
----
+| `content_type` | Description |
+|---|---|
+| `titleblock-hybrid` | Extract title block metadata using OCR + AI |
+| `rooms-deterministic` | Rule-based room extraction |
+| `rooms-ai` | AI-driven room extraction |
+| `full-plan-ai` | Full architectural plan analysis |
+
+```bash
+curl -X POST "http://localhost:8000/drawing_parser/titleblock-hybrid/" \
+  -F "file=@floorplan.pdf"
+```
+
+### Gantt Parser
+
+```
+POST /gantt_parser/{chart_format}
+```
+
+| `chart_format` | Description |
+|---|---|
+| `visual` | Image-based Gantt chart parsing |
+| `tabular` | Table-based Gantt chart parsing |
+| `full_ai` | End-to-end AI extraction |
+
+```bash
+curl -X POST "http://localhost:8000/gantt_parser/visual" \
+  -F "file=@gantt.pdf"
+```
+
+### Financial (BOQ) Parser
+
+```bash
+curl -X POST "http://localhost:8000/financial_parser/" \
+  -F "file=@boq.pdf"
+```
+
+### AI Q&A
+
+```bash
+curl -X POST "http://localhost:8000/ask_ai/" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "question": "What is the total project duration?",
+    "document_data": { ... }
+  }'
+```
+
+## Validation
+
+The validation module provides LLM-as-a-judge prompts and reference test data for evaluating parser output quality. Each parser has its own validation set so you can benchmark accuracy independently.
+
+See `src/validation/` for prompt templates and test fixtures.
+
+## Project Structure
+
+```
+├── main.py                  # FastAPI app, route definitions, Response model
+├── requirements.txt
+├── src/
+│   ├── plan2data/           # Drawing / floor plan parser modules
+│   ├── gantt2data/          # Gantt chart parser modules
+│   ├── boq2data/            # Bill of Quantities parser modules
+│   └── validation/          # LLM-as-a-judge prompts and test data
+├── frontend/
+│   ├── src/                 # React components, chat UI
+│   └── public/
+└── README.md
+```
+
+## Development Notes
+
+- Large PDF/image uploads may take several seconds; parsing is CPU- and API-bound.
+- Gantt and BOQ parsers expect PDF input. The drawing parser also accepts common image formats.
+- When OCR confidence is low, the system falls back to AI-based extraction automatically.
+
+## Deployment
+
+The project has been tested on Render's free tier. Note that free-tier instances spin down after inactivity, so expect cold-start delays of ~30–50 seconds on the first request. The React frontend includes a loading state to handle this gracefully.
+
+For Docker-based deployment, see the `Dockerfile` in dockerization branch
+
+
+## Authors
+
+Alyssa, Bahar, Rebekka — see the application footer for contact links.
 
 ## License
-No license file included — add a LICENSE (e.g., MIT) if you intend to open-source this project.
 
----
-
-If you'd like, I can also:
-- Add an example Postman collection or curl scripts for CI tests
-- Add a short developer guide for adding new parser modules
-
+No license file is currently included. If you intend to open-source this project, consider adding an [MIT](https://choosealicense.com/licenses/mit/) or [Apache 2.0](https://choosealicense.com/licenses/apache-2.0/) license.

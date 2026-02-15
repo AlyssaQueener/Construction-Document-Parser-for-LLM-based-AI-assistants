@@ -5,7 +5,7 @@ from mistralai.client import MistralClient
 
 ## Retrieve the API key from environment variables
 #api_key = os.environ["MISTRAL_API_KEY"]
-api_key = "mVTgI1ELSkn5Q28v2smHK0O4E02nMaxG"
+api_key = "your api key"
 import json
 from mistralai import Mistral
 from typing import Any, Dict

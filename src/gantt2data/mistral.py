@@ -21,7 +21,7 @@ import base64
 # Mistral client configuration
 # ---------------------------------------------------------------------------
 model = "mistral-small-2506"
-api_key = "I4sokIRRBLZqZW3tSdmMhHBtCgnmwNNc"  # TODO: move to env variable
+api_key = "Your Api Key"  
 client = Mistral(api_key=api_key)
 
 

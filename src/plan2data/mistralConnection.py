@@ -11,7 +11,7 @@ import time
 
 # Mistral API configuration
 model = "mistral-small-2503"  # Model version for API calls
-api_key = "5fhN3mCTNSd2MV5dJLcLdhBA90BUoHSv" #mVTgI1ELSkn5Q28v2smHK0O4E02nMaxG"  # 
+api_key = "your api key" 
 client = Mistral(api_key=api_key)
 
 
