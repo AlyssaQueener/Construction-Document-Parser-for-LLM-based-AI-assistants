@@ -29,7 +29,9 @@ from fastapi import Request
 # ========================================
 # OPENAI API KEY
 # ========================================
-OPENAI_API_KEY = "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"  
+import os
+
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 openai_client = OpenAI(api_key=OPENAI_API_KEY)
 
 class Response(BaseModel):

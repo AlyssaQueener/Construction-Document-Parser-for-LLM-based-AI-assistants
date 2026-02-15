@@ -175,28 +175,3 @@ Begin your response with {{
 """
     return prompt
 
-"""def call_gemini_return_json(prompt):
-    #api_key = os.environ["GOOGLE_API_KEY"]
-    api_key = "AIzaSyD22tv_jw44Cnqp3J_9J-_1s85e5epop9s"
-    genai.configure(api_key=api_key)
-    generation_config = {
-        "temperature": 0.0,  # Set temperature to 0 for deterministic output
-        # You can add other parameters here if needed, e.g., "top_p", "top_k", "max_output_tokens"
-    }
-    model = genai.GenerativeModel('gemini-2.5-flash',generation_config=generation_config)
-     # Define the generation configuration
-
-    response = model.generate_content(prompt)
-    raw_text_content = response.text # so that the ouput is just the 
-        
-     # Now apply string methods to the raw_text_content
-    cleaned_response = raw_text_content.strip().removeprefix('```json\n').removesuffix('\n```')
-    
-    try:
-        # Attempt to parse the response as JSON
-        import json
-        return json.loads(cleaned_response)
-    except json.JSONDecodeError:
-        return {"error": "Response is not valid JSON", "raw_response": cleaned_response.text}"""
-
-
