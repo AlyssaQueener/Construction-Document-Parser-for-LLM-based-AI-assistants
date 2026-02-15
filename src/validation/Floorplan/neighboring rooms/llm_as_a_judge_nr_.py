@@ -4,7 +4,7 @@ from mistralai import Mistral
 
 # Configuration for Mistral AI model
 model = "mistral-small-2503"
-api_key = "mVTgI1ELSkn5Q28v2smHK0O4E02nMaxG"
+api_key = "your api key"
 client = Mistral(api_key=api_key)
 
 def create_prompt_neighboring_rooms(ground_truth, parser_result):

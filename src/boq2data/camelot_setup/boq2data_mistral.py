@@ -9,7 +9,7 @@ from mistralai import Mistral
 #api_key = os.environ["MISTRAL_API_KEY"]
 
 model = "mistral-small-2503"
-api_key_r = "bXBteq8WKzIBDINDeBy4ZmHc9QdAMZMQ"
+api_key_r = "your api key"
 client = Mistral(api_key=api_key_r)
 def call_mistral_boq(path):
     """

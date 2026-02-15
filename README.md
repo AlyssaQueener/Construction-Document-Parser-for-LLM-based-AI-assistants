@@ -1,51 +1,184 @@
-# Construction Document Parser for LLM-based AI assistants
+# Construction Document Parser for LLM-based AI Assistants
 
-# Editing this README
+> Turn construction documents — floor plans, Gantt charts, Bills of Quantities — into structured, LLM-friendly JSON, then ask questions about them with a built-in AI assistant.
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+## The Problem
 
-## Suggestions for a good README
+Construction projects generate vast amounts of digital information — architectural drawings, schedules, contracts, cost breakdowns — yet file structures are typically defined individually by each project participant. The result: inconsistent naming conventions, unstructured folder hierarchies, and heterogeneous data repositories where information is easy to create but hard to find. According to Autodesk (2018), construction professionals spend an average of **5.5 hours per week** just searching for project information. Unification attempts like corporate folder templates are often applied only partially and break down as projects evolve, leading to information loss, version confusion, and costly retrieval errors.
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+## What This Project Does
 
-## Name
-Choose a self-explaining name for your project.
+This toolkit addresses the retrieval and structuring side of that problem. It takes the document types that construction teams work with daily — floor plans, Gantt charts, Bills of Quantities — and converts them into structured, queryable JSON using a combination of deterministic extraction, OCR, and LLM-based parsing. A built-in AI Q&A layer then lets users ask natural-language questions about the parsed data, removing the need to manually dig through files.
 
-## Description
-This project provides specialized parser to transform various types of construction documentation into
-structured, LLM-friendly formats, enabling sophisticated analysis and intelligent interaction with these
-documents:
-- Program Parser: Processing of Gantt Diagrams
-- Drawing Parser: Processing floor plan and section views
-- Financial Parser: Processing Bills of Quantities, claims and cash flow models
+```
+┌──────────────┐     ┌─────────────────┐     ┌──────────────┐     ┌────────────┐
+│  PDF / Image │ ──▶ │  Parser Module  │ ──▶ │  Structured  │ ──▶ │  AI Q&A /  │
+│  (upload)    │     │  (OCR + AI)     │     │  JSON        │     │  Chat UI   │
+└──────────────┘     └─────────────────┘     └──────────────┘     └────────────┘
+```
 
-## Installation and Requirements
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection
+## Tech Stack
 
-- Python v3
-- Javascript
+**Backend:** Python 3.9+, FastAPI, Mistral AI, OpenAI API, Tesseract OCR, pdf2image, Pillow  
+**Frontend:** React, Node.js 16+  
+**Deployment:** Docker-ready, tested on Render (free tier)
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+## Key Features
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+**Drawing Parser** — Extract title block metadata, room information (deterministic or AI-driven), and full-plan hybrid extraction from architectural floor plans.
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+**Gantt Parser** — Parse tasks, dates, and dependencies from visual or tabular Gantt charts. Three strategies: rule-based tabular extraction, hybrid visual parsing, and full AI-driven extraction with Mistral AI fallback.
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+**Financial (BOQ) Parser** — Extract and structure tabular cost data from Bills of Quantities for downstream analysis.
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+**AI Q&A** — Ask natural-language questions about any parsed document through the REST API or the integrated chat interface.
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+**Validation Module** — LLM-as-a-judge validation prompts and test data for evaluating each parser's output quality independently.
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+## Quick Start (Local)
+
+### Prerequisites
+
+- Python 3.9+
+- Node.js 16+
+- Tesseract OCR installed and on your `PATH`
+
+### 1. Clone the repo
+
+```bash
+git clone <repo-url>
+cd Construction-Document-Parser-for-LLM-based-AI-assistants
+```
+
+### 2. Backend (FastAPI)
+
+```bash
+python -m venv .venv
+source .venv/bin/activate      # macOS / Linux
+# .venv\Scripts\activate       # Windows
+
+pip install -r requirements.txt
+uvicorn main:app --reload --port 8000
+```
+
+API docs are available at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs).
+
+### 3. Frontend (React)
+
+```bash
+cd frontend
+npm install
+npm start
+```
+
+Open [http://localhost:3000](http://localhost:3000) to upload files and interact with the parsers.
+
+## API Reference
+
+All file uploads use `multipart/form-data`. Every endpoint returns a standardized JSON response:
+
+```json
+{
+  "input_format": "pdf",
+  "is_extraction_successful": true,
+  "confidence_value": 0.92,
+  "extraction_method": "hybrid",
+  "result": { ... }
+}
+```
+
+### Drawing Parser
+
+```
+POST /drawing_parser/{content_type}/
+```
+
+| `content_type` | Description |
+|---|---|
+| `titleblock-hybrid` | Extract title block metadata using OCR + AI |
+| `rooms-deterministic` | Rule-based room extraction |
+| `rooms-ai` | AI-driven room extraction |
+| `full-plan-ai` | Full architectural plan analysis |
+
+```bash
+curl -X POST "http://localhost:8000/drawing_parser/titleblock-hybrid/" \
+  -F "file=@floorplan.pdf"
+```
+
+### Gantt Parser
+
+```
+POST /gantt_parser/{chart_format}
+```
+
+| `chart_format` | Description |
+|---|---|
+| `visual` | Image-based Gantt chart parsing |
+| `tabular` | Table-based Gantt chart parsing |
+| `full_ai` | End-to-end AI extraction |
+
+```bash
+curl -X POST "http://localhost:8000/gantt_parser/visual" \
+  -F "file=@gantt.pdf"
+```
+
+### Financial (BOQ) Parser
+
+```bash
+curl -X POST "http://localhost:8000/financial_parser/" \
+  -F "file=@boq.pdf"
+```
+
+### AI Q&A
+
+```bash
+curl -X POST "http://localhost:8000/ask_ai/" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "question": "What is the total project duration?",
+    "document_data": { ... }
+  }'
+```
+
+## Validation
+
+The validation module provides LLM-as-a-judge prompts and reference test data for evaluating parser output quality. Each parser has its own validation set so you can benchmark accuracy independently.
+
+See `src/validation/` for prompt templates and test fixtures.
+
+## Project Structure
+
+```
+├── main.py                  # FastAPI app, route definitions, Response model
+├── requirements.txt
+├── src/
+│   ├── plan2data/           # Drawing / floor plan parser modules
+│   ├── gantt2data/          # Gantt chart parser modules
+│   ├── boq2data/            # Bill of Quantities parser modules
+│   └── validation/          # LLM-as-a-judge prompts and test data
+├── frontend/
+│   ├── src/                 # React components, chat UI
+│   └── public/
+└── README.md
+```
+
+## Development Notes
+
+- Large PDF/image uploads may take several seconds; parsing is CPU- and API-bound.
+- Gantt and BOQ parsers expect PDF input. The drawing parser also accepts common image formats.
+- When OCR confidence is low, the system falls back to AI-based extraction automatically.
+
+## Deployment
+
+The project has been tested on Render's free tier. Note that free-tier instances spin down after inactivity, so expect cold-start delays of ~30–50 seconds on the first request. The React frontend includes a loading state to handle this gracefully.
+
+For Docker-based deployment, see the `Dockerfile` in dockerization branch
+
+
+## Authors
+
+Alyssa, Bahar, Rebekka — see the application footer for contact links.
 
 ## License
-For open source projects, say how it is licensed.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+No license file is currently included. If you intend to open-source this project, consider adding an [MIT](https://choosealicense.com/licenses/mit/) or [Apache 2.0](https://choosealicense.com/licenses/apache-2.0/) license.
