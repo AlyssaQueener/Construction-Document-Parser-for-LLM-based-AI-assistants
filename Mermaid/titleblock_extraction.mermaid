@@ -1,0 +1,46 @@
+flowchart TD
+    A["🖼️ Input: Floor Plan Image"] --> B["get_title_block_info(path)"]
+
+    B --> C["extract_title_block_info(path)
+    <i>OCR-first pipeline</i>"]
+
+    C --> D["extract_text_titleblock(image_path)
+    <i>extractionLogictitleBlock.py</i>"]
+
+    D --> D1["Load image with OpenCV
+    Convert BGR → RGB"]
+    D1 --> D2["First OCR pass: pytesseract.image_to_data()
+    Get word-level bounding boxes"]
+    D2 --> D3["extract_right_side_titleblock()
+    Filter text boxes in right 30% of image
+    Compute enclosing bounding rectangle"]
+    D3 --> D4["Crop image to title block region"]
+    D4 --> D5["Second OCR pass: pytesseract.image_to_string()
+    Extract focused text from cropped region"]
+    D5 --> E["Mistral: call_mistral_for_content_extraction()
+    Structure raw OCR text into key-value pairs"]
+
+    E --> F{"Output empty
+    or confidence < 0.6?"}
+
+    F -- "No → confident result" --> G["✅ Return structured title block dict"]
+
+    F -- "Yes → fallback needed" --> H["extract_title_block_info_with_ai(path)
+    <i>AI-direct pipeline</i>"]
+
+    H --> I["Mistral Vision:
+    call_mistral_for_titleblock_extraction_from_image()
+    Extract in one step"]
+
+    I --> J["✅ Return structured title block dict"]
+
+    D1 -. "cv2.error / TesseractError" .-> K["OCR pipeline returns None"]
+    K --> H
+
+    style A fill:#4A90D9,color:#fff,stroke:#357ABD
+    style G fill:#27AE60,color:#fff,stroke:#1E8449
+    style J fill:#27AE60,color:#fff,stroke:#1E8449
+    style F fill:#F39C12,color:#fff,stroke:#D68910
+    style K fill:#E74C3C,color:#fff,stroke:#C0392B
+    style H fill:#8E44AD,color:#fff,stroke:#6C3483
+    style I fill:#8E44AD,color:#fff,stroke:#6C3483
