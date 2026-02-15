@@ -2,6 +2,17 @@ import { Card, Button, Select, Label, Alert, Spinner, Tabs  } from 'flowbite-rea
 import axios from 'axios';
 import { useState, useEffect } from 'react';  
 
+/**
+ * Main application component for the Construction Document Parser UI.
+ *
+ * Responsibilities:
+ * - Provide upload interfaces for floor plans, Gantt charts, and BOQs
+ * - Submit files to backend parsing endpoints and display parsed JSON
+ * - Offer an AI Q&A widget that queries parsed document data
+ *
+ * @component
+ * @returns {JSX.Element} The rendered application
+ */
 function App() {
   const [file, setFile] = useState(null);
   const [chartFormat, setChartFormat] = useState('visual');
@@ -17,6 +28,14 @@ function App() {
 
   // Wake up both backend servers on component mount
 useEffect(() => {
+  /**
+   * Send lightweight "wake-up" GET requests to hosted backend services when
+   * the component mounts to reduce first-request latency on sleeping dynos.
+   *
+   * @async
+   * @private
+   * @returns {Promise<void>}
+   */
   const wakeUpServers = async () => {
     const servers = [
       {
@@ -49,6 +68,15 @@ useEffect(() => {
   wakeUpServers();
 }, []);
 
+  /**
+   * Handle file selection from input elements.
+   *
+   * Clears previous results/errors and stores the selected File in state so
+   * it can be uploaded to the backend.
+   *
+   * @param {React.ChangeEvent<HTMLInputElement>} e - file input change event
+   * @returns {void}
+   */
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
     setResult(null);
@@ -56,6 +84,19 @@ useEffect(() => {
     setAiAnswer('');
   };
 
+  /**
+   * Upload the currently selected `file` to the backend and store the parsed
+   * response in state.
+   *
+   * Behavior:
+   * - Chooses a full URL based on the provided `endpoint` and selected UI options
+   * - Sends the file as multipart/form-data
+   * - On success sets `result`; on failure sets a user-friendly `error`
+   *
+   * @async
+   * @param {string} endpoint - path suffix for the parser endpoint (e.g. '/drawing_parser/')
+   * @returns {Promise<void>}
+   */
   const handleSubmit = async (endpoint) => {
     if (!file) {
       setError('Please select a file first');
@@ -106,6 +147,11 @@ useEffect(() => {
       setLoading(false);
     }
   };
+  /**
+   * Metadata for the Gantt chart parser UI describing each available mode.
+   * Keys correspond to `chartFormat` options used in the select control.
+   * @type {{[key: string]: {title: string, desc: string}}}
+   */
   const ganttInfo = {
     visual: {
       title: "Visual-Deterministic",
@@ -122,7 +168,16 @@ useEffect(() => {
     
   };
 
-  // AI Chatbot Function
+  /**
+   * Send a user question and the parsed document to the backend AI endpoint,
+   * then store the returned answer in `aiAnswer`.
+   *
+   * - No operation if there is no parsed `result` or the question is empty.
+   * - Toggles `aiLoading` during the request.
+   *
+   * @async
+   * @returns {Promise<void>}
+   */
   const askAI = async () => {
     if (!result || !aiQuestion.trim()) return;
     
