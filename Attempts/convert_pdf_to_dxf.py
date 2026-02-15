@@ -614,7 +614,7 @@ def build_line_graph(entities, tol=1.0):
 
 if __name__ == '__main__':
     # Configuration
-    pdf_path = "examples/FloorplansAndSectionViews/bemasster-grundriss-plankopf.pdf"
+    pdf_path = "examples/FloorplansAndSectionViews/Simple Floorplan/01_Simple.pdf"
     # pdf_path = "examples/FloorplansAndSectionViews/BasicTestPlan.pdf"
     
     output_path = "converted_output_with_text_and_curves.dxf"

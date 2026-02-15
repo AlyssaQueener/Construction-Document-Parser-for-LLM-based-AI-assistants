@@ -418,7 +418,7 @@ def process_floorplan(filename, lang='deu', show_visualization=True):
 
 # Main execution
 if __name__ == "__main__":
-    filename = 'examples/FloorplansAndSectionViews/bemasster-grundriss-plankopf_page1.png'
+    filename = 'examples/FloorplansAndSectionViews/Cluttered Plan/Cluttered 03_page1.png'
     
     try:
         results = process_floorplan(filename, lang='deu', show_visualization=True)
