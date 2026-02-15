@@ -1,51 +1,108 @@
 # Construction Document Parser for LLM-based AI assistants
 
-# Editing this README
+A focused toolkit that converts construction documents (floor plans, Gantt charts, BOQs) into structured, LLM-friendly JSON and provides an AI Q&A layer on top of parsed documents.
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+## Key features
+- Drawing parser: extract title block metadata, rooms (deterministic or AI), and full-plan hybrid extraction
+- Gantt parser: extract tasks, dates and dependencies from visual or tabular Gantt charts
+- Financial (BOQ) parser: extract tabular cost data and structure it for downstream use
+- AI Q&A endpoint: ask natural-language questions about parsed documents
+- Simple React frontend for uploads, preview and AI interaction
 
-## Suggestions for a good README
+---
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+## Quick start (local)
+Prereqs: Python 3.9+ and Node.js (recommended 16+)
 
-## Name
-Choose a self-explaining name for your project.
+1. Clone the repo
 
-## Description
-This project provides specialized parser to transform various types of construction documentation into
-structured, LLM-friendly formats, enabling sophisticated analysis and intelligent interaction with these
-documents:
-- Program Parser: Processing of Gantt Diagrams
-- Drawing Parser: Processing floor plan and section views
-- Financial Parser: Processing Bills of Quantities, claims and cash flow models
+   git clone <repo-url>
+   cd Construction-Document-Parser-for-LLM-based-AI-assistants
 
-## Installation and Requirements
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection
+2. Backend (FastAPI)
 
-- Python v3
-- Javascript
+   - Create virtualenv and install dependencies
+     python -m venv .venv
+     .venv\Scripts\activate    # Windows
+     source .venv/bin/activate  # macOS / Linux
+     pip install -r requirements.txt
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+   - Run locally
+     uvicorn main:app --reload --port 8000
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+   The API docs will be available at http://127.0.0.1:8000/docs
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+3. Frontend (React)
+
+   cd frontend
+   npm install
+   npm start
+
+   Open http://localhost:3000 and use the UI to upload files and try the parsers.
+
+---
+
+## API (examples)
+All file uploads use multipart/form-data and return a standardized JSON response with fields: `input_format`, `is_extraction_succesful`, `confident_value`, `extraction_method`, `result`.
+
+- Parse drawing (title block / rooms / full plan)
+
+  POST /drawing_parser/{content_type}/
+  content_type: `titleblock-hybrid`, `rooms-deterministic`, `rooms-ai`, `full-plan-ai`
+  Example:
+    curl -X POST "http://localhost:8000/drawing_parser/titleblock-hybrid/" -F "file=@floorplan.pdf"
+
+- Parse Gantt chart
+
+  POST /gantt_parser/{chart_format}
+  chart_format: `visual`, `tabular`, `full_ai`
+  Example:
+    curl -X POST "http://localhost:8000/gantt_parser/visual" -F "file=@gantt.pdf"
+
+- Parse Bill of Quantities (BOQ)
+
+  POST /financial_parser/
+  Example:
+    curl -X POST "http://localhost:8000/financial_parser/" -F "file=@boq.pdf"
+
+- Ask AI about a parsed document
+
+  POST /ask_ai/
+  Body (application/json): { "question": "...", "document_data": <parsed-result-object> }
+
+---
+
+## Development notes
+- The backend is a FastAPI app exposed in `main.py` and returns a consistent `Response` model (see `main.py`).
+- Set OPENAI credentials via env var `OPENAI_API_KEY` when running the backend in production. (Currently the repo contains a hardcoded API key — replace with env var before deploying.)
+- Large PDF/image uploads may take several seconds to parse; Gantt/BOQ parsing expects PDFs.
+
+---
+
+## Project structure (high level)
+- main.py — FastAPI application and endpoints
+- src/ — parser modules (gantt2data, plan2data, boq2data)
+- frontend/ — React UI
+
+---
 
 ## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+- Open an issue to discuss larger changes before starting work.
+- Fork, create a feature branch, add tests where appropriate, then open a PR.
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+---
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+## Authors / Contact
+- Alyssa, Bahar, Rebekka (see project frontend footer for links)
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+---
 
 ## License
-For open source projects, say how it is licensed.
+No license file included — add a LICENSE (e.g., MIT) if you intend to open-source this project.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+---
+
+If you'd like, I can also:
+- Add an example Postman collection or curl scripts for CI tests
+- Add a short developer guide for adding new parser modules
+
