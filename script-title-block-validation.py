@@ -7,29 +7,6 @@ path2 = "Cluttered 02_page1.png"
 path3 = "Cluttered 03_page1.png"
 
 
-
-
-
-#print("Cluttered 1")
-#print("Without AI")
-#print(parser.extract_title_block_info(path1))
-#print("With AI")
-#print(parser.extract_title_block_info_with_ai(path1))
-
-#print("Cluttered 2")
-#print("Without AI")
-#print(parser.extract_title_block_info(path2))
-#print("With AI")
-#print(parser.extract_title_block_info_with_ai(path2))
-
-
-#print("Cluttered 3")
-#print("Without AI")
-#print(parser.extract_title_block_info(path3))
-#print("With AI")
-#print(parser.extract_title_block_info_with_ai(path3))
-
-
 ########Validation#######
 
 ##GroundTruths
@@ -51,8 +28,7 @@ ai_path3 = "src/validation/Floorplan/neighboring rooms/Cluttered Floorplans/pars
 
 
 
-#Clutterplan 1
-
+## Example usage validation for titleblock extraction (llm as a judge)
 print("Clutterplan ")
 print("Hybrid Parser Validation Result:")
 print(llm_judge.llm_as_a_judge_titleblock(g_path3,hybrid_path3))
