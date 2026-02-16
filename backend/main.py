@@ -1,10 +1,5 @@
-import os
 from fastapi.middleware.cors import CORSMiddleware
 import gc
-
-
-os.environ['OMP_NUM_THREADS'] = '1'  # Limit OpenCV threads
-os.environ['OPENBLAS_NUM_THREADS'] = '1' 
 from fastapi import FastAPI, UploadFile, HTTPException
 from PIL import Image 
 import src.plan2data.titleBlockInfo as floorplan_parser
@@ -15,24 +10,26 @@ import src.boq2data.camelot_setup.boq2data_gemini as boq
 import src.plan2data.voronoi_functions as vor
 import src.plan2data.full_plan_ai as full
 import src.plan2data.helper as helper
-#from voronoi_functions import*
 from pydantic import BaseModel
 from enum import Enum
-# run fastapi dev main.py
-#     server   Server started at http://127.0.0.1:8000  server   Documentation at http://127.0.0.1:8000/docs
 from openai import OpenAI
 import json
 from fastapi import Request
 
 
+# ========================================
+# run fastapi dev main.py -> Documentation at http://127.0.0.1:8000/docs
+# ========================================
 
 # ========================================
 # OPENAI API KEY
 # ========================================
 import os
-
+os.environ['OMP_NUM_THREADS'] = '1'  # Limit OpenCV threads
+os.environ['OPENBLAS_NUM_THREADS'] = '1' 
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 openai_client = OpenAI(api_key=OPENAI_API_KEY)
+
 
 class Response(BaseModel):
     input_format: str
@@ -53,33 +50,101 @@ class ChartFormat(str, Enum):
     full_ai= "full ai"
 
 
+# ========================================
+# TAG METADATA (sidebar grouping in /docs)
+# ========================================
+
+tags_metadata = [
+    {
+        "name": "Health",
+        "description": "Server status and health checks.",
+    },
+    {
+        "name": "Program Parser",
+        "description": (
+            "Upload a **Gantt chart PDF** and receive structured JSON with tasks, durations, "
+            "dependencies, and milestones.\n\n"
+            "**Parsing strategies:**\n\n"
+            "| Strategy | Best For |\n"
+            "|----------|----------|\n"
+            "| `visual` | Image-heavy charts — uses computer-vision bar detection + OCR |\n"
+            "| `tabular` | Charts with clear table grids — uses Camelot table extraction |\n"
+            "| `full ai` | Non-standard layouts — end-to-end multimodal LLM extraction |"
+        ),
+    },
+    {
+        "name": "Financial Parser",
+        "description": (
+            "Upload a **Bill of Quantities (BoQ) PDF** and receive structured JSON with "
+            "line items, quantities, units, unit prices, and totals. "
+            "Uses AI-assisted extraction with Mistral."
+        ),
+    },
+    {
+        "name": "Drawing Parser",
+        "description": (
+            "Upload **architectural floor plans** (PDF or image) and extract structured data.\n\n"
+            "| Mode | Input | Description |\n"
+            "|------|-------|-------------|\n"
+            "| `titleblock-hybrid` | PDF / Image | Title-block metadata (project name, date, scale, etc.) via hybrid OCR + AI |\n"
+            "| `rooms-deterministic` | PDF | Room detection and adjacency via Voronoi tessellation (fast, no AI) |\n"
+            "| `rooms-ai` | PDF / Image | AI-based room detection with neighbouring-room analysis |\n"
+            "| `full-plan-ai` | PDF | Full extraction combining Voronoi geometry with AI post-processing |"
+        ),
+    },
+    {
+        "name": "AI Chatbot",
+        "description": (
+            "Ask natural-language questions about previously parsed document data. "
+            "Send the parsed JSON together with your question and receive an AI-generated answer "
+            "(powered by GPT-4o-mini)."
+        ),
+    },
+]
+
+
 description = """
-This API helps you to convert your Construction Document into structured JSON files, ideal for further applications and LLM usage.
+## Overview
 
-## Financial Parser
+**ConDoc Parser** converts construction documents into structured JSON, 
+ready for downstream applications and LLM-based AI assistants.
 
-upload and parse **Bill of Quantities**.
+**Workflow:** Upload a file → choose a parsing strategy → receive clean, structured data.
 
-## Program Parser
+### Supported Document Types
 
-upload and parse **Gantt Charts**.
+| Category | Documents | Accepted Formats |
+|----------|-----------|------------------|
+| **Financial** | Bill of Quantities (BoQ) | PDF |
+| **Program** | Gantt Charts | PDF |
+| **Drawings** | Architectural Floor Plans | PDF, JPEG, PNG |
 
-Please use the parameter chartFormat
+### Quick Start
 
-"chartFormat (string) – Specifies the layout of the Gantt chart. 
-"visual": for charts where activity timing must be inferred from bar positions (with activities on the left and a timeline above)
-"tabular": for charts that include a structured table with explicit start, end, and duration fields
+1. Pick the parser endpoint for your document type.
+2. `POST` your file as `multipart/form-data`.
+3. Receive a JSON response with extracted data, extraction method, and confidence score.
+4. *(Optional)* Send the parsed result to `/ask_ai/` with a question for AI-powered insights.
 
-## Drawing Parser
+---
 
-upload and parse **Floor Plans**.
+*Developed as part of the ITBE Master's programme at TU München.*
 """
 
 
 
 app = FastAPI(
-    title="Construction Document Parser for LLM based AI assistants",
-    description=description
+    title="ConDoc Parser — Construction Document Parser API",
+    description=description,
+    version="1.0.0",
+    openapi_tags=tags_metadata,
+    contact={
+        "name": "ConDoc Parser Team",
+        "url": "https://construction-doc-parser.onrender.com",
+    },
+    license_info={
+        "name": "MIT",
+    },
 )
 
 
@@ -94,13 +159,51 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/")
+@app.get(
+    "/",
+    tags=["Health"],
+    summary="Health check",
+    description="Returns basic server info. Use this to verify the API is running.",
+)
 async def hello_world():
     return {"This is": "Document Parser for LLM based AI assistants",
             "To try out API" : "Go to -> /docs"
             }
 ########################################## GANT##########################################    
-@app.post("/gantt_parser/{chart_format}")
+@app.post(
+    "/gantt_parser/{chart_format}",
+    tags=["Program Parser"],
+    response_model=Response,
+    summary="Parse a Gantt chart PDF",
+    description=(
+        "Upload a Gantt chart in **PDF format** and select a parsing strategy.\n\n"
+        "**Strategies:**\n\n"
+        "- `visual` — Vision-based bar detection + OCR. Best for image-rendered charts.\n"
+        "- `tabular` — Table extraction via Camelot. Best for charts with clear grid structure.\n"
+        "- `full ai` — Multimodal LLM extraction. Most flexible, handles non-standard layouts.\n\n"
+        "Returns extracted tasks with names, start/end dates, durations, and dependencies."
+    ),
+    responses={
+        200: {
+            "description": "Successfully parsed Gantt chart.",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "input_format": "application/pdf",
+                        "is_extraction_succesful": True,
+                        "confident_value": None,
+                        "extraction_method": "visual",
+                        "result": [
+                            {"task": "Foundation Work", "start": "2024-01-15", "end": "2024-03-01", "duration_days": 46}
+                        ],
+                    }
+                }
+            },
+        },
+        400: {"description": "Invalid file type — only PDF is accepted."},
+        500: {"description": "Internal processing error."},
+    },
+)
 async def create_upload_file_gantt(file: UploadFile, chart_format: ChartFormat):
     upload_dir = "uploads"  # Make sure this directory exists
     os.makedirs(upload_dir, exist_ok=True)
@@ -151,7 +254,39 @@ async def create_upload_file_gantt(file: UploadFile, chart_format: ChartFormat):
 
     
 ################################################ FINANCIAL ##########################################################################
-@app.post("/financial_parser/")
+@app.post(
+    "/financial_parser/",
+    tags=["Financial Parser"],
+    response_model=Response,
+    summary="Parse a Bill of Quantities PDF",
+    description=(
+        "Upload a **Bill of Quantities (BoQ)** document in PDF format.\n\n"
+        "Uses AI-assisted table extraction (Mistral) to identify line items, "
+        "quantities, units, unit prices, and totals.\n\n"
+        "Returns structured JSON suitable for cost analysis, LLM querying, "
+        "or integration into project-management tools."
+    ),
+    responses={
+        200: {
+            "description": "Successfully parsed BoQ.",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "input_format": "application/pdf",
+                        "is_extraction_succesful": True,
+                        "confident_value": None,
+                        "extraction_method": "mistral-ai",
+                        "result": [
+                            {"item_no": "3.1", "description": "Reinforced concrete C30/37", "quantity": 120.0, "unit": "m³", "unit_price": 185.00, "total": 22200.00}
+                        ],
+                    }
+                }
+            },
+        },
+        400: {"description": "Invalid file type — only PDF or image accepted."},
+        500: {"description": "Internal processing error."},
+    },
+)
 async def create_upload_file_fin(file: UploadFile):
     upload_dir = "uploads"
     os.makedirs(upload_dir, exist_ok=True)
@@ -199,7 +334,71 @@ async def create_upload_file_fin(file: UploadFile):
 
 ################################################################## DRAWING ######################################################
 
-@app.post("/drawing_parser/{content_type}/")
+@app.post(
+    "/drawing_parser/{content_type}/",
+    tags=["Drawing Parser"],
+    response_model=Response,
+    summary="Parse an architectural floor plan",
+    description=(
+        "Upload an architectural floor plan and choose an extraction mode.\n\n"
+        "### Extraction Modes\n\n"
+        "| Mode | Accepted Input | What It Extracts |\n"
+        "|------|---------------|------------------|\n"
+        "| `titleblock-hybrid` | PDF or Image | Title-block metadata: project name, drawing number, date, scale, revision, architect. Hybrid OCR + AI. |\n"
+        "| `rooms-deterministic` | PDF only | Room polygons and spatial adjacency via Voronoi tessellation. Fast, fully deterministic. |\n"
+        "| `rooms-ai` | PDF or Image | AI-based room detection with neighbouring-room relationships. |\n"
+        "| `full-plan-ai` | PDF only | Complete floor-plan extraction: rooms, adjacency, and metadata. Combines Voronoi geometry with AI post-processing. |\n\n"
+        "### Tips\n\n"
+        "- For `rooms-deterministic` and `full-plan-ai`, upload clean PDF drawings (not scans) for best results.\n"
+        "- `titleblock-hybrid` accepts either a PDF (first page is converted) or a direct image of the title block.\n"
+        "- `rooms-ai` is the most flexible but may be slower due to LLM inference."
+    ),
+    responses={
+        200: {
+            "description": "Successfully parsed floor plan.",
+            "content": {
+                "application/json": {
+                    "examples": {
+                        "titleblock": {
+                            "summary": "Title-block extraction",
+                            "value": {
+                                "input_format": "application/pdf",
+                                "is_extraction_succesful": True,
+                                "confident_value": 0.92,
+                                "extraction_method": "hybrid",
+                                "result": {
+                                    "project_name": "Residential Complex B",
+                                    "drawing_number": "A-101",
+                                    "date": "2024-06-20",
+                                    "scale": "1:100",
+                                    "architect": "Studio XY",
+                                },
+                            },
+                        },
+                        "rooms_deterministic": {
+                            "summary": "Room adjacency (deterministic)",
+                            "value": {
+                                "input_format": "application/pdf",
+                                "is_extraction_succesful": True,
+                                "confident_value": None,
+                                "extraction_method": "deterministic",
+                                "result": {
+                                    "rooms": [
+                                        {"id": "R1", "label": "Living Room", "area_m2": 28.5},
+                                        {"id": "R2", "label": "Kitchen", "area_m2": 12.0},
+                                    ],
+                                    "adjacencies": [["R1", "R2"]],
+                                },
+                            },
+                        },
+                    }
+                }
+            },
+        },
+        400: {"description": "Invalid file type for the selected content type."},
+        500: {"description": "Internal processing error."},
+    },
+)
 async def create_upload_file_floorplans(file: UploadFile, content_type: ContentType):
     upload_dir = "uploads"
     os.makedirs(upload_dir, exist_ok=True)
@@ -316,7 +515,43 @@ async def create_upload_file_floorplans(file: UploadFile, content_type: ContentT
 # ========================================
 # AI CHATBOT
 # ========================================
-@app.post("/ask_ai/")
+@app.post(
+    "/ask_ai/",
+    tags=["AI Chatbot"],
+    summary="Ask a question about parsed document data",
+    description=(
+        "Send previously parsed construction-document JSON together with a "
+        "natural-language question. The endpoint forwards both to **GPT-4o-mini**, "
+        "which answers strictly based on the provided data.\n\n"
+        "### Workflow\n\n"
+        "1. Parse a document with one of the parser endpoints.\n"
+        "2. Take the `result` field from the parser response.\n"
+        "3. Send it here as `document_data` along with your `question`.\n\n"
+        "### Request Body\n\n"
+        "```json\n"
+        "{\n"
+        '  "question": "What is the most expensive line item?",\n'
+        '  "document_data": { "...parsed data..." }\n'
+        "}\n"
+        "```"
+    ),
+    responses={
+        200: {
+            "description": "AI-generated answer.",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "answer": "The most expensive line item is 3.1 Reinforced concrete at €22,200.",
+                        "model": "gpt-4o-mini",
+                        "usage": {"prompt_tokens": 320, "completion_tokens": 45, "total_tokens": 365},
+                    }
+                }
+            },
+        },
+        400: {"description": "Missing `question` or `document_data` field."},
+        500: {"description": "LLM inference error."},
+    },
+)
 async def ask_ai(request: Request):
     """Ask AI questions about parsed construction document data"""
     try:
