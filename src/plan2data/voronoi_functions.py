@@ -991,4 +991,4 @@ if __name__ == "__main__":
     pdf_path = "examples/FloorplansAndSectionViews/bemasster-grundriss-plankopf.pdf"
     #connected_rooms = extract_full_floorplan(pdf_path)
     neighboring_rooms_voronoi(pdf_path)
-    print(pdf_path)
+    print(neighboring_rooms_voronoi)
