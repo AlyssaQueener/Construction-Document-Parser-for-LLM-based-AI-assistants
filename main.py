@@ -1,10 +1,5 @@
-import os
 from fastapi.middleware.cors import CORSMiddleware
-import gc
-
-
-os.environ['OMP_NUM_THREADS'] = '1'  # Limit OpenCV threads
-os.environ['OPENBLAS_NUM_THREADS'] = '1' 
+import gc 
 from fastapi import FastAPI, UploadFile, HTTPException
 from PIL import Image 
 import src.plan2data.titleBlockInfo as floorplan_parser
@@ -15,16 +10,19 @@ import src.boq2data.camelot_setup.boq2data_mistral as boq
 import src.plan2data.voronoi_functions as vor
 import src.plan2data.full_plan_ai as full
 import src.plan2data.helper as helper
-#from voronoi_functions import*
 from pydantic import BaseModel
 from enum import Enum
-# run fastapi dev main.py
-#     server   Server started at http://127.0.0.1:8000  server   Documentation at http://127.0.0.1:8000/docs
 from openai import OpenAI
 import json
 from fastapi import Request
 
+import os
+os.environ['OMP_NUM_THREADS'] = '1'  # Limit OpenCV threads
+os.environ['OPENBLAS_NUM_THREADS'] = '1'
 
+# ========================================
+# run fastapi dev main.py -> server   Server started at http://127.0.0.1:8000 
+# ========================================
 
 # ========================================
 # OPENAI API KEY
