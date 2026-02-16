@@ -1,7 +1,7 @@
 import src.boq2data.camelot_setup.Camelot_Functions as cam 
 import json
 import camelot
-import src.boq2data.camelot_setup.gemini as gemini 
+import backend.src.boq2data.camelot_setup.prompts as prompts 
 
 
 
@@ -21,7 +21,7 @@ def call_mistral_boq(path):
         tables = camelot.read_pdf(path, flavor=flav, pages=page_num) # -> output camelot table object 
         tables_boq_processed = cam.cam_stream_merge(tables) # json 
         processed_str = json.dumps(tables_boq_processed, indent=2, ensure_ascii=False)
-        user_message = gemini.create_preproccesed_prompt(processed_str)
+        user_message = prompts.create_preproccesed_prompt(processed_str)
         messages = [
         {
             "role": "system",
