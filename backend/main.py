@@ -6,7 +6,7 @@ import src.plan2data.titleBlockInfo as floorplan_parser
 import io
 import uuid
 import src.gantt2data.ganttParser as gantt_parser
-import src.boq2data.camelot_setup.boq2data_gemini as boq
+import src.boq2data.camelot_setup.boq2data_mistral as boq
 import src.plan2data.voronoi_functions as vor
 import src.plan2data.full_plan_ai as full
 import src.plan2data.helper as helper
