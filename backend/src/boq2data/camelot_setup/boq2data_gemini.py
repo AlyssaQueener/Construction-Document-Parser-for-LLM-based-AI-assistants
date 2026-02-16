@@ -10,11 +10,10 @@ import base64
 import os
 
 ## Retrieve the API key from environment variables
-#api_key = os.environ["MISTRAL_API_KEY"]
+api_key = os.environ["MISTRAL_API_KEY"]
 
 model = "mistral-small-2503"
-api_key_r = "bXBteq8WKzIBDINDeBy4ZmHc9QdAMZMQ"
-client = Mistral(api_key=api_key_r)
+client = Mistral(api_key=api_key)
 
 def call_mistral_boq(path):
         page_num = "all"

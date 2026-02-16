@@ -4,12 +4,13 @@ from mistralai import Mistral
 import base64
 import ast
 import time
+import os 
 
 ## Retrieve the API key from environment variables
 #api_key = os.environ["MISTRAL_API_KEY"]
 
 model = "mistral-small-2503"
-api_key = "mVTgI1ELSkn5Q28v2smHK0O4E02nMaxG"
+api_key = os.environ["MISTRAL_API_KEY"]
 client = Mistral(api_key=api_key)
 
 
