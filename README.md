@@ -16,6 +16,11 @@ This toolkit addresses the retrieval and structuring side of that problem. It ta
 │  (upload)    │     │  (OCR + AI)     │     │  JSON        │     │  Chat UI   │
 └──────────────┘     └─────────────────┘     └──────────────┘     └────────────┘
 ```
+## Live Demo
+
+**API Docs** https://construction-document-parser.onrender.com/docs
+**Web app:** https://construction-doc-parser.onrender.com
+
 
 ## Tech Stack
 
