@@ -128,7 +128,6 @@ ready for downstream applications and LLM-based AI assistants.
 
 ---
 
-*Developed as part of the ITBE Master's programme at TU München.*
 """
 
 
