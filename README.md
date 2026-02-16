@@ -55,7 +55,15 @@ git clone <repo-url>
 cd Construction-Document-Parser-for-LLM-based-AI-assistants
 ```
 
-### 2. Backend (FastAPI)
+### 2. Environment variables
+
+Add your API keys to `.env` file in the project root:
+```
+OPENAI_API_KEY=your-openai-key
+MISTRAL_API_KEY=your-mistral-key
+```
+
+### 3. Backend (FastAPI)
 
 ```bash
 python -m venv .venv
@@ -63,12 +71,12 @@ source .venv/bin/activate      # macOS / Linux
 # .venv\Scripts\activate       # Windows
 
 pip install -r requirements.txt
-uvicorn main:app --reload --port 8000
+fastapi dev main.py #Server started at http://127.0.0.1:8000 
 ```
 
 API docs are available at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs).
 
-### 3. Frontend (React)
+### 4. Frontend (React)
 
 ```bash
 cd frontend

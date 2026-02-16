@@ -20,8 +20,12 @@ import base64
 # ---------------------------------------------------------------------------
 # Mistral client configuration
 # ---------------------------------------------------------------------------
+from dotenv import load_dotenv
+import os
+load_dotenv()
+api_key = os.getenv("MISTRAL_API_KEY")
 model = "mistral-small-2506"
-api_key = "Your Api Key"  
+
 client = Mistral(api_key=api_key)
 
 

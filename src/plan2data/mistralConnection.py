@@ -11,7 +11,10 @@ import time
 
 # Mistral API configuration
 model = "mistral-small-2503"  # Model version for API calls
-api_key = "your api key" 
+from dotenv import load_dotenv
+import os
+load_dotenv()
+api_key = os.getenv("MISTRAL_API_KEY")
 client = Mistral(api_key=api_key)
 
 

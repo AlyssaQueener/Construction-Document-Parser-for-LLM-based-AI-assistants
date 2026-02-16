@@ -2,10 +2,12 @@ import json
 from mistralai import Mistral
 
 ## Retrieve the API key from environment variables
-#api_key = os.environ["MISTRAL_API_KEY"]
 
 model = "mistral-small-2503"
-api_key = "mVTgI1ELSkn5Q28v2smHK0O4E02nMaxG"
+from dotenv import load_dotenv
+import os
+load_dotenv()
+api_key = os.getenv("MISTRAL_API_KEY")
 client = Mistral(api_key=api_key)
 
 def create_prompt_gantt_new(ground_truth, parser_result):
